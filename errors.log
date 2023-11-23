@@ -1,10 +1,25 @@
 {
-	"path": "C:\Users\matte\..uni\f1_project\N/A",
-	"error_code": "500",
- 	"error_message": "mysqli error: 2002"
+	"path": "D:\Matteo\Learning\Uni\UniGe\III-anno\f1_project\registration.php",
+	"error_code": "-1",
+ 	"error_message": "Date of birth pattern NOT valid."
 },
 {
-	"path": "C:\Users\matte\..uni\f1_project\N/A",
-	"error_code": "500",
- 	"error_message": "mysqli error: 2002"
+	"path": "D:\Matteo\Learning\Uni\UniGe\III-anno\f1_project\registration.php",
+	"error_code": "-1",
+ 	"error_message": "Input fields NOT provided."
+},
+{
+	"path": "D:\Matteo\Learning\Uni\UniGe\III-anno\f1_project\registration.php",
+	"error_code": "-1",
+ 	"error_message": "Date of birth pattern NOT valid."
+},
+{
+	"path": "D:\Matteo\Learning\Uni\UniGe\III-anno\f1_project\registration.php",
+	"error_code": "-1",
+ 	"error_message": "Date of birth pattern NOT valid."
+},
+{
+	"path": "D:\Matteo\Learning\Uni\UniGe\III-anno\f1_project\private.php",
+	"error_code": "401",
+ 	"error_message": "not_authorized"
 },
