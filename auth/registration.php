@@ -81,7 +81,9 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     DB::p_stmt_no_select($conn,
         "INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0, ?, null, null, ?);",
         ["s", "s", "s", "s", "s", "i"],
-        [$first_name, $last_name, $email, $hash_password, $date_of_birth, $newsletter]);
+        [$first_name, $last_name, $email, $hash_password, $date_of_birth, $newsletter],
+    "registration.php",
+        "../views/public/registration_form.php");
 
     if (!$conn->close()) {
         error("500", "conn_close()", "registration.php", "../views/public/registration_form.php");

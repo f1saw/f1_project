@@ -26,13 +26,15 @@ function check_cookie(): array {
     $user = [];
     $login_allowed = 0;
 
-    if (isset($_COOKIE["my_f1_cookie"])) {
+    if (isset($_COOKIE["my_f1_cookie_id"]) && isset($_COOKIE["my_f1_cookie_value"])) {
         $conn = DB::connect();
-        $_COOKIE["my_f1_cookie"] = $conn->real_escape_string($_COOKIE["my_f1_cookie"]);
+        $_COOKIE["my_f1_cookie_id"] = $conn->real_escape_string($_COOKIE["my_f1_cookie_id"]);
         $user = DB::get_record_by_field($conn,
             "SELECT * FROM Users JOIN Cookies ON Users.cookie_id = Cookies.id WHERE Cookies.id = ? AND Cookies.expiration_date > ?;",
             ["s", "i"],
-            [$_COOKIE["my_f1_cookie"], time()]);
+            [$_COOKIE["my_f1_cookie_id"], time()]);
+        if (!password_verify($_COOKIE["my_f1_cookie_value"], $user["value"]))
+            $user = null;
         if (!$conn->close()) {
             error("500", "conn close error: $conn->error", "auth.php", ""); // TODO: generic error page
             exit;

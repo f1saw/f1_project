@@ -28,6 +28,7 @@ function generate_random_string($length): string {
 
 [$login_allowed, $user] = check_cookie();
 if (!$login_allowed) {
+
     if (isset($_POST["email"]) && isset($_POST["pass"])) {
 
         /* CLEANING INPUT */
@@ -55,17 +56,38 @@ if (!$login_allowed) {
             "login.php",
             "../views/public/login_form.php");
 
-
         if ($user && password_verify($password, $user["password"])) {
             if ($remember_me) {
                 try {
 
-                    $cookie_id = generate_random_string(30);
-                    $cookie_exp_date = time() + 3600*24*30;
-                    setcookie("my_f1_cookie", $cookie_id, $cookie_exp_date, "/");
+                    $cookie_id = generate_random_string(255);
+                    $cookie_value = generate_random_string(255); // TODO: length from file
+                    $cookie_exp_date = time() + 3600*24*30; // TODO: expiration from file
+                    setcookie("my_f1_cookie_id", $cookie_id, $cookie_exp_date, "/");
+                    setcookie("my_f1_cookie_value", $cookie_value, $cookie_exp_date, "/");
+
+                    $cookie_value = password_hash($cookie_value, PASSWORD_DEFAULT);
+
+                    DB::p_stmt_no_select($conn,
+                        "INSERT INTO Cookies VALUES (?, ?, ?);",
+                        ["s", "s", "i"],
+                        [$cookie_id, $cookie_value, $cookie_exp_date],
+                        "login.php",
+                        "../views/public/login_form.php");
+
+                    DB::p_stmt_no_select($conn,
+                        "UPDATE Users SET cookie_id = ? WHERE id = ?;",
+                        ["s", "i"],
+                        [$cookie_id, $user["id"]],
+                        "login.php",
+                        "../views/public/login_form.php");
 
 
-                    $cookie = DB::get_record_by_field($conn,
+                    /* TODO: controllo superfluo in quanto se ci fosse già un cookie, non si accederebbe a questa sezione di codice.
+                                anche se sarebbe più sicuro, nel caso sarebbe da fare un SELECT * Cookies, for(cookies as cookie) if (password_match()) => already in DB.
+                                potrebbe accadere incongruenza in caso di modifiche manuali (tipo rimozione manuale di cookie_id da User)
+
+                        $cookie = DB::get_record_by_field($conn,
                         "SELECT id FROM Cookies WHERE id = ?;",
                         ["s"],
                         [$user["cookie_id"]],
@@ -73,6 +95,7 @@ if (!$login_allowed) {
                         "../views/public/login_form.php");
 
                     if ($cookie) {
+
                         DB::p_stmt_no_select($conn,
                             "UPDATE Cookies SET id = ?, expiration_date = ? WHERE id = ?;",
                             ["s", "i", "s"],
@@ -95,7 +118,7 @@ if (!$login_allowed) {
                         [$cookie_id, $user["id"]],
                         "login.php",
                         "../views/public/login_form.php");
-                    }
+                    } */
                 } catch (Exception $e) {
                     error("500", "generate_random_string()", "login.php", "../views/public/login_form.php");
                     exit;

@@ -12,12 +12,13 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 if (check_user_auth()) {
 
     /* DELETE COOKIE */
-    if (isset($_COOKIE["my_f1_cookie"]) && $_COOKIE["my_f1_cookie"]) {
+    if (isset($_COOKIE["my_f1_cookie_id"]) && isset($_COOKIE["my_f1_cookie_value"]) &&
+        $_COOKIE["my_f1_cookie_id"] && $_COOKIE["my_f1_cookie_value"]) {
         $conn = DB::connect();
         DB::p_stmt_no_select($conn,
             "DELETE FROM Cookies WHERE id = ?;",
             ["s"],
-            [$_COOKIE["my_f1_cookie"]],
+            [$_COOKIE["my_f1_cookie_id"]],
             "logout.php",
             "../public/login_form.php");
 
@@ -28,7 +29,7 @@ if (check_user_auth()) {
 
         $cookie_id = null;
         $cookie_exp_date = time() - 3600;
-        setcookie("my_f1_cookie", $cookie_id, $cookie_exp_date);
+        setcookie("my_f1_cookie_id", $cookie_id, $cookie_exp_date);
     }
 
 
