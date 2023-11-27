@@ -49,7 +49,7 @@
                     </ul>
                     <form class="d-none d-lg-flex" style="position: absolute; right:0;" role="search" name="search_bar">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://wallpapercave.com/dwp2x/wp11200441.jpg" class="d-block w-100" alt="...">
+                <img src="images/wp9002050-4k-f1-desktop-wallpapers.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100" alt="...">
