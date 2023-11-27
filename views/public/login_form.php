@@ -89,7 +89,7 @@ if (check_user_auth($user)) {
             <hr>
             <div class="row d-flex justify-content-end align-items-center mx-1">
                 <button type="submit" class="btn btn-primary col-9 col-sm-5 col-md-3"><b>Sign in</b></button>
-                <a href="../../views/public/registration_form.php" class="col-2 text-center text-decoration-none">Back</a>
+                <a href="../../index.php" class="col-2 text-center text-decoration-none">Home</a>
             </div>
         </fiedlset>
     </form>

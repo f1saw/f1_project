@@ -11,8 +11,11 @@
             crossorigin="anonymous">
     </script>
     <meta charset="UTF-8">
+    <?php require_once("auth/auth.php")?>
 </head>
 <body>
+<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
+
 <main class="container-fluid text-center">
 
     <nav class="navbar navbar-expand-lg bg-light">
@@ -31,12 +34,38 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Features</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="views/public/login_form.php">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="views/public/registration_form.php">Registration</a>
-                        </li>
+
+                        <?php
+                            [$login_allowed, $user] = check_cookie();
+                            if (!check_user_auth($user)) {
+                        ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="views/public/login_form.php">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="views/public/registration_form.php">Registration</a>
+                                </li>
+                        <?php
+                            }
+                            else{
+                        ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">My profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="views/private/logout.php">Logout</a>
+                                </li>
+                        <?php
+                            }
+                            if (check_admin_auth($user)){
+                        ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Table users</a>
+                                </li>
+                        <?php
+                            }
+                        ?>
+
                         <li>
                             <a href="#"><img src=https://static.vecteezy.com/ti/vettori-gratis/p1/4568682-shop-open-line-icon-vettoriale.jpg" width="25" height="25"
                                     alt="Logo shop" style="position: relative; top: 5px"></a>
