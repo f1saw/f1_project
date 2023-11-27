@@ -32,10 +32,10 @@
                             <a class="nav-link" href="#">Features</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
+                            <a class="nav-link" href="views/public/login_form.php">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Registration</a>
+                            <a class="nav-link" href="views/public/registration_form.php">Registration</a>
                         </li>
                         <li>
                             <a href="#"><img src=https://static.vecteezy.com/ti/vettori-gratis/p1/4568682-shop-open-line-icon-vettoriale.jpg" width="25" height="25"
@@ -66,7 +66,7 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="images/wp9002050-4k-f1-desktop-wallpapers.jpg" class="d-block w-100" alt="...">
+                <img src="https://wallpapercave.com/dwp2x/wp11200441.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100" alt="...">
