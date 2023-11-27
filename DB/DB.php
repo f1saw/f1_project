@@ -42,7 +42,7 @@ class DB {
             error("500", "stmt_close error: $stmt->error", $source, $redirect_error);
             exit;
         }
-        if (($element = $res->fetch_assoc()) === false) {
+        if (($element = $res->fetch_all(MYSQLI_ASSOC)) === false) {
             error("500", "fetch_assoc()", $source, $redirect_error);
             exit;
         }
@@ -56,6 +56,14 @@ class DB {
             error("500", "mysqli: query", $source, $redirect_error);
             exit;
         }
+    }
+
+    public static function stmt_get_record_by_field($conn, $query, $source = "NA", $redirect_error = "") {
+        if (!($res = $conn->query($query))) {
+            error("500", "mysqli: query ", $source, $redirect_error);
+            exit;
+        }
+        return [$res->num_rows, $res->fetch_all(MYSQLI_ASSOC)];
     }
 
     public static function p_stmt_no_select($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = ""): void {

@@ -54,7 +54,8 @@ if (!$login_allowed) {
             ['s'],
             [$email],
             "login.php",
-            "../views/public/login_form.php");
+            "../views/public/login_form.php")[0];
+
 
         if ($user && password_verify($password, $user["password"])) {
             if ($remember_me) {
@@ -143,7 +144,7 @@ if (!$login_allowed) {
 
 if ($login_allowed) {
     set_session($user);
-    header("Location: ../views/private/private.php");
+    header("Location: ../views/private/dashboard.php");
 } else {
     error("401", "Email and pwd NOT correct", "login.php", "../views/public/login_form.php");
     exit;

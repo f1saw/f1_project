@@ -32,7 +32,7 @@ function check_cookie(): array {
         $user = DB::get_record_by_field($conn,
             "SELECT * FROM Users JOIN Cookies ON Users.cookie_id = Cookies.id WHERE Cookies.id = ? AND Cookies.expiration_date > ?;",
             ["s", "i"],
-            [$_COOKIE["my_f1_cookie_id"], time()]);
+            [$_COOKIE["my_f1_cookie_id"], time()])[0];
         if (!password_verify($_COOKIE["my_f1_cookie_value"], $user["value"]))
             $user = null;
         if (!$conn->close()) {
