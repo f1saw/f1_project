@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <title>Admin | User</title>
@@ -74,9 +74,9 @@
                                     $user["id"] .
                                     "</a>" .
                                     "</th>" .
-                                    "<td class='text-center'>" . $user["email"] . "</td>" .
                                     "<td class='text-center'>" . $user["first_name"] . "</td>" .
                                     "<td class='text-center'>" . $user["last_name"] . "</td>" .
+                                    "<td class='text-center'>" . $user["email"] . "</td>" .
                                     "<td class='text-center'>" . $user["date_of_birth"] . "</td>" .
                                     "<td class='text-center'>" . $user["role"] . "</td>" .
                                     "<td class='text-center'>" . $user["newsletter"] . "</td>" .
