@@ -19,12 +19,12 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
-    header('Location: ../private/private.php');
+    header('Location: /f1_project/views/private/private.php');
 }
 ?>
 <div class="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center">
 
-    <form id="signup-form" action="../../auth/registration.php" method="POST" class="container col-12 col-md-6">
+    <form id="signup-form" action="/f1_project/auth/registration.php" method="POST" class="container col-12 col-md-6">
         <?php
         if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -96,7 +96,7 @@ if (check_user_auth($user)) {
             <hr>
             <div class="row d-flex justify-content-end align-items-center mx-1 mb-3">
                 <button type="submit" class="btn btn-primary col-9 col-sm-5 col-md-3"><b>Sign up</b></button>
-                <a href="login_form.php" class="col-3 text-center text-decoration-none">Login</a>
+                <a href="/f1_project/views/public/login_form.php" class="col-3 text-center text-decoration-none">Login</a>
             </div>
         </fiedlset>
 

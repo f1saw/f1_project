@@ -16,7 +16,7 @@
     <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
     <?php [$login_allowed, $user] = check_cookie(); ?>
-    <?php if (check_user_auth($user)) {
+    <?php if (check_admin_auth($user)) {
         set_session($user); ?>
 
 
@@ -42,7 +42,7 @@
             "dashboard.php",
             "dashboard.php");
             if (!$conn->close()) {
-                error("500", "conn_close()", "dashboard.php", "dashboard.php");
+                error("500", "conn_close()", "dashboard.php", "/f1_project/views/private/dashboard.php");
                 exit;
             }
             ?>
@@ -109,7 +109,7 @@
         <?php session_destroy(); ?>
     </div>
     <?php } else {
-        error("401", "not_authorized", "private.php", "../public/login_form.php", "Unauthorized access.");
+        error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
         exit;
     } ?>
 

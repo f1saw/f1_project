@@ -4,7 +4,6 @@ require_once("../../error_handling.php");
 require_once ("../../DB/DB.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
-
 [$login_allowed, $user] = check_cookie();
 if (check_admin_auth($user)) {
     set_session($user);
@@ -14,10 +13,10 @@ if (check_admin_auth($user)) {
             "DELETE FROM Users WHERE id=?",
             ["i"], [$_GET["id"]], "user_delete.php", "user_delete.php");
         if (!$conn->close()) {
-            error("500", "conn_close()", "user_detail.php", "dashboard.php");
+            error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
             exit;
         }
-        header("location: dashboard.php");
+        header("location:  /f1_project/views/private/dashboard.php");
         exit;
     }
     /*
@@ -25,6 +24,6 @@ if (check_admin_auth($user)) {
      */
 }
 else {
-    error("401", "not_authorized", "user_delete.php", "../public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "user_delete.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
     exit;
 }

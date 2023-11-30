@@ -18,15 +18,15 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 [$login_allowed, $user] = check_cookie();
-if (check_user_auth($user)) {
+if (check_user_auth($user) && !isset($_SESSION["err"]) && $_SESSION["err"]) {
     set_session($user);
-    header("Location: ../private/private.php");
+    header("Location: /f1_project/views/private/dashboard.php");
 }
 ?>
 
 <div class="container-fluid vh-100 w-100 d-flex flex-column justify-content-center align-items-center">
 
-    <form id="signup-form" action="../../auth/login.php" class="container col-12 col-md-6" method="POST">
+    <form id="signup-form" action="/f1_project/auth/login.php" class="container col-12 col-md-6" method="POST">
 
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -89,7 +89,7 @@ if (check_user_auth($user)) {
             <hr>
             <div class="row d-flex justify-content-end align-items-center mx-1">
                 <button type="submit" class="btn btn-primary col-9 col-sm-5 col-md-3"><b>Sign in</b></button>
-                <a href="../../views/public/registration_form.php" class="col-2 text-center text-decoration-none">Back</a>
+                <a href="/f1_project/views/public/registration_form.php" class="col-2 text-center text-decoration-none">Back</a>
             </div>
         </fiedlset>
     </form>

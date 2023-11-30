@@ -23,13 +23,13 @@
         set_session($user); ?>
 
         <p>Welcome back, <?php echo $_SESSION["first_name"]; ?></p>
-        <a href="logout.php" class="text-decoration-none">Logout</a>
+        <a href="/f1_project/views/private/logout.php" class="text-decoration-none">Logout</a>
 
         <!-- TODO: just for testing -->
         <?php session_destroy(); ?>
 
     <?php } else {
-        error("401", "not_authorized", "private.php", "../public/login_form.php", "Unauthorized access.");
+        error("401", "not_authorized", "private.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
         exit;
     } ?>
 </div>
