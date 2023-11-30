@@ -95,13 +95,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="images/wp9002050-4k-f1-desktop-wallpapers.jpg" class="d-block w-100" alt="...">
+                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100" alt="F1 2022">
             </div>
             <div class="carousel-item">
-                <img src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100" alt="...">
+                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100" alt="F1 Mercedes">
             </div>
             <div class="carousel-item">
-                <img src="images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100" alt="...">
+                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100" alt="F1 Ferrari">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
