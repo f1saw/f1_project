@@ -28,7 +28,7 @@
 
 
 
-        <p>Welcome back, <?php echo $_SESSION["first_name"]; ?> | <a href="logout.php" class="text-decoration-none">Logout</a></p>
+        <p>Welcome back, <?php echo $_SESSION["first_name"] . " (id: " . $_SESSION["id"] . ")"; ?> | <a href="logout.php" class="text-decoration-none">Logout</a></p>
 
 
         <div class="col-12 col-md-9">

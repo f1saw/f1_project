@@ -11,6 +11,7 @@
 
 <body>
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
+
 <?php [$login_allowed, $user] = check_cookie(); ?>
 <?php if (check_admin_auth($user)) {
     set_session($user);
@@ -18,13 +19,16 @@
     $conn = DB::connect();
     $element = DB::get_record_by_field($conn,
         "SELECT first_name,last_name,email,img_url FROM Users WHERE id=?",
-        ["i"], [$_GET["id"]], "user_detail.php", "user_detail.php");
+        ["i"], [$_GET["id"]], "user_detail.php", "user_detail.php")[0];
     if (!$conn->close()) {
         error("500", "conn_close()", "user_detail.php", "dashboard.php");
         exit;
     }
     if($element != null) {
     ?>
+            NAVBAR <?php echo "YOUR ID: " . $_SESSION["id"]; ?>
+            <br>
+            <a href="../dashboard.php">Back</a>
         <main class="container-fluid vh-100 w-100 d-flex flex-column justify-content-center align-items-center">
             <div style="width: 40%;">
                 <table class="table">
@@ -68,7 +72,7 @@
         echo "no information";
 }
 else{
-    error("401", "not_authorized", "private.php", "../public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "user_detail.php", "../public/login_form.php", "Unauthorized access.");
     exit;
 }
 ?>
