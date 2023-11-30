@@ -14,6 +14,7 @@ require_once ("auth/auth.php");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 
+// TODO: bloccare pagina in caso di utente già registrato
 
 /* -- ERROR | fields NOT set -- */
 if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["password_confirm"]) /* && isset($_POST["date_of_birth"])*/) {
@@ -83,7 +84,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
         ["s", "s", "s", "s", "s", "i"],
         [$first_name, $last_name, $email, $hash_password, $date_of_birth, $newsletter],
     "registration.php",
-        "../views/public/registration_form.php");
+        "/f1_project/views/public/registration_form.php");
 
     if (!$conn->close()) {
         error("500", "conn_close()", "registration.php", "/f1_project/views/public/registration_form.php");
@@ -93,7 +94,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
 
     $_SESSION["success"] = 1;
     $_SESSION["success_msg"] = "Registration completed successfully.";
-    header("Location: ../views/public/login_form.php");
+    header("Location: /f1_project/views/public/login_form.php");
 
 } else {
     error("-1", "Input fields NOT provided.", "registration.php", "/f1_project/views/public/registration_form.php");

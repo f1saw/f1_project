@@ -59,5 +59,5 @@ function check_auth($role, $user = null): bool {
 
     [$login_allowed, $user] = check_cookie();
     return (($login_allowed && $user["Users.role"] >= $role)
-        || isset($_SESSION["Users.role"]) && $_SESSION["Users.role"] >= $role);
+        || isset($_SESSION["role"]) && $_SESSION["role"] >= $role);
 }

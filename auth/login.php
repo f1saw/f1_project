@@ -50,14 +50,14 @@ if (!$login_allowed) {
         $remember_me = $conn->real_escape_string($remember_me);
 
         $user = DB::get_record_by_field($conn,
-            "SELECT * FROM Users WHERE email = ?;",
+            "SELECT Users.id AS 'Users.id', Users.first_name AS 'Users.first_name', Users.last_name AS 'Users.last_name', Users.email AS 'Users.email', Users.password AS 'Users.password', Users.role AS 'Users.role', Users.date_of_birth AS 'Users.date_of_birth', Users.img_url AS 'Users.img_url', Users.newsletter AS 'Users.newsletter' FROM Users WHERE email = ?;",
             ['s'],
             [$email],
             "login.php",
             "/f1_project/views/public/login_form.php")[0];
 
 
-        if ($user && password_verify($password, $user["password"])) {
+        if ($user && password_verify($password, $user["Users.password"])) {
             if ($remember_me) {
                 try {
 
@@ -79,7 +79,7 @@ if (!$login_allowed) {
                     DB::p_stmt_no_select($conn,
                         "UPDATE Users SET cookie_id = ? WHERE id = ?;",
                         ["s", "i"],
-                        [$cookie_id, $user["id"]],
+                        [$cookie_id, $user["Users.id"]],
                         "login.php",
                         "/f1_project/views/public/login_form.php");
 
@@ -144,7 +144,7 @@ if (!$login_allowed) {
 
 if ($login_allowed) {
     set_session($user);
-    header("Location: ../views/private/dashboard.php");
+    header("Location: /f1_project/views/private/dashboard.php");
 } else {
     error("401", "Email and pwd NOT correct", "login.php", "/f1_project/views/public/login_form.php");
     exit;

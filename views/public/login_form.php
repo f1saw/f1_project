@@ -18,9 +18,15 @@
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 [$login_allowed, $user] = check_cookie();
-if (check_user_auth($user) && !isset($_SESSION["err"]) && $_SESSION["err"]) {
+if (check_user_auth($user)) {
     set_session($user);
-    header("Location: /f1_project/views/private/dashboard.php");
+    if (check_admin_auth($user)) {
+        header("Location: /f1_project/views/private/dashboard.php");
+    } else {
+        echo "Logged but in user mode";
+        echo "<a href='/f1_project/views/private/logout.php'>Logout</a>";
+    }
+    exit;
 }
 ?>
 
