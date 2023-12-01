@@ -9,6 +9,7 @@
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
+    <?php require_once ("../partials/Alert.php") ?>
 </head>
 
 <body class="vh-100">
@@ -25,11 +26,7 @@
 
     <div class="container-fluid d-flex flex-column justify-content-center align-items-center mt-5">
 
-
-
-
         <p>Welcome back, <?php echo $_SESSION["first_name"] . " (id: " . $_SESSION["id"] . "; role: " . $_SESSION["role"] . ")"; ?> | <a href="logout.php" class="text-decoration-none">Logout</a></p>
-
 
         <div class="col-12 col-md-9">
             <h1 class="col-12 h1">ALL USERS</h1>
@@ -50,6 +47,22 @@
             <?php if ($num_users > 0) { ?>
 
                     <!-- TODO: https://stackoverflow.com/questions/30981765/how-to-divide-table-to-show-in-pages-the-table-data-is-filled-dynamically-with -->
+                <?php symbol(); ?>
+
+                <?php
+                if (isset($_SESSION["err"]) && $_SESSION["err"]) {
+                    err_msg_alert();
+                    unset($_SESSION["err"]);
+                    unset($_SESSION["err_msg"]);
+                } ?>
+
+                <?php
+                if (isset($_SESSION["success"]) && $_SESSION["success"]) {
+                    succ_msg_alert();
+                    unset($_SESSION["success"]);
+                    unset($_SESSION["success_msg"]);
+                }
+                ?>
 
                 <table class="table table-bordered">
                     <thead>
