@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <title>home</title>
+    <link rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+    <link rel="stylesheet" href="style/index_style.css">
+
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
@@ -16,11 +20,11 @@
 <body>
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
-<main class="container-fluid text-center">
-
+<div class="container">
+    <!-- Nav -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid d-flex justify-content-end">
-            <img style="position: absolute; left:0;" src="https://www.dinamikamente.net/wp-content/uploads/2017/11/nuovo-logo-formula-1.png" width="35" height="35"
+            <img class="img_logo" src="https://www.dinamikamente.net/wp-content/uploads/2017/11/nuovo-logo-formula-1.png" width="35" height="35"
                  alt="Logo f1">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,39 +40,39 @@
                         </li>
 
                         <?php
-                            [$login_allowed, $user] = check_cookie();
-                            if (!check_user_auth($user)) {
-                        ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="views/public/login_form.php">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="views/public/registration_form.php">Registration</a>
-                                </li>
-                        <?php
-                            }
-                            else{
-                        ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">My profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="views/private/logout.php">Logout</a>
-                                </li>
-                        <?php
-                            }
-                            if (check_admin_auth($user)){
-                        ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Table users</a>
-                                </li>
-                        <?php
-                            }
+                        [$login_allowed, $user] = check_cookie();
+                        if (!check_user_auth($user)) {
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="views/public/login_form.php">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="views/public/registration_form.php">Registration</a>
+                            </li>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">My profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="views/private/logout.php">Logout</a>
+                            </li>
+                            <?php
+                        }
+                        if (check_admin_auth($user)){
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Table users</a>
+                            </li>
+                            <?php
+                        }
                         ?>
 
                         <li>
                             <a href="#"><img src=https://static.vecteezy.com/ti/vettori-gratis/p1/4568682-shop-open-line-icon-vettoriale.jpg" width="25" height="25"
-                                    alt="Logo shop" style="position: relative; top: 5px"></a>
+                                             alt="Logo shop" style="position: relative; top: 5px"></a>
                         </li>
                         <!--Implementare scomparsa con js-->
                         <form class="d-flex d-lg-none" role="search">
@@ -85,8 +89,9 @@
         </div>
     </nav>
 
-    <h2 style="font-family: Verdana">Welcome in f1 page</h2>
+    <h1 class="title">Welcome!</h1>
 
+    <!-- Showcase -->
     <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -95,13 +100,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100" alt="F1 2022">
+                <img src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100 img-carousel" alt="F1 2022">
             </div>
             <div class="carousel-item">
-                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100" alt="F1 Mercedes">
+                <img src="images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel" alt="F1 Mercedes">
             </div>
             <div class="carousel-item">
-                <img style="aspect-ratio: 5.3/2; object-fit: cover;" src="images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100" alt="F1 Ferrari">
+                <img src="images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel" alt="F1 Ferrari">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
@@ -113,40 +118,46 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <p style="text-align: left; font-family: 'Times New Roman'; font-size: 20px">
-        On this site you will be able to analyze the circuits in which the grand prix are contested; for each circuit you can
-        view the best times, the fastest laps in qualifying and the race for each season and the drivers who participated
-        at the GP.
-        <br>
-        If you are an enthusiast you will also be able to access our online shop, where you will have the opportunity to buy
-        gadgets, t-shirts, pants, hats and more!
-    </p>
 
-    <h3 style="font-family: Verdana">Information on formula 1</h3>
-    <p style="text-align: left; font-family: 'Times New Roman'; font-size: 20px">
-        Formula One is the highest class of international racing for open-wheel single-seater formula racing cars sanctioned by the Fédération Internationale de l'Automobile (FIA).
-        The FIA Formula One World Championship has been one of the premier forms of racing around the world since its inaugural season in 1950.
-        The word formula in the name refers to the set of rules to which all participants' cars must conform.
-        A Formula One season consists of a series of races, known as Grands Prix.
-        Grands Prix take place in multiple countries and continents around the world on either purpose-built circuits or closed public roads.
-        <br>
-        A points system is used at Grands Prix to determine two annual World Championships: one for the drivers, and one for the constructors (the teams).
-        Each driver must hold a valid Super Licence, the highest class of racing licence issued by the FIA, and the races must be held on tracks graded "1",
-        the highest grade-rating issued by the FIA for tracks.
-        <br>
-        Formula One cars are the fastest regulated road-course racing cars in the world, owing to very high cornering speeds achieved through generating large amounts of aerodynamic downforce.
-        Much of this downforce is generated by front and rear wings, which have the side effect of causing severe turbulence behind each car.
-        The turbulence reduces the downforce generated by the cars following directly behind, making it hard to overtake.
-        Major changes made to the cars for the 2022 season have resulted in greater use of ground effect aerodynamics and modified wings to reduce the turbulence behind the cars,
-        with the goal of making overtaking easier.[3] The cars are dependent on electronics, aerodynamics, suspension and tyres.
-        Traction control, launch control, and automatic shifting, plus other electronic driving aids, were first banned in 1994.
-        They were briefly reintroduced in 2001, and have more recently been banned since 2004 and 2008, respectively.
-        <br>
-        With the average annual cost of running a team – designing, building, and maintaining cars, pay, transport – being approximately £220,000,000 (or $265,000,000),
-        its financial and political battles are widely reported. On 23 January 2017, Liberty Media completed its acquisition of the Formula One Group,
-        from private-equity firm CVC Capital Partners for £6.4bn ($8bn).
-    </p>
+    <br>
+    <h2 class="title">Browse our site!</h2>
+    <br>
 
-</main>
+    <!-- Home cards 1 -->
+    <section class="home-cards">
+        <div>
+            <img class="img-home-cards" src="https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.png" alt="">
+            <h3>Circuit</h3>
+            <p>
+                In this section you can see all the characteristic F1 circuits.
+            </p>
+            <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div>
+            <img class="img-home-cards" src="https://formu1a.uno/wp-content/uploads/2022/12/formu1a-2022-vs-2023-front-floor.jpg" alt="" />
+            <h3>Regulation</h3>
+            <p>
+                If you are a new fan discover the rules of F1!
+            </p>
+            <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div>
+            <img class="img-home-cards" src="https://hoteldelaville.com/wp-content/uploads/2021/06/gran-premio-di-monza-informazioni-1000x634.jpg" alt="" />
+            <h3>Information</h3>
+            <p>
+                If you are looking for the best times per circuit, this is the section for you!.
+            </p>
+            <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div>
+            <img class="img-home-cards" src="https://cdn-autosprint.corrieredellosport.it/img/1146/645/2022/11/22/122523534-4bb76434-2355-45ab-888a-c2a3bdea3b96.jpg" alt="" />
+            <h3>Pilots</h3>
+            <p>
+                Here you can consult the drivers who have raced in F1 since the first season
+            </p>
+            <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </section>
+
 </body>
 </html>
