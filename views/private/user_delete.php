@@ -1,27 +1,46 @@
 <?php
 require_once("../../auth/auth.php");
-require_once("../../error_handling.php");
 require_once ("../../DB/DB.php");
+require_once ("../../Utility/utility_func.php");
+require_once ("../../Utility/msg_error.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
+
 if (check_admin_auth($user)) {
     set_session($user);
-    $conn = DB::connect();
-    if($_SESSION["id"] != $_GET["id"]) {
-        DB::p_stmt_no_select($conn,
-            "DELETE FROM Users WHERE id=?",
-            ["i"], [$_GET["id"]], "user_delete.php", "user_delete.php");
-        if (!$conn->close()) {
-            error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
-            exit;
-        }
-        header("location:  /f1_project/views/private/dashboard.php");
+
+    if($_SESSION["id"] == $_GET["id"]) {
+        msg_err_user_delete("It is not possible to delete the account you are using.");
         exit;
     }
-    /*
-     * else messaggio lato client per dire utente che non può eliminare l'account collegato
-     */
+
+    $conn = DB::connect();
+    $check_role = check_user_role($conn,
+        [$_GET["id"]],
+        "/f1_project/views/private/user_delete.php",
+        "/f1_project/views/private/user_delete.php");
+
+    if($check_role){
+        msg_err_user_delete("You cannot delete an administrator.");
+        exit;
+    }
+
+    $conn = DB::connect();
+    DB::p_stmt_no_select($conn,
+        "DELETE FROM Users WHERE id=?",
+        ["i"], [$_GET["id"]],
+        "user_delete.php",
+        "user_delete.php");
+
+    if (!$conn->close()) {
+        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
+        exit;
+    }
+    $_SESSION["success"] = 1;
+    $_SESSION["success_msg"] = "Account deleted.";
+    header("location:  /f1_project/views/private/dashboard.php");
+    exit;
 }
 else {
     error("401", "not_authorized", "user_delete.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");

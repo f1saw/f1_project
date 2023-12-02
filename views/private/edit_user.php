@@ -2,6 +2,8 @@
 require_once("../../auth/auth.php");
 require_once("../../error_handling.php");
 require_once("../../DB/DB.php");
+require_once ("../../Utility/utility_func.php");
+require_once ("../../Utility/msg_error.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
@@ -14,11 +16,8 @@ if (check_admin_auth($user)) {
 
     if(isset($_POST[$post_name[3]]) && $_POST[$post_name[3]] != ""){
         if(!is_numeric($_POST[$post_name[3]])){
-            error("401",
-                " Unauthorized access.",
-                "edit_user.php",
-                "/f1_project/views/private/dashboard.php",
-                "Please enter a number.");
+            msg_err_edit_user("Please enter a number.");
+            exit;
         }
 
         if($_POST[$post_name[3]] != 0){
@@ -26,24 +25,13 @@ if (check_admin_auth($user)) {
         }
 
         $conn = DB::connect();
-        $role = DB::get_record_by_field($conn,
-            "SELECT role FROM Users WHERE id = ?",
-            ["i"],
-            [$_POST["Button"]],
-            "/f1_project/views/private/edit_user.php",
-            "/f1_project/views/private/edit_user.php")[0];
+        $check_role = check_user_role($conn,
+        [$_POST["Button"]],
+        "/f1_project/views/private/edit_user.php",
+        "/f1_project/views/private/edit_user.php");
 
-        if (!$conn->close()) {
-            error("500", "conn_close()", "/f1_project/views/private/edit_user.php", "/f1_project/views/private/dashboard.php");
-            exit;
-        }
-
-        if($role["role"] == 1){
-            error("401",
-                " Unauthorized access.",
-                "edit_user.php",
-                "/f1_project/views/private/dashboard.php",
-                "You can only change the value of a user with role 0 to 1.");
+        if ($check_role){
+            msg_err_edit_user("You cannot change the administrator role.");
             exit;
         }
     }
