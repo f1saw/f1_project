@@ -8,4 +8,7 @@ SAW project about F1
 <li>Proteggere tutti file server rilevanti (tipo DB.php, ...)</li>
 <li>Recupero password</li>
 <li>Check cookie ridondante </li>
+<li>Scrittura politica cookie</li>
+<li>Get latest news with scraping f1.com</li>
+<li>Check correttezza campi registrazione con js</li>
 </ul>
