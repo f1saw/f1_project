@@ -94,8 +94,9 @@
 
 <body>
 <div class="container-fluid bg-dark">
+
     <!-- Nav -->
-    <nav id="navbar" class="w-100 navbar navbar-expand">
+    <nav id="navbar" class="w-100 navbar navbar-expand-lg mb-3 mb-lg-0">
         <div class="container-fluid px-4">
             <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index.php"></a>
 
@@ -105,13 +106,14 @@
 
 
 
-            <div class="collapse navbar-collapse d-flex justify-content-between align-items-center" id="navbarNav">
+            <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between align-items-center" id="navbarNav">
                 <form class="d-none d-lg-flex" role="search" name="search_bar">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-danger" type="submit">Search</button>
                 </form>
-                <ul class="navbar-nav d-flex flex-row gap-5">
-                    <div class="d-flex gap-4">
+
+                <ul class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
+                    <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
                         <li class="nav-item d-flex align-items-end">
                             <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                                 <span class="material-symbols-outlined">shopping_bag</span>
@@ -128,6 +130,8 @@
                             <a class="nav-link" href="#">Features</a>
                         </li> -->
                     </div>
+
+
 
 
                     <div class="d-flex gap-3">
@@ -161,16 +165,27 @@
                     </div>
 
 
-
                     <!--Implementare scomparsa con js-->
-                    <form class="d-flex d-lg-none" role="search">
+                    <!-- <form class="d-flex d-lg-none" role="search">
                         <input class="form-control me-2" style="width: 100px;height: 30px" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success d-flex align-items-center justify-content-center" style="width: 50px;height: 30px; overflow:hidden; text-overflow: ellipsis;" type="submit">Go</button>
+                    </form> -->
+
+                    <form class="d-flex flex-row d-lg-none" role="search" name="search_bar">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
                 </ul>
 
             </div>
 
+
+            <!-- <div class="d-inline d-lg-none">
+                <form class="d-none d-lg-flex" role="search" name="search_bar">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit">Search</button>
+                </form>
+            </div> -->
         </div>
     </nav>
 
@@ -241,7 +256,7 @@
                 <div class="col d-flex align-items-stretch">
                     <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                         <div class="card-img">
-                            <img src="https://formu1a.uno/wp-content/uploads/2022/12/formu1a-2022-vs-2023-front-floor.jpg" class="card-img-top" alt="...">
+                            <img src="https://i.ytimg.com/vi/jKZKCl_GEgY/maxresdefault.jpg" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body d-flex align-items-end">
                             <div class="w-100">
@@ -271,7 +286,7 @@
                             <div class="w-100">
                                 <h5 class="card-title text-danger">Statistics</h5>
                                 <hr>
-                                <p class="card-text"><strong>Data</strong> lover? This is the section for you!</p>
+                                <p class="card-text"><strong>Data</strong> lover? This section is for you!</p>
                                 <p class="card-text">
                                     <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
                                         <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
@@ -310,6 +325,32 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col d-flex align-items-stretch">
+                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
+                        <div class="card-img d-flex justify-content-center">
+                            <!-- <img src="https://www.f1-fansite.com/wp-content/uploads/2023/11/230070-scuderia-ferrari-abu-dhabi-gp-2023-race_2ca9a370-0909-4cca-adae-9dbf3c91638f.jpg" class="card-img-top" alt="..."> -->
+                            <img style="width: 250px;" src="https://grandprixstore.co.za/wp-content/uploads/2023/05/Grand-Prix-Store-Shop-Ferrari.jpg" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body d-flex align-items-end">
+                            <div class="w-100">
+                                <h5 class="card-title text-danger">Store</h5>
+                                <hr>
+                                <p class="card-text">Buy <strong>official</strong> merchandise</p>
+                                <p class="card-text">
+                                    <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
+                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
+                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                                            Check it out!
+                                            <span class="material-symbols-outlined">sports_score</span>
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </section>
