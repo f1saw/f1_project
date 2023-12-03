@@ -137,7 +137,8 @@
                     <div class="d-flex gap-3">
                         <?php
                         [$login_allowed, $user] = check_cookie();
-                        if (!check_user_auth($user)) { ?>
+                        if (!check_user_auth($user)) {
+                            set_session($user);?>
                             <li class="nav-item">
                                 <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="login_form.php">
                                     <span class="material-symbols-outlined">login</span>
@@ -152,14 +153,29 @@
                             </li>
                         <?php } else { ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">My profile</a>
+                                <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="#">
+
+                                    <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
+                                        <img src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
+                                    <?php } else{ ?>
+                                        <img style="border-radius: 50%; width: 24px; height: 24px;" src="../../assets/images/foto-profilo.jpg" alt="Profile">
+                                    <?php }?>
+
+                                    <span>My profile</span>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../private/logout.php">Logout</a>
+                                <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/logout.php">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <span>Logout</span>
+                                </a>
                             </li>
                         <?php } if (check_admin_auth($user)){ ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Table users</a>
+                                <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="#">
+                                    <span class="material-symbols-outlined">table_rows</span>
+                                    <span>Table users</span>
+                                </a>
                             </li>
                         <?php } ?>
                     </div>

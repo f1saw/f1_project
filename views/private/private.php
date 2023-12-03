@@ -17,14 +17,6 @@
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center mt-5">
 
     <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-    <?php
-        // salvo percorso del file
-        if(getcwd() !== false){
-            $dir = "file://".getcwd()."/private.php";
-            $dir = str_replace("\\", "/", $dir);
-            $_SESSION["redirection"] = $dir;
-        }
-    ?>
 
     <?php [$login_allowed, $user] = check_cookie(); ?>
     <?php if (check_user_auth($user)) {
@@ -37,6 +29,7 @@
         <?php session_destroy(); ?>
 
     <?php } else {
+        $_SESSION["redirection"] = "/f1_project/views/private/private.php";
         error("401", "not_authorized", "private.php", "../public/login_form.php", "Unauthorized access.");
         exit;
     } ?>
