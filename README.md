@@ -11,4 +11,7 @@ SAW project about F1
 <li>Scrittura politica cookie</li>
 <li>Get latest news with scraping f1.com</li>
 <li>Check correttezza campi registrazione con js</li>
+<li>cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)</li>
+<li>Collapse navbar in index not working</li>
+<li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
 </ul>
