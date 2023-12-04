@@ -12,7 +12,6 @@ SAW project about F1
 
 MAURI:
 <li>login-registration reindirizzamento file alla pagina chiamante</li>
-<li>table-user finire user_delete</li>
 <li>table-user grafica user_detail</li>
 
 <hr>
