@@ -5,14 +5,14 @@
     <title>Login</title>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
     <?php include("../partials/head.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
 </head>
-
-<body>
-
 
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
@@ -30,23 +30,19 @@ if (check_user_auth($user)) {
 }
 ?>
 
-<div class="container-fluid vh-100 w-100 d-flex flex-column justify-content-center align-items-center">
+<body class="vh-100">
 
-    <form id="signup-form" action="/f1_project/auth/login.php" class="container col-12 col-md-6" method="POST">
+<?php include ("../partials/navbar_log_reg.php"); ?>
 
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </symbol>
-        </svg>
+<div id="bg-login" class="container-fluid h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+
+    <form id="login-form" action="../../auth/login.php" class="container col-12 col-lg-6 col-xl-4 py-3 border border-3 border-danger rounded" method="POST">
 
         <?php
-
-
         if (isset($_SESSION["success"]) && $_SESSION["success"]) { ?>
             <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mt-4 col-12" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <b>Success!</b>&nbsp;<?php echo $_SESSION["success_msg"]; ?>
+                <span class="material-symbols-outlined text-success">done</span>
+                <strong class="text-success">Success!</strong>&nbsp;<?php echo $_SESSION["success_msg"]; ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
@@ -59,8 +55,8 @@ if (check_user_auth($user)) {
         <?php
         if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
             <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mt-4 col-12" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <b>ERROR!</b>&nbsp;<?php echo $_SESSION["err_msg"]; ?>
+                <span class="material-symbols-outlined text-danger">warning</span>
+                <strong class="text-danger">ERROR!</strong>&nbsp;<?php echo $_SESSION["err_msg"]; ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
@@ -69,36 +65,63 @@ if (check_user_auth($user)) {
         } ?>
 
         <fiedlset>
-            <legend><b>LOGIN</b></legend>
+            <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
+                <span class="material-symbols-outlined">passkey</span>
+                <strong>LOGIN</strong>
+            </legend>
             <hr>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="email" class="form-label"><b>EMAIL</b></label><br>
-                    <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" required>
+                    <label for="email" class="form-label"><strong>EMAIL</strong></label><br>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
+                        <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="password" class="form-label"><b>PASSWORD</b></label><br>
-                    <input type="password" class="form-control" id="password" name="pass" placeholder="Password" required>
+                    <label for="password" class="form-label"><strong>PASSWORD</strong></label><br>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="password-addon">lock</span>
+                        <input type="password" class="form-control" id="password" name="pass" placeholder="Password" aria-describedby="password-addon" required>
+                    </div>
+
                 </div>
             </div>
-            <hr>
-            <div class="row mb-3">
-                <div class="col-12">
+            <div class="row mb-3 mt-5">
+                <div class="col-12 d-flex flex-row gap-1">
                     <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me">
-                    <label class="form-check-label mx-1" for="remember_me">
+                    <label class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="remember_me" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<div class='d-flex justify-content-center align-items-center gap-2'>Provided by <span class='material-symbols-outlined'>cookie</span></div>">
                         Remember me
+                        <span class="material-symbols-outlined" style="color: aqua;">help</span>
                     </label>
                 </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-12 d-flex flex-row gap-1 hover-red">
+                    <a href="lost_password_form.php" class="text-white text-decoration-none my_outline_animation mx-1 d-flex align-items-center justify-content-start gap-2 py-2">
+                        <span class="material-symbols-outlined">key_off</span>
+                        <span>Password dimenticata<strong> ?</strong></span>
+                    </a>
+                </div>
+            </div>
             <hr>
-            <div class="row d-flex justify-content-end align-items-center mx-1">
-                <button type="submit" class="btn btn-primary col-9 col-sm-5 col-md-3"><b>Sign in</b></button>
-                <a href="/f1_project/views/public/registration_form.php" class="col-2 text-center text-decoration-none">Back</a>
+            <div class="row col-12 d-flex justify-content-end align-items-center mx-1 gap-3">
+                <button type="submit" class="btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                    <span class="material-symbols-outlined text-light">login</span>
+                    <strong>Sign in</strong>
+                </button>
+                <a href="/f1_project/views/public/registration_form.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                    <span class="material-symbols-outlined">how_to_reg</span>
+                    <span class="d-inline d-sm-none d-xxl-inline">Register</span>
+                </a>
             </div>
         </fiedlset>
     </form>
 </div>
 </body>
+
+
+<script src="../../assets/js/log_reg.js"></script>
 </html>
