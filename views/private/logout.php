@@ -20,7 +20,7 @@ if (check_user_auth()) {
             ["s"],
             [$_COOKIE["my_f1_cookie_id"]],
             "logout.php",
-            "../public/login_form.php");
+            "/f1_project/views/public/login_form.php");
 
         if (!$conn->close()) {
             error("500", "conn_close: $conn->error", "logout.php", "login_form.php");
@@ -39,9 +39,9 @@ if (check_user_auth()) {
     $_SESSION["success"] = 1;
     $_SESSION["success_msg"] = "Successfully logged out.";
 
-    header("Location: ../public/login_form.php");
+    header("Location: /f1_project/views/public/login_form.php");
 
 } else {
-    error("401", "not_authorized", "logout.php", "../public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "logout.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
     exit;
 }

@@ -20,14 +20,19 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
-    header("Location: ../private/private.php");
+    if (check_admin_auth($user)) {
+        header("Location: /f1_project/views/private/dashboard.php");
+    } else {
+        echo "Logged but in user mode";
+        echo "<a href='/f1_project/views/private/logout.php'>Logout</a>";
+    }
+    exit;
 }
 ?>
 
 <body class="vh-100">
 
 <?php include ("../partials/navbar_log_reg.php"); ?>
-
 
 <div id="bg-login" class="container-fluid h-100 w-100 d-flex flex-column justify-content-center align-items-center">
 
