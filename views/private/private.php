@@ -29,6 +29,7 @@
         <?php session_destroy(); ?>
 
     <?php } else {
+        $_SESSION["redirection"] = "/f1_project/views/private/private.php";
         error("401", "not_authorized", "private.php", "../public/login_form.php", "Unauthorized access.");
         exit;
     } ?>

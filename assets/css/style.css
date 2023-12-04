@@ -1,0 +1,46 @@
+* {
+    color: white;
+}
+
+hr {
+    border-top: 3px solid red;
+}
+
+.my_outline_animation {
+    border: none;
+    position: relative;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: 0;
+    background-color: red;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.hover-red:hover .material-symbols-outlined {
+    color: red;
+}
+
+#navbar {
+    background-color: transparent;
+}
+
+#navbar-logo {
+    width: 70px;
+    height: 70px;
+    background-image: url('/f1_project/assets/images/F1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,35 @@
+main {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.img-carousel{
+    aspect-ratio: 5.3/2;
+    object-fit: cover;
+}
+
+.title{
+    text-align: center;
+}
+
+.card img {
+    transition: all ease-in-out 1s;
+}
+
+.card-img {
+    overflow: hidden;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.home-cards * {
+    color: rgb(33,37,41);
+}

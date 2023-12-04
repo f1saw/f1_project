@@ -143,7 +143,17 @@ if (!$login_allowed) {
 
 if ($login_allowed) {
     set_session($user);
-    header("Location: ../views/private/private.php");
+
+    if(isset($_SESSION["redirection"])) {
+        header("Location: {$_SESSION['redirection']}");
+        unset($_SESSION['redirection']);
+        exit;
+    }
+    else {
+        header("Location: /f1_project/views/public/index.php");
+        exit;
+    }
+
 } else {
     error("401", "Email and pwd NOT correct", "login.php", "../views/public/login_form.php");
     exit;

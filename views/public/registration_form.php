@@ -5,13 +5,14 @@
     <title>Sign Up</title>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
+
     <?php include("../partials/head.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
 </head>
-
-<body>
 
 <?php
 if(session_status() == PHP_SESSION_NONE) session_start();
@@ -22,23 +23,26 @@ if (check_user_auth($user)) {
     header('Location: ../private/private.php');
 }
 ?>
-<div class="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center">
 
-    <form id="signup-form" action="../../auth/registration.php" method="POST" class="container col-12 col-md-6">
+
+
+<body class="vh-100">
+
+<?php include ("../partials/navbar_log_reg.php"); ?>
+
+<div id="bg-register" class="container-fluid h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+
+    <form id="register-form" action="../../auth/registration.php" method="POST" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded">
+
         <?php
         if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
-            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </symbol>
-            </svg>
             <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-                <div class="d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                    <h4 class="alert-heading m-0">Registration failed!</h4>
+                <div class="d-flex align-items-center gap-1" role="alert">
+                    <span class="material-symbols-outlined text-danger">warning</span>
+                    <h4 class="alert-heading text-danger m-0">Registration failed!</h4>
                 </div>
                 <hr>
-                <p class="mb-0"><?php echo $_SESSION["err_msg"]; ?></p>
+                <p class="mb-0 text-danger"><?php echo $_SESSION["err_msg"]; ?></p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
@@ -46,36 +50,55 @@ if (check_user_auth($user)) {
             unset($_SESSION["err_msg"]);
         }
         ?>
+
         <fiedlset>
-            <legend><b>CREATE ACCOUNT</b></legend>
+            <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
+                <span class="material-symbols-outlined">passkey</span>
+                <b>REGISTER</b>
+            </legend>
             <hr>
             <div class="row mb-3">
                 <div class="col-12 col-md-6">
                     <label for="fname" class="form-label"><strong>FIRST NAME</strong></label><br>
-                    <input type="text" id="fname" name="fname" class="form-control" placeholder="Your first name" required>
-                    <div class="form-text"></div>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="fname-addon">badge</span>
+                        <input type="text" id="fname" name="fname" class="form-control" placeholder="Your first name" aria-describedby="fname-addon" required>
+                    </div>
+                    <!-- <div class="form-text"></div> -->
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="lname" class="form-label"><strong>LAST NAME</strong></label><br>
-                    <input type="text" id="lname" name="lname" class="form-control" placeholder="Your last name" required>
-                    <div class="form-text"></div>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="fname-addon">badge</span>
+                        <input type="text" id="lname" name="lname" class="form-control" placeholder="Your last name" required>
+                    </div>
+                    <!-- <div class="form-text"></div> -->
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="email" class="form-label"><b>EMAIL</b></label><br>
-                    <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" required>
-                    <div class="form-text mx-1">your <strong>Top secret</strong> email :P</div>
+                    <label for="email" class="form-label"><strong>EMAIL</strong></label><br>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
+                        <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
+                    </div>
+                    <div class="form-text mx-1 text-light">your <strong>Top secret</strong> email :P</div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12 col-md-6 mb-3 mb-md-0">
                     <label for="password" class="form-label"><strong>PASSWORD</strong></label><br>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="password-addon">lock</span>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="password_confirm" class="form-label"><strong>REPEAT PASSWORD</strong></label><br>
-                    <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Repeat password">
+                    <div class="input-group">
+                        <span class="input-group-text material-symbols-outlined text-dark" id="password-addon">lock</span>
+                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Repeat password">
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -84,23 +107,32 @@ if (check_user_auth($user)) {
                     <input id="date_of_birth" name="date_of_birth" class="form-control" type="date" />
                 </div>
                 <div class="col-12 col-sm-6 mb-3 mb-sm-0 d-flex align-items-end">
-                    <div>
+                    <div class="d-flex flex-row gap-1">
                         <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
-                        <label class="form-check-label mx-1" for="newsletter">
+                        <label class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="Receive <strong>exclusive</strong> contents :P">
                             Subscribe to newsletter
+                            <span class="material-symbols-outlined" style="color: aqua;">help</span>
                         </label>
                     </div>
                 </div>
             </div>
 
             <hr>
-            <div class="row d-flex justify-content-end align-items-center mx-1 mb-3">
-                <button type="submit" class="btn btn-primary col-9 col-sm-5 col-md-3"><b>Sign up</b></button>
-                <a href="login_form.php" class="col-3 text-center text-decoration-none">Login</a>
+            <div class="row col-12 d-flex justify-content-end align-items-center mx-1 mb-3 gap-3">
+                <button type="submit" class="btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                    <span class="material-symbols-outlined">person_add</span>
+                    <strong>Sign up</strong>
+                </button>
+                <a href="login_form.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                    <span class="material-symbols-outlined">login</span>
+                    <span class="d-inline d-xxl-inline">Login</span>
+                </a>
             </div>
         </fiedlset>
 
     </form>
 </div>
 </body>
+
+<script src="../../assets/js/log_reg.js"></script>
 </html>
