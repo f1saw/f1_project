@@ -7,9 +7,9 @@
 
     <?php include("../partials/head.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
-    <?php require_once("../../error_handling.php"); ?>
+    <?php require_once("../../utility/error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
-    <?php require_once ("../partials/Alert.php") ?>
+    <?php require_once("../partials/alert.php") ?>
 
 </head>
 

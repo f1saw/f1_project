@@ -1,8 +1,8 @@
 <?php
 require_once("../../auth/auth.php");
 require_once ("../../DB/DB.php");
-require_once ("../../Utility/utility_func.php");
-require_once ("../../Utility/msg_error.php");
+require_once("../../utility/utility_func.php");
+require_once("../../utility/msg_error.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
