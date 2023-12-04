@@ -5,6 +5,7 @@
     <title>Sign Up</title>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
 
     <?php include("../partials/head.php"); ?>

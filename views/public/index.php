@@ -4,96 +4,11 @@
     <title>Home</title>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/index_style.css">
+
     <?php include("../partials/head.php"); ?>
-
-    <!-- <link rel="stylesheet" href="../../assets/css/index_style.css"> -->
-
     <?php require_once("../../auth/auth.php") ?>
-
-    <style>
-        * {
-            color: white;
-        }
-
-        hr {
-            border-top: 3px solid red;
-        }
-
-        .img-carousel{
-            aspect-ratio: 5.3/2;
-            object-fit: cover;
-        }
-
-        .title{
-            text-align: center;
-        }
-
-        .card img {
-            transition: all ease-in-out 1s;
-        }
-
-        .card-img {
-            overflow: hidden;
-        }
-
-        .profile-img{
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-        }
-
-        .card:hover img {
-            transform: scale(1.1);
-        }
-
-        .home-cards * {
-            color: rgb(33,37,41);
-        }
-        #navbar {
-            background-color: transparent;
-        }
-
-        #navbar-logo {
-            width: 70px;
-            height: 70px;
-            background-image: url('/f1_project/assets/images/F1.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .my_outline_animation {
-            border: none;
-            position: relative;
-            transition: all ease-in-out .2s;
-        }
-
-        .my_outline_animation::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            left: 50%;
-            bottom: 0;
-            background-color: red;
-            transition: all ease-in-out .2s;
-        }
-
-        .my_outline_animation:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .hover-red:hover .material-symbols-outlined {
-            color: red;
-        }
-
-        main {
-            max-width: 1300px;
-            margin: auto;
-        }
-
-    </style>
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -106,11 +21,9 @@
         <div class="container-fluid px-4">
             <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index.php"></a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-symbols-outlined">menu</span>
             </button>
-
-
 
             <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between align-items-center" id="navbarNav">
                 <form class="d-none d-lg-flex" role="search" name="search_bar">
@@ -118,24 +31,21 @@
                     <button class="btn btn-outline-danger" type="submit">Search</button>
                 </form>
 
-                <ul class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
-
-                        <li class="nav-item d-flex align-items-end">
+                <div class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
+                    <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
+                        <div class="nav-item d-flex align-items-end">
                             <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                                 <span class="material-symbols-outlined">shopping_bag</span>
                                 <span>Store</span>
                             </a>
-                        </li>
-                        <li class="nav-item d-flex align-items-end">
+                        </div>
+                        <div class="nav-item d-flex align-items-end">
                             <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                                 <span class="material-symbols-outlined">sports_score</span>
                                 <span>Circuits</span>
                             </a>
-                        </li>
-
-
-
-
+                        </div>
+                    </div>
 
                     <div class="d-flex gap-3">
                         <?php
@@ -186,24 +96,11 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
-                </ul>
-
-
+                </div>
             </div>
-
-
-            <!-- <div class="d-inline d-lg-none">
-                <form class="d-none d-lg-flex" role="search" name="search_bar">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-danger" type="submit">Search</button>
-                </form>
-            </div> -->
         </div>
     </nav>
 
-
-
-    <!-- <h1 class="title">Welcome!</h1> -->
 
     <main>
         <!-- Showcase -->
@@ -362,8 +259,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </section>
     </main>

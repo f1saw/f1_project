@@ -13,5 +13,6 @@ SAW project about F1
 <li>Check correttezza campi registrazione con js</li>
 <li>cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)</li>
 <li>Collapse navbar in index not working</li>
+<li>Formattazione su schermo mobile non funziona + parti bianche volanti</li>
 <li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
 </ul>

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
     <?php include("../partials/head.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
@@ -30,7 +31,7 @@ if (check_user_auth($user)) {
 
 <div id="bg-login" class="container-fluid h-100 w-100 d-flex flex-column justify-content-center align-items-center">
 
-    <form id="login-form" action="../../auth/login.php" class="container col-12 col-md-6 col-lg-4 col-xl-3 py-3 border border-3 border-danger rounded" method="POST">
+    <form id="login-form" action="../../auth/login.php" class="container col-12 col-lg-6 col-xl-4 py-3 border border-3 border-danger rounded" method="POST">
 
         <?php
         if (isset($_SESSION["success"]) && $_SESSION["success"]) { ?>
