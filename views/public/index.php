@@ -36,6 +36,12 @@
             overflow: hidden;
         }
 
+        .profile-img{
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+        }
+
         .card:hover img {
             transform: scale(1.1);
         }
@@ -113,7 +119,7 @@
                 </form>
 
                 <ul class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
-                    <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
+
                         <li class="nav-item d-flex align-items-end">
                             <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                                 <span class="material-symbols-outlined">shopping_bag</span>
@@ -126,10 +132,7 @@
                                 <span>Circuits</span>
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li> -->
-                    </div>
+
 
 
 
@@ -156,9 +159,9 @@
                                 <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="#">
 
                                     <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
-                                        <img src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
+                                        <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
                                     <?php } else{ ?>
-                                        <img style="border-radius: 50%; width: 24px; height: 24px;" src="../../assets/images/foto-profilo.jpg" alt="Profile">
+                                        <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
                                     <?php }?>
 
                                     <span>My profile</span>
@@ -179,19 +182,12 @@
                             </li>
                         <?php } ?>
                     </div>
-
-
-                    <!--Implementare scomparsa con js-->
-                    <!-- <form class="d-flex d-lg-none" role="search">
-                        <input class="form-control me-2" style="width: 100px;height: 30px" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success d-flex align-items-center justify-content-center" style="width: 50px;height: 30px; overflow:hidden; text-overflow: ellipsis;" type="submit">Go</button>
-                    </form> -->
-
                     <form class="d-flex flex-row d-lg-none" role="search" name="search_bar">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
                 </ul>
+
 
             </div>
 
