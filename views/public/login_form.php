@@ -12,6 +12,7 @@
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../utility/error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
+    <?php include("../partials/alert.php"); ?>
 </head>
 
 <?php
@@ -38,31 +39,8 @@ if (check_user_auth($user)) {
 
     <form id="login-form" action="../../auth/login.php" class="container col-12 col-lg-6 col-xl-4 py-3 border border-3 border-danger rounded" method="POST">
 
-        <?php
-        if (isset($_SESSION["success"]) && $_SESSION["success"]) { ?>
-            <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mt-4 col-12" role="alert">
-                <span class="material-symbols-outlined text-success">done</span>
-                <strong class="text-success">Success!</strong>&nbsp;<?php echo $_SESSION["success_msg"]; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php
-            unset($_SESSION["success"]);
-            unset($_SESSION["success_msg"]);
-        }
-        ?>
-
-
-        <?php
-        if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
-            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mt-4 col-12" role="alert">
-                <span class="material-symbols-outlined text-danger">warning</span>
-                <strong class="text-danger">ERROR!</strong>&nbsp;<?php echo $_SESSION["err_msg"]; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php
-            unset($_SESSION["err"]);
-            unset($_SESSION["err_msg"]);
-        } ?>
+        <?php err_msg_alert(); ?>
+        <?php succ_msg_alert(); ?>
 
         <fiedlset>
             <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">

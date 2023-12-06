@@ -12,6 +12,7 @@
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../utility/error_handling.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
+    <?php require_once ("../partials/alert.php"); ?>
 </head>
 
 <?php
@@ -39,22 +40,7 @@ if (check_user_auth($user)) {
 
     <form id="register-form" action="../../auth/registration.php" method="POST" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded">
 
-        <?php
-        if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-                <div class="d-flex align-items-center gap-1" role="alert">
-                    <span class="material-symbols-outlined text-danger">warning</span>
-                    <h4 class="alert-heading text-danger m-0">Registration failed!</h4>
-                </div>
-                <hr>
-                <p class="mb-0 text-danger"><?php echo $_SESSION["err_msg"]; ?></p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php
-            unset($_SESSION["err"]);
-            unset($_SESSION["err_msg"]);
-        }
-        ?>
+        <?php err_msg_alert(); ?>
 
         <fiedlset>
             <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
