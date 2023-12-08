@@ -1,0 +1,80 @@
+main {
+    max-width: 1335px;
+    margin: auto;
+}
+
+.container {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    display: -webkit-flex;
+
+}
+
+.container-element{
+    position: relative;
+    backdrop-filter: blur(5px);
+    max-height: 70%;
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    top: 100px;
+    border-style: solid;
+    border-color: #ff1300;
+}
+
+@media screen and (max-width: 992px) {
+    .container-element{
+        max-width: 70%;
+        max-height: 68%;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-element{
+        max-width: 70%;
+        max-height: 84%;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+#bg-profile {
+    background: url("/f1_project/assets/images/circuit.jpeg");
+    background-size: cover;
+    background-position: bottom;
+    border-radius: 10px;
+}
+
+#bg-profile #profile-data {
+    background: rgba(87, 87, 87, .6);
+}
+
+#photo_profile{
+    position: relative;
+    width: 70px;
+    height: 70px;
+    top: 20px
+}
+
+.tex-box{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.text-red {
+    color: #ff1300;
+}
+
+input{
+    text-align: center;
+}
+input::placeholder {
+    text-align: center;
+}
+

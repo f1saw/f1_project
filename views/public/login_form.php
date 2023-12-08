@@ -22,7 +22,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 if (check_user_auth($user)) {
     set_session($user);
     if (check_admin_auth($user)) {
-        header("Location: /f1_project/views/private/dashboard.php");
+        header("Location: /f1_project/views/private/table_users.php");
     } else {
         echo "Logged but in user mode";
         echo "<a href='/f1_project/views/private/logout.php'>Logout</a>";

@@ -5,6 +5,7 @@ require_once("../../utility/utility_func.php");
 require_once("../../utility/msg_error.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
+unset($_SESSION["dont_show_in_nav"]);
 [$login_allowed, $user] = check_cookie();
 
 if (check_admin_auth($user)) {
@@ -34,12 +35,12 @@ if (check_admin_auth($user)) {
         "user_delete.php");
 
     if (!$conn->close()) {
-        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
+        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/table_users.php");
         exit;
     }
     $_SESSION["success"] = 1;
     $_SESSION["success_msg"] = "Account deleted.";
-    header("location:  /f1_project/views/private/dashboard.php");
+    header("location:  /f1_project/views/private/table_users.php");
     exit;
 }
 else {
