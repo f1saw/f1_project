@@ -15,7 +15,7 @@
             <div class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
                 <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
                     <div class="nav-item d-flex align-items-end">
-                        <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
+                        <a href="/f1_project/views/public/store/store.php" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                             <span class="material-symbols-outlined">shopping_bag</span>
                             <span>Store</span>
                         </a>

@@ -24,11 +24,15 @@ MAURI:
 
 MATTE:
 <li>init grafico shop (sotto forma di cards)</li>
-
+<li></li>
+<li>nationality for users?</li>
+<li>dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...</li>
+<li>In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
 <li>Check cookie ridondante </li>
 <li>Scrittura politica cookie</li>
 <li>Get latest news with scraping f1.com</li>
 <li>Check correttezza campi registrazione con js</li>
 <li>Formattazione su schermo mobile non funziona + parti bianche volanti</li>
 <li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
+<li>NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart</li>
 </ul>

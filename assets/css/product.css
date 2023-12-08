@@ -1,0 +1,17 @@
+select {
+    color: white !important;
+    width: fit-content !important;
+}
+select .option_valid {
+    color: black !important;
+}
+
+.img-carousel{
+    aspect-ratio: 3/4;
+    object-fit: contain;
+    max-height: 450px;
+}
+
+.accordion-body * {
+    color: black;
+}

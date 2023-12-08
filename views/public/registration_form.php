@@ -125,5 +125,5 @@ if (check_user_auth($user)) {
 </div>
 </body>
 
-<script src="../../assets/js/log_reg.js"></script>
+<script src="../../assets/js/tooltip.js"></script>
 </html>

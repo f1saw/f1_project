@@ -32,6 +32,16 @@ hr {
     color: red;
 }
 
+.btn-reverse-color * {
+    color: white;
+}
+.btn-reverse-color:hover {
+    background-color: white !important;
+}
+.btn-reverse-color:hover * {
+    color: red;
+}
+
 #navbar {
     background-color: transparent;
 }
