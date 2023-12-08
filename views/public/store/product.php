@@ -10,6 +10,11 @@
 
     <?php include("../../partials/head.php"); ?>
     <?php require_once("../../../auth/auth.php") ?>
+
+    <?php require_once("../../../utility/error_handling.php"); ?>
+    <?php require_once ("../../../utility/store.php") ?>
+    <?php require_once ("../../../DB/DB.php"); ?>
+    <?php require_once("../../partials/alert.php") ?>
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -21,7 +26,31 @@
     <?php include ("../../partials/navbar_store.php")?>
 
 
-    <main class="mt-4 p-3 row d-flex justify-content-center align-items-stretch">
+    <?php
+    if(!isset($_GET["id"]) || !$_GET["id"]) {
+        error("500", "ID not given", "product.php", "/f1_project/views/public/store.php");
+        exit;
+    }
+
+    $conn = DB::connect("product.php", "/f1_project/views/public/store.php");
+    $product = DB::get_record_by_field($conn,
+        "SELECT * FROM Products WHERE id = ?",
+        ["i"],
+        [$_GET["id"]],
+        "product.php",
+        "/f1_project/views/public/store.php")[0];
+    if (!$conn->close()) {
+        error("500", "conn_close()", "product.php", "/f1_project/views/public/store.php");
+        exit;
+    }
+    if (!$product) {
+        error("500", "product_look_up", "product.php", "/f1_project/views/public/store.php");
+        exit;
+    }
+    ?>
+
+
+    <main class="mt-4 mx-auto p-3 row d-flex justify-content-center align-items-stretch">
         <div class="col-12 col-sm-6">
             <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -30,11 +59,12 @@
                     </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://store.ferrari.com/product_image/1647597333252950/F/w1080.jpg" class="d-block w-100 img-carousel rounded" alt="...">
+                        <img src="<?php echo $product["img_url"]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
                     </div>
-                    <div class="carousel-item">
+                    <!-- TODO: gestione più foto -->
+                    <!-- <div class="carousel-item">
                         <img src="https://store.ferrari.com/product_image/1647597333252950/R/w1080.jpg" class="d-block w-100 img-carousel rounded" alt="...">
-                    </div>
+                    </div> -->
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,36 +79,34 @@
 
         </div>
         <div class="col-12 col-sm-6">
-            <h3>Maglia sottotuta F1 PRO Charles Leclerc Puma per Scuderia Ferrari - Joshua Vides</h3>
+            <h3><?php echo $product["title"]; ?></h3>
             <hr>
-            <div>
-                <label for="s-color">Color: Red</label>
-                <img class="mx-3" src="https://store.ferrari.com/product_image/1647597333252950/F/w1080.jpg" height="50px" alt="">
-                <!-- <div class="d-flex justify-content-start align-items-center gap-2">
-                    <label for="s-color">Color: </label>
-                    <select name="s-color" id="s-color" class="form-select rounded-pill" aria-labelledby="Select color">
-                        <option value="ns" selected disabled>Select the color</option>
-                        <option value="red" class="option_valid">Red</option>
-                        <option value="orange" class="option_valid">Orange</option>
-                        <option value="blue" class="option_valid">Blue</option>
-                        <option value="green" class="option_valid">Green</option>
-                    </select> -->
-            </div>
-            <div>
-                <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
-                    <label for="s-size">Size: </label>
-                    <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
-                        <option value="ns" selected disabled>Select the size</option>
-                        <option value="s" class="option_valid">S</option>
-                        <option value="m" class="option_valid">M</option>
-                        <option value="l" class="option_valid">L</option>
-                        <option value="xl" class="option_valid">XL</option>
-                    </select>
+            <?php if ($product["color"]) { ?>
+                <div>
+                    <label for="s-color">Color: <?php echo $product["color"]; ?></label>
+                    <img class="mx-3" src="<?php echo $product["img_url"]; ?>" height="50px" alt="">
                 </div>
-            </div>
+            <?php } ?>
+            <?php if ($product["size"]) { ?>
+                <?php $size = explode(";", $product["size"]); ?>
+                <div>
+                    <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
+                        <label for="s-size">Size: </label>
+                        <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
+                            <option value="ns" class="option_invalid" selected disabled>Select the size</option>
+                            <?php
+                            foreach ($size as $s) {
+                                echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            <?php } ?>
             <hr>
             <div class="d-flex justify-content-end gap-3">
-                <h3>€ 500.00</h3>
+                <?php [$int, $dec] = str2int_dec($product["price"]); ?>
+                <h3>€ <?php echo "$int.$dec" ?></h3>
                 <div class="d-flex flex-row gap-2 pb-1 hover-red">
                     <div id="btn-add-cart" class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
                         <span class="material-symbols-outlined">shopping_bag</span>
@@ -99,9 +127,7 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <label>
-                                Il 2023 segna il ritorno del <strong style="color: red;">Gran Premio di Las Vegas</strong> nel Campionato Mondiale. Per celebrare l’evento, Scuderia Ferrari propone una selezione speciale di prodotti di cui fa parte l’esclusiva maglia sottotuta indossata da Charles Leclerc durante la gara. Il design del capo trae ispirazione dalla Golden Era della F1 negli Stati Uniti e dallo stile delle leggendarie vetture Ferrari degli anni ’70.
-                            </label>
+                            <label><?php echo $product["description"]; ?></label>
                         </div>
                     </div>
                 </div>

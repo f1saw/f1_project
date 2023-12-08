@@ -21,11 +21,22 @@ MAURI:
 </li>
 <li>fix grafico tabella dashboard (color bg scuro, navbar)</li>
 <hr>
+</ul>
 
-MATTE:
-<li>init grafico shop (sotto forma di cards)</li>
-<li></li>
+# MATTE:
+- [ ] new_product_form => add color and size
+- [ ] products / team management
+- [ ] products / multi photos management through ";" separator
+- [ ] email confirmation
+- [ ] news got through web scraping
+- [X] init grafico shop (sotto forma di cards)
+
+
+
+
+<li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
 <li>nationality for users?</li>
+<li><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></li>
 <li>dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...</li>
 <li>In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
 <li>Check cookie ridondante </li>
@@ -33,6 +44,7 @@ MATTE:
 <li>Get latest news with scraping f1.com</li>
 <li>Check correttezza campi registrazione con js</li>
 <li>Formattazione su schermo mobile non funziona + parti bianche volanti</li>
-<li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
 <li>NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart</li>
-</ul>
+
+<li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
+

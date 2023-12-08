@@ -9,6 +9,10 @@
 
     <?php include("../../partials/head.php"); ?>
     <?php require_once("../../../auth/auth.php") ?>
+
+    <?php require_once("../../../utility/error_handling.php"); ?>
+    <?php require_once ("../../../DB/DB.php"); ?>
+    <?php require_once("../../partials/alert.php") ?>
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -17,7 +21,7 @@
 <div class="container-fluid bg-dark">
 
     <!-- Nav -->
-    <?php include ("../../partials/navbar.php")?>
+    <?php include ("../../partials/navbar_store.php")?>
 
 
     <div class="w-100 d-flex flex-column gap-3">
@@ -32,7 +36,7 @@
                 width: 60px;
             }
         </style>
-        <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-1">
+        <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
             <a href="#">
                 <img src="https://f1store2.formula1.com/content/ws/all/9a4b02b0-f73a-4bf7-af5a-dd9794260036.svg" alt="">
             </a>
@@ -61,6 +65,9 @@
                 <img src="https://f1store2.formula1.com/content/ws/all/af401abe-7378-47aa-95df-1bf6ab81674a.svg" alt="">
             </a>
             <a href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_Haas_F1.png" alt="">
+            </a>
+            <a href="#">
                 <img src="https://f1store2.formula1.com/content/ws/all/1fb492a9-7e56-4dca-9fa8-878548679887.svg" alt="">
             </a>
         </div>
@@ -70,92 +77,89 @@
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
+            <?php
+            $conn = DB::connect("store.php", "/f1_project/views/public/index.php");
+            [$num_products, $products] = DB::stmt_get_record_by_field($conn,
+                "SELECT * FROM Products;",
+                "dashboard.php",
+                "dashboard.php");
+            if (!$conn->close()) {
+                error("500", "conn_close()", "dashboard.php", "/f1_project/views/private/dashboard.php");
+                exit;
+            }
+            ?>
 
-            <div class="col d-flex align-items-stretch">
-                <a href="product.php?id="<?php echo "ITEM_ID";?> class="text-decoration-none">
-                    <div class="card bordered border-danger border-3 p-2 h-100">
-                        <div class="card-img">
-                            <img src="https://images.footballfanatics.com/scuderia-ferrari/scuderia-ferrari-2023-team-t-shirt_ss4_p-13368608+u-ya0zcr5gjt4kzyrcb08m+v-f28b0bcee21c492bbbd3d4f328095725.jpg?_hv=2&w=340" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end p-1">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">ITEM_NAME</h5>
-                                <hr>
-                                <p class="card-text">ITEM_DESC</p>
-                                <div class="card-text text-decoration-none d-flex justify-content-between align-items-end pt-3">
-                                    <h5 style="border-top: 2px solid red; border-right: 2px solid red; padding-right: 5px;" class="h-100 d-flex align-items-center">
-                                        <strong>€ 50.00</strong>
-                                    </h5>
-                                    <span class="d-flex flex-row gap-2 pb-1 hover-red">
+            <?php if ($num_products > 0) { ?>
 
-                                        <style>
-                                            .btn-reverse-color * {
-                                                color: white;
-                                            }
+                <!-- TODO: https://stackoverflow.com/questions/30981765/how-to-divide-table-to-show-in-pages-the-table-data-is-filled-dynamically-with -->
+                <?php foreach ($products as $product) { ?>
 
-                                            .btn-reverse-color:hover {
-                                                background-color: white;
-                                            }
-                                            .btn-reverse-color:hover * {
-                                                color: red;
-                                            }
-                                        </style>
-                                        <span class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                                            <span class="material-symbols-outlined">shopping_bag</span>
-                                            <span>Add it!</span>
-                                        </span>
-                                    </span>
+                    <div class="col d-flex align-items-stretch">
+                        <a href="product.php?id=<?php echo $product["id"]; ?>" class="text-decoration-none">
+                            <div class="card bordered border-danger border-3 p-2 h-100">
+                                <div class="card-img">
+                                    <img src="<?php echo $product["img_url"]; ?>" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body d-flex align-items-end p-1">
+                                    <div class="w-100">
+                                        <h5 class="card-title text-danger"><?php echo $product["title"]; ?></h5>
+                                        <hr>
+                                        <p class="card-text"><?php echo (strlen($product["description"]) < 50)? $product["description"] : (substr($product["description"], 0, 70) . " [...]"); ?></p>
+                                        <div class="card-text text-decoration-none d-flex justify-content-between align-items-end pt-3">
+                                            <h5 style="border-top: 2px solid red; border-right: 2px solid red; padding-right: 5px;" class="h-100 d-flex align-items-center">
+                                                <?php
+                                                $int = intval($product["price"] / 100);
+                                                $dec = $product["price"] % 100;
+                                                if ($dec < 10) {
+                                                    $dec = "0" . $dec;
+                                                }
+                                                ?>
+                                                <strong>€ <?php echo $int . "." . $dec ?></strong>
+                                            </h5>
+                                            <span class="d-flex flex-row gap-2 pb-1 hover-red">
 
+                                                <style>
+                                                    .btn-reverse-color * {
+                                                        color: white;
+                                                    }
+
+                                                    .btn-reverse-color:hover {
+                                                        background-color: white;
+                                                    }
+                                                    .btn-reverse-color:hover * {
+                                                        color: red;
+                                                    }
+                                                </style>
+                                                <span class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                                                    <span class="material-symbols-outlined">shopping_bag</span>
+                                                    <span>Add it!</span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
+
+                <?php } ?>
+
+            <?php } else { ?>
+                    <style>
+                        .alert-no-data * {
+                            color: white !important;
+                        }
+                    </style>
+                <div class="mx-auto alert alert-no-data border-light fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                    <span class="material-symbols-outlined">description</span>
+                    <span class="mx-2">
+                    <b>INFO</b>&nbsp;| No Data available!
+                </span>
+                </div>
+            <?php } ?>
 
 
 
-            <div class="col d-flex align-items-stretch">
-                <a href="product.php" class="text-decoration-none">
-                    <div class="card bordered border-danger border-3 p-2 h-100">
-                        <div class="card-img">
-                            <img src="https://images.footballfanatics.com/scuderia-ferrari/scuderia-ferrari-2023-team-softshell-jacket_ss4_p-13368388+u-1697ehkh6odvy4fw2s3h+v-0ca11877b48b48afa306d16c0a65476d.jpg?_hv=2&w=340" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end p-1">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">ITEM_NAME</h5>
-                                <hr>
-                                <p class="card-text">ITEM_DESC</p>
-                                <div class="card-text text-decoration-none d-flex justify-content-between align-items-end pt-3">
-                                    <h5 style="border-top: 2px solid red; border-right: 2px solid red; padding-right: 5px;" class="h-100 d-flex align-items-center">
-                                        <strong>€ 50.00</strong>
-                                    </h5>
-                                    <span class="d-flex flex-row gap-2 pb-1 hover-red">
-
-                                        <style>
-                                            .btn-reverse-color * {
-                                                color: white;
-                                            }
-
-                                            .btn-reverse-color:hover {
-                                                background-color: white;
-                                            }
-                                            .btn-reverse-color:hover * {
-                                                color: red;
-                                            }
-                                        </style>
-                                        <span class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                                            <span class="material-symbols-outlined">shopping_bag</span>
-                                            <span>Add it!</span>
-                                        </span>
-                                    </span>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
 
 
 

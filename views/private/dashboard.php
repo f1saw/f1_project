@@ -113,6 +113,11 @@
             <?php } ?>
         </div>
 
+
+        <a href="/f1_project/views/private/store/product_new_form.php">
+            New product
+        </a>
+
         <!-- TODO: just for testing -->
         <?php session_destroy(); ?>
     </div>
