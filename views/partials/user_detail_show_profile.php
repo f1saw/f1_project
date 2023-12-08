@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <?php include("../partials/navbar.php"); ?>
-    <main class="container-fluid nav-profile s">
-        <div id="bg-profile" class="container d-flex justify-content-center">
+    <main>
+        <div id="bg-profile" class="flex-container d-flex justify-content-center">
             <div id="profile-data" class="container-element">
                 <div class="d-flex justify-content-center">
                     <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo $element['img_url']; else echo "/f1_project/images/default_img_profile.jpeg"; ?>"

@@ -23,19 +23,18 @@
     <!-- In attesa di risolvere il bug -->
     <style>
         main {
-            max-width: 1335px;
+            max-width: 90%;
             margin: auto;
         }
 
-        .container {
+        .flex-container {
             position: relative;
             height: 85vh;
             width: 100%;
+            display: -webkit-flex;
+            display: flex;
             overflow: hidden;
             border-radius: 10px;
-            display: flex;
-            display: -webkit-flex;
-
         }
 
         .container-element{
