@@ -61,16 +61,31 @@ main {
     transition: all 500ms ease;
 }
 
+@media screen and (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
 .flex-slide:hover {
     -webkit-flex-grow: 3;
     flex-grow: 3;
 }
 
 .profile {
-    height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/leclerc.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/dwp2x/wp11174641.jpg);
     background-size: cover;
-    background-position-x: -300px;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/profile_768.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
 }
 
 @keyframes aboutFlexSlide {
@@ -89,13 +104,38 @@ main {
 }
 
 .product {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/login_bg_ferrari.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/ferrari.jpg");
     background-size: cover;
-    background-position-x: 400px;
+    background-position: right;
     background-attachment: fixed;
+}
+
+@media screen and (max-width: 768px) {
+    .product {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/sfondo_product1.jpg");
+        background-size: cover;
+        background-position: center bottom;
+        background-attachment: fixed;
+    }
 }
 
 .flex-title-product{
     position: relative;
     top: 19%
+}
+
+.table-users{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/dwp2x/wp12074922.png);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 768px) {
+    .table-users {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/logo_table.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
 }

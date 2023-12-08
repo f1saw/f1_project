@@ -13,22 +13,15 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
 
     <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-
-    <?php
-    [$login_allowed, $user] = check_cookie();
-    if(check_admin_auth($user))
-        echo '<link rel="stylesheet" href="../../assets/css/dashboard_style_admin.css">';
-    else
-        echo '<link rel="stylesheet" href="../../assets/css/dashboard_style_users.css">'
-    ?>
 </head>
 <body class="bg-dark">
+    <?php [$login_allowed, $user] = check_cookie(); ?>
     <?php if(check_admin_auth($user)){?>
         <div class="container-fluid">
             <?php include ("../partials/navbar.php"); ?>
             <main>
                 <div class="flex-container">
-                    <div class="flex-slide profile display-flex">
+                    <div class="flex-slide profile">
                         <div class="flex-title flex-title-profile">Profile</div>
                         <div onclick="goToProfile()" class="flex-about"><p class="text-center">Click here to view or edit your profile</p></div>
                     </div>
