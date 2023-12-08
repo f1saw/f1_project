@@ -28,7 +28,7 @@
             <?php include ("../partials/navbar.php"); ?>
             <main>
                 <div class="flex-container">
-                    <div class="flex-slide profile">
+                    <div class="flex-slide profile display-flex">
                         <div class="flex-title flex-title-profile">Profile</div>
                         <div onclick="goToProfile()" class="flex-about"><p class="text-center">Click here to view or edit your profile</p></div>
                     </div>
