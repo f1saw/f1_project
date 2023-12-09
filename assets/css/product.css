@@ -1,14 +1,12 @@
 select {
     color: white !important;
     width: fit-content !important;
+    background-color: rgb(33,37,41) !important;
 }
 
-select .option_invalid {
-    background-color: rgb(200,200,200) !important;
-}
-
-select .option_valid {
-    color: black !important;
+.option_invalid {
+    color: rgba(107,109,109,255) !important;
+    background-color: rgb(33,37,41) !important;
 }
 
 .img-carousel{

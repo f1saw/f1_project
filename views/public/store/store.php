@@ -6,13 +6,14 @@
 
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/index_style.css">
+    <link rel="stylesheet" href="../../../assets/css/store.css">
 
     <?php include("../../partials/head.php"); ?>
     <?php require_once("../../../auth/auth.php") ?>
 
     <?php require_once("../../../utility/error_handling.php"); ?>
+    <?php require_once ("../../../utility/store.php") ?>
     <?php require_once ("../../../DB/DB.php"); ?>
-    <?php require_once("../../partials/alert.php") ?>
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -23,19 +24,10 @@
     <!-- Nav -->
     <?php include ("../../partials/navbar_store.php")?>
 
-
     <div class="w-100 d-flex flex-column gap-3">
         <h3 class="d-flex justify-content-center">
             Shop by Team
         </h3>
-        <style>
-            #shop-by-team {
-                background-color: rgba(231,227,224,.3);
-            }
-            #shop-by-team * {
-                width: 60px;
-            }
-        </style>
         <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
             <a href="#">
                 <img src="https://f1store2.formula1.com/content/ws/all/9a4b02b0-f73a-4bf7-af5a-dd9794260036.svg" alt="">
@@ -73,7 +65,6 @@
         </div>
     </div>
 
-
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
@@ -81,10 +72,10 @@
             $conn = DB::connect("store.php", "/f1_project/views/public/index.php");
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
                 "SELECT * FROM Products;",
-                "dashboard.php",
-                "dashboard.php");
+                "store.php",
+                "/f1_project/views/public/index.php");
             if (!$conn->close()) {
-                error("500", "conn_close()", "dashboard.php", "/f1_project/views/private/dashboard.php");
+                error("500", "conn_close()", "store.php", "/f1_project/views/public/index.php");
                 exit;
             }
             ?>
@@ -107,32 +98,13 @@
                                         <p class="card-text"><?php echo (strlen($product["description"]) < 50)? $product["description"] : (substr($product["description"], 0, 70) . " [...]"); ?></p>
                                         <div class="card-text text-decoration-none d-flex justify-content-between align-items-end pt-3">
                                             <h5 style="border-top: 2px solid red; border-right: 2px solid red; padding-right: 5px;" class="h-100 d-flex align-items-center">
-                                                <?php
-                                                $int = intval($product["price"] / 100);
-                                                $dec = $product["price"] % 100;
-                                                if ($dec < 10) {
-                                                    $dec = "0" . $dec;
-                                                }
-                                                ?>
+                                                <?php [$int, $dec] = str2int_dec($product["price"]); ?>
                                                 <strong>€ <?php echo $int . "." . $dec ?></strong>
                                             </h5>
-                                            <span class="d-flex flex-row gap-2 pb-1 hover-red">
-
-                                                <style>
-                                                    .btn-reverse-color * {
-                                                        color: white;
-                                                    }
-
-                                                    .btn-reverse-color:hover {
-                                                        background-color: white;
-                                                    }
-                                                    .btn-reverse-color:hover * {
-                                                        color: red;
-                                                    }
-                                                </style>
-                                                <span class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                                                    <span class="material-symbols-outlined">shopping_bag</span>
-                                                    <span>Add it!</span>
+                                            <span <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
+                                                <span <?php echo get_data_id($product); ?> class="btn-add-cart btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                                                    <span <?php echo get_data_id($product); ?> class="material-symbols-outlined">shopping_bag</span>
+                                                    <span <?php echo get_data_id($product); ?>>Add it!</span>
                                                 </span>
                                             </span>
                                         </div>
@@ -145,11 +117,6 @@
                 <?php } ?>
 
             <?php } else { ?>
-                    <style>
-                        .alert-no-data * {
-                            color: white !important;
-                        }
-                    </style>
                 <div class="mx-auto alert alert-no-data border-light fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                     <span class="material-symbols-outlined">description</span>
                     <span class="mx-2">
@@ -157,18 +124,9 @@
                 </span>
                 </div>
             <?php } ?>
-
-
-
-
-
-
-
-
-
-
         </div>
     </main>
-
 </body>
+
+<script src="../../../assets/js/store.js"></script>
 </html>

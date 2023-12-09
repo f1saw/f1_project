@@ -24,16 +24,16 @@ MAURI:
 </ul>
 
 # MATTE:
-- [ ] new_product_form => add color and size
 - [ ] products / team management
 - [ ] products / multi photos management through ";" separator
 - [ ] email confirmation
 - [ ] news got through web scraping
+-<hr>
 - [X] init grafico shop (sotto forma di cards)
+- [X] new_product_form => script add color and size (when u press " " or "," or ";" value is divided)
 
 
-
-
+<br><br><br>
 <li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
 <li>nationality for users?</li>
 <li><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></li>

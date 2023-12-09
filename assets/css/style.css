@@ -33,13 +33,15 @@ hr {
 }
 
 .btn-reverse-color * {
-    color: white;
+    color: white !important;
 }
+
 .btn-reverse-color:hover {
     background-color: white !important;
 }
+
 .btn-reverse-color:hover * {
-    color: red;
+    color: red !important;
 }
 
 #navbar {

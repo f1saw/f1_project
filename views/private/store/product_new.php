@@ -12,7 +12,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["img_url"])) {
+    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["img_url"]) && isset($_POST["color"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
         $title = htmlentities($_POST["title"]);
@@ -23,10 +23,12 @@ if ($login_allowed) {
         // TODO appropriate team id
         // $team_id = $_POST["team_id"] ?? -1;
         $team_id = -1;
+        $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
+        $size = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["size"])));
 
         // REGEX PRICE xx.yy
         if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "product_new.php", "/f1_project/views/private/dashboard.php");
+            error("-1", "Price NOT valid.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -38,22 +40,24 @@ if ($login_allowed) {
         }*/
 
         /* DB */
-        $conn = DB::connect("product_new.php", "/f1_project/views/private/dashboard.php");
+        $conn = DB::connect("product_new.php", "/f1_project/views/private/store/product_new_form.php");
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
         $price = number_format($conn->real_escape_string($price), 2) * 100;
         $img_url = $conn->real_escape_string($img_url);
         $team_id = intval($conn->real_escape_string($team_id));
+        $color = $conn->real_escape_string($color);
+        $size = $conn->real_escape_string($size);
 
         DB::p_stmt_no_select($conn,
-        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?)",
-        ["s", "s", "i", "s", "i"],
-        [$title, $desc, $price, $img_url, $team_id],
+        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
+        ["s", "s", "i", "s", "i", "s", "s"],
+        [$title, $desc, $price, $img_url, $team_id, $color, $size],
         "product_new.php",
-        "/f1_project/views/private/dashboard.php");
+        "/f1_project/views/private/store/product_new_form.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "product_new.php", "/f1_project/views/private/dashboard.php");
+            error("500", "conn_close()", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
             exit;
         }
 
@@ -62,14 +66,9 @@ if ($login_allowed) {
         header("Location: /f1_project/views/private/dashboard.php");
 
     } else {
-        error("500", "Fields not provided.", "product_new.php", "/f1_project/views/private/dashboard.php");
+        error("500", "Fields not provided.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
     }
 } else {
     error("401", "Unauthorised access!", "product_new.php", "/f1_project/views/public/login_form.php");
 }
 exit;
-
-
-
-
-

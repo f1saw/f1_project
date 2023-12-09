@@ -23,45 +23,12 @@
 
 
                     <style>
-                        .pull-left {
-                            float: left;
-                        }
 
-                        .icon-headernav {
-                            color: #ff6200;
-                            font-size: 16px;
-                        }
-
-                        .button-header {
-                            cursor: pointer;
-                        }
-
-
-                        /*.notification-dot {
-                            height: 6px;
-                            width: 6px;
-                            background-color: #525199;
-                            border-radius: 50%;
-                            border: 1px solid white;
-                            display: inline-block;
-                            position: relative;
-                            top: -8px;
-                            left: -8px;
-                        } */
-
-                        .notification-dot {
-                            color: red;
-                            width: fit-content;
-                            font-size: 12px;
-                            padding: 0;
-                            margin: 0;
-                            border: 0;
-                        }
                     </style>
                     <div class="nav-item d-flex align-items-end">
                         <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
 
-                            <label id="cart-tooltip" onmouseover="Showtt(this, 1)" class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" data-bs-trigger="manual" title="Shopping cart">
+                            <label id="cart-tooltip" class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="Shopping cart">
                                 <span class="d-flex justify-content-center">
                                     <span class="material-symbols-outlined align-self-end">shopping_cart</span>
                                     <span id="cart-notification-dot" class="btn btn-circle notification-dot align-self-start"></span>
@@ -110,7 +77,7 @@
                         </li>
                     <?php } if (check_admin_auth($user)){ ?>
                         <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/dashboard.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
                                 <span class="material-symbols-outlined">table_rows</span>
                                 <span>Table users</span>
                             </a>
@@ -126,10 +93,5 @@
     </div>
 </nav>
 
-
-<script src="/f1_project/assets/js/tooltip.js"></script>
-<script>
-    const curr_cart = JSON.parse(localStorage.getItem("cart"))
-    if (curr_cart)
-        $("#cart-notification-dot").text(curr_cart.length)
-</script>
+<script src="../../assets/js/tooltip.js"></script>
+<script src="../../assets/js/store.js"></script>

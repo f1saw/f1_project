@@ -1,54 +1,55 @@
+<?php if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()"); ?>
+<?php require_once("auth/auth.php"); ?>
+<?php require_once("utility/error_handling.php"); ?>
+<?php require_once("utility/store.php"); ?>
+<?php require_once ("DB/DB.php"); ?>
+<?php require_once("views/partials/alert.php") ?>
+
+<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
+
+<?php
+if(!isset($_GET["id"]) || !$_GET["id"]) {
+    error("500", "ID not given", "product.php", "/f1_project/views/public/store.php");
+    exit;
+}
+
+$conn = DB::connect("product.php", "/f1_project/views/public/store.php");
+$product = DB::get_record_by_field($conn,
+    "SELECT * FROM Products WHERE id = ?",
+    ["i"],
+    [$_GET["id"]],
+    "product.php",
+    "/f1_project/views/public/store.php")[0];
+if (!$conn->close()) {
+    error("500", "conn_close()", "product.php", "/f1_project/views/public/store.php");
+    exit;
+}
+if (!$product) {
+    error("500", "product_look_up", "product.php", "/f1_project/views/public/store.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Home</title>
+    <title><?php echo $product["title"] ?></title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../../../assets/css/style.css">
-    <link rel="stylesheet" href="../../../assets/css/index_style.css">
-    <link rel="stylesheet" href="../../../assets/css/product.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/store.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/product.css">
 
-    <?php include("../../partials/head.php"); ?>
-    <?php require_once("../../../auth/auth.php") ?>
-
-    <?php require_once("../../../utility/error_handling.php"); ?>
-    <?php require_once ("../../../utility/store.php") ?>
-    <?php require_once ("../../../DB/DB.php"); ?>
-    <?php require_once("../../partials/alert.php") ?>
+    <?php include("views/partials/head.php"); ?>
 </head>
-
-<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
 <body>
 <div class="container-fluid bg-dark">
 
     <!-- Nav -->
-    <?php include ("../../partials/navbar_store.php")?>
-
-
-    <?php
-    if(!isset($_GET["id"]) || !$_GET["id"]) {
-        error("500", "ID not given", "product.php", "/f1_project/views/public/store.php");
-        exit;
-    }
-
-    $conn = DB::connect("product.php", "/f1_project/views/public/store.php");
-    $product = DB::get_record_by_field($conn,
-        "SELECT * FROM Products WHERE id = ?",
-        ["i"],
-        [$_GET["id"]],
-        "product.php",
-        "/f1_project/views/public/store.php")[0];
-    if (!$conn->close()) {
-        error("500", "conn_close()", "product.php", "/f1_project/views/public/store.php");
-        exit;
-    }
-    if (!$product) {
-        error("500", "product_look_up", "product.php", "/f1_project/views/public/store.php");
-        exit;
-    }
-    ?>
-
+    <?php include ("views/partials/navbar_store.php")?>
 
     <main class="mt-4 mx-auto p-3 row d-flex justify-content-center align-items-stretch">
         <div class="col-12 col-sm-6">
@@ -75,15 +76,19 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
-
         </div>
         <div class="col-12 col-sm-6">
             <h3><?php echo $product["title"]; ?></h3>
             <hr>
             <?php if ($product["color"]) { ?>
                 <div>
-                    <label for="s-color">Color: <?php echo $product["color"]; ?></label>
+                    <?php
+                    $str_color = "";
+                    foreach (explode(";", $product["color"]) as $color) {
+                        $str_color .= ucfirst($color) . " ";
+                    }
+                    ?>
+                    <label for="s-color">Color: <?php echo $str_color; ?></label>
                     <img class="mx-3" src="<?php echo $product["img_url"]; ?>" height="50px" alt="">
                 </div>
             <?php } ?>
@@ -93,7 +98,7 @@
                     <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
                         <label for="s-size">Size: </label>
                         <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
-                            <option value="ns" class="option_invalid" selected disabled>Select the size</option>
+                            <option value="ns" class="option_invalid" selected>Select size</option>
                             <?php
                             foreach ($size as $s) {
                                 echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";
@@ -107,16 +112,15 @@
             <div class="d-flex justify-content-end gap-3">
                 <?php [$int, $dec] = str2int_dec($product["price"]); ?>
                 <h3>€ <?php echo "$int.$dec" ?></h3>
-                <div class="d-flex flex-row gap-2 pb-1 hover-red">
-                    <div id="btn-add-cart" class="btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                        <span class="material-symbols-outlined">shopping_bag</span>
-                        <span>Add to cart!</span>
+                <div <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
+                    <div <?php echo get_data_id($product); ?> class="btn-add-cart btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                        <span <?php echo get_data_id($product); ?> class="material-symbols-outlined">shopping_bag</span>
+                        <span <?php echo get_data_id($product); ?>>Add to cart!</span>
                     </div>
                 </div>
             </div>
 
             <hr>
-
 
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item rounded-top">
@@ -163,30 +167,12 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
                 </div>
             </div>
-
-
-
+        </div>
     </main>
 </body>
 
-
-<script>
-    $("#btn-add-cart").click(() => {
-        let curr_cart = JSON.parse(localStorage.getItem("cart"))
-        if (!curr_cart) curr_cart = []
-        curr_cart.push({
-            "id": 1,
-            "name": "sottotuta",
-            "size": "M",
-            "color": "multicolor",
-            "price": 500
-        })
-        console.log(curr_cart)
-        localStorage.setItem("cart", JSON.stringify(curr_cart))
-
-        $("#cart-notification-dot").text(curr_cart.length)
-    })
-</script>
+<script src="../../../assets/js/store.js"></script>
 </html>
