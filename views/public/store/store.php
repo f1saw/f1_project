@@ -12,6 +12,7 @@
     <?php require_once("../../../auth/auth.php") ?>
 
     <?php require_once("../../../utility/error_handling.php"); ?>
+    <?php require_once("../../partials/alert.php") ?>
     <?php require_once ("../../../utility/store.php") ?>
     <?php require_once ("../../../DB/DB.php"); ?>
 </head>
@@ -65,13 +66,16 @@
         </div>
     </div>
 
+    <?php err_msg_alert(); ?>
+
+
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
             <?php
             $conn = DB::connect("store.php", "/f1_project/views/public/index.php");
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-                "SELECT * FROM Products;",
+                "SELECT * FROM Products ORDER BY id DESC;",
                 "store.php",
                 "/f1_project/views/public/index.php");
             if (!$conn->close()) {
@@ -89,7 +93,7 @@
                         <a href="product.php?id=<?php echo $product["id"]; ?>" class="text-decoration-none">
                             <div class="card bordered border-danger border-3 p-2 h-100">
                                 <div class="card-img">
-                                    <img src="<?php echo $product["img_url"]; ?>" class="card-img-top" alt="...">
+                                    <img src="<?php echo explode("\t", $product["img_url"])[0]; ?>" class="card-img-top" alt="...">
                                 </div>
                                 <div class="card-body d-flex align-items-end p-1">
                                     <div class="w-100">

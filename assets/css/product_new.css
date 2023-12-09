@@ -5,3 +5,7 @@ select .option_invalid {
 select .option_valid {
     color: black !important;
 }
+
+#img-preview img {
+    object-fit: contain !important;
+}

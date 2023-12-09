@@ -28,9 +28,9 @@
 
     <?php include("views/partials/navbar.php") ?>
 
-    <div class="container-fluid d-flex flex-row justify-content-center align-items-center gap-4 mt-5">
+    <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
 
-        <div class="col-6 col-md-6">
+        <div class="col-12 col-sm-7">
             <form id="login-form" action="/f1_project/views/private/store/product_new.php" class="container" method="POST">
 
                 <?php err_msg_alert(); ?>
@@ -98,11 +98,18 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-12">
-                            <label for="img_url" class="form-label"><strong>IMAGE</strong></label><br>
+                        <div class="col-6">
+                            <label for="img_url_1" class="form-label"><strong>IMAGE (1)</strong></label><br>
                             <div class="input-group">
-                                <span class="input-group-text material-symbols-outlined text-dark" id="img-addon">image</span>
-                                <input type="text" id="img_url" class="form-control" name="img_url" placeholder="https://image.url" aria-describedby="img-addon" required>
+                                <span class="input-group-text material-symbols-outlined text-dark" id="img-1-addon">image</span>
+                                <input type="text" id="img_url_1" class="img_url form-control" name="img_url_1" placeholder="https://image.url" aria-describedby="img-1-addon" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="img_url_2" class="form-label"><strong>IMAGE (2)</strong></label><br>
+                            <div class="input-group">
+                                <span class="input-group-text material-symbols-outlined text-dark" id="img-2-addon">image</span>
+                                <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" placeholder="https://image.url" aria-describedby="img-2-addon" required>
                             </div>
                         </div>
                     </div>
@@ -123,8 +130,9 @@
             </form>
         </div>
 
-        <div id="img-preview" class="d-none col-4">
-            <img id="img-act" src="" class="d-none card-img-top rounded" alt="...">
+        <div id="img-preview" class="d-none col-12 col-sm-5 row">
+            <img id="img-url-1" class="d-none img-url col-6 rounded" alt="..." src="">
+            <img id="img-url-2" class="d-none img-url col-6 rounded " alt="..." src="">
         </div>
 
         <!-- TODO: just for testing -->

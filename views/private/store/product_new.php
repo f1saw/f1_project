@@ -12,14 +12,21 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["img_url"]) && isset($_POST["color"]) && isset($_POST["size"])) {
+    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && (isset($_POST["img_url_1"]) || isset($_POST["img_url_2"])) && isset($_POST["color"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
         $title = htmlentities($_POST["title"]);
         $desc = htmlentities($_POST["desc"]);
         $price = preg_replace('!\s+!', '', $_POST["price"]);
         $price = htmlentities($_POST["price"]);
-        $img_url = $_POST["img_url"]? htmlentities($_POST["img_url"]):"";
+        $img_url = [];
+        if (isset($_POST["img_url_1"])) {
+            $img_url[0] = $_POST["img_url_1"]? htmlentities($_POST["img_url_1"]):"";
+        }
+        if (isset($_POST["img_url_2"])) {
+            $img_url[1] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
+        }
+
         // TODO appropriate team id
         // $team_id = $_POST["team_id"] ?? -1;
         $team_id = -1;
@@ -44,7 +51,8 @@ if ($login_allowed) {
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
         $price = number_format($conn->real_escape_string($price), 2) * 100;
-        $img_url = $conn->real_escape_string($img_url);
+        $img_url_str = implode("\t", $img_url);
+        $img_url_str = $conn->real_escape_string($img_url_str);
         $team_id = intval($conn->real_escape_string($team_id));
         $color = $conn->real_escape_string($color);
         $size = $conn->real_escape_string($size);
@@ -52,7 +60,7 @@ if ($login_allowed) {
         DB::p_stmt_no_select($conn,
         "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
         ["s", "s", "i", "s", "i", "s", "s"],
-        [$title, $desc, $price, $img_url, $team_id, $color, $size],
+        [$title, $desc, $price, $img_url_str, $team_id, $color, $size],
         "product_new.php",
         "/f1_project/views/private/store/product_new_form.php");
 

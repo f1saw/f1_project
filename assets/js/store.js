@@ -18,13 +18,17 @@ $(".btn-add-cart").click(event => {
     $("#cart-notification-dot").text(curr_cart.length)
 })
 
-$("#img_url").on('input', $.debounce(250, () => {
-    const curr_url = $("#img_url").val()
+$(".img_url").on('input', $.debounce(250, event => {
+    const curr_url = $(event.target).val()
+    const curr_img = event.target.id.split("_").slice(-1)[0];
     if (curr_url !== "") {
         $("#img-preview").removeClass("d-none")
-        $("#img-act").removeClass("d-none").attr("src", curr_url)
+        $(`#img-url-${curr_img}`).removeClass("d-none").attr("src", curr_url)
     } else {
-        $("#img-preview").addClass("d-none")
-        $("#img-act").addClass("d-none")
+        $(`#img-url-${curr_img}`).addClass("d-none").attr("src", "")
+        const other_img = (curr_img === "1")? "2":"1";
+        if ($(`#img-url-${other_img}`).attr("src") === "") {
+            $("#img-preview").addClass("d-none")
+        }
     }
 }))

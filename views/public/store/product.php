@@ -10,23 +10,23 @@
 
 <?php
 if(!isset($_GET["id"]) || !$_GET["id"]) {
-    error("500", "ID not given", "product.php", "/f1_project/views/public/store.php");
+    error("500", "ID not given", "product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 
-$conn = DB::connect("product.php", "/f1_project/views/public/store.php");
+$conn = DB::connect("product.php", "/f1_project/views/public/store/store.php");
 $product = DB::get_record_by_field($conn,
     "SELECT * FROM Products WHERE id = ?",
     ["i"],
     [$_GET["id"]],
     "product.php",
-    "/f1_project/views/public/store.php")[0];
+    "/f1_project/views/public/store/store.php")[0];
 if (!$conn->close()) {
-    error("500", "conn_close()", "product.php", "/f1_project/views/public/store.php");
+    error("500", "conn_close()", "product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 if (!$product) {
-    error("500", "product_look_up", "product.php", "/f1_project/views/public/store.php");
+    error("500", "product_look_up", "product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 ?>
@@ -59,13 +59,13 @@ if (!$product) {
                     <button type="button" data-bs-target="#Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     </div>
                 <div class="carousel-inner">
+                    <?php $img_urls = explode("\t", $product["img_url"]); ?>
                     <div class="carousel-item active">
-                        <img src="<?php echo $product["img_url"]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                        <img src="<?php echo $img_urls[0]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
                     </div>
-                    <!-- TODO: gestione più foto -->
-                    <!-- <div class="carousel-item">
-                        <img src="https://store.ferrari.com/product_image/1647597333252950/R/w1080.jpg" class="d-block w-100 img-carousel rounded" alt="...">
-                    </div> -->
+                    <div class="carousel-item">
+                        <img src="<?php echo $img_urls[1]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                    </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
