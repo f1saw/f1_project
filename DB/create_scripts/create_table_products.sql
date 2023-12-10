@@ -3,9 +3,15 @@ create table products
 (
     id          int auto_increment
         primary key,
-    name        varchar(50)  not null,
-    description varchar(255) null,
+    title       varchar(50)  not null,
+    description varchar(500) null,
     price       int          not null,
-    img_url     varchar(255) null
+    img_url     varchar(700) null,
+    team_id     int          null,
+    color       varchar(20)  null,
+    size        varchar(20)  null,
+    constraint team___fk
+        foreign key (team_id) references teams (id)
+            on update cascade on delete cascade
 );
 

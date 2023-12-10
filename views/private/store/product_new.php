@@ -12,7 +12,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && (isset($_POST["img_url_1"]) || isset($_POST["img_url_2"])) && isset($_POST["color"]) && isset($_POST["size"])) {
+    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
         $title = htmlentities($_POST["title"]);
@@ -26,10 +26,7 @@ if ($login_allowed) {
         if (isset($_POST["img_url_2"])) {
             $img_url[1] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
         }
-
-        // TODO appropriate team id
-        // $team_id = $_POST["team_id"] ?? -1;
-        $team_id = -1;
+        $team_id = isset($_POST["team_id"])? htmlentities($_POST["team_id"]) : null;
         $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
         $size = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["size"])));
 
@@ -53,7 +50,7 @@ if ($login_allowed) {
         $price = number_format($conn->real_escape_string($price), 2) * 100;
         $img_url_str = implode("\t", $img_url);
         $img_url_str = $conn->real_escape_string($img_url_str);
-        $team_id = intval($conn->real_escape_string($team_id));
+        $team_id = ($team_id)? intval($conn->real_escape_string($team_id)) : null;
         $color = $conn->real_escape_string($color);
         $size = $conn->real_escape_string($size);
 

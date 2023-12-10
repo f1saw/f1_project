@@ -66,12 +66,25 @@
                             </div>
                         </div>
                         <div class="col-6">
+                            <?php
+                            $conn = DB::connect("product_new_form.php", "/f1_project/views/private/dashboard.php");
+                            [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
+                                "SELECT * FROM Teams;",
+                                "product_new_form.php",
+                                "/f1_project/views/private/dashboard.php");
+                            if (!$conn->close()) {
+                                error("500", "conn_close()", "product_new_form.php", "/f1_project/views/private/dashboard.php");
+                                exit;
+                            }
+                            ?>
                             <label for="team" class="form-label"><strong>TEAM</strong></label>
                             <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size">
                                 <option value="ns" class="option_invalid" selected disabled>Select team</option>
-                                <option value="alfa_romeo" class="option_valid">Alfa Romeo</option>
-                                <option value="alpha_tauri" class="option_valid">Alpha Tauri</option>
-                                <option value="ferrari" class="option_valid">Ferrari</option>
+                                <?php
+                                foreach ($teams as $team) {
+                                    echo "<option value=" . $team["id"] . " class='option_valid'>" . $team["name"] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -102,14 +115,14 @@
                             <label for="img_url_1" class="form-label"><strong>IMAGE (1)</strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="img-1-addon">image</span>
-                                <input type="text" id="img_url_1" class="img_url form-control" name="img_url_1" placeholder="https://image.url" aria-describedby="img-1-addon" required>
+                                <input type="text" id="img_url_1" class="img_url form-control" name="img_url_1" placeholder="https://image.url" aria-describedby="img-1-addon">
                             </div>
                         </div>
                         <div class="col-6">
                             <label for="img_url_2" class="form-label"><strong>IMAGE (2)</strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="img-2-addon">image</span>
-                                <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" placeholder="https://image.url" aria-describedby="img-2-addon" required>
+                                <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" placeholder="https://image.url" aria-describedby="img-2-addon">
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ if(!isset($_GET["id"]) || !$_GET["id"]) {
 
 $conn = DB::connect("product.php", "/f1_project/views/public/store/store.php");
 $product = DB::get_record_by_field($conn,
-    "SELECT * FROM Products WHERE id = ?",
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Team.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
     ["i"],
     [$_GET["id"]],
     "product.php",
@@ -34,7 +34,7 @@ if (!$product) {
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title><?php echo $product["title"] ?></title>
+    <title><?php echo $product["Products.title"] ?></title>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
@@ -52,48 +52,63 @@ if (!$product) {
     <?php include ("views/partials/navbar_store.php")?>
 
     <main class="mt-4 mx-auto p-3 row d-flex justify-content-center align-items-stretch">
-        <div class="col-12 col-sm-6">
-            <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <?php if ($product["Products.img_url"]) { ?>
+            <?php $img_urls = explode("\t", $product["Products.img_url"]); ?>
+            <div class="col-12 col-sm-6">
+                <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <?php if ($img_urls[1]) { ?>
+                            <button type="button" data-bs-target="#Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <?php } ?>
                     </div>
-                <div class="carousel-inner">
-                    <?php $img_urls = explode("\t", $product["img_url"]); ?>
-                    <div class="carousel-item active">
-                        <img src="<?php echo $img_urls[0]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<?php echo $img_urls[0]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                        </div>
+                        <?php if ($img_urls[1]) { ?>
+                            <div class="carousel-item">
+                                <img src="<?php echo $img_urls[1]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                            </div>
+                        <?php } ?>
                     </div>
-                    <div class="carousel-item">
-                        <img src="<?php echo $img_urls[1]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#Indicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#Indicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
-        </div>
+        <?php } ?>
         <div class="col-12 col-sm-6">
-            <h3><?php echo $product["title"]; ?></h3>
+            <h3><?php echo $product["Products.title"]; ?></h3>
             <hr>
-            <?php if ($product["color"]) { ?>
                 <div>
-                    <?php
-                    $str_color = "";
-                    foreach (explode(";", $product["color"]) as $color) {
-                        $str_color .= ucfirst($color) . " ";
-                    }
-                    ?>
-                    <label for="s-color">Color: <?php echo $str_color; ?></label>
-                    <img class="mx-3" src="<?php echo $product["img_url"]; ?>" height="50px" alt="">
+
+                    <?php if ($product["Products.color"]) { ?>
+                        <?php
+                        $str_color = "";
+                        foreach (explode(";", $product["Products.color"]) as $color) {
+                            $str_color .= ucfirst($color) . " ";
+                        }
+                        ?>
+                        <label for="s-color">Color: <?php echo $str_color; ?></label>
+                    <?php } ?>
+
+                    <?php if ($img_urls != null) { ?>
+                        <?php foreach ($img_urls as $img) { ?>
+                            <img class="mx-3" src="<?php echo $img; ?>" height="50px" alt="">
+                        <?php } ?>
+                    <?php } ?>
                 </div>
+            <?php if ($product["Teams.name"]) { ?>
+                <label for="s-team-name" class="mt-3">Team: <?php echo $product["Teams.name"]; ?></label>
             <?php } ?>
-            <?php if ($product["size"]) { ?>
-                <?php $size = explode(";", $product["size"]); ?>
+            <?php if ($product["Products.size"]) { ?>
+                <?php $size = explode(";", $product["Products.size"]); ?>
                 <div>
                     <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
                         <label for="s-size">Size: </label>
@@ -110,7 +125,7 @@ if (!$product) {
             <?php } ?>
             <hr>
             <div class="d-flex justify-content-end gap-3">
-                <?php [$int, $dec] = str2int_dec($product["price"]); ?>
+                <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                 <h3>€ <?php echo "$int.$dec" ?></h3>
                 <div <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
                     <div <?php echo get_data_id($product); ?> class="btn-add-cart btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
@@ -131,7 +146,7 @@ if (!$product) {
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <label><?php echo $product["description"]; ?></label>
+                            <label><?php echo $product["Products.description"]; ?></label>
                         </div>
                     </div>
                 </div>

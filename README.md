@@ -25,12 +25,12 @@ MAURI:
 
 # MATTE:
 - [ ] products / team management
-- [ ] products / multi photos management through ";" separator
 - [ ] email confirmation
 - [ ] news got through web scraping
 -<hr>
 - [X] init grafico shop (sotto forma di cards)
 - [X] new_product_form => script add color and size (when u press " " or "," or ";" value is divided)
+- [X] products / multi photos management through ";" separator
 
 
 <br><br><br>
