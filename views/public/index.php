@@ -18,7 +18,7 @@
 <div class="container-fluid">
 
     <!-- Nav -->
-    <?php include ("../partials/navbar.php")?>
+    <?php include ("../partials/navbar.php");?>
 
 
     <main>

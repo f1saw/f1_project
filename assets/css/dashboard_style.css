@@ -65,6 +65,10 @@ main {
     .flex-container {
         flex-direction: column;
     }
+
+    .flex-title {
+        transform: rotate(0deg) !important;
+    }
 }
 
 .flex-slide:hover {

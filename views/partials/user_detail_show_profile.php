@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid" >
     <?php include("../partials/navbar.php"); ?>
-    <main>
-        <div id="bg-profile" class="flex-container d-flex justify-content-center">
+    <main >
+        <div id="bg-profile" class="flex-container d-flex justify-content-center" >
             <div id="profile-data" class="container-element">
                 <div class="d-flex justify-content-center">
                     <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo $element['img_url']; else echo "/f1_project/images/default_img_profile.jpeg"; ?>"
@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <br>
-                <div class="row mb-3 d-flex justify-content-center">
-                    <button onclick="my_function()" type="button" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">Edit profile</button>
+                <div class="row mb-3 d-flex justify-content-center button">
+                    <button onclick="my_function()" type="button" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Edit profile</button>
                 </div>
             </div>
         </div>

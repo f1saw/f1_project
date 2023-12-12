@@ -3,15 +3,14 @@ main {
     margin: auto;
 }
 
-.container {
+.flex-container {
     position: relative;
     height: 85vh;
     width: 100%;
+    display: -webkit-flex;
+    display: flex;
     overflow: hidden;
     border-radius: 10px;
-    display: flex;
-    display: -webkit-flex;
-
 }
 
 .container-element{
@@ -24,6 +23,12 @@ main {
     top: 100px;
     border-style: solid;
     border-color: #ff1300;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.container-element::-webkit-scrollbar {
+    width: 0;
 }
 
 @media screen and (max-width: 992px) {
@@ -62,13 +67,9 @@ main {
     top: 20px
 }
 
-.tex-box{
+.text-box{
     margin-left: 10px;
     margin-right: 10px;
-}
-
-.text-red {
-    color: #ff1300;
 }
 
 input{
@@ -78,3 +79,63 @@ input::placeholder {
     text-align: center;
 }
 
+.text-red {
+    color: #ff1300;
+}
+
+* {
+    color: white;
+}
+
+hr {
+    border-top: 3px solid red;
+}
+
+.my_outline_animation {
+    border: none;
+    position: relative;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: 0;
+    background-color: red;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.hover-red:hover .material-symbols-outlined {
+    color: red;
+}
+
+#navbar {
+    background-color: transparent;
+}
+
+#navbar-logo {
+    width: 70px;
+    height: 70px;
+    background-image: url('/f1_project/assets/images/F1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.nav-profile{
+    height: 85vh;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}

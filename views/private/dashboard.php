@@ -38,7 +38,7 @@
                 </div>
             </main>
         </div>
-        <script src="../../assets/js/dashboard_script.js"></script>s
+        <script src="../../assets/js/dashboard_script.js"></script>
 
     <?php
     }

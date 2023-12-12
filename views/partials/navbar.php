@@ -20,12 +20,6 @@
                             <span>Store</span>
                         </a>
                     </div>
-                    <div class="nav-item d-flex align-items-end">
-                        <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
-                            <span class="material-symbols-outlined">sports_score</span>
-                            <span>Circuits</span>
-                        </a>
-                    </div>
                 </div>
 
                 <div class="d-flex gap-3">
@@ -59,7 +53,7 @@
                             </a>
                         </div>
                         <div class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/logout.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
                                 <span>Logout</span>
                             </a>

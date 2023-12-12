@@ -12,14 +12,8 @@ SAW project about F1
 <hr>
 
 MAURI:
-<li>dashboard + push</li>
-<li>table-user grafica user_detail</li>
 <li>cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)</li>
-<li>
-    Togliere dalla home profile -> mettere dashboard (per users si apre pagina con scelta update info e ordini)
-    (per admin si apre stessa cosa + table_users)
-</li>
-<li>fix grafico tabella dashboard (color bg scuro, navbar)</li>
+<li>fix grafico table_user (color bg scuro, navbar, adattamento mobile etc)</li>
 <hr>
 
 MATTE:

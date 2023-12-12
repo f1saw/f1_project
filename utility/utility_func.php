@@ -24,6 +24,8 @@ function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") 
 // dalla dashboard. Se nessun utente è stato selezionato vengono ritornate le info dell'utente collegato
 function choose_correct_data($id) : array{
     if($id == null) {
+        // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
+        // ritono sul profilo e non nella table
         $_SESSION['redirection'] = "/f1_project/views/private/user_detail.php";
         $current_id = $_SESSION["id"];
     }
