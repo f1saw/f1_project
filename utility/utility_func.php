@@ -44,7 +44,7 @@ function choose_correct_data($id) : array{
         }
     }
     else{
-        $element = array_flip(array("first_name", "last_name", "email", "date_of_birth", "cookie_id", "img_url"));
+        $element = [];
 
         $element["id"]            = $_SESSION["id"];
         $element["first_name"]    = $_SESSION["first_name"];
