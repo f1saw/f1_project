@@ -13,20 +13,21 @@ SAW project about F1
 
 MAURI:
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
-<li>dashboard + push</li>
-<li>table-user grafica user_detail</li>
-<li>cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)</li>
+- [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
+- [ ] navbar store - mettere dash
+- [ ] adattabilità mobile
+- [ ] cercare per recupero pass, modifica pass, 
+- [ ] newsletter (php mailer) -> admin scrive msg e arriva a utente con news == 1
+- [ ] email confirmation
 <hr>
 </ul>
 
 # MATTE:
-- [ ] products / team management
-- [ ] email confirmation
+- [ ] products / crud
+- [ ] ricerca tramite team
 - [ ] news got through web scraping
+- [ ] carrello
 -<hr>
-- [X] init grafico shop (sotto forma di cards)
-- [X] new_product_form => script add color and size (when u press " " or "," or ";" value is divided)
-- [X] products / multi photos management through ";" separator
 
 
 <br><br><br>
