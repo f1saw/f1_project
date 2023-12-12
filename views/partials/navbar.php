@@ -20,34 +20,28 @@
                             <span>Store</span>
                         </a>
                     </div>
-                    <div class="nav-item d-flex align-items-end">
-                        <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
-                            <span class="material-symbols-outlined">sports_score</span>
-                            <span>Circuits</span>
-                        </a>
-                    </div>
                 </div>
 
                 <div class="d-flex gap-3">
                     <?php
                     [$login_allowed, $user] = check_cookie();
-                    if (!check_user_auth($user)) {
-                        set_session($user);?>
-                        <li class="nav-item">
+                    if (!check_user_auth($user)) {?>
+                        <div class="nav-item">
                             <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="login_form.php">
                                 <span class="material-symbols-outlined">login</span>
                                 <span>Login</span>
                             </a>
-                        </li>
-                        <li class="nav-item my_outline_animation">
+                        </div>
+                        <div class="nav-item my_outline_animation">
                             <a class="nav-link text-light d-flex gap-2" href="registration_form.php">
                                 <span class="material-symbols-outlined">how_to_reg</span>
                                 <span>Registration</span>
                             </a>
-                        </li>
-                    <?php } else { ?>
-                        <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="">
+                        </div>
+                    <?php } else {
+                        set_session($user);?>
+                        <div class="nav-item">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
                                     <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
@@ -55,22 +49,15 @@
                                     <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
                                 <?php }?>
 
-                                <span>My profile</span>
+                                <span>Dashboard</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/logout.php">
+                        </div>
+                        <div class="nav-item">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
                                 <span>Logout</span>
                             </a>
-                        </li>
-                    <?php } if (check_admin_auth($user)){ ?>
-                        <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/table_users.php">
-                                <span class="material-symbols-outlined">table_rows</span>
-                                <span>Table users</span>
-                            </a>
-                        </li>
+                        </div>
                     <?php } ?>
                 </div>
                 <form class="d-flex flex-row d-lg-none" role="search" name="search_bar">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+      <!--xmlns="http://www.w3.org/1999/html"-->
 <head>
     <title>Home</title>
     <meta charset="UTF-8">
@@ -13,16 +14,16 @@
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
-<body>
-<div class="container-fluid bg-dark">
+<body class="bg-dark">
+<div class="container-fluid">
 
     <!-- Nav -->
-    <?php include ("../partials/navbar.php")?>
+    <?php include ("../partials/navbar.php");?>
 
 
     <main>
         <!-- Showcase -->
-        <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
+        <div id="Indicators" class="carousel slide " data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -180,6 +181,6 @@
             </div>
         </section>
     </main>
-
+</div>
 </body>
 </html>

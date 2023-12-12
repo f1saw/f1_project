@@ -56,3 +56,13 @@ hr {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.nav-profile{
+    height: 85vh;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}

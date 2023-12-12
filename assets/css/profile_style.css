@@ -1,0 +1,141 @@
+main {
+    max-width: 90%;
+    margin: auto;
+}
+
+.flex-container {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.container-element{
+    position: relative;
+    backdrop-filter: blur(5px);
+    max-height: 70%;
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    top: 100px;
+    border-style: solid;
+    border-color: #ff1300;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.container-element::-webkit-scrollbar {
+    width: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .container-element{
+        max-width: 70%;
+        max-height: 68%;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-element{
+        max-width: 70%;
+        max-height: 84%;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+#bg-profile {
+    background: url("/f1_project/assets/images/circuit.jpeg");
+    background-size: cover;
+    background-position: bottom;
+    border-radius: 10px;
+}
+
+#bg-profile #profile-data {
+    background: rgba(87, 87, 87, .6);
+}
+
+#photo_profile{
+    position: relative;
+    width: 70px;
+    height: 70px;
+    top: 20px
+}
+
+.text-box{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input{
+    text-align: center;
+}
+input::placeholder {
+    text-align: center;
+}
+
+.text-red {
+    color: #ff1300;
+}
+
+* {
+    color: white;
+}
+
+hr {
+    border-top: 3px solid red;
+}
+
+.my_outline_animation {
+    border: none;
+    position: relative;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: 0;
+    background-color: red;
+    transition: all ease-in-out .2s;
+}
+
+.my_outline_animation:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.hover-red:hover .material-symbols-outlined {
+    color: red;
+}
+
+#navbar {
+    background-color: transparent;
+}
+
+#navbar-logo {
+    width: 70px;
+    height: 70px;
+    background-image: url('/f1_project/assets/images/F1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.nav-profile{
+    height: 85vh;
+}
+
+.profile-img{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}

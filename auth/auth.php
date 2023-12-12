@@ -19,6 +19,7 @@ function set_session($user): void {
         $_SESSION["img_url"] = $user["Users.img_url"];
         $_SESSION["newsletter"] = $user["Users.newsletter"];
         $_SESSION["role"] = $user["Users.role"];
+        $_SESSION["cookie_id"] = $user["Cookies.id"];
     }
 }
 

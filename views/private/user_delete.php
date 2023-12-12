@@ -5,6 +5,7 @@ require_once("../../utility/utility_func.php");
 require_once("../../utility/msg_error.php");
 
 if(session_status() == PHP_SESSION_NONE) session_start();
+unset($_SESSION["dont_show_in_nav"]);
 [$login_allowed, $user] = check_cookie();
 
 if (check_admin_auth($user)) {
