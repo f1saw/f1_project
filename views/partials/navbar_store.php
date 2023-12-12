@@ -58,7 +58,7 @@
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
                                     <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
@@ -66,20 +66,13 @@
                                     <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
                                 <?php }?>
 
-                                <span>My profile</span>
+                                <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/logout.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
                                 <span>Logout</span>
-                            </a>
-                        </li>
-                    <?php } if (check_admin_auth($user)){ ?>
-                        <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/table_users.php">
-                                <span class="material-symbols-outlined">table_rows</span>
-                                <span>Table users</span>
                             </a>
                         </li>
                     <?php } ?>
