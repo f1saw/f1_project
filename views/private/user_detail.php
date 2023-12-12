@@ -19,7 +19,7 @@ if (check_admin_auth($user)) {
     set_session($user);
 
     if(!isset($_GET["id"]) && $_GET["id"] == null) {
-        error("401", " Unauthorized access.", "user_detail.php", "/f1_project/views/private/dashboard.php", "No user select.");
+        error("401", " Unauthorized access.", "user_detail.php", "/f1_project/views/private/table_users.php", "No user select.");
         exit;
     }
 
@@ -31,7 +31,7 @@ if (check_admin_auth($user)) {
         "user_detail.php",
         "/f1_project/views/private/user_detail.php")[0];
     if (!$conn->close()) {
-        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
+        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/table_users.php");
         exit;
     }
     if($element != null) {

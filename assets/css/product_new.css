@@ -1,0 +1,11 @@
+select .option_invalid {
+    background-color: rgb(200,200,200) !important;
+}
+
+select .option_valid {
+    color: black !important;
+}
+
+#img-preview img {
+    object-fit: contain !important;
+}

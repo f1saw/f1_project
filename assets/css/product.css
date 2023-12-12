@@ -1,0 +1,20 @@
+select {
+    color: white !important;
+    width: fit-content !important;
+    background-color: rgb(33,37,41) !important;
+}
+
+.option_invalid {
+    color: rgba(107,109,109,255) !important;
+    background-color: rgb(33,37,41) !important;
+}
+
+.img-carousel{
+    aspect-ratio: 3/4;
+    object-fit: contain;
+    max-height: 450px;
+}
+
+.accordion-body * {
+    color: black;
+}
