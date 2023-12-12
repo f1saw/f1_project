@@ -25,8 +25,7 @@
                 <div class="d-flex gap-3">
                     <?php
                     [$login_allowed, $user] = check_cookie();
-                    if (!check_user_auth($user)) {
-                        set_session($user);?>
+                    if (!check_user_auth($user)) {?>
                         <div class="nav-item">
                             <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="login_form.php">
                                 <span class="material-symbols-outlined">login</span>
@@ -39,7 +38,8 @@
                                 <span>Registration</span>
                             </a>
                         </div>
-                    <?php } else { ?>
+                    <?php } else {
+                        set_session($user);?>
                         <div class="nav-item">
                             <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 
