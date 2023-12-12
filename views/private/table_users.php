@@ -36,10 +36,10 @@
             $conn = DB::connect();
             [$num_users, $users] = DB::stmt_get_record_by_field($conn,
             "SELECT * FROM Users;",
-            "dashboard.php",
-            "dashboard.php");
+            "table_users.php",
+            "table_users.php");
             if (!$conn->close()) {
-                error("500", "conn_close()", "dashboard.php", "/f1_project/views/private/dashboard.php");
+                error("500", "conn_close()", "table_users.php", "/f1_project/views/private/table_users.php");
                 exit;
             }
             ?>
@@ -122,7 +122,7 @@
         <?php session_destroy(); ?>
     </div>
     <?php } else {
-        error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+        error("401", "not_authorized", "table_users.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
         exit;
     } ?>
 

@@ -66,7 +66,7 @@
                         </li>
                     <?php } if (check_admin_auth($user)){ ?>
                         <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/dashboard.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="../private/table_users.php">
                                 <span class="material-symbols-outlined">table_rows</span>
                                 <span>Table users</span>
                             </a>

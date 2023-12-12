@@ -34,12 +34,12 @@ if (check_admin_auth($user)) {
         "user_delete.php");
 
     if (!$conn->close()) {
-        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/dashboard.php");
+        error("500", "conn_close()", "user_detail.php", "/f1_project/views/private/table_users.php");
         exit;
     }
     $_SESSION["success"] = 1;
     $_SESSION["success_msg"] = "Account deleted.";
-    header("location:  /f1_project/views/private/dashboard.php");
+    header("location:  /f1_project/views/private/table_users.php");
     exit;
 }
 else {

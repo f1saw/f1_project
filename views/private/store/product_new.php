@@ -68,7 +68,7 @@ if ($login_allowed) {
 
         $_SESSION["success"] = 1;
         $_SESSION["success_msg"] = "Product created successfully";
-        header("Location: /f1_project/views/private/dashboard.php");
+        header("Location: /f1_project/views/private/table_users.php");
 
     } else {
         error("500", "Fields not provided.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");

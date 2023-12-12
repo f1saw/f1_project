@@ -12,6 +12,7 @@ SAW project about F1
 <hr>
 
 MAURI:
+- [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
 <li>dashboard + push</li>
 <li>table-user grafica user_detail</li>
 <li>cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)</li>
@@ -34,6 +35,7 @@ MAURI:
 
 
 <br><br><br>
+- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 <li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
 <li>nationality for users?</li>
 <li><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></li>

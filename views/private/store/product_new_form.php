@@ -67,13 +67,13 @@
                         </div>
                         <div class="col-6">
                             <?php
-                            $conn = DB::connect("product_new_form.php", "/f1_project/views/private/dashboard.php");
+                            $conn = DB::connect("product_new_form.php", "/f1_project/views/private/table_users.php");
                             [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
                                 "SELECT * FROM Teams;",
                                 "product_new_form.php",
-                                "/f1_project/views/private/dashboard.php");
+                                "/f1_project/views/private/table_users.php");
                             if (!$conn->close()) {
-                                error("500", "conn_close()", "product_new_form.php", "/f1_project/views/private/dashboard.php");
+                                error("500", "conn_close()", "product_new_form.php", "/f1_project/views/private/table_users.php");
                                 exit;
                             }
                             ?>
@@ -152,7 +152,7 @@
         <?php session_destroy(); ?>
     </div>
 <?php } else {
-    error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "table_users.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
     exit;
 } ?>
 
