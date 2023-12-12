@@ -6,13 +6,11 @@
 
     <link rel="stylesheet" href="/f1_project/assets/css/profile_style.css">
 
-
     <?php include("../partials/head.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../utility/error_handling.php"); ?>
     <?php require_once("../../utility/utility_func.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
-
 </head>
 
 <body class="bg-dark">
@@ -26,7 +24,6 @@ if (check_user_auth($user)) {
 
     if(check_admin_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
-
         $element = choose_correct_data($id);
         unset($id);
     }

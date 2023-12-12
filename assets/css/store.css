@@ -1,0 +1,19 @@
+.notification-dot {
+    color: red !important;
+    width: fit-content !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.alert-no-data * {
+    color: white !important;
+}
+
+#shop-by-team {
+    background-color: rgba(231,227,224,.3);
+}
+#shop-by-team * {
+    width: 60px;
+}

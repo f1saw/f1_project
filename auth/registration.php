@@ -73,6 +73,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     /* DB */
     $conn = DB::connect();
 
+    $email = $conn->real_escape_string($email);
     $first_name = $conn->real_escape_string($first_name);
     $last_name = $conn->real_escape_string($last_name);
     $date_of_birth = $conn->real_escape_string($date_of_birth);
