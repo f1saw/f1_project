@@ -24,7 +24,7 @@ MAURI:
 
 # MATTE:
 - [ ] products / crud
-- [ ] ricerca tramite team
+- [X] ricerca tramite team
 - [ ] news got through web scraping
 - [ ] carrello
 -<hr>
