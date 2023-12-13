@@ -9,11 +9,6 @@ function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") 
         $source,
         $redirect_error)[0];
 
-    if (!$conn->close()) {
-        error("500", "conn_close()", "/f1_project/views/private/edit_user.php", "/f1_project/views/private/table_users.php");
-        exit;
-    }
-
     if($role["role"] == 1){
         return true;
     }
