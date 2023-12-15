@@ -31,7 +31,7 @@
     <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
 
         <div class="col-12 col-sm-7">
-            <form id="login-form" action="/f1_project/views/private/store/product_new.php" class="container" method="POST">
+            <form action="/f1_project/views/private/store/product_new.php" class="container" method="POST">
 
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>

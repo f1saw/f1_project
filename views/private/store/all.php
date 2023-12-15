@@ -73,7 +73,7 @@ set_session($user); ?>
                     foreach ($products as $product) { ?>
                         <tr>
                             <th class='text-center'>
-                                <a href='product_detail.php/?id=<?php echo $product["Products.id"] ?>' class="text-decoration-none" style="color: #4a82fc">
+                                <a href='edit_form.php/?id=<?php echo $product["Products.id"] ?>' class="text-decoration-none" style="color: #4a82fc">
                                     <?php echo $product["Products.id"]; ?>
                                 </a>
                             </th>

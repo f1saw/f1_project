@@ -19,6 +19,7 @@ MAURI:
 - [ ] cercare per recupero pass, modifica pass, 
 - [ ] newsletter (php mailer) -> admin scrive msg e arriva a utente con news == 1
 - [ ] email confirmation
+- **+** in edit_user => htmlentities, real_escape_string + conn->close@32
 <hr>
 </ul>
 
