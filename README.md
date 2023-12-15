@@ -31,7 +31,8 @@ MAURI:
 
 
 <br><br><br>
-- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
+- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti:
+      - hp: caricare la prima volta da DB, a ogni modifica del carrello scrivo su DB => per il resto chiamo/lavoro solo lato client (flag di dover caricare o effettuare modifiche da effettuare sul db)
 <li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
 <li>nationality for users?</li>
 <li><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></li>
