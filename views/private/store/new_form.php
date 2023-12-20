@@ -31,7 +31,7 @@
     <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
 
         <div class="col-12 col-sm-7">
-            <form action="/f1_project/views/private/store/product_new.php" class="container" method="POST">
+            <form action="/f1_project/controllers/store/create.php" class="container" method="POST">
 
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>
@@ -67,13 +67,13 @@
                         </div>
                         <div class="col-6">
                             <?php
-                            $conn = DB::connect("product_new_form.php", "/f1_project/views/private/table_users.php");
+                            $conn = DB::connect("new_form.php", "/f1_project/views/private/table_users.php");
                             [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
                                 "SELECT * FROM Teams;",
-                                "product_new_form.php",
+                                "new_form.php",
                                 "/f1_project/views/private/table_users.php");
                             if (!$conn->close()) {
-                                error("500", "conn_close()", "product_new_form.php", "/f1_project/views/private/table_users.php");
+                                error("500", "conn_close()", "new_form.php", "/f1_project/views/private/table_users.php");
                                 exit;
                             }
                             ?>

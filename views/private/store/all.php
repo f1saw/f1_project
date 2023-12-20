@@ -109,7 +109,7 @@ set_session($user); ?>
                             </td>
 
                             <td class='text-center'>
-                                <a href='delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
+                                <a href='../../../controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                     <span class='material-icons text-danger'>delete</span>
                                 </a>
                             </td>
@@ -118,6 +118,15 @@ set_session($user); ?>
                     } ?>
                     </tbody>
                 </table>
+
+                <div class="row d-flex justify-content-end py-3">
+                    <a href="/f1_project/views/private/store/new_form.php" class="text-decoration-none d-flex justify-content-end">
+                        <button class="col-12 col-md-5 col-lg-3 btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                            <span class="material-symbols-outlined">add</span>
+                            <span>Create</span>
+                        </button>
+                    </a>
+                </div>
             <?php } else { ?>
                 <div class="alert border-dark text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                     <span class="material-symbols-outlined">description</span>

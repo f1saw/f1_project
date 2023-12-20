@@ -33,7 +33,7 @@ if ($login_allowed) {
 
         // REGEX PRICE xx.yy
         if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
+            error("-1", "Price NOT valid.", "create.php", "/f1_project/views/private/store/new_form.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);

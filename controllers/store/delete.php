@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 
 require_once("auth/auth.php");
-require_once ("DB/DB.php");
+require_once("DB/DB.php");
 require_once("utility/utility_func.php");
 require_once("utility/msg_error.php");
 

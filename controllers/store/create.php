@@ -1,5 +1,4 @@
 <?php
-
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 
@@ -7,33 +6,33 @@ require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("auth/auth.php");
 
-if (session_status() == PHP_SESSION_NONE) session_start();
+
+if(session_status() == PHP_SESSION_NONE) session_start();
 
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_GET["id"]) && isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
+    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
-        $id = htmlentities($_GET["id"]);
         $title = htmlentities($_POST["title"]);
         $desc = htmlentities($_POST["desc"]);
         $price = preg_replace('!\s+!', '', $_POST["price"]);
         $price = htmlentities($_POST["price"]);
         $img_url = [];
         if (isset($_POST["img_url_1"])) {
-            $img_url[0] = $_POST["img_url_1"] ? htmlentities($_POST["img_url_1"]) : "";
+            $img_url[0] = $_POST["img_url_1"]? htmlentities($_POST["img_url_1"]):"";
         }
         if (isset($_POST["img_url_2"])) {
-            $img_url[1] = $_POST["img_url_2"] ? htmlentities($_POST["img_url_2"]) : "";
+            $img_url[1] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
         }
-        $team_id = isset($_POST["team_id"]) ? htmlentities($_POST["team_id"]) : null;
+        $team_id = isset($_POST["team_id"])? htmlentities($_POST["team_id"]) : null;
         $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
         $size = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["size"])));
 
         // REGEX PRICE xx.yy
         if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
+            error("-1", "Price NOT valid.", "create.php", "/f1_project/views/private/store/new_form.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -45,37 +44,36 @@ if ($login_allowed) {
         }*/
 
         /* DB */
-        $conn = DB::connect("store/edit.php", "/f1_project/views/private/store/edit_form.php");
-        $id = $conn->real_escape_string($id);
+        $conn = DB::connect("create.php", "/f1_project/views/private/store/new_form.php");
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
         $price = number_format($conn->real_escape_string($price), 2) * 100;
         $img_url_str = implode("\t", $img_url);
         $img_url_str = $conn->real_escape_string($img_url_str);
-        $team_id = ($team_id) ? intval($conn->real_escape_string($team_id)) : null;
+        $team_id = ($team_id)? intval($conn->real_escape_string($team_id)) : null;
         $color = $conn->real_escape_string($color);
         $size = $conn->real_escape_string($size);
 
         DB::p_stmt_no_select($conn,
-            "UPDATE Products title=?, desc=?, price=?, img_url_str=?, team_id=?, color=?, size=? WHERE id = ?",
-            ["s", "s", "i", "s", "i", "s", "s", "i"],
-            [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $id],
-            "store/edit.php",
-            "/f1_project/views/private/store/edit_form.php");
+        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
+        ["s", "s", "i", "s", "i", "s", "s"],
+        [$title, $desc, $price, $img_url_str, $team_id, $color, $size],
+        "create.php",
+        "/f1_project/views/private/store/new_form.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "store/edit.php", "/f1_project/views/private/store/edit_form.php");
+            error("500", "conn_close()", "create.php", "/f1_project/views/private/store/new_form.php");
             exit;
         }
 
         $_SESSION["success"] = 1;
-        $_SESSION["success_msg"] = "Product updated successfully";
+        $_SESSION["success_msg"] = "Product created successfully";
         header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "store/edit.php", "/f1_project/views/private/store/edit_form.php");
+        error("500", "Fields not provided.", "create.php", "/f1_project/views/private/store/new_form.php");
     }
 } else {
-    error("401", "Unauthorised access!", "store/edit.php", "/f1_project/views/public/login_form.php");
+    error("401", "Unauthorised access!", "create.php", "/f1_project/views/public/login_form.php");
 }
 exit;
