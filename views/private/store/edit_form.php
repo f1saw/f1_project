@@ -68,6 +68,7 @@ if (!$product) {
 
                     <?php err_msg_alert(); ?>
 
+                    <input type="hidden" name="id" value="<?php echo $id; ?>" required>
                     <fiedlset>
                         <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                             <span class="material-symbols-outlined">edit_note</span>

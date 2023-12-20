@@ -12,10 +12,10 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_POST["id"]) && isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
+    if (isset($_GET["id"]) && isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
-        $id = htmlentities($_POST["id"]);
+        $id = htmlentities($_GET["id"]);
         $title = htmlentities($_POST["title"]);
         $desc = htmlentities($_POST["desc"]);
         $price = preg_replace('!\s+!', '', $_POST["price"]);
@@ -57,7 +57,7 @@ if ($login_allowed) {
         $size = $conn->real_escape_string($size);
 
         DB::p_stmt_no_select($conn,
-            "UPDATE Products SET title=?, description=?, price=?, img_url=?, team_id=?, color=?, size=? WHERE id = ?",
+            "UPDATE Products title=?, desc=?, price=?, img_url_str=?, team_id=?, color=?, size=? WHERE id = ?",
             ["s", "s", "i", "s", "i", "s", "s", "i"],
             [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $id],
             "store/edit.php",
@@ -73,7 +73,7 @@ if ($login_allowed) {
         header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "store/edit.php", "/f1_project/views/private/store/all.php");
+        error("500", "Fields not provided.", "store/edit.php", "/f1_project/views/private/store/edit_form.php");
     }
 } else {
     error("401", "Unauthorised access!", "store/edit.php", "/f1_project/views/public/login_form.php");

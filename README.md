@@ -24,7 +24,8 @@ MAURI:
 </ul>
 
 # MATTE:
-- [ ] products / crud
+- [ ] products / update (check lato server e client color e size)
+- [X] products / crud
 - [X] ricerca tramite team
 - [ ] news got through web scraping
 - [ ] carrello
