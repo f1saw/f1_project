@@ -1,0 +1,21 @@
+main {
+    max-width: 90%;
+    margin: auto;
+}
+
+.card * {
+    color: rgb(33,37,41);
+}
+
+
+.card img {
+    transition: all ease-in-out 1s;
+}
+
+.card-img {
+    overflow: hidden;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
