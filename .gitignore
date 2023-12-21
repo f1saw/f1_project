@@ -1,3 +1,4 @@
 .idea
 config/keys.ini
 errors.log
+/vendor/

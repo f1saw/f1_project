@@ -1,0 +1,18 @@
+{
+    "name": "saw/f1_project",
+    "autoload": {
+        "psr-4": {
+            "Saw\\F1Project\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matteo Naccarato",
+            "email": "matteo.naccarato@itiscuneo.eu"
+        }
+    ],
+  "require": {
+    "ext-curl": "*",
+    "ext-dom": "*"
+  }
+}
