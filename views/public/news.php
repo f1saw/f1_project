@@ -126,7 +126,7 @@ function f1_scrape_news($base_url): array {
                                         <a href="<?php echo $link_list[$i] ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
                                             <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
                                                 <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                                Check it out!
+                                                Go
                                                 <span class="material-symbols-outlined">sports_score</span>
                                             </span>
                                         </a>
