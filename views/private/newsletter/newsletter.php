@@ -1,3 +1,7 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!--xmlns="http://www.w3.org/1999/html"-->
@@ -5,10 +9,10 @@
     <title>Newsletter</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
 
-    <?php include("../../partials/head.php"); ?>
-    <?php require_once("../../../auth/auth.php") ?>
+    <?php include("views/partials/head.php"); ?>
+    <?php require_once("auth/auth.php") ?>
     <style>
         main {
             max-width: 90%;
@@ -66,7 +70,7 @@
     <div class="container-fluid">
 
         <!-- Nav -->
-        <?php include("../../partials/navbar.php");?>
+        <?php include("views/partials/navbar.php");?>
         <main>
             <div class="flex-container d-flex justify-content-center">
                 <div class="container-element">
