@@ -76,7 +76,8 @@ if (check_admin_auth($user)) {
             exit;
 
         } catch (Exception $e) {
-            echo "Exception thrown:<br>$e";
+            error("500", "PHPMailer exception: $e", "send_email.php", "/f1_project/views/private/newsletter/newsletter.php");
+            exit;
         }
     } else {
         error("500", "Fields NOT provided", "send_email.php", "/f1_project/views/private/newsletter/newsletter.php");

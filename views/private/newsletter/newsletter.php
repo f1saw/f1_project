@@ -51,7 +51,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
                         <div class="row mb-3 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 py-5">
                             <button id="btn_submit" type="submit" class="btn btn-danger col-12 col-md-5 col-lg-4 col-xxl-3 d-flex align-items-center justify-content-center gap-2 btn-reverse-color">
                                 <span class="material-symbols-outlined">send</span>
-                                <span>Send</span>
+                                <span id="send-txt">Send</span>
                             </button>
                             <div class="d-none lds-ring-container">
                                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
