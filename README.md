@@ -1,6 +1,11 @@
 # f1_project
 SAW project about F1
 
+# CLONE (w/ submodules):
+```git clone --recursive-submodule {.git}```
+or 
+```git submodule update --init --recursive```
+
 # TO-DO:
 <ul>
 <li>Check code HTTP code errors</li>
