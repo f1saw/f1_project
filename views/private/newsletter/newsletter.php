@@ -18,6 +18,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/admin/newsletter.css">
+    <script src="/f1_project/assets/js/newsletter.js" defer></script>
 </head>
 <body class="bg-dark">
     <div class="container-fluid">
@@ -47,11 +48,14 @@ if (session_status() == PHP_SESSION_NONE) session_start();
                         <div class="input-group">
                             <textarea class="form-control text-box" id="text" name="text" rows="5" cols="50"></textarea>
                         </div>
-                        <div class="row mb-3 d-flex justify-content-center button">
-                            <button id="button" type="submit" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2 btn-reverse-color">
+                        <div class="row mb-3 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 py-5">
+                            <button id="btn_submit" type="submit" class="btn btn-danger col-12 col-md-5 col-lg-4 col-xxl-3 d-flex align-items-center justify-content-center gap-2 btn-reverse-color">
                                 <span class="material-symbols-outlined">send</span>
                                 <span>Send</span>
                             </button>
+                            <div class="d-none lds-ring-container">
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
                         </div>
                     </form>
                 </div>

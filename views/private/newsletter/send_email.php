@@ -22,7 +22,15 @@ require_once ("DB/DB.php");
 if (check_admin_auth($user)) {
     set_session($user);
 
-    if (isset($_POST["subject"]) && isset($_POST["text"])) {
+    if (isset($_POST["subject"]) && $_POST["subject"] && isset($_POST["text"]) && $_POST["text"]) {
+
+        $subject = preg_replace('!\s+!', '', $_POST["subject"]);
+        $body = preg_replace('!\s+!', '', $_POST["text"]);
+
+        if (!$subject  || !$body) {
+            error("500", "Fields NOT provided", "send_email.php", "/f1_project/views/private/newsletter/newsletter.php");
+            exit;
+        }
 
         $subject = htmlentities($_POST["subject"]);
         $body = htmlentities($_POST["text"]);
