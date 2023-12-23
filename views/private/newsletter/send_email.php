@@ -82,7 +82,7 @@ if (check_admin_auth($user)) {
             echo "Mail SENT";
 
         } catch (Exception $e) {
-            echo "Exception thrown";
+            echo "Exception thrown:<br>$e";
         }
 
 
