@@ -92,8 +92,8 @@ function f1_scrape_news($base_url): array {
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/index_style.css">
 
-    <?php include("../partials/head.php"); ?>
-    <?php require_once("../../auth/auth.php") ?>
+    <?php include("views/partials/head.php"); ?>
+    <?php require_once("auth/auth.php") ?>
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -102,7 +102,7 @@ function f1_scrape_news($base_url): array {
 <div class="container-fluid">
 
     <!-- Nav -->
-    <?php include ("../partials/navbar.php");?>
+    <?php include ("views/partials/navbar.php");?>
 
 
     <main>
@@ -136,8 +136,8 @@ function f1_scrape_news($base_url): array {
 
         <br>
         <!-- Home cards 1 -->
-        <section class="home-cards row d-flex justify-content-around">
-            <div class="col-4">
+        <section class="home-cards row d-flex justify-content-around gap-5 gap-md-0">
+            <div class="col-12 order-2 col-md-4 order-md-1 d-flex justify-content-center flex-column">
                 <span class="title text-light">
                     <span class="text-light h2">
                         News
@@ -145,7 +145,7 @@ function f1_scrape_news($base_url): array {
                     </span>
                     (provided by <a href="https://www.formula1.com" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
                 </span>
-                <br>
+
                 <div class="row">
                     <?php for ($i = 0; $i < count($title_list); $i++) { ?>
                         <div class="col-12 d-flex align-items-stretch py-3">
@@ -177,8 +177,8 @@ function f1_scrape_news($base_url): array {
                     <?php } ?>
                 </div>
             </div>
-            <div class="col-8">
-                <h2 class="title text-light">Browse our site
+            <div class="col-12 col-md-8">
+                <h2 class="title text-light d-flex justify-content-center align-items-center gap-2">Browse our site
                     <span class="material-symbols-outlined text-danger">travel_explore</span>
                 </h2>
                 <br>
