@@ -4,17 +4,23 @@
     <title>Home</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../../../assets/css/style.css">
-    <link rel="stylesheet" href="../../../assets/css/index_style.css">
-    <link rel="stylesheet" href="../../../assets/css/store.css">
+    <?php
+    if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+        error("500", "set_include_path()");
+    ?>
 
-    <?php include("../../partials/head.php"); ?>
-    <?php require_once("../../../auth/auth.php") ?>
+    <?php include("views/partials/head.php"); ?>
+    <?php require_once("auth/auth.php") ?>
 
-    <?php require_once("../../../utility/error_handling.php"); ?>
-    <?php require_once("../../partials/alert.php") ?>
-    <?php require_once ("../../../utility/store.php") ?>
-    <?php require_once ("../../../DB/DB.php"); ?>
+    <?php require_once("utility/error_handling.php"); ?>
+    <?php require_once("views/partials/alert.php") ?>
+    <?php require_once ("utility/store.php") ?>
+    <?php require_once ("DB/DB.php"); ?>
+
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/store.css">
+
 </head>
 
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -23,46 +29,25 @@
 <div class="container-fluid bg-dark">
 
     <!-- Nav -->
-    <?php include ("../../partials/navbar_store.php")?>
+    <?php include ("views/partials/navbar_store.php")?>
 
     <div class="w-100 d-flex flex-column gap-3">
         <h3 class="d-flex justify-content-center">
             Shop by Team
         </h3>
+        <?php
+        $conn = DB::connect("store.php", "/f1_project/views/public/index.php");
+        [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
+            "SELECT * FROM Teams;",
+            "store.php",
+            "/f1_project/views/public/index.php");
+        ?>
         <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/9a4b02b0-f73a-4bf7-af5a-dd9794260036.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/7699db10-0dff-47ff-ba47-ff92078a02fd.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/239e8493-e331-4a9f-a8ac-262d1c743e29.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/8a248b00-993b-4a19-8259-5b583b68c4b6.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/5bf95f16-e3ad-42da-bfdc-6bf13926f348.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/15466209-49af-4adc-b619-514a9fcbe8e3.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/5bfedd91-c84a-48a3-85d4-7c3da87cc72a.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/d9a775d3-e042-4434-9971-f51a8c83279b.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/af401abe-7378-47aa-95df-1bf6ab81674a.svg" alt="">
-            </a>
-            <a href="#">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_Haas_F1.png" alt="">
-            </a>
-            <a href="#">
-                <img src="https://f1store2.formula1.com/content/ws/all/1fb492a9-7e56-4dca-9fa8-878548679887.svg" alt="">
-            </a>
+            <?php foreach($teams as $team) { ?>
+                <a href="?team=<?php echo $team["id"]?>">
+                    <img src="<?php echo $team["logo_url"]; ?>" alt="<?php echo $team["name"]; ?>">
+                </a>
+            <?php } ?>
         </div>
     </div>
 
@@ -73,9 +58,9 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
             <?php
-            $conn = DB::connect("store.php", "/f1_project/views/public/index.php");
+            $team_filter = (isset($_GET["team"]) && $_GET["team"])? ("WHERE team_id = " . $_GET["team"]):"";
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-                "SELECT * FROM Products ORDER BY id DESC;",
+                "SELECT * FROM Products $team_filter ORDER BY id DESC;",
                 "store.php",
                 "/f1_project/views/public/index.php");
             if (!$conn->close()) {
@@ -132,5 +117,5 @@
     </main>
 </body>
 
-<script src="../../../assets/js/store.js"></script>
+<script src="/f1_project/assets/js/store.js"></script>
 </html>

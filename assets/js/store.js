@@ -32,3 +32,11 @@ $(".img_url").on('input', $.debounce(250, event => {
         }
     }
 }))
+
+const urls = [$("#img_url_1"), $("#img_url_2")]
+urls.forEach((url, index) => {
+    if (url.val() !== "") {
+        $("#img-preview").removeClass("d-none")
+        $(`#img-url-${index + 1}`).removeClass("d-none").attr("src", url.val())
+    }
+})

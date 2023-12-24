@@ -14,14 +14,16 @@ SAW project about F1
 - [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
 - [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
-<hr>
+- [ ] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
 
+<hr>
 
 ## MATTE:
 - [ ] carrello
 - [X] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
+- [ ] link to store management (all, create, edit)
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 

@@ -3,8 +3,8 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 
 require_once("utility/error_handling.php");
-require_once ("DB/DB.php");
-require_once ("auth/auth.php");
+require_once("DB/DB.php");
+require_once("auth/auth.php");
 
 
 if(session_status() == PHP_SESSION_NONE) session_start();
@@ -32,7 +32,7 @@ if ($login_allowed) {
 
         // REGEX PRICE xx.yy
         if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
+            error("-1", "Price NOT valid.", "create.php", "/f1_project/views/private/store/new_form.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -44,7 +44,7 @@ if ($login_allowed) {
         }*/
 
         /* DB */
-        $conn = DB::connect("product_new.php", "/f1_project/views/private/store/product_new_form.php");
+        $conn = DB::connect("create.php", "/f1_project/views/private/store/new_form.php");
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
         $price = number_format($conn->real_escape_string($price), 2) * 100;
@@ -58,22 +58,22 @@ if ($login_allowed) {
         "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
         ["s", "s", "i", "s", "i", "s", "s"],
         [$title, $desc, $price, $img_url_str, $team_id, $color, $size],
-        "product_new.php",
-        "/f1_project/views/private/store/product_new_form.php");
+        "create.php",
+        "/f1_project/views/private/store/new_form.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
+            error("500", "conn_close()", "create.php", "/f1_project/views/private/store/new_form.php");
             exit;
         }
 
         $_SESSION["success"] = 1;
         $_SESSION["success_msg"] = "Product created successfully";
-        header("Location: /f1_project/views/private/table_users.php");
+        header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "product_new.php", "/f1_project/views/private/store/product_new_form.php");
+        error("500", "Fields not provided.", "create.php", "/f1_project/views/private/store/new_form.php");
     }
 } else {
-    error("401", "Unauthorised access!", "product_new.php", "/f1_project/views/public/login_form.php");
+    error("401", "Unauthorised access!", "create.php", "/f1_project/views/public/login_form.php");
 }
 exit;
