@@ -284,7 +284,7 @@ function f1_scrape_news($base_url): array {
                         <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                             <div class="card-img d-flex justify-content-center">
                                 <!-- <img src="https://www.f1-fansite.com/wp-content/uploads/2023/11/230070-scuderia-ferrari-abu-dhabi-gp-2023-race_2ca9a370-0909-4cca-adae-9dbf3c91638f.jpg" class="card-img-top" alt="..."> -->
-                                <img style="width: 250px;" src="https://grandprixstore.co.za/wp-content/uploads/2023/05/Grand-Prix-Store-Shop-Ferrari.jpg" class="card-img-top" alt="...">
+                                <img src="https://cdn-5.motorsport.com/images/amp/0qXjNlQ6/s6/charles-leclerc-ferrari-carlos.jpg" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body d-flex align-items-end">
                                 <div class="w-100">
