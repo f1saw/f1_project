@@ -24,7 +24,7 @@ MAURI:
 - [ ] adattabilità mobile
 - [ ] cercare per recupero pass, modifica pass, 
 - [ ] newsletter (php mailer) -> admin scrive msg e arriva a utente con news == 1
-- [ ] email confirmation
+- [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 <hr>
 </ul>
 
