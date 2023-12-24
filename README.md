@@ -19,9 +19,10 @@ SAW project about F1
 
 ## MATTE:
 - [ ] carrello
-- [ ] html dinamico con ciclo index
+- [X] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
+- (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
 <br><br><br>
