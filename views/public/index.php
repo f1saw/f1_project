@@ -166,7 +166,7 @@
                                 <hr>
                                 <p class="card-text">Buy <strong>official</strong> merchandise</p>
                                 <p class="card-text">
-                                    <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
+                                    <a href="/f1_project/views/public/store/store.php" class="card-link text-decoration-none d-flex flex-row justify-content-end">
                                         <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
                                             <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
                                             Check it out!
