@@ -72,10 +72,10 @@ main {
     margin-right: 10px;
 }
 
-input{
+#profile-data input {
     text-align: center;
 }
-input::placeholder {
+#profile-data input::placeholder {
     text-align: center;
 }
 

@@ -1,12 +1,18 @@
 # f1_project
 SAW project about F1
 
+# CLONE (w/ submodules):
+- ```git clone --recursive-submodule {.git}```
+<br>or<br>
+```git submodule update --init --recursive```
+- Update submodule ```git submodule update --remote```
+
 # TO-DO:
 <ul>
 <li>Check code HTTP code errors</li>
 <li>Generic error page</li>
 <li>Proteggere tutti file server rilevanti (tipo DB.php, ...)</li>
-<li>Recupero password</li>
+<li>Recupero password</li> 
 
 
 <hr>
@@ -18,7 +24,7 @@ MAURI:
 - [ ] adattabilità mobile
 - [ ] cercare per recupero pass, modifica pass, 
 - [ ] newsletter (php mailer) -> admin scrive msg e arriva a utente con news == 1
-- [ ] email confirmation
+- [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 <hr>
 </ul>
 
@@ -32,6 +38,7 @@ MAURI:
 
 <br><br><br>
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
+- [ ] Proteggere file privati da accesso web (es. keys.ini)
 <li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
 <li>nationality for users?</li>
 <li><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></li>
