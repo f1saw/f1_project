@@ -143,11 +143,11 @@ function f1_scrape_news($base_url): array {
                         News
                         <span class="material-symbols-outlined text-danger">download</span>
                     </span>
-                    (provided by <a href="https://www.formula1.com" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
+                    (provided by <a href="<?php echo end($link_list); ?>" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
                 </span>
 
                 <div class="row">
-                    <?php for ($i = 0; $i < count($title_list); $i++) { ?>
+                    <?php for ($i = 0; $i < min(count($title_list), 4); $i++) { ?>
                         <div class="col-12 d-flex align-items-stretch py-3">
                             <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                                 <div class="card-img">
