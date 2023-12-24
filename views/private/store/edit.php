@@ -61,7 +61,6 @@ if (!$product) {
         <?php include("views/partials/navbar.php") ?>
 
         <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
-
             <div class="col-12 col-md-10">
 
                 <form action="/f1_project/controllers/store/edit.php" method="POST" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded">
@@ -77,7 +76,7 @@ if (!$product) {
                         <hr>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="title" class="form-label"><strong>TITLE</strong></label><br>
+                                <label for="title" class="form-label"><strong>TITLE <label class="text-danger">*</label></strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
                                     <input type="text" id="title" class="form-control" name="title" placeholder="Title" value="<?php echo $product["Products.title"] ?>" aria-describedby="title-addon" required>
@@ -92,7 +91,7 @@ if (!$product) {
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label for="price" class="form-label"><strong>PRICE</strong></label><br>
+                                <label for="price" class="form-label"><strong>PRICE <label class="text-danger">*</label></strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
@@ -112,7 +111,6 @@ if (!$product) {
                                 }
                                 ?>
 
-                                <?php echo $product["Teams.id"]; ?>
                                 <label for="team" class="form-label"><strong>TEAM</strong></label>
                                 <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size">
                                     <option value="ns" class="option_invalid" selected disabled>Select team</option>
@@ -126,23 +124,29 @@ if (!$product) {
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="size" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. XS S M L XL)">
-                                    <strong>SIZE</strong>
-                                    <span class="material-symbols-outlined" style="color: aqua;">help</span>
+                                <label class="d-flex justify-content-between">
+                                    <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="size" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. XS S M L XL)">
+                                        <strong>SIZE</strong>
+                                        <span class="material-symbols-outlined" style="color: aqua;">help</span>
+                                    </label>
+                                    <label id="selected-size"></label>
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
-                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo strtoupper($product["Products.size"]) ?>" placeholder="Size" aria-describedby="size-addon" required>
+                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo preg_replace("/;/", " ", strtoupper($product["Products.size"])) ?>" placeholder="XS S M" aria-describedby="size-addon" required>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="color" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. Red Orange Black)">
-                                    <strong>COLOR</strong>
-                                    <span class="material-symbols-outlined" style="color: aqua;">help</span>
+                                <label class="d-flex justify-content-between">
+                                    <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="color" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. Red Orange Black)">
+                                        <strong>COLOR</strong>
+                                        <span class="material-symbols-outlined" style="color: aqua;">help</span>
+                                    </label>
+                                    <label id="selected-color"></label>
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="color-addon">palette</span>
-                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo $product["Products.color"] ?>" placeholder="Color" aria-describedby="color-addon" required>
+                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo preg_replace("/;/", " ", $product["Products.color"]) ?>" placeholder="red black" aria-describedby="color-addon" required>
                                 </div>
                             </div>
                         </div>
@@ -181,13 +185,18 @@ if (!$product) {
                             </button>
                             <a href="/f1_project/views/private/store/all.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                                 <span class="material-symbols-outlined">fast_rewind</span>
-                                <span class="d-inline d-sm-none d-xxl-inline">Discard</span>
+                                <span class="d-inline d-sm-none d-xxl-inline">Back</span>
                             </a>
+                        </div>
+
+                        <div class="row col-12">
+                            <label>
+                                <label class="text-danger">*</label> Compulsory fields
+                            </label>
                         </div>
                     </fiedlset>
 
                 </form>
-
 
             </div>
 

@@ -38,7 +38,6 @@ set_session($user); ?>
         <div class="container-element col-12 col-md-9">
 
             <?php
-
             $conn = DB::connect();
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
                 "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.name AS 'Teams.name' FROM Products JOIN Teams ON Products.team_id = Teams.id;",
@@ -48,7 +47,6 @@ set_session($user); ?>
                 error("500", "conn_close()", "store/all.php", "/f1_project/views/private/dashboard.php");
                 exit;
             }
-
             ?>
 
             <?php if ($num_products > 0) { ?>
@@ -73,7 +71,7 @@ set_session($user); ?>
                     foreach ($products as $product) { ?>
                         <tr>
                             <th class='text-center'>
-                                <a href='edit_form.php/?id=<?php echo $product["Products.id"] ?>' class="text-decoration-none" style="color: #4a82fc">
+                                <a href='edit.php/?id=<?php echo $product["Products.id"] ?>' class="text-decoration-none" style="color: #4a82fc">
                                     <?php echo $product["Products.id"]; ?>
                                 </a>
                             </th>
@@ -88,8 +86,6 @@ set_session($user); ?>
                                 <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                                 € <?php echo $int . "." . $dec ?>
                             </td>
-
-
 
                             <td class='text-center' >
                                 <?php
@@ -120,7 +116,7 @@ set_session($user); ?>
                 </table>
 
                 <div class="row d-flex justify-content-end py-3">
-                    <a href="/f1_project/views/private/store/new_form.php" class="text-decoration-none d-flex justify-content-end">
+                    <a href="/f1_project/views/private/store/new.php" class="text-decoration-none d-flex justify-content-end">
                         <button class="col-12 col-md-5 col-lg-3 col-xxl-2 btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <span>Create</span>

@@ -28,15 +28,16 @@ if ($login_allowed) {
             $img_url[1] = $_POST["img_url_2"] ? htmlentities($_POST["img_url_2"]) : "";
         }
         $team_id = isset($_POST["team_id"]) ? htmlentities($_POST["team_id"]) : null;
-        $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
-        $size = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["size"])));
+        $color = preg_replace("/[\s,;]+/", ";", strtolower(htmlentities($_POST["color"])));
+        $size = preg_replace("/[\s,;]+/", ";", strtolower(htmlentities($_POST["size"])));
 
         // REGEX PRICE xx.yy
-        if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "create.php", "/f1_project/views/private/store/new_form.php");
+        if (!preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
+            error("-1", "Price NOT valid.", "store/edit.php", "/f1_project/views/private/store/edit_form.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
+
 
         // TODO: REGEX img url ?? è necessario ??
         /*if ($date_of_birth && !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date_of_birth)) {
