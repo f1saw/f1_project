@@ -7,47 +7,40 @@ SAW project about F1
 ```git submodule update --init --recursive```
 - Update submodule ```git submodule update --remote```
 
-# TO-DO:
-<ul>
-<li>Check code HTTP code errors</li>
-<li>Generic error page</li>
-<li>Proteggere tutti file server rilevanti (tipo DB.php, ...)</li>
-<li>Recupero password</li> 
-
-
 <hr>
 
-MAURI:
-- [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
-- [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
-- [ ] navbar store - mettere dash
-- [ ] adattabilità mobile
-- [ ] cercare per recupero pass, modifica pass, 
-- [ ] newsletter (php mailer) -> admin scrive msg e arriva a utente con news == 1
+## MAURI:
+- [ ] cercare per recupero pass, modifica pass,
 - [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
+- [ ] search bar -> queury database prodotti e visualizzare in una pagina
+- [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
 <hr>
-</ul>
 
-# MATTE:
-- [X] products / crud
-- [X] ricerca tramite team
-- [X] news got through web scraping
+
+## MATTE:
 - [ ] carrello
--<hr>
-
+- [ ] html dinamico con ciclo index
+- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
+- [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
+<hr>
 
 <br><br><br>
-- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
+
+## ALL:
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
-<li>ADMIN / DASHBOARD => fare tre quadranti per editare tabella utenti, ordini, prodotti</li>
-<li>nationality for users?</li>
-<li>dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...</li>
-<li>In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
-<li>Check cookie ridondante </li>
-<li>Scrittura politica cookie</li>
-<li>Check correttezza campi registrazione con js</li>
-<li>Formattazione su schermo mobile non funziona + parti bianche volanti</li>
-<li>NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart</li>
+- [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
+- [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
+- [ ] Check cookie ridondante
+- [ ] Scrittura politica cookie
+- [ ] Check correttezza campi registrazione con js
+- [ ] Check code HTTP code errors
+- [ ] Generic error page
 
-<li>Photo repo: <a href="https://www.f1-fansite.com/">f1-fansite</a></li>
+## EXTRA:
+- [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...
+- [ ] In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
 
+
+## SOURCES:
+- <a href="https://www.f1-fansite.com/">f1-fansite</a>
+- <a href="https://wallpapercave.com/">wallpapercave</a>
