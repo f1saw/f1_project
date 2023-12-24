@@ -121,7 +121,7 @@ set_session($user); ?>
 
                 <div class="row d-flex justify-content-end py-3">
                     <a href="/f1_project/views/private/store/new_form.php" class="text-decoration-none d-flex justify-content-end">
-                        <button class="col-12 col-md-5 col-lg-3 btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                        <button class="col-12 col-md-5 col-lg-3 col-xxl-2 btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <span>Create</span>
                         </button>
