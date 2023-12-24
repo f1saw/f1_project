@@ -1,0 +1,87 @@
+main {
+    max-width: 90%;
+    margin: auto;
+}
+
+.flex-container {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.container-element{
+    position: relative;
+    backdrop-filter: blur(5px);
+    max-height: 55%;
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    top: 100px;
+    border-style: solid;
+    border-color: #ff1300;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.container-element::-webkit-scrollbar {
+    width: 0;
+}
+
+.text-box{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.lds-ring-container {
+    width: fit-content;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* #button {
+    position: relative;
+    bottom: -30px;
+} */
+
+#newsletter {
+    position: relative;
+    top: 12px;
+}

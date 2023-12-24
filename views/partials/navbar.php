@@ -15,6 +15,14 @@
             <div class="navbar-nav d-flex flex-column align-items-end gap-4 flex-lg-row justify-content-lg-end gap-lg-5">
                 <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
                     <div class="nav-item d-flex align-items-end">
+                        <a href="/f1_project/views/public/news.php" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
+                            <span class="material-symbols-outlined">news</span>
+                            <span>News</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-end gap-4 flex-lg-row gap-lg-4 mt-4 mt-lg-0">
+                    <div class="nav-item d-flex align-items-end">
                         <a href="/f1_project/views/public/store/store.php" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                             <span class="material-symbols-outlined">shopping_bag</span>
                             <span>Store</span>
@@ -52,6 +60,14 @@
                                 <span>Dashboard</span>
                             </a>
                         </div>
+                        <?php if(check_admin_auth($user)){ ?>
+                            <div class="nav-item">
+                                <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/newsletter/newsletter.php">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <span>Newsletter</span>
+                                </a>
+                            </div>
+                        <?php } ?>
                         <div class="nav-item">
                             <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
