@@ -19,7 +19,7 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [-] carrello (TODO: aggiungere quantità dei prodotti nel carrello (evitare duplicati)
+- [ ] carrello (TODO: aggiungere quantità dei prodotti nel carrello (evitare duplicati)
 - [X] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
