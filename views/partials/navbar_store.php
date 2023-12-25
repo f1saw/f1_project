@@ -26,7 +26,7 @@
 
                     </style>
                     <div class="nav-item d-flex align-items-end">
-                        <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
+                        <a href="/f1_project/views/public/store/cart.php" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
 
                             <label id="cart-tooltip" class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="Shopping cart">
                                 <span class="d-flex justify-content-center">

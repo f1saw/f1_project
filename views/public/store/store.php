@@ -109,8 +109,8 @@
                 <div class="mx-auto alert alert-no-data border-light fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                     <span class="material-symbols-outlined">description</span>
                     <span class="mx-2">
-                    <b>INFO</b>&nbsp;| No Data available!
-                </span>
+                        <b>INFO</b>&nbsp;| No Data available!
+                    </span>
                 </div>
             <?php } ?>
         </div>
