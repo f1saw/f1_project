@@ -16,7 +16,7 @@ if(!isset($_GET["id"]) || !$_GET["id"]) {
 
 $conn = DB::connect("product.php", "/f1_project/views/public/store/store.php");
 $product = DB::get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Team.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
     ["i"],
     [$_GET["id"]],
     "product.php",
@@ -189,5 +189,5 @@ if (!$product) {
     </main>
 </body>
 
-<script src="../../../assets/js/store.js"></script>
+<script src="/f1_project/assets/js/navbar.js"></script>
 </html>

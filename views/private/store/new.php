@@ -134,7 +134,7 @@
                             <span class="material-symbols-outlined">add</span>
                             <strong>Create</strong>
                         </button>
-                        <a href="/f1_project/views/private/dashboard.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/private/store/all.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined">fast_rewind</span>
                             <span class="d-inline d-sm-none d-xxl-inline">Discard</span>
                         </a>
@@ -161,7 +161,6 @@
     exit;
 } ?>
 
-<script src="/f1_project/assets/js/tooltip.js"></script>
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 <script src="/f1_project/assets/js/store.js"></script>
 </body>

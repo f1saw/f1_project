@@ -35,7 +35,7 @@ class DB {
         $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error);
 
         if (!$res = $stmt->get_result()) {
-            error("500", "get_result()", $source, $redirect_error);
+            error("500", "get_result(): $stmt->error", $source, $redirect_error);
             exit;
         }
         if (!$stmt->close()) {
@@ -53,14 +53,14 @@ class DB {
 
     public static function stmt_no_select($conn, $query, $source = "N/A", $redirect_error = ""): void {
         if (!$conn->query($query)) {
-            error("500", "mysqli: query", $source, $redirect_error);
+            error("500", "mysqli: $conn->error", $source, $redirect_error);
             exit;
         }
     }
 
     public static function stmt_get_record_by_field($conn, $query, $source = "NA", $redirect_error = "") {
         if (!($res = $conn->query($query))) {
-            error("500", "mysqli: query ", $source, $redirect_error);
+            error("500", "mysqli: $conn->error", $source, $redirect_error);
             exit;
         }
         return [$res->num_rows, $res->fetch_all(MYSQLI_ASSOC)];

@@ -209,7 +209,6 @@ if (!$product) {
         </div>
     </div>
 
-    <script src="/f1_project/assets/js/tooltip.js"></script>
     <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
     <script src="/f1_project/assets/js/store.js"></script>
 </body>

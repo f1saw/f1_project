@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Home</title>
+    <title>Store</title>
     <meta charset="UTF-8">
 
     <?php
@@ -60,7 +60,12 @@
             <?php
             $team_filter = (isset($_GET["team"]) && $_GET["team"])? ("WHERE team_id = " . $_GET["team"]):"";
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-                "SELECT * FROM Products $team_filter ORDER BY id DESC;",
+                "SELECT 
+                            Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
+                            Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' 
+                        FROM Products JOIN Teams ON Products.team_id = Teams.id 
+                        $team_filter 
+                        ORDER BY Products.id DESC;",
                 "store.php",
                 "/f1_project/views/public/index.php");
             if (!$conn->close()) {
@@ -75,19 +80,19 @@
                 <?php foreach ($products as $product) { ?>
 
                     <div class="col d-flex align-items-stretch">
-                        <a href="product.php?id=<?php echo $product["id"]; ?>" class="text-decoration-none">
+                        <a href="product.php?id=<?php echo $product["Products.id"]; ?>" class="text-decoration-none">
                             <div class="card bordered border-danger border-3 p-2 h-100">
                                 <div class="card-img">
-                                    <img src="<?php echo explode("\t", $product["img_url"])[0]; ?>" class="card-img-top" alt="...">
+                                    <img src="<?php echo explode("\t", $product["Products.img_url"])[0]; ?>" class="card-img-top" alt="...">
                                 </div>
                                 <div class="card-body d-flex align-items-end p-1">
                                     <div class="w-100">
-                                        <h5 class="card-title text-danger"><?php echo $product["title"]; ?></h5>
+                                        <h5 class="card-title text-danger"><?php echo $product["Products.title"]; ?></h5>
                                         <hr>
-                                        <p class="card-text"><?php echo (strlen($product["description"]) < 50)? $product["description"] : (substr($product["description"], 0, 70) . " [...]"); ?></p>
+                                        <p class="card-text"><?php echo (strlen($product["Products.description"]) < 50)? $product["Products.description"] : (substr($product["Products.description"], 0, 70) . " [...]"); ?></p>
                                         <div class="card-text text-decoration-none d-flex justify-content-between align-items-end pt-3">
                                             <h5 style="border-top: 2px solid red; border-right: 2px solid red; padding-right: 5px;" class="h-100 d-flex align-items-center">
-                                                <?php [$int, $dec] = str2int_dec($product["price"]); ?>
+                                                <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                                                 <strong>€ <?php echo $int . "." . $dec ?></strong>
                                             </h5>
                                             <span <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
@@ -117,5 +122,6 @@
     </main>
 </body>
 
+<script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store.js"></script>
 </html>

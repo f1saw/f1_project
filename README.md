@@ -42,6 +42,7 @@ SAW project about F1
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...
 - [ ] In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
+- [ ] Add alt description in Images in DB
 
 
 ## SOURCES:

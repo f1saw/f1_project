@@ -5,6 +5,10 @@
     border: 1px solid grey; !important;
 }
 
+.my-thick-grey {
+    border: 3px solid grey !important;
+}
+
 .hover-yellow:hover {
     background-color: white;
 }
@@ -15,4 +19,16 @@
 
 .hover-yellow:hover .text {
     color: black;
+}
+
+@media only screen and (min-width: 768px) {
+    .link-product {
+        width: fit-content;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    .product-img {
+        height: 300px;
+    }
 }

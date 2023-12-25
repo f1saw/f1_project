@@ -1,23 +1,4 @@
-const curr_cart = JSON.parse(localStorage.getItem("cart"))
-if (curr_cart)
-    $("#cart-notification-dot").text(curr_cart.length)
-
-$(".btn-add-cart").click(event => {
-    event.preventDefault();
-    let curr_cart = JSON.parse(localStorage.getItem("cart"))
-    if (!curr_cart) curr_cart = []
-    curr_cart.push({
-        "id": event.target.dataset.id,
-        "title": event.target.dataset.title,
-        "price": event.target.dataset.price,
-        "img_url": event.target.dataset.img
-    })
-    console.log(curr_cart)
-    localStorage.setItem("cart", JSON.stringify(curr_cart))
-
-    $("#cart-notification-dot").text(curr_cart.length)
-})
-
+/** IMG URLs management in create/edit product */
 $(".img_url").on('input', $.debounce(250, event => {
     const curr_url = $(event.target).val()
     const curr_img = event.target.id.split("_").slice(-1)[0];
