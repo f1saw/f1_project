@@ -19,7 +19,7 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] carrello (TODO: selezionare taglia, mandare mail conferma ordine, pagina riepilogo ordini)
+- [ ] carrello (TODO: selezionare taglia, mandare mail conferma ordine)
 - [X] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
@@ -38,6 +38,7 @@ SAW project about F1
 - [ ] Check correttezza campi registrazione con js
 - [ ] Check code HTTP code errors
 - [ ] Generic error page
+- [ ] Renderizzare dashboard differenti in base al ruolo dell'utente
 
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...

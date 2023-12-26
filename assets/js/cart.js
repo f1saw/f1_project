@@ -109,11 +109,11 @@ const html_img = (id, img_url) => {
             </div>`
 }
 
-const html_description = (id, desc, team, price, quantity) => {
+const html_description = (id, title, team, price, quantity) => {
     return `<div class="col-12 col-md-4 text-center text-md-start">
                 <a href="/f1_project/views/public/store/product.php?id=${id}" target="_blank" class="link-product w-100 text-decoration-none text-light d-flex flex-column justify-content-between align-items-start">
                     <span class="mx-auto mx-md-0 w-100">
-                        ${desc}
+                        ${title}
                         <hr class="rounded my-thin-grey">
                         ${team}
                     </span>

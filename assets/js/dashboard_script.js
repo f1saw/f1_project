@@ -24,7 +24,7 @@ function goToProfile(){
     window.location.href = "/f1_project/views/private/user_detail.php"
 }
 function goToOrders(){
-    window.location.href = "#"
+    window.location.href = "/f1_project/views/private/orders/all.php"
 }
 
  function goToTable(){

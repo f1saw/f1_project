@@ -94,9 +94,9 @@ require_once ("DB/DB.php");
                     </button>
                 </form>
                 <label class="col-12 col-md-5 text-center text-md-end">
-                <span>
-                    Total (<span id="count-items"></span>): <strong class="total-price"></strong>
-                </span>
+                    <span>
+                        Total (<span id="count-items"></span>): <strong class="total-price"></strong>
+                    </span>
                 </label>
             </div>
         </div>

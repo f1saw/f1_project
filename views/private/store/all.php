@@ -92,10 +92,10 @@ set_session($user); ?>
                                 if ($product["Products.img_url"]) {
                                     $img = explode("\t", $product["Products.img_url"]);
                                     if($img && $img[0] != '') { ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[0]; ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[0]; ?>" alt="Product pictures.">
                                     <?php }
                                     if($img && $img[1] != '') { ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[1]; ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[1]; ?>" alt="Product pictures.">
                                     <?php
                                     }
                                 } else { ?>
@@ -124,7 +124,7 @@ set_session($user); ?>
                     </a>
                 </div>
             <?php } else { ?>
-                <div class="alert border-dark text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                     <span class="material-symbols-outlined">description</span>
                     <span class="mx-2">
                         <b>INFO</b>&nbsp;| No Data available!

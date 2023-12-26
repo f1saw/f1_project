@@ -103,7 +103,7 @@
                         </tbody>
                     </table>
                 <?php } else { ?>
-                    <div class="alert border-dark text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                    <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                         <span class="material-symbols-outlined">description</span>
                         <span class="mx-2">
                         <b>INFO</b>&nbsp;| No Data available!
