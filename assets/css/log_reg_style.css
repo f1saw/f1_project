@@ -1,5 +1,5 @@
 #navbar {
-    position: static;
+    position: sticky;
 }
 
 html {
@@ -101,10 +101,45 @@ legend {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .container-element{
         max-width: 70%;
         height: 480px;
+        width: 100%;
+    }
+
+    .reg {
+        max-width: 70%;
+        height: 480px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-height: 1100px) {
+    .container-element{
+        top: 200px;
+    }
+}
+
+@media screen and (max-height: 680px) {
+    .container-element{
+        max-width: 70%;
+        max-height: 270px;
+        width: 100%;
+    }
+
+    .reg {
+        max-width: 70%;
+        height: 480px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 460px) {
+    .container-element{
+        top: 50px;
+        max-width: 70%;
+        max-height: 200px;
         width: 100%;
     }
 
@@ -124,5 +159,12 @@ legend {
     .reg {
         max-width: 70%;
         height: 500px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #bg-login {
+        background-position: bottom;
+        background-position-x: 38%;
     }
 }
