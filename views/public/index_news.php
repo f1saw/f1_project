@@ -137,7 +137,7 @@ function f1_scrape_news($base_url): array {
         <br>
         <!-- Home cards 1 -->
         <section class="home-cards row d-flex justify-content-around gap-5 gap-md-0">
-            <div class="col-12 order-2 col-md-4 order-md-1 d-flex justify-content-center flex-column">
+            <div style="border-radius: 10px; background: rgba(87, 87, 87, .6); " class="col-12 order-2 col-md-4 order-md-1 d-flex justify-content-center flex-column">
                 <span class="title text-light">
                     <span class="text-light h2">
                         News

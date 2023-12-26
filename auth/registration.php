@@ -13,7 +13,6 @@ require_once ("auth/auth.php");
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-
 // TODO: bloccare pagina in caso di utente già registrato
 
 /* -- ERROR | fields NOT set -- */
@@ -68,7 +67,6 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
         exit;
     }
     $hash_password = password_hash($password, PASSWORD_DEFAULT);
-
 
     /* DB */
     $conn = DB::connect();

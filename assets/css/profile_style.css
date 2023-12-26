@@ -16,9 +16,8 @@ main {
 .container-element{
     position: relative;
     backdrop-filter: blur(5px);
-    max-height: 70%;
     width: 40%;
-    height: 100%;
+    height: 480px;
     border-radius: 10px;
     top: 100px;
     border-style: solid;
@@ -34,18 +33,14 @@ main {
 @media screen and (max-width: 992px) {
     .container-element{
         max-width: 70%;
-        max-height: 68%;
         width: 100%;
-        height: 100%;
     }
 }
 
 @media screen and (max-width: 768px) {
     .container-element{
         max-width: 70%;
-        max-height: 84%;
         width: 100%;
-        height: 100%;
     }
 }
 

@@ -151,7 +151,7 @@ if ($login_allowed) {
         exit;
     }
     else {
-        header("Location: /f1_project/views/public/index.php");
+        header("Location: /f1_project/views/public/index_news.php");
         exit;
     }
 

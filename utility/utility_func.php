@@ -56,3 +56,36 @@ function choose_correct_data($id) : array{
     }
     return $element;
 }
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+// $BCC must be an associative array with email field
+function send_mail($destination_address, $subject, $body, $BCC = null){
+    $ini = parse_ini_file("config/keys.ini");
+
+    $mail = new PHPMailer(true);
+    $mail->isSMTP(); // "Send messages using SMTP"
+    $mail->Host = $ini["smtp_host"];
+    $mail->SMTPAuth = true; // Whether to use SMTP authentication
+    $mail->Username = $ini["g_email"]; // GMAIL email
+    $mail->Password = $ini["g_app_password"]; // GMAIL APP Password
+    $mail->SMTPSecure = $ini["smtp_secure"];
+    $mail->Port = $ini["smtp_port"];
+
+    // I send email from $ini["g_email"] to itself.
+    // The receivers will be pushed in the BCC in order to respect their privacy
+    $mail->setFrom($ini["g_email"]);
+    $mail->addAddress($destination_address);
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+    $_SESSION["confirm_email"] = false;
+
+    if($BCC != null){
+        foreach ($BCC as $receiver) {
+            $mail->addBCC($receiver["email"]);
+        }
+    }
+
+    $mail->send();
+}

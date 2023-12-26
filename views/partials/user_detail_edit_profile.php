@@ -77,7 +77,7 @@
                 </div>
                 <br>
                 <div class="row mb-3 d-flex justify-content-center">
-                    <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">Confirm</button>
+                    <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                 </div>
             </form>
         </div>

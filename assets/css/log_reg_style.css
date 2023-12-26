@@ -1,25 +1,128 @@
 #navbar {
-    position: absolute;
+    position: static;
+}
+
+html {
+    overflow: hidden;
+}
+
+main {
+    max-width: 90%;
+    margin: auto;
+}
+
+.flex-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.flex-container::-webkit-scrollbar {
+    width: 0;
+}
+
+
+.container-element {
+    position: relative;
+    background: rgba(87, 87, 87, .6);
+    backdrop-filter: blur(5px);
+    height: 480px;
+    width: 40%;
+    border-radius: 10px;
+    top: 100px;
+    border-style: solid;
+    border-color: #ff1300;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.container-element::-webkit-scrollbar {
+    width: 0;
+}
+
+#bg-login {
+    background: url("/f1_project/assets/images/FEpfHeBXwAMnIJA.jpeg");
+    background-size: cover;
+    overflow: hidden;
+    background-position: bottom;
 }
 
 #bg-register {
     background: url("/f1_project/assets/images/FVCyg1fWIAIy8y7.jpeg");
     background-size: cover;
     background-position: top;
+    overflow: hidden;
 }
 
-#bg-register #register-form {
-    background: rgba(87, 87, 87, .6);
-    backdrop-filter: blur(5px);
+.reg {
+    height: 550px;
 }
 
-#bg-login {
-    background: url("/f1_project/assets/images/FEpfHeBXwAMnIJA.jpeg");
-    background-size: cover;
-    background-position: bottom;
+.log {
+    width: 40%;
 }
 
-#bg-login #login-form {
-    background: rgba(87, 87, 87, .6);
-    backdrop-filter: blur(5px);
+.text-box {
+    margin-left: 10px;
+}
+
+p {
+    margin-bottom: unset !important;
+}
+
+input {
+    margin-right: 20px !important;
+}
+
+#remember_me {
+    margin-right: 0;
+}
+
+legend {
+    margin-top: 10px;
+    margin-left: 14px;
+}
+
+@media screen and (max-width: 992px) {
+    .container-element{
+        max-width: 50%;
+        height: 480px;
+        width: 100%;
+    }
+
+    .reg {
+        max-width: 50%;
+        height: 550px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-element{
+        max-width: 70%;
+        height: 480px;
+        width: 100%;
+    }
+
+    .reg {
+        max-width: 70%;
+        height: 480px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container-element {
+        max-width: 70%;
+        height: 500px;
+    }
+
+    .reg {
+        max-width: 70%;
+        height: 500px;
+    }
 }

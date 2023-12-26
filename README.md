@@ -13,7 +13,7 @@ SAW project about F1
 - [ ] cercare per recupero pass, modifica pass,
 - [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
-- [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
+- [ ] capire overflow su login e registrazione
 <hr>
 
 
