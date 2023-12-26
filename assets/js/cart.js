@@ -4,33 +4,37 @@ $().ready(() => {
     render_cart();
     $(".lds-ring-container").addClass("d-none");
     $("#cart-list").removeClass("d-none");
+    window.addEventListener('storage', function() {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        render_cart(cart);
+    })
 })
 
 /** Remove item from cart (LocalStorage) */
-const remove_on_click = () => {
+const remove_on_click = (cart = curr_cart) => {
     $(".remove").click(event => {
         event.preventDefault();
         // Find ID to remove through the index of the "remove button" (e.g. "remove-7" refers to the item with ID 7)
         const id_to_remove = event.target.id.split("-")[1]
         // Find product by ID the product to remove from current cart
         // splice(start, deleteCount)
-        const index = curr_cart.findIndex(item => {
+        const index = cart.findIndex(item => {
             return item.id === id_to_remove
         });
-        curr_cart[index].quantity--;
-        if (curr_cart[index].quantity < 1) {
-            curr_cart.splice(index, 1)
+
+        cart[index].quantity--;
+        if (cart[index].quantity < 1) {
+            cart.splice(index, 1)
         }
         /* curr_cart.splice(curr_cart.findIndex(item => {
             return item.id === id_to_remove
         }), 1); */
 
         // Set new current cart in LocalStorage and render changes
-        localStorage.setItem("cart", JSON.stringify(curr_cart));
-        const items_cnt = items_cart(curr_cart);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        const items_cnt = items_cart(cart);
         $("#cart-notification-dot").text((items_cnt > 0)? items_cnt:"");
-        render_cart();
-        console.log(JSON.parse(localStorage.getItem("cart")));
+        render_cart(cart);
     })
 }
 
@@ -57,7 +61,7 @@ const update_input_fields = info => {
     $(".total-price").text(str2int_dec(info.total_price) + " €");
 }
 
-const render_cart = () => {
+const render_cart = (cart = curr_cart) => {
     // Delete all child nodes
     $("#cart-list").empty();
     let info = {
@@ -70,9 +74,11 @@ const render_cart = () => {
         "prices": "",
         "total_price": 0
     }
-    if (curr_cart && curr_cart.length) {
+
+    if (cart && cart.length) {
         $("#second-body").removeClass("d-none")
-        curr_cart.forEach(item => {
+        $("#cart-empty-alert").addClass("d-none");
+        cart.forEach(item => {
             update_info(info, item);
             $("#cart-list").prepend(
                 $(`<div id='element-${item.id}' class='row d-flex justify-content-center gap-4 item'>` +
@@ -84,9 +90,9 @@ const render_cart = () => {
             )
         })
         // Add event listener on "click" to each .remove button
-        remove_on_click();
+        remove_on_click(cart);
         update_input_fields(info);
-        const curr_cart_length = curr_cart.length;
+        const curr_cart_length = cart.length;
         $("#count-items").text(curr_cart_length + ` product${curr_cart_length > 1? "s":""}`)
 
     } else {

@@ -8,10 +8,16 @@ const items_cart = cart => {
 }
 
 const curr_cart = JSON.parse(localStorage.getItem("cart"))
-if (curr_cart && curr_cart.length) {
-    $("#cart-notification-dot").text(items_cart(curr_cart))
-}
+const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
+$("#cart-notification-dot").text(text)
 
+$(() => {
+    window.addEventListener('storage', function() {
+        const curr_cart = JSON.parse(localStorage.getItem("cart"))
+        const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
+        $("#cart-notification-dot").text(text)
+    })
+})
 
 $(".btn-add-cart").click(event => {
     event.preventDefault();
