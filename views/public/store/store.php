@@ -123,5 +123,4 @@
 </body>
 
 <script src="/f1_project/assets/js/navbar.js"></script>
-<script src="/f1_project/assets/js/store.js"></script>
 </html>

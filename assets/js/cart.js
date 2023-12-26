@@ -4,7 +4,6 @@ $().ready(() => {
     render_cart();
     $(".lds-ring-container").addClass("d-none");
     $("#cart-list").removeClass("d-none");
-    $("#second-body").removeClass("d-none");
 })
 
 /** Remove item from cart (LocalStorage) */
@@ -15,15 +14,23 @@ const remove_on_click = () => {
         const id_to_remove = event.target.id.split("-")[1]
         // Find product by ID the product to remove from current cart
         // splice(start, deleteCount)
-        curr_cart.splice(curr_cart.findIndex(i => {
-            return i.id === id_to_remove
-        }), 1);
+        const index = curr_cart.findIndex(item => {
+            return item.id === id_to_remove
+        });
+        curr_cart[index].quantity--;
+        if (curr_cart[index].quantity < 1) {
+            curr_cart.splice(index, 1)
+        }
+        /* curr_cart.splice(curr_cart.findIndex(item => {
+            return item.id === id_to_remove
+        }), 1); */
 
         // Set new current cart in LocalStorage and render changes
-        localStorage.setItem("cart", JSON.stringify(curr_cart))
-        $("#cart-notification-dot").text(curr_cart.length)
+        localStorage.setItem("cart", JSON.stringify(curr_cart));
+        const items_cnt = items_cart(curr_cart);
+        $("#cart-notification-dot").text((items_cnt > 0)? items_cnt:"");
         render_cart();
-        console.log(JSON.parse(localStorage.getItem("cart")))
+        console.log(JSON.parse(localStorage.getItem("cart")));
     })
 }
 
@@ -32,12 +39,13 @@ const render_cart = () => {
     $("#cart-list").empty();
     let total_price = 0
     if (curr_cart && curr_cart.length) {
+        $("#second-body").removeClass("d-none")
         curr_cart.forEach(item => {
-            total_price += (item.price * 1);
+            total_price += (item.price * item.quantity);
             $("#cart-list").prepend(
                 $(`<div id='element-${item.id}' class='row d-flex justify-content-center gap-4 item'>` +
                         html_img(item.id, item.img_url) +
-                        html_description(item.id, item.title, item.team_name, item.price) +
+                        html_description(item.id, item.title, item.team_name, item.price, item.quantity) +
                         html_price(item.price) +
                         "<hr class='d-md-none rounded my-thick-grey'>" +
                     "</div>")
@@ -51,6 +59,7 @@ const render_cart = () => {
 
     } else {
         $("#cart-empty-alert").removeClass("d-none");
+        $("#second-body").addClass("d-none")
     }
 }
 
@@ -62,7 +71,7 @@ const html_img = (id, img_url) => {
             </div>`
 }
 
-const html_description = (id, desc, team, price) => {
+const html_description = (id, desc, team, price, quantity) => {
     return `<div class="col-12 col-md-4 text-center text-md-start">
                 <a href="/f1_project/views/public/store/product.php?id=${id}" target="_blank" class="link-product w-100 text-decoration-none text-light d-flex flex-column justify-content-between align-items-start">
                     <span class="mx-auto mx-md-0 w-100">
@@ -71,7 +80,10 @@ const html_description = (id, desc, team, price) => {
                         ${team}
                     </span>
                     <br>
-                    <div class="w-100 d-flex justify-content-around justify-content-md-end align-items-center">
+                    <div class="w-100 d-flex justify-content-around justify-content-md-between align-items-center">
+                        <div class="mt-3">
+                            Quantity: <strong>${quantity}</strong>
+                        </div>
                         <button id="remove-${id}" class="remove bg-transparent border-0 p-0 text-info d-flex gap-2 mt-3">
                             <span class="material-symbols-outlined">delete</span>
                             Remove
