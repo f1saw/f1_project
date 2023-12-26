@@ -34,14 +34,46 @@ const remove_on_click = () => {
     })
 }
 
+const update_info = (info, item) => {
+    info.ids += item.id + "\t";
+    info.titles += item.title + "\t";
+    info.teams += item.team_name + "\t";
+    info.quantities += item.quantity + "\t";
+    info.sizes += /*item.size*/ "XS" + "\t";
+    info.imgs += item.img_url + "\t";
+    info.prices += item.price + "\t";
+    info.total_price += (item.price * item.quantity);
+}
+
+const update_input_fields = info => {
+    $("#ids").val(info.ids);
+    $("#titles").val(info.titles);
+    $("#teams").val(info.teams);
+    $("#quantities").val(info.quantities);
+    $("#sizes").val(info.sizes);
+    $("#imgs").val(info.imgs);
+    $("#prices").val(info.prices);
+    $("#total").val(info.total_price);
+    $(".total-price").text(str2int_dec(info.total_price) + " €");
+}
+
 const render_cart = () => {
     // Delete all child nodes
     $("#cart-list").empty();
-    let total_price = 0
+    let info = {
+        "ids": "",
+        "titles": "",
+        "teams": "",
+        "quantities": "",
+        "sizes": "",
+        "imgs": "",
+        "prices": "",
+        "total_price": 0
+    }
     if (curr_cart && curr_cart.length) {
         $("#second-body").removeClass("d-none")
         curr_cart.forEach(item => {
-            total_price += (item.price * item.quantity);
+            update_info(info, item);
             $("#cart-list").prepend(
                 $(`<div id='element-${item.id}' class='row d-flex justify-content-center gap-4 item'>` +
                         html_img(item.id, item.img_url) +
@@ -53,7 +85,7 @@ const render_cart = () => {
         })
         // Add event listener on "click" to each .remove button
         remove_on_click();
-        $("#total-price").text(str2int_dec(total_price) + " €");
+        update_input_fields(info);
         const curr_cart_length = curr_cart.length;
         $("#count-items").text(curr_cart_length + ` product${curr_cart_length > 1? "s":""}`)
 

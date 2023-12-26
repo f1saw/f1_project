@@ -10,7 +10,7 @@ require_once("auth/auth.php");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 [$login_allowed, $user] = check_cookie();
-if ($login_allowed) {
+if (check_admin_auth($user)) {
 
     if (isset($_POST["id"]) && isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["size"])) {
 

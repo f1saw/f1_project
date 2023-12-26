@@ -51,3 +51,16 @@ function choose_correct_data($id) : array{
     }
     return $element;
 }
+
+/**
+ * @throws Exception
+ */
+function generate_random_string($length): string {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters_length = strlen($characters);
+    $random_string = "";
+    for ($i = 0; $i < $length; $i++) {
+        $random_string .= $characters[random_int(0, $characters_length - 1)];
+    }
+    return $random_string;
+}

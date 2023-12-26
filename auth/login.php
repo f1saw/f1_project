@@ -2,6 +2,7 @@
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 
+require_once ("utility/utility_func.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
 require_once ("auth/auth.php");
@@ -11,18 +12,7 @@ require_once ("auth/auth.php");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 
-/**
- * @throws Exception
- */
-function generate_random_string($length): string {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $characters_length = strlen($characters);
-    $random_string = "";
-    for ($i = 0; $i < $length; $i++) {
-        $random_string .= $characters[random_int(0, $characters_length - 1)];
-    }
-    return $random_string;
-}
+
 
 
 

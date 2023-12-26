@@ -29,6 +29,15 @@ require_once ("DB/DB.php");
 <body>
 <div class="container-fluid bg-dark">
 
+    <label id="order-success" class="d-none"><?php echo ($_SESSION["success"])??""; ?></label>
+    <script>
+        // JS script required at this point because it must be after the label defined at the previous row (row 32) in order to get its values,
+        // and it must be before the include for the navbar (otherwise, an outdated cart would be considered during the render of the navbar)
+        if ($("#order-success").text() !== "") {
+            localStorage.clear();
+        }
+    </script>
+
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
 
@@ -68,7 +77,17 @@ require_once ("DB/DB.php");
         <div id="second-body" class="d-none">
             <hr class="rounded mt-5">
             <div class="row d-flex justify-content-between gap-3 mt-4">
-                <form action="#" method="POST" class="col-12 col-md-5">
+                <form action="/f1_project/controllers/orders/create.php" method="POST" class="col-12 col-md-5">
+
+                    <input type="hidden" name="ids" id="ids" value="" required>
+                    <input type="hidden" name="titles" id="titles" value="" required>
+                    <input type="hidden" name="teams" id="teams" value="" required>
+                    <input type="hidden" name="imgs" id="imgs" value="" required>
+                    <input type="hidden" name="quantities" id="quantities" value="" required>
+                    <input type="hidden" name="prices" id="prices" value="" required>
+                    <input type="hidden" name="sizes" id="sizes" value="XS" required>
+                    <input type="hidden" name="total" id="total" value="" required>
+
                     <button type="submit" class="mx-auto mx-md-0 btn btn-warning d-flex gap-2 hover-yellow">
                         <span class="material-symbols-outlined">credit_card</span>
                         <span class="text">Complete order</span>
@@ -76,7 +95,7 @@ require_once ("DB/DB.php");
                 </form>
                 <label class="col-12 col-md-5 text-center text-md-end">
                 <span>
-                    Total (<span id="count-items"></span>): <strong id="total-price"></strong>
+                    Total (<span id="count-items"></span>): <strong class="total-price"></strong>
                 </span>
                 </label>
             </div>
