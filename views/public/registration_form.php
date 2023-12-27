@@ -2,6 +2,7 @@
 <html lang="it">
 
 <head>
+    <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
     <title>Sign Up</title>
     <meta charset="UTF-8">
 
@@ -30,7 +31,6 @@
 <?php } ?>
 
 <?php
-if(session_status() == PHP_SESSION_NONE) session_start();
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
@@ -54,10 +54,11 @@ if (check_user_auth($user)) {
     <div class="flex-container d-flex justify-content-center">
         <?php
         if (isset($_SESSION["confirm_email"]) && !$_SESSION["confirm_email"]){?>
-            <div class="container-element">
+            <div class="container-element text">
                 <h1>Request received</h1>
                 <br>
-                <h3>Check your mailbox and confirm your email. Once confirmed, refresh this page and log in</h3>
+                <h3>Check your mailbox and confirm your email.</h3>
+                <h3>Once confirmed, refresh this page and log in</h3>
             </div>
         <?php }
         else if (isset($_SESSION["confirm_email"]) && $_SESSION["confirm_email"]){

@@ -3,6 +3,8 @@ require_once("../utility/error_handling.php");
 require_once ("../DB/DB.php");
 require_once ("auth.php");
 
+if (session_status() == PHP_SESSION_NONE) session_start();
+
 if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SESSION["tmp_email"]) && isset($_SESSION["tmp_pass"]) && isset($_SESSION["tmp_cpass"]) && isset($_SESSION["tmp_hpass"])) {
 
     $conn = DB::connect();

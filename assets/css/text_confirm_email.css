@@ -7,10 +7,14 @@ h1 {
 h3 {
     position: relative;
     text-align: center;
-    top:130px;
+    top:110px;
 }
 
 .container-element{
     top: 190px;
     height: 400px;
+}
+
+.text {
+    top: 100px;
 }

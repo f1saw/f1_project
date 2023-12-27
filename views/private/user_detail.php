@@ -7,11 +7,21 @@
     <link rel="stylesheet" href="/f1_project/assets/css/profile_style.css">
 
     <?php include("../partials/head.php"); ?>
+    <?php include("../partials/alert.php"); ?>
     <?php require_once("../../auth/auth.php"); ?>
     <?php require_once("../../utility/error_handling.php"); ?>
     <?php require_once("../../utility/utility_func.php"); ?>
     <?php require_once ("../../DB/DB.php"); ?>
 </head>
+
+<?php if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) && $_SESSION["success"]){ ?>
+<style>
+    .container-element{
+        height: 550px;
+        top: 55px;
+    }
+</style>
+<?php } ?>
 
 <body class="bg-dark">
 <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
@@ -24,11 +34,11 @@ if (check_user_auth($user)) {
 
     if(check_admin_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
-        $element = choose_correct_data($id);
+        $element = select_user($id);
         unset($id);
     }
     else{
-        $element = choose_correct_data(null);
+        $element = select_user(null);
     }
 
     if($element != null) {

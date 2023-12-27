@@ -11,9 +11,10 @@ SAW project about F1
 
 ## MAURI:
 - [ ] cercare per recupero pass, modifica pass,
-- [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
+- [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
+- [x] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
-- [ ] capire overflow su login e registrazione
+- [x] capire overflow su login e registrazione
 <hr>
 
 

@@ -3,6 +3,13 @@
     <main >
         <div id="bg-profile" class="flex-container d-flex justify-content-center" >
             <div id="profile-data" class="container-element">
+                <div style="margin-left: 10px; margin-right: 10px">
+                    <?php $function = "var x = document.getElementsByClassName('container-element')[0];
+                                       x.style.height = '480px';
+                                       x.style.top    = '100px';" ?>
+                    <?php err_msg_alert($function); ?>
+                    <?php succ_msg_alert($function); ?>
+                </div>
                 <div class="d-flex justify-content-center">
                     <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo $element['img_url']; else echo "/f1_project/images/default_img_profile.jpeg"; ?>"
                          alt="profile picture">
@@ -63,7 +70,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row mb-3 d-flex justify-content-center button">
+                <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                     <button onclick="my_function()" type="button" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Edit profile</button>
                 </div>
             </div>

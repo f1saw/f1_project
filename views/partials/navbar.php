@@ -54,7 +54,7 @@
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
                                     <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
                                 <?php } else{ ?>
-                                    <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
+                                    <img class="profile-img" src="/f1_project/assets/images/foto-profilo.jpg" alt="Profile">
                                 <?php }?>
 
                                 <span>Dashboard</span>

@@ -75,7 +75,6 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     }
     $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Ora prima di salvare nel database devo mandare una mail con un codice
     try {
         $subject = "Confirm email";
         $body = '
