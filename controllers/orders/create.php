@@ -73,8 +73,7 @@ if ($login_allowed) {
                 $body .= "${titles_array[$i]}, ${sizes_array[$i]}, ${quantities_array[$i]}, <img src='${imgs_array[$i]}' width='65px;' alt='product picture'>";
                 $body .= "<br>";
             }
-            // send_mail([$user["Users.email"]], $subject, $body);
-            send_mail(["mat.nac2002@icloud.com"], $subject, $body);
+            send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {
                 error("500", "conn_close()", "orders/create.php", "/f1_project/views/public/store/cart.php");
