@@ -54,6 +54,30 @@
     <?php err_msg_alert(); ?>
 
 
+
+
+    <style>
+        .modal * {
+            color: black !important;
+        }
+    </style>
+
+
+
+    <script>
+        /* $(".btn").on('click', event => {
+            console.log(event.target.id)
+        })
+
+        document.getElementById("exampleModal").addEventListener('show.bs.modal', function(event) {
+            console.log(event)
+        }) */
+    </script>
+
+
+
+
+
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
@@ -73,7 +97,6 @@
                 exit;
             }
             ?>
-
             <?php if ($num_products > 0) { ?>
 
                 <!-- TODO: https://stackoverflow.com/questions/30981765/how-to-divide-table-to-show-in-pages-the-table-data-is-filled-dynamically-with -->
@@ -95,17 +118,45 @@
                                                 <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                                                 <strong>€ <?php echo $int . "." . $dec ?></strong>
                                             </h5>
-                                            <span <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
-                                                <span <?php echo get_data_id($product); ?> class="btn-add-cart btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                                                    <span <?php echo get_data_id($product); ?> class="material-symbols-outlined">shopping_bag</span>
-                                                    <span <?php echo get_data_id($product); ?>>Add it!</span>
-                                                </span>
+                                            <span <?php echo get_data_id($product); ?> id="span-add-it-<?php echo $product["Products.id"]; ?>" class="btn-modal d-flex flex-row gap-2 pb-1 hover-red">
+                                                <button <?php echo get_data_id($product); ?> data-bs-toggle="modal" data-bs-target="#modal-<?php echo $product["Products.id"]; ?>" class="btn-add-cart btn-modal btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                                                    <span <?php echo get_data_id($product); ?> class="btn-modal material-symbols-outlined">shopping_bag</span>
+                                                    <span <?php echo get_data_id($product); ?> class="btn-modal">Add it!</span>
+                                                </button>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </a>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal-<?php echo $product["Products.id"]; ?>" tabindex="-1" aria-labelledby="modal-<?php echo $product["Products.id"]; ?>Label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Select size</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <?php $size = explode(";", $product["Products.size"]); ?>
+                                    <select id="s-size-<?php echo $product["Products.id"]; ?>" class="form-select rounded-pill" aria-label="Select size">
+                                        <option value="ns" class="option_invalid" selected>Select size</option>
+                                        <?php
+                                        foreach ($size as $s) {
+                                            echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="close-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="confirm-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 <?php } ?>
@@ -118,6 +169,12 @@
                     </span>
                 </div>
             <?php } ?>
+
+
+
+
+
+
         </div>
     </main>
 </body>

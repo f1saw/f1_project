@@ -1,6 +1,0 @@
-INSERT INTO products VALUES
-    (NULL, 'Scuderia Ferrari 2023 Team T-Shirt', 'T-Shirt scuderia', 7000, 'https://images.footballfanatics.com/scuderia-ferrari/scuderia-ferrari-2023-team-t-shirt_ss4_p-13368608+u-ya0zcr5gjt4kzyrcb08m+v-f28b0bcee21c492bbbd3d4f328095725.jpg?_hv=2&w=340', -1),
-    (NULL, 'Williams Racing 2023 Team Training Jersey', 'T-Shirt scuderia', 6300, 'https://images.footballfanatics.com/williams-racing/williams-racing-2023-team-training-jersey_ss4_p-13347536+u-z307bt1xq7pq1xg9mdee+v-b94565181e3844b39bf6262c2b23cf07.jpg?_hv=2&w=900', -1),
-    (NULL, 'BWT Alpine F1 Team 2023 Rain Jacket', 'Rain Jacket', 15000, 'https://images.footballfanatics.com/alpine/bwt-alpine-f1-team-2023-rain-jacket_ss4_p-13356064+u-qtm2exz2ygj7lm9hfw79+v-3c17c88bf0f04b65aba2e0e4ff6076e5.jpg?_hv=2&w=900', -1),
-    (NULL, 'BWT Alpine F1 Team 2023 T-Shirt', 'T-Shirt scuderia', 6000, 'https://images.footballfanatics.com/alpine/bwt-alpine-f1-team-2023-t-shirt-black_ss4_p-13356049+u-ard4u1pbo648p8gq5tyj+v-02154f1269b249dea98203e66488bdb5.jpg?_hv=2&w=900', -1),
-    (NULL, 'Mercedes AMG Petronas F1 2023 George Russell 1:5 Model Helmet', 'Mini helmet', 7000, 'https://images.footballfanatics.com/mercedes-amg-petronas-f1-team/mercedes-amg-petronas-f1-2023-george-russell-1:5-model-helmet_ss5_p-14420763+pv-1+u-agvz0jvxzwipldrshg2l+v-8kedsxhrouobi5m7hv3y.jpg?_hv=2&w=900', -1);
