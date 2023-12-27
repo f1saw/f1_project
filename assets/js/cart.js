@@ -15,11 +15,12 @@ const remove_on_click = (cart = curr_cart) => {
     $(".remove").click(event => {
         event.preventDefault();
         // Find ID to remove through the index of the "remove button" (e.g. "remove-7" refers to the item with ID 7)
-        const id_to_remove = event.target.id.split("-")[1]
+        const id_to_remove = event.target.id.split("-")[1];
+        const size_to_remove = event.target.id.split("-")[2];
         // Find product by ID the product to remove from current cart
         // splice(start, deleteCount)
         const index = cart.findIndex(item => {
-            return item.id === id_to_remove
+            return item.id === id_to_remove && item.size === size_to_remove;
         });
 
         cart[index].quantity--;
@@ -43,8 +44,8 @@ const update_info = (info, item) => {
     info.titles += item.title + "\t";
     info.teams += item.team_name + "\t";
     info.quantities += item.quantity + "\t";
-    info.sizes += /*item.size*/ "XS" + "\t";
-    info.imgs += item.img_url + "\t";
+    info.sizes += item.size + "\t";
+    info.imgs += item.img_url.split('\t')[0] + "\t";
     info.prices += item.price + "\t";
     info.total_price += (item.price * item.quantity);
 }
@@ -83,7 +84,7 @@ const render_cart = (cart = curr_cart) => {
             $("#cart-list").prepend(
                 $(`<div id='element-${item.id}' class='row d-flex justify-content-center gap-4 item'>` +
                         html_img(item.id, item.img_url) +
-                        html_description(item.id, item.title, item.team_name, item.price, item.quantity) +
+                        html_description(item.id, item.title, item.team_name, item.price, item.size, item.quantity) +
                         html_price(item.price) +
                         "<hr class='d-md-none rounded my-thick-grey'>" +
                     "</div>")
@@ -109,7 +110,7 @@ const html_img = (id, img_url) => {
             </div>`
 }
 
-const html_description = (id, title, team, price, quantity) => {
+const html_description = (id, title, team, price, size, quantity) => {
     return `<div class="col-12 col-md-4 text-center text-md-start">
                 <a href="/f1_project/views/public/store/product.php?id=${id}" target="_blank" class="link-product w-100 text-decoration-none text-light d-flex flex-column justify-content-between align-items-start">
                     <span class="mx-auto mx-md-0 w-100">
@@ -121,8 +122,10 @@ const html_description = (id, title, team, price, quantity) => {
                     <div class="w-100 d-flex justify-content-around justify-content-md-between align-items-center">
                         <div class="mt-3">
                             Quantity: <strong>${quantity}</strong>
+                            <br>
+                            Size: ${size.toUpperCase()}
                         </div>
-                        <button id="remove-${id}" class="remove bg-transparent border-0 p-0 text-info d-flex gap-2 mt-3">
+                        <button id="remove-${id}-${size.toLowerCase()}" class="remove bg-transparent border-0 p-0 text-info d-flex gap-2 mt-3">
                             <span class="material-symbols-outlined">delete</span>
                             Remove
                         </button>

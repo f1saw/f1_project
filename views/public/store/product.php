@@ -109,7 +109,7 @@ if (!$product) {
             <?php } ?>
             <?php if ($product["Products.size"]) { ?>
                 <?php $size = explode(";", $product["Products.size"]); ?>
-                <div>
+                <div class="d-flex flex-column justify-content-center flex-md-row align-md-items-center justify-content-md-start gap-md-3">
                     <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
                         <label for="s-size">Size: </label>
                         <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
@@ -120,6 +120,10 @@ if (!$product) {
                             }
                             ?>
                         </select>
+                    </div>
+                    <div id="select-info" class="d-none d-flex gap-2 mt-4 py-1">
+                        <span class="material-symbols-outlined"></span>
+                        <span class=""></span>
                     </div>
                 </div>
             <?php } ?>
@@ -141,7 +145,7 @@ if (!$product) {
                 <div class="accordion-item rounded-top">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Descrizione
+                            Description
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">

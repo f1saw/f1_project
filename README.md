@@ -39,6 +39,7 @@ SAW project about F1
 - [ ] Check code HTTP code errors
 - [ ] Generic error page
 - [ ] Renderizzare dashboard differenti in base al ruolo dell'utente
+- [ ] Textarea nei form attraverso libreria JS consigliata da Ribaudo
 
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...

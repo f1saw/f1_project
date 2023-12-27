@@ -46,7 +46,7 @@ require_once ("DB/DB.php");
     <?php err_msg_alert(); ?>
 
 
-    <main class="container-fluid mt-5">
+    <main class="container-fluid mt-0 mt-md-5">
 
         <div class="text-light">
             <span class="text-light h2 d-flex align-items-end gap-3">
@@ -85,7 +85,7 @@ require_once ("DB/DB.php");
                     <input type="hidden" name="imgs" id="imgs" value="" required>
                     <input type="hidden" name="quantities" id="quantities" value="" required>
                     <input type="hidden" name="prices" id="prices" value="" required>
-                    <input type="hidden" name="sizes" id="sizes" value="XS" required>
+                    <input type="hidden" name="sizes" id="sizes" value="" required>
                     <input type="hidden" name="total" id="total" value="" required>
 
                     <button type="submit" class="mx-auto mx-md-0 btn btn-warning d-flex gap-2 hover-yellow">

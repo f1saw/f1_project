@@ -28,7 +28,6 @@ if ($login_allowed) {
         $sizes = htmlentities($_POST["sizes"]);
         $total = htmlentities($_POST["total"]);
 
-
         /* DB */
         $conn = DB::connect("orders/create.php", "/f1_project/views/public/store/cart.php");
         $ids = $conn->real_escape_string($ids);
@@ -61,8 +60,8 @@ if ($login_allowed) {
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
                 DB::p_stmt_no_select($conn,
                     "INSERT INTO orders_products VALUES (?, ?, ?, ?, ?);",
-                    ["s", "i", "i", "i", "s"],
-                    [$order_id, $products_id_array[$i], $quantities_array[$i], $prices_array[$i], $sizes_array[$i]],
+                    ["s", "i", "s", "i", "i"],
+                    [$order_id, $products_id_array[$i], $sizes_array[$i], $quantities_array[$i], $prices_array[$i]],
                     "orders/create.php",
                     "/f1_project/views/public/store/cart.php");
             }
@@ -71,13 +70,17 @@ if ($login_allowed) {
             $subject = "Ready to goooo! You've just completed your order :)";
             $body = "";
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
+                $size = strtoupper($sizes_array[$i]);
                 [$int, $dec] = str2int_dec($prices_array[$i]);
-                $body .= "$titles_array[$i], $sizes_array[$i], [$quantities_array[$i]x <strong>$int.$dec €</strong>], <img src='$imgs_array[$i]' width='65px;' alt='product picture'>";
-                $body .= "<br>";
+                $body .= "$titles_array[$i]<br>";
+                $body .= "Size: $size<br>";
+                $body .= "[$quantities_array[$i]x <strong>$int.$dec &euro;</strong>]<br>";
+                $body .= "<img src='$imgs_array[$i]' width='65px;' alt='product picture'>";
+                $body .= "<hr>";
             }
 
             [$int, $dec] = str2int_dec($total);
-            $body .= "Total: <strong>$int.$dec €</strong>";
+            $body .= "Total: <strong>$int.$dec &euro;</strong>";
             send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {
@@ -89,7 +92,6 @@ if ($login_allowed) {
             $_SESSION["success_msg"] = "Order created successfully";
             header("Location: /f1_project/views/public/store/cart.php");
 
-            // TODO: mail di conferma (stesso layout di cart)
         } catch (Exception $e) {
             error("500", "generate_random_string(): $e", "orders/create.php", "/f1_project/views/public/store/cart.php");
         }
