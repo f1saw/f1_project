@@ -4,6 +4,7 @@
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 
+require_once ("utility/store.php");
 require_once ("utility/utility_func.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
@@ -70,9 +71,13 @@ if ($login_allowed) {
             $subject = "Ready to goooo! You've just completed your order :)";
             $body = "";
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
-                $body .= "${titles_array[$i]}, ${sizes_array[$i]}, ${quantities_array[$i]}, <img src='${imgs_array[$i]}' width='65px;' alt='product picture'>";
+                [$int, $dec] = str2int_dec($prices_array[$i]);
+                $body .= "$titles_array[$i], $sizes_array[$i], [$quantities_array[$i]x <strong>$int.$dec €</strong>], <img src='$imgs_array[$i]' width='65px;' alt='product picture'>";
                 $body .= "<br>";
             }
+
+            [$int, $dec] = str2int_dec($total);
+            $body .= "Total: <strong>$int.$dec €</strong>";
             send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {
