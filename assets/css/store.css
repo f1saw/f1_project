@@ -11,9 +11,24 @@
     color: white !important;
 }
 
+.modal-footer * {
+    color: white !important;
+}
+
+.modal-footer .my_close:hover {
+    background-color: white !important;
+    color: rgb(108,117,125) !important;
+}
+
+.modal-footer .my_confirm:hover {
+    background-color: white !important;
+    color: red !important;
+}
+
 #shop-by-team {
     background-color: rgba(231,227,224,.3);
 }
+
 #shop-by-team * {
     width: 60px;
 }

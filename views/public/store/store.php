@@ -53,31 +53,6 @@
 
     <?php err_msg_alert(); ?>
 
-
-
-
-    <style>
-        .modal * {
-            color: black !important;
-        }
-    </style>
-
-
-
-    <script>
-        /* $(".btn").on('click', event => {
-            console.log(event.target.id)
-        })
-
-        document.getElementById("exampleModal").addEventListener('show.bs.modal', function(event) {
-            console.log(event)
-        }) */
-    </script>
-
-
-
-
-
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
@@ -152,8 +127,8 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="close-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="confirm-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Save changes</button>
+                                    <button type="button" class="btn btn-secondary my_close" id="close-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger btn-reverse-color my_confirm" id="confirm-modal-<?php echo $product["Products.id"]; ?>" data-bs-dismiss="modal">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -169,11 +144,6 @@
                     </span>
                 </div>
             <?php } ?>
-
-
-
-
-
 
         </div>
     </main>
