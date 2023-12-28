@@ -26,7 +26,7 @@ if (check_admin_auth($user)) {
         $body = htmlentities($_POST["text"]);
 
         $conn = DB::connect("send_email.php", "/f1_project/views/private/newsletter/send_email.php");
-        [$num_users, $receivers_list] = DB::stmt_get_record_by_field($conn,
+        [$num_users, $recipients] = DB::stmt_get_record_by_field($conn,
             "SELECT email FROM users WHERE newsletter = 1;",
         "send_email.php",
         "/f1_project/views/private/newsletter/send_email.php");
@@ -37,11 +37,7 @@ if (check_admin_auth($user)) {
 
         try {
             $ini = parse_ini_file("config/keys.ini");
-            $bcc = [];
-            foreach ($receivers_list as $receiver) {
-                $bcc[] = $receiver["email"];
-            }
-            send_mail([$ini["g_email"]], $subject, $body, $bcc);
+            send_mail([$ini["g_email"]], $subject, $body, $recipients);
 
             $_SESSION["success"] = 1;
             $_SESSION["success_msg"] = "Email SENT successfully :)";

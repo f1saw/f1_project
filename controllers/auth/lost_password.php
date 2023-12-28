@@ -8,7 +8,7 @@ require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
 require_once ("auth/auth.php");
 
-const NEW_PASSWORD_LENGTH = 10;
+const NEW_PASSWORD_LENGTH = 5;
 
 [$login_allowed, $user] = check_cookie();
 if (!$login_allowed) {
@@ -36,7 +36,6 @@ if (!$login_allowed) {
         if ($user_db) {
             // EMAIL exists in DB
             // Generate new password and send it via mail
-
             try {
                 $new_password = generate_random_string(NEW_PASSWORD_LENGTH);
                 $hash_pwd = password_hash($new_password, PASSWORD_DEFAULT);

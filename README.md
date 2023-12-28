@@ -19,7 +19,7 @@ SAW project about F1
 
 
 ## MATTE:
-- **IMPORTANTE** => uniformo send_mail in newsletter con quella in utility_func! (controllo admin, lo faccio in newsletter)
+- **IMPORTANTE** => uniformo send_mail in cart branch!
 - [ ] carrello
 - [ ] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti

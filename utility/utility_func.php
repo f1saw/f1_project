@@ -78,10 +78,10 @@ require_once ('PHPMailer/src/Exception.php');
 require_once ('PHPMailer/src/PHPMailer.php');
 require_once ('PHPMailer/src/SMTP.php');
 /**
- * @param array $recipients : recipients email address (e.g. ["pippo@topolino.com", "pluto@topolino.com"])
+ * @param array $recipients : recipients email address (e.g. ["pippo@topolino.com", "pluto@topolino.com"] OR [["email" => "a@a.c"], ["email" => "b@b.c"]])
  * @param string $subject : email subject
  * @param string $body : email body (it can be HTML)
- * @param array $bcc : optional parameter to specify BCC (e.g. ["pippo@topolino.com", "pluto@topolino.com"])
+ * @param array $bcc : optional parameter to specify BCC (e.g. ["pippo@topolino.com", "pluto@topolino.com"] OR [["email" => "a@a.c"], ["email" => "b@b.c"]])
  * @return void
  * @throws Exception
  *
@@ -101,9 +101,9 @@ function send_mail(array $recipients, string $subject, string $body, array $bcc 
     $mail->Port = $ini["smtp_port"];
 
     // I send email from $ini["g_email"] to addresses stored in $to.
-    $mail->setFrom($ini["g_email"], $ini["g_name"]??null);
+    $mail->setFrom($ini["g_email"], $ini["g_name"]?? null);
     foreach ($recipients as $recipient) {
-        $mail->addAddress($recipient);
+        $mail->addAddress($recipient["email"]?? $recipient);
     }
     $mail->isHTML(true);
     $mail->Subject = $subject;
@@ -111,7 +111,7 @@ function send_mail(array $recipients, string $subject, string $body, array $bcc 
 
     // BCC implemented in order to respect privacy
     foreach ($bcc as $recipient) {
-        $mail->addBCC($recipient);
+        $mail->addBCC($recipient["email"]?? $recipient);
     }
 
     $mail->send();
