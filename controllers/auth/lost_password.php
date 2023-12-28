@@ -57,20 +57,20 @@ if (!$login_allowed) {
                 $body = "Your new credentials:<br>";
                 $body .= "EMAIL: $email<br>";
                 $body .= "New password: $new_password";
-                send_mail($user_db["email"], "F1 SAW: here's your new password!", $body);
+                send_mail([$user_db["email"]], "F1 SAW: here's your new password!", $body);
 
                 $_SESSION["success"] = 1;
                 $_SESSION["success_msg"] = "New password sent successfully!";
                 header("Location: /f1_project/views/public/login_form.php");;
                 exit;
             } catch (Exception $e) {
-                error("-1", "Exception: $e", "controllers/auth/lost_password..php", "/f1_project/views/public/auth/lost_password.php");
+                error("-1", "Exception: $e", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
                 exit;
             }
 
         } else {
             // EMAIL DOES NOT exists in DB
-            error("-1", "Email DOES NOT exists.", "controllers/auth/lost_password..php", "/f1_project/views/public/auth/lost_password.php");
+            error("-1", "Email DOES NOT exists.", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
             exit;
         }
 
@@ -78,7 +78,7 @@ if (!$login_allowed) {
 
 
     } else {
-        error("401", "Fields not provided.", "controllers/auth/lost_password..php", "/f1_project/views/public/auth/lost_password.php");
+        error("401", "Fields not provided.", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
         exit;
     }
 } else {

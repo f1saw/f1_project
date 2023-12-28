@@ -19,6 +19,7 @@ SAW project about F1
 
 
 ## MATTE:
+- **IMPORTANTE** => uniformo send_mail in newsletter con quella in utility_func! (controllo admin, lo faccio in newsletter)
 - [ ] carrello
 - [ ] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
@@ -26,6 +27,9 @@ SAW project about F1
 <hr>
 
 <br><br><br>
+
+## NOTES:
+- Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 
 ## ALL:
 - [ ] Proteggere file privati da accesso web (es. keys.ini)

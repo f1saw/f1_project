@@ -1,17 +1,7 @@
 <?php
-/** Service provided by https://github.com/PHPMailer/PHPMailer */
-
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if (session_status() == PHP_SESSION_NONE) session_start();
-
-$ini = parse_ini_file("config/keys.ini");
-
-use PHPMailer\PHPMailer\Exception;
-
-require_once ('PHPMailer/src/Exception.php');
-require_once ('PHPMailer/src/PHPMailer.php');
-require_once ('PHPMailer/src/SMTP.php');
 
 require_once ("auth/auth.php");
 require_once ("utility/error_handling.php");
@@ -46,7 +36,12 @@ if (check_admin_auth($user)) {
         }
 
         try {
-            send_mail($ini["g_email"], $subject, $body, $receivers_list );
+            $ini = parse_ini_file("config/keys.ini");
+            $bcc = [];
+            foreach ($receivers_list as $receiver) {
+                $bcc[] = $receiver["email"];
+            }
+            send_mail([$ini["g_email"]], $subject, $body, $bcc);
 
             $_SESSION["success"] = 1;
             $_SESSION["success_msg"] = "Email SENT successfully :)";

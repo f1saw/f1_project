@@ -49,7 +49,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
         || $password == ""
         || $password_confirm == ""
         /*|| $date_of_birth == "" || $date_of_birth == " "*/) {
-        error("-1", "Empty input fields.", "registration.php", "/f1_project/views/public/registration_form.php");
+        error("-1", "Empty input fields.", "registration_email.php", "/f1_project/views/public/registration_form.php");
         exit;
     }
 
@@ -57,7 +57,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     // REGEX EMAIL
     /* https://en.wikipedia.org/wiki/Email_address */
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        error("-1", "EMAIL pattern NOT valid.", "registration.php", "/f1_project/views/public/registration_form.php");
+        error("-1", "EMAIL pattern NOT valid.", "registration_email.php", "/f1_project/views/public/registration_form.php");
         exit;
     }
 
@@ -70,26 +70,27 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
 
     /* -- ERROR | passwords (mis)matching -- */
     if ($password != $password_confirm) {
-        error("-1", "Mismatched passwords.", "registration.php", "/f1_project/views/public/registration_form.php");
+        error("-1", "Mismatched passwords.", "registration_email.php", "/f1_project/views/public/registration_form.php");
         exit;
     }
     $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
     try {
         $subject = "Confirm email";
-        $body = '
+        $body = "
                     <!DOCTYPE html>
-                    <html lang="en">
+                    <html lang='en'>
                     
                     <head>
                         <title>Confirm email</title>
-                        <meta charset="UTF-8">
+                        <meta charset='UTF-8'>
                     </head>
                     <body>
-                    <p>Hi, we have received your request to register on our site. Please confirm your email to complete registration: <a href="http://localhost:63342/DB.php/auth/confirm_email.php">confirm email</p>
+                    <p>Hi $first_name! We have just received your request to register on our site. Please confirm your email to complete registration: <a href='http://localhost:63342/f1_project/auth/confirm_email.php'>confirm email</p>
                     </body>
-                    ';
-        send_mail($email, $subject, $body);
+                    ";
+        send_mail([$email], $subject, $body);
+        $_SESSION["confirm_email"] = false;
 
         // I need to temporarily keep the recording values in memory
         $_SESSION["tmp_fname"] = $first_name;
@@ -104,11 +105,11 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
         header("location: /f1_project/views/public/registration_form.php");
 
     } catch (Exception $e) {
-        error("500", "PHPMailer exception: $e", "send_email.php", "/f1_project/views/private/newsletter/newsletter.php");
+        error("500", "PHPMailer exception: $e", "registration_email.php", "/f1_project/views/public/registration_form.php");
         exit;
     }
 
 } else {
-    error("-1", "Input fields NOT provided.", "registration.php", "/f1_project/views/public/registration_form.php");
+    error("-1", "Input fields NOT provided.", "registration_email.php", "/f1_project/views/public/registration_form.php");
     exit;
 }

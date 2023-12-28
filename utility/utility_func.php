@@ -58,7 +58,7 @@ function select_user($id) : array{
 }
 
 /**
- * @throws Exception
+ * @throws Exception|\Exception
  */
 function generate_random_string($length): string {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -77,13 +77,20 @@ use PHPMailer\PHPMailer\Exception;
 require_once ('PHPMailer/src/Exception.php');
 require_once ('PHPMailer/src/PHPMailer.php');
 require_once ('PHPMailer/src/SMTP.php');
-// $BCC must be an associative array with email field
 /**
+ * @param array $recipients : recipients email address (e.g. ["pippo@topolino.com", "pluto@topolino.com"])
+ * @param string $subject : email subject
+ * @param string $body : email body (it can be HTML)
+ * @param array $bcc : optional parameter to specify BCC (e.g. ["pippo@topolino.com", "pluto@topolino.com"])
+ * @return void
  * @throws Exception
+ *
+ * Service provided by https://github.com/PHPMailer/PHPMailer
  */
-function send_mail($destination_address, $subject, $body, $BCC = null): void {
+function send_mail(array $recipients, string $subject, string $body, array $bcc = []): void {
     $ini = parse_ini_file("config/keys.ini");
 
+    // 'true' needed to set exceptions
     $mail = new PHPMailer(true);
     $mail->isSMTP(); // "Send messages using SMTP"
     $mail->Host = $ini["smtp_host"];
@@ -93,19 +100,18 @@ function send_mail($destination_address, $subject, $body, $BCC = null): void {
     $mail->SMTPSecure = $ini["smtp_secure"];
     $mail->Port = $ini["smtp_port"];
 
-    // I send email from $ini["g_email"] to itself.
-    // The receivers will be pushed in the BCC in order to respect their privacy
-    $mail->setFrom($ini["g_email"]);
-    $mail->addAddress($destination_address);
+    // I send email from $ini["g_email"] to addresses stored in $to.
+    $mail->setFrom($ini["g_email"], $ini["g_name"]??null);
+    foreach ($recipients as $recipient) {
+        $mail->addAddress($recipient);
+    }
     $mail->isHTML(true);
     $mail->Subject = $subject;
     $mail->Body = $body;
-    $_SESSION["confirm_email"] = false;
 
-    if($BCC != null){
-        foreach ($BCC as $receiver) {
-            $mail->addBCC($receiver["email"]);
-        }
+    // BCC implemented in order to respect privacy
+    foreach ($bcc as $recipient) {
+        $mail->addBCC($recipient);
     }
 
     $mail->send();
