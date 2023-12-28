@@ -5,7 +5,7 @@ $().ready(() => {
     $(".lds-ring-container").addClass("d-none");
     $("#cart-list").removeClass("d-none");
     window.addEventListener('storage', function() {
-        const cart = JSON.parse(localStorage.getItem("cart"));
+        const cart = JSON.parse(localStorage.getItem(`cart-${user_id}`));
         render_cart(cart);
     })
 })
@@ -32,7 +32,7 @@ const remove_on_click = (cart = curr_cart) => {
         }), 1); */
 
         // Set new current cart in LocalStorage and render changes
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem(`cart-${user_id}`, JSON.stringify(cart));
         const items_cnt = items_cart(cart);
         $("#cart-notification-dot").text((items_cnt > 0)? items_cnt:"");
         render_cart(cart);

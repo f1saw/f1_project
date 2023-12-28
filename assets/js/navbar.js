@@ -8,20 +8,21 @@ const items_cart = cart => {
 }
 
 const cart_notification_dot = $("#cart-notification-dot");
-const curr_cart = JSON.parse(localStorage.getItem("cart"))
+const user_id = $("#user-id").text()
+const curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
 const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
 cart_notification_dot.text(text)
 
 $(() => {
     window.addEventListener('storage', function() {
-        const curr_cart = JSON.parse(localStorage.getItem("cart"))
+        const curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
         const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
         cart_notification_dot.text(text)
     })
 })
 
 const onConfirm = (event, size_param = null) => {
-    let curr_cart = JSON.parse(localStorage.getItem("cart"))
+    let curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
     if (!curr_cart) curr_cart = []
 
     const size = size_param?? $("#s-size").val();
@@ -47,7 +48,7 @@ const onConfirm = (event, size_param = null) => {
         }
 
         console.log(curr_cart)
-        localStorage.setItem("cart", JSON.stringify(curr_cart))
+        localStorage.setItem(`cart-${user_id}`, JSON.stringify(curr_cart))
 
         cart_notification_dot.text(items_cart(curr_cart));
 

@@ -66,6 +66,7 @@
                                 <?php }?>
 
                                 <span>Dashboard</span>
+                                <label id="user-id" class="d-none"><?php echo $_SESSION["id"] ?></label>
                             </a>
                         </li>
                         <li class="nav-item">
