@@ -61,7 +61,10 @@ if (!$conn->close()) {
 
         <div class="flex-container d-flex flex-column justify-content-center align-items-center mt-3 mt-md-5">
             <div class="container-element col-12 col-md-9">
-                <h2 class="mb-4 mb-md-5 text-start">Your orders</h2>
+                <div class="mb-4 mb-md-5 ">
+                    <h2 class="text-start">Your orders</h2>
+                    <span>(same <strong>#order</strong> means the items are part of the same order)</span>
+                </div>
 
                 <?php if ($num_orders > 0) { ?>
 
@@ -121,7 +124,7 @@ if (!$conn->close()) {
                                 </td>
                                 <td class='text-center'>
                                     <?php [$int, $dec] = str2int_dec($order["Orders_Products.unit_price"]  * $order["Orders_Products.quantity"]); ?>
-                                    € <?php echo $int . "." . $dec ?>
+                                    <strong><?php echo $int . "." . $dec ?></strong> €
                                 </td>
                             </tr>
                         <?php } ?>

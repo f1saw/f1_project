@@ -19,11 +19,12 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] carrello
-- [X] html dinamico con ciclo index
+- [ ] Visualizzazione limitata di 10 in 10 dello Store (vedi note iPhone)
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] link to store management (all, create, edit)
+- [X] carrello
+- [X] html dinamico con ciclo index
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 

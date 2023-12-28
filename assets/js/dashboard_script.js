@@ -30,3 +30,7 @@ function goToOrders(){
  function goToTable(){
      window.location.href = "/f1_project/views/private/table_users.php"
  }
+
+ function goToStoreManagement() {
+    window.location.href = "/f1_project/views/private/store/all.php"
+ }
