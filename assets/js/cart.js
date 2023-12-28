@@ -93,7 +93,7 @@ const render_cart = (cart = curr_cart) => {
         // Add event listener on "click" to each .remove button
         remove_on_click(cart);
         update_input_fields(info);
-        const curr_cart_length = cart.length;
+        const curr_cart_length = items_cart(curr_cart);
         $("#count-items").text(curr_cart_length + ` product${curr_cart_length > 1? "s":""}`)
 
     } else {
