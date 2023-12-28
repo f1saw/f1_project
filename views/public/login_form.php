@@ -90,7 +90,7 @@ if (check_user_auth($user)) {
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 d-flex flex-row gap-1 hover-red text-box">
-                            <a href="lost_password_form.php" class="text-white text-decoration-none my_outline_animation mx-1 d-flex align-items-center justify-content-start gap-2 py-2">
+                            <a href="/f1_project/views/public/auth/lost_password.php" class="text-white text-decoration-none my_outline_animation mx-1 d-flex align-items-center justify-content-start gap-2 py-2">
                                 <span style="margin-left: -5px" class="material-symbols-outlined">key_off</span>
                                 <span>Password dimenticata<strong> ?</strong></span>
                             </a>

@@ -57,10 +57,31 @@ function select_user($id) : array{
     return $element;
 }
 
+/**
+ * @throws Exception
+ */
+function generate_random_string($length): string {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters_length = strlen($characters);
+    $random_string = "";
+    for ($i = 0; $i < $length; $i++) {
+        $random_string .= $characters[random_int(0, $characters_length - 1)];
+    }
+    return $random_string;
+}
+
+
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once ('PHPMailer/src/Exception.php');
+require_once ('PHPMailer/src/PHPMailer.php');
+require_once ('PHPMailer/src/SMTP.php');
 // $BCC must be an associative array with email field
-function send_mail($destination_address, $subject, $body, $BCC = null){
+/**
+ * @throws Exception
+ */
+function send_mail($destination_address, $subject, $body, $BCC = null): void {
     $ini = parse_ini_file("config/keys.ini");
 
     $mail = new PHPMailer(true);
