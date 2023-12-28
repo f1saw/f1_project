@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script> $(document).ready( function () { $('#table').DataTable(); }); </script>
+    <script> $(document).ready( function () { $('#table').DataTable({ order: [[0, 'desc'] ]}); }); </script>
 </head>
 
 <body class="vh-100 dark">
@@ -40,7 +40,10 @@ set_session($user); ?>
             <?php
             $conn = DB::connect();
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-                "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.name AS 'Teams.name' FROM Products JOIN Teams ON Products.team_id = Teams.id;",
+                "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
+                            Teams.name AS 'Teams.name' 
+                        FROM Products JOIN Teams ON Products.team_id = Teams.id
+                        ORDER BY Products.id DESC;",
                 "store/all.php",
                 "/f1_project/views/private/dashboard.php");
             if (!$conn->close()) {

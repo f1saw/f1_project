@@ -25,6 +25,10 @@
     color: red !important;
 }
 
+.my-disabled {
+    background-color: black;
+}
+
 #shop-by-team {
     background-color: rgba(231,227,224,.3);
 }

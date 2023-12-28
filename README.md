@@ -19,18 +19,21 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] Visualizzazione limitata di 10 in 10 dello Store (vedi note iPhone)
-- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
-- [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
-- [ ] link to store management (all, create, edit)
+- [ ] BUG: if you specify only the second image of a product, it will be considered if there was a first one
+- [X] Visualizzazione limitata di 10 in 10 dello Store (vedi note iPhone)
+- [X] link to store management (all, create, edit)
 - [X] carrello
 - [X] html dinamico con ciclo index
+- [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
+- [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
+- [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
 <br><br><br>
 
 ## ALL:
+- [ ] Footer
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
 - [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
