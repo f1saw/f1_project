@@ -151,9 +151,13 @@ if (!$conn->close()) {
         </div>
 
         <div class="page-selector d-flex justify-content-center align-items-center gap-3 py-5">
-            <button class="btn btn-primary" id="prev-page">prev</button>
-            <button class="btn btn-primary" id="curr-page">1</button>
-            <button class="btn btn-primary" id="next-page">next</button>
+            <button class="btn btn-navigate-page d-flex justify-content-center align-items-center" id="prev-page">
+                <span class="material-symbols-outlined text-danger">fast_rewind</span>
+            </button>
+            <button class="btn btn-outline-danger btn-navigate-page" id="curr-page">1</button>
+            <button class="btn btn-navigate-page d-flex justify-content-center align-items-center" id="next-page">
+                <span class="material-symbols-outlined text-danger">fast_forward</span>
+            </button>
         </div>
     </main>
 </body>

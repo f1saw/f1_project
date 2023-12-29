@@ -6,11 +6,11 @@ const render_products = (lower, upper) => {
     const products = $(".product").toArray();
     const prev_btn = $("#prev-page");
     const next_btn = $("#next-page");
-    prev_btn.removeClass("my-disabled");
-    next_btn.removeClass("my-disabled");
+    prev_btn.removeClass("my-disabled").attr("disabled", false);
+    next_btn.removeClass("my-disabled").attr("disabled", false);
 
-    if (lower === 0) prev_btn.addClass("my-disabled");
-    if (upper >= products.length) next_btn.addClass("my-disabled");
+    if (lower === 0) prev_btn.addClass("my-disabled").attr("disabled", true);
+    if (upper >= products.length) next_btn.addClass("my-disabled").attr("disabled", true);
 
     products.forEach((item, index) => {
         if (index >= lower && index <= upper) {
@@ -24,15 +24,19 @@ const render_products = (lower, upper) => {
 $("#prev-page").on('click', () => {
     const curr_page_btn = $("#curr-page");
     const curr_page = curr_page_btn.text();
-    render_products(ITEMS_PER_PAGE * (curr_page*1 - 2), ITEMS_PER_PAGE * (curr_page*1 - 1) - 1);
-    curr_page_btn.text(curr_page*1 - 1);
+    if (curr_page > 1) {
+        render_products(ITEMS_PER_PAGE * (curr_page*1 - 2), ITEMS_PER_PAGE * (curr_page*1 - 1) - 1);
+        curr_page_btn.text(curr_page*1 - 1);
+    }
 })
 
 $("#next-page").on('click', () => {
     const curr_page_btn = $("#curr-page");
     const curr_page = curr_page_btn.text();
-    render_products(ITEMS_PER_PAGE * curr_page, ITEMS_PER_PAGE * (curr_page*1 + 1) - 1);
-    curr_page_btn.text(curr_page*1 + 1);
+    if (curr_page < $(".product").toArray().length / ITEMS_PER_PAGE) {
+        render_products(ITEMS_PER_PAGE * curr_page, ITEMS_PER_PAGE * (curr_page*1 + 1) - 1);
+        curr_page_btn.text(curr_page*1 + 1);
+    }
 })
 
 $(() => {

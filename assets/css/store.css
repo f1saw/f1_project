@@ -25,8 +25,18 @@
     color: red !important;
 }
 
-.my-disabled {
-    background-color: black;
+.btn-navigate-page {
+    color: rgb(220,53,69);
+}
+
+.my-disabled, .my-disabled:hover {
+    background-color: transparent;
+    color: transparent;
+    border: 0;
+}
+
+#prev-page:hover, #next-page:hover {
+    background-color: white;
 }
 
 #shop-by-team {
