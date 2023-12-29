@@ -42,13 +42,6 @@ if ($login_allowed) {
         try {
             $order_id = generate_random_string(29);
 
-            DB::p_stmt_no_select($conn,
-                "INSERT INTO orders VALUES (?, ?, ?, ?, ?);",
-                ["s", "i", "s", "s", "i"],
-                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d'), "Via ...", $total],
-                "orders/create.php",
-                "/f1_project/views/public/store/cart.php");
-
             $products_id_array = explode("\t", $ids);
             $quantities_array = explode("\t", $quantities);
             $prices_array = explode("\t", $prices);
@@ -57,13 +50,32 @@ if ($login_allowed) {
             $imgs_array = explode("\t", $imgs);
             $titles_array = explode("\t", $titles);
             $teams_array = explode("\t", $teams);
+
+            // Check if every product in the cart is still available, if NOT I cannot create and order id
+            /* for ($i = 0; $i < count($products_id_array) - 1; $i++) {
+                $product = DB::get_record_by_field($conn,
+                    "SELECT id FROM products WHERE id = ?;",
+                    ["i"],
+                    $products_id_array[$i],
+                "orders\create.php",
+                    "/f1_project/views/public/store/cart.php");
+            } */
+
+            DB::p_stmt_no_select($conn,
+                "INSERT INTO orders VALUES (?, ?, ?, ?, ?);",
+                ["s", "i", "s", "s", "i"],
+                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d'), "Via ...", $total],
+                "orders/create.php",
+                "/f1_project/views/public/store/cart.php");
+
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
                 DB::p_stmt_no_select($conn,
                     "INSERT INTO orders_products VALUES (?, ?, ?, ?, ?);",
                     ["s", "i", "s", "i", "i"],
                     [$order_id, $products_id_array[$i], $sizes_array[$i], $quantities_array[$i], $prices_array[$i]],
                     "orders/create.php",
-                    "/f1_project/views/public/store/cart.php");
+                    "/f1_project/views/public/store/cart.php",
+                    $order_id);
             }
 
 

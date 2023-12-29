@@ -66,8 +66,8 @@ class DB {
         return [$res->num_rows, $res->fetch_all(MYSQLI_ASSOC)];
     }
 
-    public static function p_stmt_no_select($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = ""): void {
-        $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error);
+    public static function p_stmt_no_select($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = "", $order_delete_id = null): void {
+        $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error, $order_delete_id);
 
         if (!$stmt->close()) {
             error("500", "stmt_close error: $stmt->error", $source, $redirect_error);
@@ -75,7 +75,7 @@ class DB {
         }
     }
 
-    public static function p_stmt_bind_execute($conn, $query, $type_params, $params, $source = "", $redirect_error  = "") {
+    public static function p_stmt_bind_execute($conn, $query, $type_params, $params, $source = "", $redirect_error  = "", $order_delete_id = null) {
         $s_type_params = implode("", $type_params);
 
         if (!$stmt = $conn->prepare($query)) {
@@ -87,7 +87,9 @@ class DB {
             exit;
         }
         if (!$stmt->execute()) {
-            error("500", "stmt_execute error: $stmt->error", $source, $redirect_error);
+            if ($order_delete_id)
+                DB::stmt_no_select($conn, "DELETE FROM orders WHERE id = '$order_delete_id';", "DB.php", "/f1_project/views/public/store/cart.php");
+            error("500", "stmt_execute error: $stmt->error", $source, $redirect_error, $order_delete_id?"Something went wrong! Maybe one of your products is not available anymore.":null);
             exit;
         }
         return $stmt;

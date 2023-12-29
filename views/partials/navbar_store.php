@@ -55,7 +55,8 @@
                                 <span>Registration</span>
                             </a>
                         </li>
-                    <?php } else { ?>
+                    <?php } else {
+                        set_session($user);?>
                         <li class="nav-item">
                             <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 

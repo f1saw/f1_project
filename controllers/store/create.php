@@ -24,7 +24,8 @@ if (check_admin_auth($user)) {
             $img_url[0] = $_POST["img_url_1"]? htmlentities($_POST["img_url_1"]):"";
         }
         if (isset($_POST["img_url_2"])) {
-            $img_url[1] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
+            $index = !($img_url[0] === "");
+            $img_url[$index] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
         }
         $team_id = isset($_POST["team_id"])? htmlentities($_POST["team_id"]) : null;
         $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
