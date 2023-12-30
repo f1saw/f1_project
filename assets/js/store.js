@@ -41,6 +41,7 @@ $("#next-page").on('click', () => {
 
 $(() => {
     render_products(LOWER_BOUND, UPPER_BOUND);
+    $(".lds-ring-container").addClass("d-none")
 });
 
 

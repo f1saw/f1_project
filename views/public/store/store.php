@@ -45,6 +45,7 @@ if (!$conn->close()) {
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/loading.css">
 </head>
 
 <body>
@@ -52,6 +53,8 @@ if (!$conn->close()) {
 
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
+
+
 
     <div class="w-100 d-flex flex-column gap-3">
         <h3 class="d-flex justify-content-center">
@@ -67,6 +70,11 @@ if (!$conn->close()) {
     </div>
 
     <?php err_msg_alert(); ?>
+
+    <!-- Loader -->
+    <div class="mx-auto lds-ring-container py-2">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
 
     <main class="home-cards mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
