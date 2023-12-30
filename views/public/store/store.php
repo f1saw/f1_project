@@ -45,7 +45,6 @@ if (!$conn->close()) {
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/loading.css">
 </head>
 
 <body>
@@ -54,8 +53,7 @@ if (!$conn->close()) {
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
 
-
-
+    <!-- Filter by team -->
     <div class="w-100 d-flex flex-column gap-3">
         <h3 class="d-flex justify-content-center">
             Shop by Team
@@ -71,17 +69,14 @@ if (!$conn->close()) {
 
     <?php err_msg_alert(); ?>
 
-    <!-- Loader -->
-    <div class="mx-auto lds-ring-container py-2">
-        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    </div>
+    <!-- Loading circle -->
+    <?php include ("views/partials/loading.php"); ?>
 
     <main class="home-cards mt-5">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-4">
 
             <?php if ($num_products > 0) { ?>
 
-                <!-- TODO: https://stackoverflow.com/questions/30981765/how-to-divide-table-to-show-in-pages-the-table-data-is-filled-dynamically-with -->
                 <?php $i = 0; ?>
                 <?php foreach ($products as $product) { ?>
 
@@ -142,8 +137,8 @@ if (!$conn->close()) {
                         </div>
                     </div>
 
-                <?php
-                $i++;
+                    <?php
+                    $i++;
                 }
                 ?>
 

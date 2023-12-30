@@ -20,7 +20,6 @@ require_once ("DB/DB.php");
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/loading.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store/cart.css">
 
@@ -57,10 +56,8 @@ require_once ("DB/DB.php");
 
         <hr class="mb-5 rounded">
 
-        <!-- Loader -->
-        <div class="mx-auto lds-ring-container">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-        </div>
+        <!-- Loading circle -->
+        <?php include ("views/partials/loading.php"); ?>
 
         <!-- PRODUCTS in CART -->
         <div id="cart-list" class="d-none row d-flex justify-content-center gap-4 item"></div>
@@ -77,7 +74,7 @@ require_once ("DB/DB.php");
         <div id="second-body" class="d-none">
             <hr class="rounded mt-5">
             <div class="row d-flex justify-content-between gap-3 mt-4">
-                <form action="/f1_project/controllers/orders/create.php" method="POST" class="col-12 col-md-5">
+                <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-md-5">
 
                     <input type="hidden" name="ids" id="ids" value="" required>
                     <input type="hidden" name="titles" id="titles" value="" required>
@@ -93,6 +90,10 @@ require_once ("DB/DB.php");
                         <span class="text">Complete order</span>
                     </button>
                 </form>
+
+                <!-- Loading circle -->
+                <?php include ("views/partials/loading.php"); ?>
+
                 <label class="col-12 col-md-5 text-center text-md-end">
                     <span>
                         Total (<span id="count-items"></span>): <strong class="total-price"></strong>

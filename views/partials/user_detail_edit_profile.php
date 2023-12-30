@@ -79,7 +79,11 @@
                 <div class="row mb-3 d-flex justify-content-center">
                     <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">Confirm</button>
                 </div>
+                <!-- Loading circle -->
+                <?php include ("views/partials/loading.php"); ?>
             </form>
         </div>
     </main>
 </div>
+
+<script src="/f1_project/assets/js/users/edit.js"></script>

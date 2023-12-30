@@ -10,6 +10,12 @@ $().ready(() => {
     })
 })
 
+/** Loading effect after confirming order */
+$("#form-loading").on('submit', event => {
+    // :eq(1) used to select the second loading circle
+    $(".lds-ring-container").eq(1).removeClass("d-none");
+})
+
 /** Remove item from cart (LocalStorage) */
 const remove_on_click = (cart = curr_cart) => {
     $(".remove").click(event => {
@@ -93,7 +99,7 @@ const render_cart = (cart = curr_cart) => {
         // Add event listener on "click" to each .remove button
         remove_on_click(cart);
         update_input_fields(info);
-        const curr_cart_length = items_cart(curr_cart);
+        const curr_cart_length = items_cart(cart);
         $("#count-items").text(curr_cart_length + ` product${curr_cart_length > 1? "s":""}`)
 
     } else {

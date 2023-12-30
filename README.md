@@ -33,6 +33,7 @@ SAW project about F1
 <br><br><br>
 
 ## ALL:
+- [ ] Difference between !...! and /.../ in regex (fare test) 
 - [ ] Footer
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")

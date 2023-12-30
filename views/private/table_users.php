@@ -1,17 +1,23 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once ("DB/DB.php");
+require_once("views/partials/alert.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
     <title>Admin | User</title>
     <meta charset="UTF-8">
 
-    <?php include("../partials/head.php"); ?>
-    <?php require_once("../../auth/auth.php"); ?>
-    <?php require_once("../../utility/error_handling.php"); ?>
-    <?php require_once ("../../DB/DB.php"); ?>
-    <?php require_once("../partials/alert.php") ?>
+    <?php include("views/partials/head.php"); ?>
 
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/table_style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script> $(document).ready( function () { $('#table').DataTable(); }); </script>
@@ -26,7 +32,7 @@
         set_session($user); ?>
 
     <div class="container-fluid">
-        <?php include("../partials/navbar.php") ?>
+        <?php include("views/partials/navbar.php") ?>
 
         <div class="flex-container d-flex flex-column justify-content-center align-items-center mt-5">
 
@@ -46,10 +52,15 @@
 
                 ?>
 
+                <!-- Loading circle -->
+                <?php include ("views/partials/loading.php"); ?>
+
+
                 <?php if ($num_users > 0) { ?>
 
                     <?php succ_msg_alert(); ?>
                     <?php err_msg_alert(); ?>
+
                     <table id="table" class="display">
                         <thead>
                             <tr>
@@ -92,7 +103,7 @@
                                     } ?>
                                 </td>
 
-                                <td class='text-center'>
+                                <td class='text-center' id="delete-loading">
                                     <a href='user_delete.php/?id=<?php echo $user["id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                         <span class='material-icons text-danger'>delete</span>
                                     </a>
@@ -110,6 +121,8 @@
                     </span>
                     </div>
                 <?php } ?>
+
+
             </div>
             <!-- TODO: just for testing -->
             <?php session_destroy(); ?>
@@ -120,5 +133,7 @@
             exit;
         } ?>
     </div>
+
+<script src="/f1_project/assets/js/loading-crud.js"></script>
 </body>
 </html>

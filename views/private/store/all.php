@@ -1,19 +1,21 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once ("utility/store.php");
+require_once ("DB/DB.php");
+require_once("views/partials/alert.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
     <title>Admin | Store</title>
     <meta charset="UTF-8">
 
-    <?php
-    if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-        error("500", "set_include_path()");
-    ?>
     <?php include("views/partials/head.php"); ?>
-    <?php require_once("auth/auth.php"); ?>
-    <?php require_once("utility/error_handling.php"); ?>
-    <?php require_once ("utility/store.php") ?>
-    <?php require_once ("DB/DB.php"); ?>
-    <?php require_once("views/partials/alert.php") ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
@@ -107,8 +109,8 @@ set_session($user); ?>
                                 ?>
                             </td>
 
-                            <td class='text-center'>
-                                <a href='../../../controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
+                            <td class='text-center' id="delete-loading">
+                                <a href='/f1_project/controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                     <span class='material-icons text-danger'>delete</span>
                                 </a>
                             </td>
@@ -134,6 +136,9 @@ set_session($user); ?>
                     </span>
                 </div>
             <?php } ?>
+
+            <!-- Loading circle -->
+            <?php include ("views/partials/loading.php"); ?>
         </div>
         <!-- TODO: just for testing -->
         <?php session_destroy(); ?>
@@ -144,5 +149,7 @@ set_session($user); ?>
         exit;
     } ?>
 </div>
+
+<script src="/f1_project/assets/js/loading-crud.js"></script>
 </body>
 </html>

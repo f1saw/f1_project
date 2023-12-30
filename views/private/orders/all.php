@@ -71,6 +71,9 @@ if (!$conn->close()) {
                     <?php succ_msg_alert(); ?>
                     <?php err_msg_alert(); ?>
 
+                    <!-- Loading circle -->
+                    <?php include ("views/partials/loading.php"); ?>
+
                     <table id="table" class="display">
                         <thead>
                         <tr>
@@ -143,5 +146,7 @@ if (!$conn->close()) {
             <?php session_destroy(); ?>
         </div>
     </div>
+
+<script src="/f1_project/assets/js/store/order.js"></script>
 </body>
 </html>
