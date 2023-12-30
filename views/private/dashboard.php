@@ -28,7 +28,8 @@
 
                 <div class="flex-slide table-users">
                     <div class="flex-title">Table</div>
-                    <div onclick="goToTable()" class="flex-about"><p class="text-center">Click here to view all users</p></div>
+                    <div onclick="goToTable()" class="flex-about mb-2"><p class="text-center">Click here to view all users</p></div>
+                    <div onclick="goToStoreManagement()" class="flex-about mt-2"><p class="text-center">Click here to manage the store</p></div>
                 </div>
 
                 <div class="flex-slide product">

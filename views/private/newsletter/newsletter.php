@@ -17,6 +17,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
     <?php include("views/partials/head.php"); ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/loading.css">
     <link rel="stylesheet" href="/f1_project/assets/css/admin/newsletter.css">
     <script src="/f1_project/assets/js/newsletter.js" defer></script>
 </head>

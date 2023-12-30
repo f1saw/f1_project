@@ -1,25 +1,27 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once ("utility/store.php");
+require_once ("DB/DB.php");
+require_once("views/partials/alert.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
     <title>Admin | Store</title>
     <meta charset="UTF-8">
 
-    <?php
-    if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-        error("500", "set_include_path()");
-    ?>
     <?php include("views/partials/head.php"); ?>
-    <?php require_once("auth/auth.php"); ?>
-    <?php require_once("utility/error_handling.php"); ?>
-    <?php require_once ("utility/store.php") ?>
-    <?php require_once ("DB/DB.php"); ?>
-    <?php require_once("views/partials/alert.php") ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script> $(document).ready( function () { $('#table').DataTable(); }); </script>
+    <script> $(document).ready( function () { $('#table').DataTable({ order: [[0, 'desc'] ]}); }); </script>
 </head>
 
 <body class="vh-100 dark">
@@ -40,7 +42,10 @@ set_session($user); ?>
             <?php
             $conn = DB::connect();
             [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-                "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.name AS 'Teams.name' FROM Products JOIN Teams ON Products.team_id = Teams.id;",
+                "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
+                            Teams.name AS 'Teams.name' 
+                        FROM Products JOIN Teams ON Products.team_id = Teams.id
+                        ORDER BY Products.id DESC;",
                 "store/all.php",
                 "/f1_project/views/private/dashboard.php");
             if (!$conn->close()) {
@@ -92,10 +97,10 @@ set_session($user); ?>
                                 if ($product["Products.img_url"]) {
                                     $img = explode("\t", $product["Products.img_url"]);
                                     if($img && $img[0] != '') { ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[0]; ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[0]; ?>" alt="Product pictures.">
                                     <?php }
                                     if($img && $img[1] != '') { ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[1]; ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[1]; ?>" alt="Product pictures.">
                                     <?php
                                     }
                                 } else { ?>
@@ -104,8 +109,8 @@ set_session($user); ?>
                                 ?>
                             </td>
 
-                            <td class='text-center'>
-                                <a href='../../../controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
+                            <td class='text-center' id="delete-loading">
+                                <a href='/f1_project/controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                     <span class='material-icons text-danger'>delete</span>
                                 </a>
                             </td>
@@ -124,13 +129,16 @@ set_session($user); ?>
                     </a>
                 </div>
             <?php } else { ?>
-                <div class="alert border-dark text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                     <span class="material-symbols-outlined">description</span>
                     <span class="mx-2">
                         <b>INFO</b>&nbsp;| No Data available!
                     </span>
                 </div>
             <?php } ?>
+
+            <!-- Loading circle -->
+            <?php include ("views/partials/loading.php"); ?>
         </div>
         <!-- TODO: just for testing -->
         <?php session_destroy(); ?>
@@ -141,5 +149,7 @@ set_session($user); ?>
         exit;
     } ?>
 </div>
+
+<script src="/f1_project/assets/js/loading-crud.js"></script>
 </body>
 </html>

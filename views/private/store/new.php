@@ -31,7 +31,7 @@
     <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
         <div class="col-12 col-md-10">
 
-            <form action="/f1_project/controllers/store/create.php" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded" method="POST">
+            <form action="/f1_project/controllers/store/create.php" id="form-loading" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded" method="POST">
 
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>
@@ -78,7 +78,7 @@
                             }
                             ?>
                             <label for="team" class="form-label"><strong>TEAM</strong></label>
-                            <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size">
+                            <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
                                 <option value="ns" class="option_invalid" selected disabled>Select team</option>
                                 <?php
                                 foreach ($teams as $team) {
@@ -130,11 +130,13 @@
                     <hr>
 
                     <div class="row col-12 d-flex justify-content-end align-items-center mx-1 mb-3 gap-3">
+                        <!-- Loading circle -->
+                        <?php include ("views/partials/loading.php"); ?>
                         <button type="submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <strong>Create</strong>
                         </button>
-                        <a href="/f1_project/views/private/dashboard.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/private/store/all.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined">fast_rewind</span>
                             <span class="d-inline d-sm-none d-xxl-inline">Discard</span>
                         </a>
@@ -161,8 +163,9 @@
     exit;
 } ?>
 
-<script src="/f1_project/assets/js/tooltip.js"></script>
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
-<script src="/f1_project/assets/js/store.js"></script>
+<script src="/f1_project/assets/js/store/crud.js"></script>
+<script src="/f1_project/assets/js/loading-crud.js"></script>
+
 </body>
 </html>

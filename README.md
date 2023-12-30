@@ -19,17 +19,22 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] carrello
-- [X] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
-- [ ] link to store management (all, create, edit)
+- [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
+- [X] BUG: if you specify only the second image of a product, it will be considered if there was a first one
+- [X] Visualizzazione limitata di 10 in 10 dello Store (vedi note iPhone)
+- [X] link to store management (all, create, edit)
+- [X] carrello
+- [X] html dinamico con ciclo index
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
 <br><br><br>
 
 ## ALL:
+- [ ] Difference between !...! and /.../ in regex (fare test) 
+- [ ] Footer
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
 - [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
@@ -38,10 +43,13 @@ SAW project about F1
 - [ ] Check correttezza campi registrazione con js
 - [ ] Check code HTTP code errors
 - [ ] Generic error page
+- [ ] Renderizzare dashboard differenti in base al ruolo dell'utente
+- [ ] Textarea nei form attraverso libreria JS consigliata da Ribaudo
 
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...
 - [ ] In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
+- [ ] Add alt description in Images in DB
 
 
 ## SOURCES:

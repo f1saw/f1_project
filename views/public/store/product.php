@@ -16,7 +16,7 @@ if(!isset($_GET["id"]) || !$_GET["id"]) {
 
 $conn = DB::connect("product.php", "/f1_project/views/public/store/store.php");
 $product = DB::get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Team.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
     ["i"],
     [$_GET["id"]],
     "product.php",
@@ -109,7 +109,7 @@ if (!$product) {
             <?php } ?>
             <?php if ($product["Products.size"]) { ?>
                 <?php $size = explode(";", $product["Products.size"]); ?>
-                <div>
+                <div class="d-flex flex-column justify-content-center flex-md-row align-md-items-center justify-content-md-start gap-md-3">
                     <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
                         <label for="s-size">Size: </label>
                         <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
@@ -120,6 +120,10 @@ if (!$product) {
                             }
                             ?>
                         </select>
+                    </div>
+                    <div id="select-info" class="d-none d-flex gap-2 mt-4 py-1">
+                        <span class="material-symbols-outlined"></span>
+                        <span class=""></span>
                     </div>
                 </div>
             <?php } ?>
@@ -141,7 +145,7 @@ if (!$product) {
                 <div class="accordion-item rounded-top">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Descrizione
+                            Description
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -153,7 +157,7 @@ if (!$product) {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                            Dettagli
+                            Details
                         </button>
                     </h2>
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -189,5 +193,5 @@ if (!$product) {
     </main>
 </body>
 
-<script src="../../../assets/js/store.js"></script>
+<script src="/f1_project/assets/js/navbar.js"></script>
 </html>
