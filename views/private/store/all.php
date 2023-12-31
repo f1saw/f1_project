@@ -109,7 +109,7 @@ set_session($user); ?>
                                 ?>
                             </td>
 
-                            <td class='text-center' id="delete-loading">
+                            <td class='text-center delete-loading'>
                                 <a href='/f1_project/controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                     <span class='material-icons text-danger'>delete</span>
                                 </a>

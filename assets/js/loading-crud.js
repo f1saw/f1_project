@@ -7,6 +7,6 @@ $("#form-loading").on('submit', () => {
     $(".lds-ring-container").removeClass("d-none")
 })
 
-$("#delete-loading").on('click', () => {
+$(".delete-loading").on('click', () => {
     $(".lds-ring-container").removeClass("d-none");
 })
