@@ -1,6 +1,6 @@
 <nav id="navbar" class="w-100 navbar navbar-expand-lg mb-3 mb-lg-0">
     <div class="container-fluid px-4">
-        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index.php"></a>
+        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index_news.php"></a>
 
         <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="material-symbols-outlined">menu</span>
@@ -54,7 +54,7 @@
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
                                     <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
                                 <?php } else{ ?>
-                                    <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
+                                    <img class="profile-img" src="/f1_project/assets/images/foto-profilo.jpg" alt="Profile">
                                 <?php }?>
 
                                 <span>Dashboard</span>

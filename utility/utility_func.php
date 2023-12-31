@@ -17,7 +17,7 @@ function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") 
 
 // Questa funzione ha lo scopo di estrarre le informazioni dell'utente che si decide di visualizzare
 // dalla dashboard. Se nessun utente è stato selezionato vengono ritornate le info dell'utente collegato
-function choose_correct_data($id) : array{
+function select_user($id) : array{
     if($id == null) {
         // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
         // ritono sul profilo e non nella table
@@ -53,7 +53,7 @@ function choose_correct_data($id) : array{
 }
 
 /**
- * @throws Exception
+ * @throws Exception|\Exception
  */
 function generate_random_string($length): string {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -63,4 +63,51 @@ function generate_random_string($length): string {
         $random_string .= $characters[random_int(0, $characters_length - 1)];
     }
     return $random_string;
+}
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once ('PHPMailer/src/Exception.php');
+require_once ('PHPMailer/src/PHPMailer.php');
+require_once ('PHPMailer/src/SMTP.php');
+/**
+ * Send email method
+ * @param array $recipients : recipients email address (e.g. ["pippo@topolino.com", "pluto@topolino.com"] OR [["email" => "a@a.c"], ["email" => "b@b.c"]])
+ * @param string $subject : email subject
+ * @param string $body : email body (it can be HTML)
+ * @param array $bcc : optional parameter to specify BCC (e.g. ["pippo@topolino.com", "pluto@topolino.com"] OR [["email" => "a@a.c"], ["email" => "b@b.c"]])
+ * @return void
+ * @throws Exception
+ *
+ * Service provided by https://github.com/PHPMailer/PHPMailer
+ */
+function send_mail(array $recipients, string $subject, string $body, array $bcc = []): void {
+    $ini = parse_ini_file("config/keys.ini");
+
+    // 'true' needed to set exceptions
+    $mail = new PHPMailer(true);
+    $mail->isSMTP(); // "Send messages using SMTP"
+    $mail->Host = $ini["smtp_host"];
+    $mail->SMTPAuth = true; // Whether to use SMTP authentication
+    $mail->Username = $ini["g_email"]; // GMAIL email
+    $mail->Password = $ini["g_app_password"]; // GMAIL APP Password
+    $mail->SMTPSecure = $ini["smtp_secure"];
+    $mail->Port = $ini["smtp_port"];
+
+    // I send email from $ini["g_email"] to addresses stored in $to.
+    $mail->setFrom($ini["g_email"], $ini["g_name"]?? null);
+    foreach ($recipients as $recipient) {
+        $mail->addAddress($recipient["email"]?? $recipient);
+    }
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+
+    // BCC implemented in order to respect privacy
+    foreach ($bcc as $recipient) {
+        $mail->addBCC($recipient["email"]?? $recipient);
+    }
+
+    $mail->send();
 }

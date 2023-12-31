@@ -11,10 +11,11 @@ SAW project about F1
 
 ## MAURI:
 - [ ] cercare per recupero pass, modifica pass,
-- [ ] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
+- [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
 - [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
 - [ ] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
+
 
 <hr>
 
@@ -22,15 +23,13 @@ SAW project about F1
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
-- [X] BUG: if you specify only the second image of a product, it will be considered if there was a first one
-- [X] Visualizzazione limitata di 10 in 10 dello Store (vedi note iPhone)
-- [X] link to store management (all, create, edit)
-- [X] carrello
-- [X] html dinamico con ciclo index
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
 <br><br><br>
+
+## NOTES:
+- Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 
 ## ALL:
 - [ ] Difference between !...! and /.../ in regex (fare test) 
