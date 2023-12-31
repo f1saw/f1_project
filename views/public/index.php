@@ -1,25 +1,37 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
+
+require_once ("controllers/news/news.php");
+require_once ("views/partials/public/news_cards.php");
+require_once("auth/auth.php");
+
+const COL_CARD = "col-12";
+
+[$title_list, $img_list, $link_list] = f1_scrape_news(BASE_URL);
+
+$json = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\\views\\partials\\public\\index_cards.json");
+$json_cards_data = json_decode($json, true);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<!--xmlns="http://www.w3.org/1999/html"-->
 <head>
     <title>Home</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/index_style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
 
-    <?php include("../partials/head.php"); ?>
-    <?php require_once("../../auth/auth.php") ?>
+    <?php include("views/partials/head.php"); ?>
 </head>
-
-<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
 <body class="bg-dark">
 <div class="container-fluid">
 
     <!-- Nav -->
-    <?php include ("../partials/navbar.php");?>
-
+    <?php include ("views/partials/navbar.php");?>
 
     <main>
         <!-- Showcase -->
@@ -34,10 +46,10 @@
                     <img src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100 img-carousel rounded" alt="F1 2022">
                 </div>
                 <div class="carousel-item">
-                    <img src="../../assets/images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Mercedes">
+                    <img src="/f1_project/assets/images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Mercedes">
                 </div>
                 <div class="carousel-item">
-                    <img src="../../assets/images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Ferrari">
+                    <img src="/f1_project/assets/images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Ferrari">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
@@ -51,135 +63,61 @@
         </div>
 
         <br>
-        <h2 class="title">Browse our site!</h2>
-        <br>
 
-        <!-- Home cards 1 -->
-        <section class="home-cards">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-                <div class="col d-flex align-items-stretch">
-                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img">
-                            <img src="https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.png" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">Circuits</h5>
-                                <hr>
-                                <p class="card-text">In this section you can see <strong>all</strong> the characteristic F1 circuits.</p>
-                                <p class="card-text">
-                                    <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
-                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
-                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                            Check it out!
-                                            <span class="material-symbols-outlined">sports_score</span>
-                                        </span>
-                                    </a>
-                                </p>
+        <!-- Home cards -->
+        <section class="home-cards row d-flex justify-content-around gap-5 gap-md-0">
+
+            <!-- News -->
+            <div style="border-radius: 10px; background: rgba(87, 87, 87, .6); " class="col-12 order-2 col-md-4 order-md-1 d-flex justify-content-center flex-column">
+                <span class="title text-light pt-2">
+                    <span class="text-light h2">
+                        News
+                        <span class="material-symbols-outlined text-danger">download</span>
+                    </span>
+                    (provided by <a href="https://www.formula1.com/en/latest/all" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
+                </span>
+                <?php echo_news_cards($title_list, $img_list, $link_list, MAX_NEWS_INDEX, COL_CARD); ?>
+            </div>
+
+            <!-- Browse our site -->
+            <div class="col-12 col-md-8">
+                <h2 class="title text-light d-flex justify-content-center align-items-center gap-2">Browse our site
+                    <span class="material-symbols-outlined text-danger">travel_explore</span>
+                </h2>
+                <br>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2 g-4">
+
+                    <?php foreach ($json_cards_data as $card) { ?>
+                        <div class="col d-flex align-items-stretch">
+                            <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
+                                <div class="card-img">
+                                    <img src="<?php echo $card["img_url"] ?>" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body d-flex align-items-end">
+                                    <div class="w-100">
+                                        <h5 class="card-title text-danger"><?php echo $card["title"] ?></h5>
+                                        <hr>
+                                        <p class="card-text"><?php echo $card["text"] ?></p>
+                                        <p class="card-text">
+                                            <a href="<?php echo $card["link"] ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
+                                                <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
+                                                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                                                    Check it out!
+                                                    <span class="material-symbols-outlined">sports_score</span>
+                                                </span>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    <?php } ?>
 
-                <div class="col d-flex align-items-stretch">
-                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img">
-                            <img src="https://i.ytimg.com/vi/jKZKCl_GEgY/maxresdefault.jpg" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">FIA Regulations <br> Formula One World Championship</h5>
-                                <hr>
-                                <p class="card-text">Have fun in reading these <strong>short</strong> docs <strong>:P</strong></p>
-                                <p class="card-text">
-                                    <a href="https://www.fia.com/regulation/category/110" class="card-link text-decoration-none d-flex flex-row justify-content-end">
-                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
-                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                            Check it out!
-                                            <span class="material-symbols-outlined">sports_score</span>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col d-flex align-items-stretch">
-                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img">
-                            <img src="https://hoteldelaville.com/wp-content/uploads/2021/06/gran-premio-di-monza-informazioni-1000x634.jpg" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">Statistics</h5>
-                                <hr>
-                                <p class="card-text"><strong>Data</strong> lover? This section is for you!</p>
-                                <p class="card-text">
-                                    <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
-                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
-                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                            Check it out!
-                                            <span class="material-symbols-outlined">sports_score</span>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col d-flex align-items-stretch">
-                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img">
-                            <!-- <img src="https://www.f1-fansite.com/wp-content/uploads/2023/11/230070-scuderia-ferrari-abu-dhabi-gp-2023-race_2ca9a370-0909-4cca-adae-9dbf3c91638f.jpg" class="card-img-top" alt="..."> -->
-                            <img src="https://www.sportinglad.com/wp-content/uploads/2023/08/ezgif.com-gif-maker.webp" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">Drivers</h5>
-                                <hr>
-                                <p class="card-text">Discover the secrets of your favorite drivers <strong>:)</strong></p>
-                                <p class="card-text">
-                                    <a href="#" class="card-link text-decoration-none d-flex flex-row justify-content-end">
-                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
-                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                            Check it out!
-                                            <span class="material-symbols-outlined">sports_score</span>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col d-flex align-items-stretch">
-                    <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img d-flex justify-content-center">
-                            <!-- <img src="https://www.f1-fansite.com/wp-content/uploads/2023/11/230070-scuderia-ferrari-abu-dhabi-gp-2023-race_2ca9a370-0909-4cca-adae-9dbf3c91638f.jpg" class="card-img-top" alt="..."> -->
-                            <img style="width: 250px;" src="https://grandprixstore.co.za/wp-content/uploads/2023/05/Grand-Prix-Store-Shop-Ferrari.jpg" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body d-flex align-items-end">
-                            <div class="w-100">
-                                <h5 class="card-title text-danger">Store</h5>
-                                <hr>
-                                <p class="card-text">Buy <strong>official</strong> merchandise</p>
-                                <p class="card-text">
-                                    <a href="/f1_project/views/public/store/store.php" class="card-link text-decoration-none d-flex flex-row justify-content-end">
-                                        <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
-                                            <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                                            Check it out!
-                                            <span class="material-symbols-outlined">sports_score</span>
-                                        </span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
         </section>
+
     </main>
 </div>
 </body>

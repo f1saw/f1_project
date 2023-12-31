@@ -27,13 +27,13 @@ if (!$login_allowed) {
         $remember_me = isset($_POST["remember_me"]) ? 1:0;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            error("-1", "Email not an email", "login.php", "/f1_project/views/public/login_form.php");
+            error("-1", "Email not an email", "login.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
 
         /* DB */
-        $conn = DB::connect("login.php", "/f1_project/views/public/login_form.php");
+        $conn = DB::connect("login.php", "/f1_project/views/public/auth/login.php");
 
         $email = $conn->real_escape_string($email);
         $password = $conn->real_escape_string($password);
@@ -44,7 +44,7 @@ if (!$login_allowed) {
             ['s'],
             [$email],
             "login.php",
-            "/f1_project/views/public/login_form.php")[0];
+            "/f1_project/views/public/auth/login.php")[0];
 
 
         if ($user && password_verify($password, $user["Users.password"])) {
@@ -64,14 +64,14 @@ if (!$login_allowed) {
                         ["s", "s", "i"],
                         [$cookie_id, $cookie_value, $cookie_exp_date],
                         "login.php",
-                        "/f1_project/views/public/login_form.php");
+                        "/f1_project/views/public/auth/login.php");
 
                     DB::p_stmt_no_select($conn,
                         "UPDATE Users SET cookie_id = ? WHERE id = ?;",
                         ["s", "i"],
                         [$cookie_id, $user["Users.id"]],
                         "login.php",
-                        "/f1_project/views/public/login_form.php");
+                        "/f1_project/views/public/auth/login.php");
 
 
                     /* TODO: controllo superfluo in quanto se ci fosse già un cookie, non si accederebbe a questa sezione di codice.
@@ -83,7 +83,7 @@ if (!$login_allowed) {
                         ["s"],
                         [$user["cookie_id"]],
                         "login.php",
-                        "../views/public/login_form.php");
+                        "../views/public/auth/login.php");
 
                     if ($cookie) {
 
@@ -92,7 +92,7 @@ if (!$login_allowed) {
                             ["s", "i", "s"],
                             [$cookie_id, $cookie_exp_date, $user["cookie_id"]],
                             "login.php",
-                            "../views/public/login_form.php"
+                            "../views/public/auth/login.php"
                         );
                     } else {
 
@@ -101,17 +101,17 @@ if (!$login_allowed) {
                             ["s", "i"],
                             [$cookie_id, $cookie_exp_date],
                             "login.php",
-                            "../views/public/login_form.php");
+                            "../views/public/auth/login.php");
 
                         DB::p_stmt_no_select($conn,
                         "UPDATE Users SET cookie_id = ? WHERE id = ?;",
                         ["s", "i"],
                         [$cookie_id, $user["id"]],
                         "login.php",
-                        "../views/public/login_form.php");
+                        "../views/public/auth/login.php");
                     } */
                 } catch (Exception $e) {
-                    error("500", "generate_random_string()", "login.php", "/f1_project/views/public/login_form.php");
+                    error("500", "generate_random_string()", "login.php", "/f1_project/views/public/auth/login.php");
                     exit;
                 }
             }
@@ -121,12 +121,12 @@ if (!$login_allowed) {
             $login_allowed = 0;
         }
         if (!$conn->close()) {
-            error("500", "conn_close()", "login.php", "/f1_project/views/public/login_form.php");
+            error("500", "conn_close()", "login.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
     } else {
-        error("401", "Fields not provided.", "login.php", "/f1_project/views/public/login_form.php");
+        error("401", "Fields not provided.", "login.php", "/f1_project/views/public/auth/login.php");
         exit;
     }
 }
@@ -141,12 +141,12 @@ if ($login_allowed) {
         exit;
     }
     else {
-        header("Location: /f1_project/views/public/index_news.php");
+        header("Location: /f1_project/views/public/index.php");
         exit;
     }
 
 } else {
-    error("401", "Email and pwd NOT correct", "login.php", "/f1_project/views/public/login_form.php");
+    error("401", "Email and pwd NOT correct", "login.php", "/f1_project/views/public/auth/login.php");
     exit;
 }
 

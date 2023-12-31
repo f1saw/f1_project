@@ -6,6 +6,10 @@ select .option_valid {
     color: black !important;
 }
 
+.img-url {
+    max-width: 400px !important;
+}
+
 #img-preview img {
     object-fit: contain !important;
 }

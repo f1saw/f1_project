@@ -1,14 +1,14 @@
-<?php if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-    error("500", "set_include_path()"); ?>
-<?php require_once("auth/auth.php"); ?>
-<?php require_once("utility/error_handling.php"); ?>
-<?php require_once("utility/store.php"); ?>
-<?php require_once ("DB/DB.php"); ?>
-<?php require_once("views/partials/alert.php") ?>
-
-<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-
 <?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once("utility/store.php");
+require_once ("DB/DB.php");
+require_once("views/partials/alert.php");
+
 if(!isset($_GET["id"]) || !$_GET["id"]) {
     error("500", "ID not given", "product.php", "/f1_project/views/public/store/store.php");
     exit;
@@ -21,10 +21,12 @@ $product = DB::get_record_by_field($conn,
     [$_GET["id"]],
     "product.php",
     "/f1_project/views/public/store/store.php")[0];
+
 if (!$conn->close()) {
     error("500", "conn_close()", "product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
+
 if (!$product) {
     error("500", "product_look_up", "product.php", "/f1_project/views/public/store/store.php");
     exit;
@@ -32,7 +34,7 @@ if (!$product) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <title><?php echo $product["Products.title"] ?></title>
     <meta charset="UTF-8">
@@ -87,7 +89,6 @@ if (!$product) {
             <h3><?php echo $product["Products.title"]; ?></h3>
             <hr>
                 <div>
-
                     <?php if ($product["Products.color"]) { ?>
                         <?php
                         $str_color = "";

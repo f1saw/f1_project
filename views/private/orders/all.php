@@ -1,8 +1,6 @@
 <?php
-
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
-
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 require_once("auth/auth.php");
@@ -13,35 +11,35 @@ require_once("views/partials/alert.php") ;
 
 [$login_allowed, $user] = check_cookie();
 if (!check_user_auth($user)) {
-    $_SESSION['redirection'] = "/f1_project/views/private/table_users.php";
-    error("401", "not_authorized", "table_users.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+    $_SESSION['redirection'] = "/f1_project/views/private/orders/all.php";
+    error("401", "not_authorized", "store/all.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 set_session($user);
 
-$conn = DB::connect("orders/all.php", "/f1_project/views/private/dashboard.php");
+$conn = DB::connect("orders\all.php", "/f1_project/views/private/dashboard.php");
 $orders = (array)DB::get_record_by_field($conn,
     "SELECT orders.id AS 'Orders.id', orders.date AS 'Orders.date', orders.amount AS 'Orders.amount', 
-                                products.id AS 'Products.id', products.title AS 'Products.title', products.img_url AS 'Products.img_url', 
-                                orders_products.size AS 'Orders_Products.size', orders_products.quantity AS 'Orders_Products.quantity', orders_products.unit_price AS 'Orders_Products.unit_price'
-                           FROM orders_products 
-                                JOIN orders ON orders_products.order_id = orders.id 
-                                JOIN products ON orders_products.product_id = products.id
-                           WHERE orders.user_id = ?;",
+                products.id AS 'Products.id', products.title AS 'Products.title', products.img_url AS 'Products.img_url', 
+                orders_products.size AS 'Orders_Products.size', orders_products.quantity AS 'Orders_Products.quantity', orders_products.unit_price AS 'Orders_Products.unit_price'
+           FROM orders_products 
+                JOIN orders ON orders_products.order_id = orders.id 
+                JOIN products ON orders_products.product_id = products.id
+           WHERE orders.user_id = ?;",
     ["i"],
     [$user["Users.id"]],
-    "orders/all.php",
+    "orders\all.php",
     "/f1_project/views/private/dashboard.php");
 $num_orders = count($orders);
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "orders/all.php", "/f1_project/views/private/dashboard.php");
+    error("500", "conn_close()", "orders\all.php", "/f1_project/views/private/dashboard.php");
     exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <title>User | Orders</title>
     <meta charset="UTF-8">

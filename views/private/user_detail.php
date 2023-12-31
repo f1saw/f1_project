@@ -1,6 +1,14 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if (session_status() == PHP_SESSION_NONE) session_start();
+
+require_once ("views/partials/alert.php");
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once("utility/utility_func.php");
+require_once ("DB/DB.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -9,14 +17,9 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     <title>User detail</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="/f1_project/assets/css/profile_style.css">
+    <?php include("views/partials/head.php"); ?>
 
-    <?php include("../partials/head.php"); ?>
-    <?php include("../partials/alert.php"); ?>
-    <?php require_once("../../auth/auth.php"); ?>
-    <?php require_once("../../utility/error_handling.php"); ?>
-    <?php require_once("../../utility/utility_func.php"); ?>
-    <?php require_once ("../../DB/DB.php"); ?>
+    <link rel="stylesheet" href="/f1_project/assets/css/profile_style.css">
 </head>
 
 <?php if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) && $_SESSION["success"]){ ?>
@@ -29,7 +32,6 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
 <?php } ?>
 
 <body class="bg-dark">
-<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
 
 <?php
 // error_redirector, link ai css non funzionano, why??
@@ -54,11 +56,11 @@ if (check_user_auth($user)) {
         }
     }
     else{
-        error("401", "not_authorized", "user_detail.php", "/f1_project/views/public/login_form.php", "No user found");
+        error("401", "not_authorized", "user_detail.php", "/f1_project/views/public/auth/login.php", "No user found");
     }
 }
 else{
-    error("401", "not_authorized", "/f1_project/views/private/user_detail.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "/f1_project/views/private/user_detail.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 ?>

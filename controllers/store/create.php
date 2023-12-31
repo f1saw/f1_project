@@ -15,8 +15,8 @@ if (check_admin_auth($user)) {
     if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["team_id"]) && isset($_POST["size"])) {
 
         /* CLEANING INPUT */
-        $title = preg_replace('/\s+/', '', htmlentities($_POST["title"]));
-        $desc = preg_replace('/\s+/', '', htmlentities($_POST["desc"]));
+        $title = preg_replace('/\s+/', ' ', htmlentities($_POST["title"]));
+        $desc = preg_replace('/\s+/', ' ', htmlentities($_POST["desc"]));
         $price = preg_replace('/\s+/', '', htmlentities($_POST["price"]));
         $img_url = [];
         if (isset($_POST["img_url_1"])) {
@@ -50,7 +50,7 @@ if (check_admin_auth($user)) {
 
         // TODO: REGEX img url ?? è necessario ??
         /*if ($date_of_birth && !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date_of_birth)) {
-            error("-1", "Date of birth pattern NOT valid.", "registration.php", "/f1_project/views/public/registration_form.php");
+            error("-1", "Date of birth pattern NOT valid.", "registration.php", "/f1_project/views/public/auth/registration.php");
             exit;
         }*/
 
@@ -85,6 +85,6 @@ if (check_admin_auth($user)) {
         error("500", "Fields not provided.", "create.php", "/f1_project/views/private/store/new.php");
     }
 } else {
-    error("401", "Unauthorised access!", "create.php", "/f1_project/views/public/login_form.php");
+    error("401", "Unauthorised access!", "create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

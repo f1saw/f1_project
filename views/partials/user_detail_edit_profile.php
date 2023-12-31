@@ -76,9 +76,9 @@
                     <br>
 
                     <div id="button_div" class="row mb-3 d-flex justify-content-center button">
-                        <button id="navigate_left" type="button" name="other_info_back" style="border: unset" class="btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
+                        <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
                         <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
-                        <button id="navigate_right" type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
+                        <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                     </div>
                 </div>
 
@@ -153,9 +153,9 @@
                     <br>
 
                     <div id="button_div" class="row mb-3 d-flex justify-content-center button">
-                        <button id="navigate_left" type="button" name="other_info" onclick="last_page()" style="border: unset" class="btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
+                        <button type="button" name="other_info" onclick="last_page()" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
                         <button type="submit" name="Button_id" value="<?php echo $element["id"]; ?>" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
-                        <button id="navigate_right" type="button" name="other_info" style="border: unset" class="btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
+                        <button type="button" name="other_info" style="border: unset" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                     </div>
                 </div>
 

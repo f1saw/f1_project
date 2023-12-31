@@ -10,7 +10,6 @@ SAW project about F1
 <hr>
 
 ## MAURI:
-- [ ] cercare per recupero pass, modifica pass,
 - [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
 - [ ] Formattazione su schermo mobile non funziona + parti bianche volanti

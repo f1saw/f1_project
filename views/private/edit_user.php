@@ -157,6 +157,6 @@ if (check_user_auth($user)) {
     header("location: /f1_project/views/private/table_users.php");
 }
 else{
-    error("401", "not_authorized", "user_detail.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "user_detail.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

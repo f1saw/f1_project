@@ -1,30 +1,47 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if (session_status() == PHP_SESSION_NONE) session_start();
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once ("DB/DB.php");
+require_once("views/partials/alert.php");
+
+[$login_allowed, $user] = check_cookie();
+if (!check_admin_auth($user)) {
+    error("401", "not_authorized", "store\\new.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    exit;
+}
+set_session($user);
+
+$conn = DB::connect("new_form.php", "/f1_project/views/private/table_users.php");
+[$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
+    "SELECT * FROM Teams;",
+    "store\\new.php",
+    "/f1_project/views/private/store/all.php");
+
+if (!$conn->close()) {
+    error("500", "conn_close()", "store\\new.php", "/f1_project/views/private/store/all.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Admin | Product</title>
     <meta charset="UTF-8">
+
+    <?php include("views/partials/head.php"); ?>
+
     <!--modificare la navbar-->
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/product_new.css">
-
-    <?php if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-        error("500", "set_include_path()"); ?>
-
-    <?php include("views/partials/head.php"); ?>
-    <?php require_once("auth/auth.php"); ?>
-    <?php require_once("utility/error_handling.php"); ?>
-    <?php require_once ("DB/DB.php"); ?>
-    <?php require_once("views/partials/alert.php") ?>
 </head>
 
 <body class="vh-100 bg-dark">
-<?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-
-<?php [$login_allowed, $user] = check_cookie(); ?>
-<?php if (check_admin_auth($user)) {
-    set_session($user); ?>
 
     <?php include("views/partials/navbar.php") ?>
 
@@ -66,17 +83,6 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <?php
-                            $conn = DB::connect("new_form.php", "/f1_project/views/private/table_users.php");
-                            [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
-                                "SELECT * FROM Teams;",
-                                "new_form.php",
-                                "/f1_project/views/private/table_users.php");
-                            if (!$conn->close()) {
-                                error("500", "conn_close()", "new_form.php", "/f1_project/views/private/table_users.php");
-                                exit;
-                            }
-                            ?>
                             <label for="team" class="form-label"><strong>TEAM</strong></label>
                             <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
                                 <option value="ns" class="option_invalid" selected disabled>Select team</option>
@@ -150,18 +156,14 @@
             </form>
         </div>
 
-        <div id="img-preview" class="d-none col-12 col-sm-5 row">
-            <img id="img-url-1" class="d-none img-url col-6 rounded" alt="..." src="">
-            <img id="img-url-2" class="d-none img-url col-6 rounded " alt="..." src="">
+        <div id="img-preview" class="d-none col-12 row d-flex justify-content-center">
+            <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="..." src="">
+            <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded " alt="..." src="">
         </div>
 
         <!-- TODO: just for testing -->
         <?php session_destroy(); ?>
     </div>
-<?php } else {
-    error("401", "not_authorized", "table_users.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
-    exit;
-} ?>
 
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 <script src="/f1_project/assets/js/store/crud.js"></script>

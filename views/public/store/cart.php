@@ -11,9 +11,9 @@ require_once ("DB/DB.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <title>Cart</title>
+    <title>Shopping Cart</title>
     <meta charset="UTF-8">
 
     <?php include("views/partials/head.php"); ?>
@@ -22,7 +22,6 @@ require_once ("DB/DB.php");
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store/cart.css">
-
 </head>
 
 <body>
@@ -30,7 +29,7 @@ require_once ("DB/DB.php");
 
     <label id="order-success" class="d-none"><?php echo ($_SESSION["success"])??""; ?></label>
     <script>
-        // JS script required at this point because it must be after the label defined at the previous row (row 32) in order to get its values,
+        // JS script required at this point because it must be after the label defined at the previous row (row 30) in order to get its values,
         // and it must be before the include for the navbar (otherwise, an outdated cart would be considered during the render of the navbar)
         if ($("#order-success").text() !== "") {
             localStorage.clear();
@@ -40,10 +39,8 @@ require_once ("DB/DB.php");
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
 
-
     <?php succ_msg_alert(); ?>
     <?php err_msg_alert(); ?>
-
 
     <main class="container-fluid mt-0 mt-md-5">
 

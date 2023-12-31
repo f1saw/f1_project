@@ -9,7 +9,6 @@ require_once ("utility/utility_func.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("auth/auth.php");
-require_once ("controllers/mail.php");
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
@@ -113,6 +112,6 @@ if ($login_allowed) {
         error("500", "Fields not provided.", "orders/create.php", "/f1_project/views/public/store/cart.php");
     }
 } else {
-    error("401", "Unauthorised access!", "orders/create.php", "/f1_project/views/public/login_form.php");
+    error("401", "Unauthorised access!", "orders/create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

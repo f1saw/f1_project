@@ -1,6 +1,6 @@
 <nav id="navbar" class="w-100 navbar navbar-expand-lg mb-3 mb-lg-0">
     <div class="container-fluid px-4">
-        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index_news.php"></a>
+        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index.php"></a>
 
         <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="material-symbols-outlined">menu</span>
@@ -40,13 +40,13 @@
                     if (!check_user_auth($user)) {
                         set_session($user);?>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="/f1_project/views/public/login_form.php">
+                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="/f1_project/views/public/auth/login.php">
                                 <span class="material-symbols-outlined">login</span>
                                 <span>Login</span>
                             </a>
                         </li>
                         <li class="nav-item my_outline_animation">
-                            <a class="nav-link text-light d-flex gap-2" href="/f1_project/views/public/registration_form.php">
+                            <a class="nav-link text-light d-flex gap-2" href="/f1_project/views/public/auth/registration.php">
                                 <span class="material-symbols-outlined">how_to_reg</span>
                                 <span>Registration</span>
                             </a>

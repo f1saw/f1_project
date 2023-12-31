@@ -17,12 +17,11 @@ if (check_user_auth($user)) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Lost password</title>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/log_reg_style.css">
@@ -33,20 +32,11 @@ if (check_user_auth($user)) {
 
 <body class="bg-dark vh-100">
 
-    <?php
-    if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) && $_SESSION["success"]){ ?>
-        <style>
-            .container-element{
-                height: 550px;
-            }
-        </style>
-    <?php } ?>
-
     <div id="bg-login" class="container-fluid">
         <?php include ("views/partials/navbar_log_reg.php"); ?>
 
         <div class="flex-container d-flex justify-content-center">
-            <form id="login-form" action="/f1_project/controllers/auth/lost_password.php" class="container-element log" method="POST">
+            <form id="login-form" action="/f1_project/controllers/auth/lost_password.php" class="container-element log p-2" method="POST">
 
                 <div style="margin-left: 10px; margin-right: 10px">
                     <?php $function = "document.getElementsByClassName('container-element')[0].style.height = '480px'" ?>
@@ -54,8 +44,8 @@ if (check_user_auth($user)) {
                     <?php succ_msg_alert($function); ?>
                 </div>
 
-                <fiedlset>
-                    <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
+                <fieldset>
+                    <legend class="d-flex align-items-center justify-content-start gap-2 hover-red px-2">
                         <span class="material-symbols-outlined">passkey</span>
                         <strong>PASSWORD RECOVERY</strong>
                     </legend>
@@ -77,17 +67,17 @@ if (check_user_auth($user)) {
                         </div>
                     </div>
                     <hr>
-                    <div class="row col-12 d-flex justify-content-center align-items-center mx-1 gap-3">
-                        <button type="submit" class="btn btn-danger btn-reverse-color col-8 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                    <div class="row col-12 d-flex justify-content-around align-items-center mx-auto gap-3 px-2">
+                        <button type="submit" class="btn btn-danger btn-reverse-color col-12 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined text-light">mail</span>
                             <strong>Send new password</strong>
                         </button>
-                        <a href="/f1_project/views/public/registration_form.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/public/auth/registration.php" class="my_outline_animation col-12 col-md-4 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined text-light">login</span>
                             <span class="d-inline d-xxl-inline">Back to login</span>
                         </a>
                     </div>
-                </fiedlset>
+                </fieldset>
             </form>
         </div>
     </div>

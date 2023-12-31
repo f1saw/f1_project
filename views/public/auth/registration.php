@@ -1,36 +1,13 @@
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-    <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-    <title>Sign Up</title>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
-
-    <?php if (isset($_SESSION["confirm_email"]) && !$_SESSION["confirm_email"]){ ?>
-        <link rel="stylesheet" href="../../assets/css/text_confirm_email.css">
-    <?php } ?>
-
-    <?php include("../partials/head.php"); ?>
-    <?php require_once("../../auth/auth.php"); ?>
-    <?php require_once("../../utility/error_handling.php"); ?>
-    <?php require_once ("../../DB/DB.php"); ?>
-    <?php require_once ("../partials/alert.php"); ?>
-
-</head>
-
-<?php if(isset($_SESSION["err"]) && $_SESSION["err"]){ ?>
-<style>
-    .container-element{
-        top: 40px;
-        height: 650px;
-    }
-</style>
-<?php } ?>
-
 <?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once("DB/DB.php");
+require_once("views/partials/alert.php");
+
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
@@ -44,12 +21,37 @@ if (check_user_auth($user)) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sign Up</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/log_reg_style.css">
+
+    <?php if (isset($_SESSION["confirm_email"]) && !$_SESSION["confirm_email"]){ ?>
+        <link rel="stylesheet" href="/f1_project/assets/css/text_confirm_email.css">
+    <?php } ?>
+
+    <?php include("views/partials/head.php"); ?>
+</head>
+
+<?php if(isset($_SESSION["err"]) && $_SESSION["err"]){ ?>
+<style>
+    .container-element{
+        top: 40px;
+        height: 650px;
+    }
+</style>
+<?php } ?>
 
 <body class="bg-dark">
 
 <div id="bg-register" class="container-fluid">
 
-    <?php include ("../partials/navbar_log_reg.php"); ?>
+    <?php include("views/partials/navbar_log_reg.php"); ?>
 
     <div class="flex-container d-flex justify-content-center">
         <?php
@@ -63,11 +65,11 @@ if (check_user_auth($user)) {
         <?php }
         else if (isset($_SESSION["confirm_email"]) && $_SESSION["confirm_email"]){
             unset($_SESSION["confirm_email"]);
-            header("location: login_form.php");
+            header("location: auth/login.php");
             exit;
         }
         else{ ?>
-        <form id="register-form" action="../../auth/registration_email.php" method="POST" class="container-element reg">
+        <form id="register-form" action="/f1_project/auth/registration_email.php" method="POST" class="container-element reg">
 
             <div style="margin-left: 10px; margin-right: 10px">
             <?php $function = "document.getElementsByClassName('reg')[0].style.height = '550px'; 
@@ -75,14 +77,14 @@ if (check_user_auth($user)) {
             <?php err_msg_alert($function); ?>
             </div>
 
-            <fiedlset>
+            <fieldset>
                 <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                     <span class="material-symbols-outlined">passkey</span>
                     <b>REGISTER</b>
                 </legend>
                 <hr>
                 <div class="row mb-3">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                         <label for="fname" class="form-label text-box"><strong>FIRST NAME</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="fname-addon">badge</span>
@@ -90,7 +92,7 @@ if (check_user_auth($user)) {
                         </div>
                         <!-- <div class="form-text"></div> -->
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-lg-6">
                         <label for="lname" class="form-label text-box"><strong>LAST NAME</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="fname-addon">badge</span>
@@ -110,14 +112,14 @@ if (check_user_auth($user)) {
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                         <label for="password" class="form-label text-box"><strong>PASSWORD</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-lg-6">
                         <label for="password_confirm" class="form-label text-box"><strong>REPEAT PASSWORD</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
@@ -149,12 +151,12 @@ if (check_user_auth($user)) {
                         <span class="material-symbols-outlined">person_add</span>
                         <strong>Sign up</strong>
                     </button>
-                    <a href="login_form.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                    <a href="login.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                         <span class="material-symbols-outlined">login</span>
                         <span class="d-inline d-xxl-inline">Login</span>
                     </a>
                 </div>
-            </fiedlset>
+            </fieldset>
         </form>
         <?php
         }
@@ -163,5 +165,5 @@ if (check_user_auth($user)) {
 </div>
 </body>
 
-<script src="../../assets/js/tooltip.js"></script>
+<script src="/f1_project/assets/js/tooltip.js"></script>
 </html>

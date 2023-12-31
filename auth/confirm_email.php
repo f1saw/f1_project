@@ -38,10 +38,10 @@ if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SE
         ["s", "s", "s", "s", "s", "i"],
         [$first_name, $last_name, $email, $hash_password, $date_of_birth, $newsletter],
         "registration.php",
-        "/f1_project/views/public/registration_form.php");
+        "/f1_project/views/public/auth/registration.php");
 
     if (!$conn->close()) {
-        error("500", "conn_close()", "registration.php", "/f1_project/views/public/registration_form.php");
+        error("500", "conn_close()", "registration.php", "/f1_project/views/public/auth/registration.php");
         exit;
     }
 
@@ -50,6 +50,6 @@ if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SE
     $_SESSION["confirm_email"] = true;
     header("Location: /f1_project/views/public/confirm.html");
 } else {
-    error("-1", "Input fields NOT provided.", "registration.php", "/f1_project/views/public/registration_form.php");
+    error("-1", "Input fields NOT provided.", "registration.php", "/f1_project/views/public/auth/registration.php");
     exit;
 }

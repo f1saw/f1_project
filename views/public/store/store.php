@@ -35,7 +35,7 @@ if (!$conn->close()) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <title>Store</title>
     <meta charset="UTF-8">
@@ -108,7 +108,6 @@ if (!$conn->close()) {
                             </div>
                         </a>
                     </div>
-
 
                     <!-- Modal (to choose size) -->
                     <div class="modal fade" id="modal-<?php echo $product["Products.id"]; ?>" tabindex="-1" aria-labelledby="modal-<?php echo $product["Products.id"]; ?>Label" aria-hidden="true">

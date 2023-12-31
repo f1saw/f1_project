@@ -1,11 +1,10 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once ("auth/auth.php");
 require_once ("views/partials/alert.php");
-
-if (session_status() == PHP_SESSION_NONE) session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +22,9 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 </head>
 <body class="bg-dark">
     <div class="container-fluid">
+
         <?php include("views/partials/navbar.php");?>
+
         <main>
             <div class="flex-container d-flex justify-content-center">
                 <div class="container-element px-3">

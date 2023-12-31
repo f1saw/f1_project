@@ -134,18 +134,23 @@ hr {
     height: 85vh;
 }
 
-.profile-img{
+.profile-img {
     border-radius: 50%;
     width: 24px;
     height: 24px;
 }
 
-#navigate_left {
+.navigate:hover {
+    background-color: transparent;
+    border: 1px solid rgb(220,53,69) !important;
+}
+
+.navigate-left {
     position: relative;
     right: 20px;
 }
 
-#navigate_right{
+.navigate-right {
     position: relative;
     left: 20px;
 }

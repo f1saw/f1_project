@@ -1,6 +1,6 @@
 <nav id="navbar" class="w-100 navbar navbar-expand-lg mb-3 mb-lg-0">
     <div class="container-fluid px-4">
-        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index_news.php"></a>
+        <a id="navbar-logo" class="navbar-brand px-5" href="/f1_project/views/public/index.php"></a>
 
         <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="material-symbols-outlined">menu</span>
@@ -35,13 +35,13 @@
                     [$login_allowed, $user] = check_cookie();
                     if (!check_user_auth($user)) {?>
                         <div class="nav-item">
-                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="login_form.php">
+                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="auth/login.php">
                                 <span class="material-symbols-outlined">login</span>
                                 <span>Login</span>
                             </a>
                         </div>
                         <div class="nav-item my_outline_animation">
-                            <a class="nav-link text-light d-flex gap-2" href="registration_form.php">
+                            <a class="nav-link text-light d-flex gap-2" href="auth/registration.php">
                                 <span class="material-symbols-outlined">how_to_reg</span>
                                 <span>Registration</span>
                             </a>
@@ -63,7 +63,7 @@
                         <?php if(check_admin_auth($user)){ ?>
                             <div class="nav-item">
                                 <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/newsletter/newsletter.php">
-                                    <span class="material-symbols-outlined">logout</span>
+                                    <span class="material-symbols-outlined">mail</span>
                                     <span>Newsletter</span>
                                 </a>
                             </div>

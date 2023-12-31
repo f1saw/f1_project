@@ -1,17 +1,37 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 require_once("auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
 require_once("views/partials/alert.php");
+
+[$login_allowed, $user] = check_cookie();
+if (!check_admin_auth($user)) {
+    $_SESSION['redirection'] = "/f1_project/views/private/table_users.php";
+    error("401", "not_authorized", "table_users.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    exit;
+}
+set_session($user);
+
+$conn = DB::connect("table_users.php", "/f1_project/views/private/dashboard.php");
+[$num_users, $users] = DB::stmt_get_record_by_field($conn,
+    "SELECT * FROM Users;",
+    "table_users.php",
+    "/f1_project/views/private/dashboard.php");
+
+if (!$conn->close()) {
+    error("500", "conn_close()", "table_users.php", "/f1_project/views/private/dashboard.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-    <title>Admin | User</title>
+    <title>Admin | Users</title>
     <meta charset="UTF-8">
 
     <?php include("views/partials/head.php"); ?>
@@ -24,37 +44,15 @@ require_once("views/partials/alert.php");
 </head>
 
 <body class="vh-100 dark">
-
-    <?php if(session_status() == PHP_SESSION_NONE) session_start(); ?>
-
-    <?php [$login_allowed, $user] = check_cookie(); ?>
-    <?php if (check_admin_auth($user)) {
-        set_session($user); ?>
-
     <div class="container-fluid">
+
         <?php include("views/partials/navbar.php") ?>
 
         <div class="flex-container d-flex flex-column justify-content-center align-items-center mt-5">
-
             <div class="container-element col-12 col-md-9">
-
-                <?php
-
-                $conn = DB::connect();
-                [$num_users, $users] = DB::stmt_get_record_by_field($conn,
-                "SELECT * FROM Users;",
-                "table_users.php",
-                "table_users.php");
-                if (!$conn->close()) {
-                    error("500", "conn_close()", "table_users.php", "/f1_project/views/private/table_users.php");
-                    exit;
-                }
-
-                ?>
 
                 <!-- Loading circle -->
                 <?php include ("views/partials/loading.php"); ?>
-
 
                 <?php if ($num_users > 0) { ?>
 
@@ -92,7 +90,7 @@ require_once("views/partials/alert.php");
                                 </td>
                                 <?php } ?>
 
-                                <td class='text-center' >
+                                <td class='text-center'>
                                     <?php if($user["img_url"] != ''){ ?>
                                         <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo $user['img_url']; ?>" alt="Profile pictures.">
                                     <?php
@@ -121,17 +119,10 @@ require_once("views/partials/alert.php");
                     </span>
                     </div>
                 <?php } ?>
-
-
             </div>
             <!-- TODO: just for testing -->
             <?php session_destroy(); ?>
         </div>
-        <?php } else {
-            $_SESSION['redirection'] = "/f1_project/views/private/table_users.php";
-            error("401", "not_authorized", "table_users.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
-            exit;
-        } ?>
     </div>
 
 <script src="/f1_project/assets/js/loading-crud.js"></script>

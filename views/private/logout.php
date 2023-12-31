@@ -1,13 +1,10 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
-
+if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once ("DB/DB.php");
 require_once ("auth/auth.php");
-
-if(session_status() == PHP_SESSION_NONE) session_start();
-
 
 if (check_user_auth()) {
 
@@ -20,10 +17,10 @@ if (check_user_auth()) {
             ["s"],
             [$_COOKIE["my_f1_cookie_id"]],
             "logout.php",
-            "/f1_project/views/public/login_form.php");
+            "/f1_project/views/public/auth/login.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close: $conn->error", "logout.php", "login_form.php");
+            error("500", "conn_close: $conn->error", "logout.php", "auth/login.php");
             exit;
         }
 
@@ -35,13 +32,12 @@ if (check_user_auth()) {
 
     session_destroy();
 
-    if(session_status() == PHP_SESSION_NONE) session_start();
     $_SESSION["success"] = 1;
     $_SESSION["success_msg"] = "Successfully logged out.";
 
-    header("Location: /f1_project/views/public/login_form.php");
+    header("Location: /f1_project/views/public/auth/login.php");
 
 } else {
-    error("401", "not_authorized", "logout.php", "/f1_project/views/public/login_form.php", "Unauthorized access.");
+    error("401", "not_authorized", "logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

@@ -1,20 +1,18 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
 
-include("views/partials/head.php");
 require_once("auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("utility/store.php");
 require_once ("DB/DB.php");
 require_once("views/partials/alert.php");
 
-if(session_status() == PHP_SESSION_NONE) session_start();
-
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
     $_SESSION['redirection'] = "/f1_project/views/private/store/edit_form.php";
-    error("401", "not_authorized", "store/edit_form.php", "/f1_project/views/public/login_form.php", "Unauthorised access.");
+    error("401", "not_authorized", "store/edit_form.php", "/f1_project/views/public/auth/login.php", "Unauthorised access.");
     exit;
 }
 set_session($user);
@@ -25,7 +23,7 @@ if (!isset($_GET["id"]) || !$_GET["id"]) {
 }
 
 $id = intval($_GET["id"])?? -1;
-$conn = DB::connect("store/edit_form.php", "f1_project/views/private/store/all.php");
+$conn = DB::connect("store\\edit_form.php", "f1_project/views/private/store/all.php");
 $product = DB::get_record_by_field($conn,
     "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?;",
@@ -35,21 +33,22 @@ $product = DB::get_record_by_field($conn,
 "/f1_project/views/private/store/all.php")[0];
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "store/edit_form.php", "/f1_project/views/private/store/all.php");
+    error("500", "conn_close()", "store\\edit_form.php", "/f1_project/views/private/store/all.php");
     exit;
 }
 if (!$product) {
-    error("500", "product_look_up", "store/edit_form.php", "/f1_project/views/private/store/all.php");
+    error("500", "product_look_up", "store\\edit_form.php", "/f1_project/views/private/store/all.php");
     exit;
 }
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <title><?php echo $product["Products.title"] ?></title>
     <meta charset="UTF-8">
+
+    <?php include("views/partials/head.php"); ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
@@ -202,9 +201,9 @@ if (!$product) {
 
             </div>
 
-            <div id="img-preview" class="d-none col-12 col-sm-5 row">
-                <img id="img-url-1" class="d-none img-url col-6 rounded" alt="..." src="">
-                <img id="img-url-2" class="d-none img-url col-6 rounded " alt="..." src="">
+            <div id="img-preview" class="d-none col-12 row d-flex justify-content-center">
+                <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="..." src="">
+                <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded " alt="..." src="">
             </div>
             <!-- TODO: just for testing -->
             <?php session_destroy(); ?>

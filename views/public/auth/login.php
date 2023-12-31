@@ -1,18 +1,25 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
+
+require_once("auth/auth.php");
+require_once("utility/error_handling.php");
+require_once("DB/DB.php");
+require_once("views/partials/alert.php");
+?>
+
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../../assets/css/log_reg_style.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/log_reg_style.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/style.css">
 
-    <?php include("../partials/head.php"); ?>
-    <?php require_once("../../auth/auth.php"); ?>
-    <?php require_once("../../utility/error_handling.php"); ?>
-    <?php require_once ("../../DB/DB.php"); ?>
-    <?php include("../partials/alert.php"); ?>
+    <?php include("views/partials/head.php"); ?>
 </head>
 
 <?php
@@ -43,10 +50,10 @@ if (check_user_auth($user)) {
 <body class="bg-dark vh-100">
 
 <div id="bg-login" class="container-fluid">
-<?php include ("../partials/navbar_log_reg.php"); ?>
+<?php include("views/partials/navbar_log_reg.php"); ?>
 
         <div class="flex-container d-flex justify-content-center">
-            <form id="login-form" action="../../auth/login.php" class="container-element log" method="POST">
+            <form id="login-form" action="../../../auth/login.php" class="container-element log" method="POST">
 
                 <div style="margin-left: 10px; margin-right: 10px">
                 <?php $function = "document.getElementsByClassName('container-element')[0].style.height = '480px'" ?>
@@ -102,7 +109,7 @@ if (check_user_auth($user)) {
                             <span class="material-symbols-outlined text-light">login</span>
                             <strong>Sign in</strong>
                         </button>
-                        <a href="/f1_project/views/public/registration_form.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/public/auth/registration.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined">how_to_reg</span>
                             <span class="d-inline d-xxl-inline">Register</span>
                         </a>
@@ -114,5 +121,5 @@ if (check_user_auth($user)) {
 </body>
 
 
-<script src="../../assets/js/tooltip.js"></script>
+<script src="/f1_project/assets/js/tooltip.js"></script>
 </html>

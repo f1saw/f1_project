@@ -53,6 +53,6 @@ if (check_admin_auth($user)) {
         exit;
     }
 } else {
-    error("401", "Unauthorized access", "send_email.php", "/f1_project/views/public/login_form.php");
+    error("401", "Unauthorized access", "send_email.php", "/f1_project/views/public/auth/login.php");
     exit;
 }
