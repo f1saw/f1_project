@@ -159,10 +159,13 @@
                     </div>
                 </div>
 
+                <!-- Loading circle -->
+                <?php include ("views/partials/loading.php"); ?>
             </form>
         </div>
     </main>
 </div>
+
 
 <script>
     function last_page(){
@@ -178,3 +181,5 @@
         document.getElementById("page2").style.removeProperty('display');
     }
 </script>
+
+<script src="/f1_project/assets/js/users/edit.js"></script>

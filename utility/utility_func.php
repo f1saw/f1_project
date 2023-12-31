@@ -9,11 +9,6 @@ function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") 
         $source,
         $redirect_error)[0];
 
-    if (!$conn->close()) {
-        error("500", "conn_close()", "/f1_project/views/private/edit_user.php", "/f1_project/views/private/table_users.php");
-        exit;
-    }
-
     if($role["role"] == 1){
         return true;
     }
@@ -71,13 +66,13 @@ function generate_random_string($length): string {
 }
 
 
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require_once ('PHPMailer/src/Exception.php');
 require_once ('PHPMailer/src/PHPMailer.php');
 require_once ('PHPMailer/src/SMTP.php');
 /**
+ * Send email method
  * @param array $recipients : recipients email address (e.g. ["pippo@topolino.com", "pluto@topolino.com"] OR [["email" => "a@a.c"], ["email" => "b@b.c"]])
  * @param string $subject : email subject
  * @param string $body : email body (it can be HTML)

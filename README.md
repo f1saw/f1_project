@@ -12,18 +12,18 @@ SAW project about F1
 ## MAURI:
 - [ ] cercare per recupero pass, modifica pass,
 - [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
-- [x] email confirmation -> dopo registrazione mail con codice; in html caricare form con numero da inserire
 - [ ] search bar -> queury database prodotti e visualizzare in una pagina
-- [x] capire overflow su login e registrazione
+- [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
+- [ ] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
+
+
 <hr>
 
-
 ## MATTE:
-- **IMPORTANTE** => uniformo send_mail in cart branch!
-- [ ] carrello
-- [ ] html dinamico con ciclo index
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
+- [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
+- (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
 <br><br><br>
@@ -32,6 +32,8 @@ SAW project about F1
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 
 ## ALL:
+- [ ] Difference between !...! and /.../ in regex (fare test) 
+- [ ] Footer
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
 - [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
@@ -40,10 +42,13 @@ SAW project about F1
 - [ ] Check correttezza campi registrazione con js
 - [ ] Check code HTTP code errors
 - [ ] Generic error page
+- [ ] Renderizzare dashboard differenti in base al ruolo dell'utente
+- [ ] Textarea nei form attraverso libreria JS consigliata da Ribaudo
 
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...
 - [ ] In upload immagine di un item nello shop, ritagliarlo tramite script in dimensione uniformi</li>
+- [ ] Add alt description in Images in DB
 
 
 ## SOURCES:

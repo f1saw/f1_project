@@ -1,3 +1,8 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

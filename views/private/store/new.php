@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin | User</title>
+    <title>Admin | Product</title>
     <meta charset="UTF-8">
     <!--modificare la navbar-->
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
@@ -29,22 +29,22 @@
     <?php include("views/partials/navbar.php") ?>
 
     <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
+        <div class="col-12 col-md-10">
 
-        <div class="col-12 col-sm-7">
-            <form id="login-form" action="/f1_project/views/private/store/product_new.php" class="container" method="POST">
+            <form action="/f1_project/controllers/store/create.php" id="form-loading" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded" method="POST">
 
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>
 
                 <fiedlset>
                     <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
-                        <h1>PRODUCT (</h1>
-                        <span class="material-symbols-outlined">add</span><h1>)</h1>
+                        <span class="material-symbols-outlined">add</span>
+                        <strong>NEW</strong>
                     </legend>
                     <hr>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <label for="title" class="form-label"><strong>TITLE</strong></label><br>
+                            <label for="title" class="form-label"><strong>TITLE <label class="text-danger">*</label></strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
                                 <input type="text" id="title" class="form-control" name="title" placeholder="Title" aria-describedby="title-addon" required>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <label for="price" class="form-label"><strong>PRICE</strong></label><br>
+                            <label for="price" class="form-label"><strong>PRICE <label class="text-danger">*</label></strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                 <input type="text" id="price" class="form-control" name="price" placeholder="50.00" aria-describedby="price-addon" required>
@@ -67,18 +67,18 @@
                         </div>
                         <div class="col-6">
                             <?php
-                            $conn = DB::connect("product_new_form.php", "/f1_project/views/private/table_users.php");
+                            $conn = DB::connect("new_form.php", "/f1_project/views/private/table_users.php");
                             [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
                                 "SELECT * FROM Teams;",
-                                "product_new_form.php",
+                                "new_form.php",
                                 "/f1_project/views/private/table_users.php");
                             if (!$conn->close()) {
-                                error("500", "conn_close()", "product_new_form.php", "/f1_project/views/private/table_users.php");
+                                error("500", "conn_close()", "new_form.php", "/f1_project/views/private/table_users.php");
                                 exit;
                             }
                             ?>
                             <label for="team" class="form-label"><strong>TEAM</strong></label>
-                            <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size">
+                            <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
                                 <option value="ns" class="option_invalid" selected disabled>Select team</option>
                                 <?php
                                 foreach ($teams as $team) {
@@ -96,7 +96,7 @@
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
-                                <input type="text" id="size" class="form-control" name="size" placeholder="Size" aria-describedby="size-addon" required>
+                                <input type="text" id="size" class="form-control" name="size" placeholder="XS S M" aria-describedby="size-addon" required>
                             </div>
                         </div>
                         <div class="col-6">
@@ -106,7 +106,7 @@
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="color-addon">palette</span>
-                                <input type="text" id="color" class="form-control" name="color" placeholder="Color" aria-describedby="color-addon" required>
+                                <input type="text" id="color" class="form-control" name="color" placeholder="red black" aria-describedby="color-addon" required>
                             </div>
                         </div>
                     </div>
@@ -129,15 +129,22 @@
 
                     <hr>
 
-                    <div class="row col-12 d-flex justify-content-end align-items-center mx-1 gap-3">
+                    <div class="row col-12 d-flex justify-content-end align-items-center mx-1 mb-3 gap-3">
+                        <!-- Loading circle -->
+                        <?php include ("views/partials/loading.php"); ?>
                         <button type="submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <strong>Create</strong>
                         </button>
-                        <a href="/f1_project/views/private/dashboard.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/private/store/all.php" class="my_outline_animation col-12 col-sm-3 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined">fast_rewind</span>
                             <span class="d-inline d-sm-none d-xxl-inline">Discard</span>
                         </a>
+                    </div>
+                    <div class="row col-12">
+                        <label>
+                            <label class="text-danger">*</label> Compulsory fields
+                        </label>
                     </div>
                 </fiedlset>
             </form>
@@ -156,8 +163,9 @@
     exit;
 } ?>
 
-<script src="/f1_project/assets/js/tooltip.js"></script>
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
-<script src="/f1_project/assets/js/store.js"></script>
+<script src="/f1_project/assets/js/store/crud.js"></script>
+<script src="/f1_project/assets/js/loading-crud.js"></script>
+
 </body>
 </html>

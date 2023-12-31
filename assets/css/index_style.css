@@ -27,3 +27,7 @@ main {
 .home-cards * {
     color: rgb(33,37,41);
 }
+
+.load-more * {
+    color: white;
+}

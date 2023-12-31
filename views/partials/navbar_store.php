@@ -22,16 +22,15 @@
                     </div>
 
                     <div class="nav-item d-flex align-items-end">
-                        <a href="#" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
-
-                            <label id="cart-tooltip" class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="Shopping cart">
+                        <label id="cart-tooltip" class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="newsletter" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="Shopping cart">
+                            <a href="/f1_project/views/public/store/cart.php" class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2">
                                 <span class="d-flex justify-content-center">
                                     <span class="material-symbols-outlined align-self-end">shopping_cart</span>
                                     <span id="cart-notification-dot" class="btn btn-circle notification-dot align-self-start"></span>
                                 </span>
                                 <span>Shopping cart</span>
-                            </label>
-                        </a>
+                            </a>
+                        </label>
                     </div>
                 </div>
 
@@ -52,7 +51,8 @@
                                 <span>Registration</span>
                             </a>
                         </li>
-                    <?php } else { ?>
+                    <?php } else {
+                        set_session($user);?>
                         <li class="nav-item">
                             <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 
@@ -63,6 +63,7 @@
                                 <?php }?>
 
                                 <span>Dashboard</span>
+                                <label id="user-id" class="d-none"><?php echo $_SESSION["id"] ?></label>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -82,5 +83,4 @@
     </div>
 </nav>
 
-<script src="../../assets/js/tooltip.js"></script>
-<script src="../../assets/js/store.js"></script>
+<script src="/f1_project/assets/js/tooltip.js"></script>
