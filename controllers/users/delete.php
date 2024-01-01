@@ -16,7 +16,7 @@ if (!check_admin_auth($user)) {
 set_session($user);
 
 if (!isset($_GET["id"]) || !$_GET["id"]) {
-    error("500", "id_not_given", "\controllers\users\delete.php", "/f1_project/views/public/auth/login.php", "ID NOT given.");
+    error("500", "id_not_given", "\controllers\users\delete.php", "/f1_project/views/private/users/all.php", "ID NOT given.");
     exit;
 }
 
@@ -27,7 +27,7 @@ if($_SESSION["id"] == $_GET["id"]) {
     exit;
 }
 
-$conn = DB::connect("\controllers\users\delete.php", "/f1_project/controllers/users/delete.php");
+$conn = DB::connect("\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
 
 // TODO: check_user_role() equivale a check_admin_auth() ?
 $check_role = check_user_role($conn,
@@ -36,7 +36,7 @@ $check_role = check_user_role($conn,
     "/f1_project/controllers/users/delete.php");
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "\controllers\users\delete.php", "/f1_project/views/private/dashboard.php");
+    error("500", "conn_close()", "\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
     exit;
 }
 
@@ -45,7 +45,7 @@ if($check_role){
     exit;
 }
 
-$conn = DB::connect("\controllers\users\delete.php", "/f1_project/controllers/users/delete.php");
+$conn = DB::connect("\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
 DB::p_stmt_no_select($conn,
     "DELETE FROM Users WHERE id = ?",
     ["i"],
@@ -54,7 +54,7 @@ DB::p_stmt_no_select($conn,
     "/f1_project/controllers/users/delete.php");
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "\controllers\users\delete.php", "/f1_project/controllers/users/delete.php");
+    error("500", "conn_close()", "\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
     exit;
 }
 

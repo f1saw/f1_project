@@ -77,8 +77,8 @@ if (check_user_auth($user)) {
             msg_error($_POST["Button_id"], $_SESSION["role"], $_SESSION["id"],"Mismatched passwords.");
             exit;
         }
+        $_POST[$post_name[$e_password]] = password_hash($_POST[$post_name[$e_password]], PASSWORD_DEFAULT);
     }
-    $_POST[$post_name[$e_password]] = password_hash($_POST[$post_name[$e_password]], PASSWORD_DEFAULT);
 
     if (isset($_POST[$post_name[$e_news]]) && $_POST[$post_name[$e_news]] != ""){
         if(!is_numeric($_POST[$post_name[$e_news]])){
@@ -130,8 +130,8 @@ if (check_user_auth($user)) {
         }
     }
 
-    for($i=0; $i <8; ++$i){
-        if (isset($_POST[$post_name[$i]]) && isset($_POST['Button_id'])){
+    for($i=0; $i < 8; ++$i) {
+        if (isset($_POST[$post_name[$i]]) && isset($_POST['Button_id'])) {
             if($_POST[$post_name[$i]] == "") {
                 continue;
             }

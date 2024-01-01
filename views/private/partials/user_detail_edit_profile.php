@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <?php include("../partials/navbar.php"); ?>
+    <?php include("views/partials/navbar.php"); ?>
     <main>
         <div id="bg-profile" class="flex-container d-flex justify-content-center">
             <form id="profile-data" class="container-element" method="POST" action="/f1_project/controllers/users/edit.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
