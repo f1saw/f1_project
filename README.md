@@ -19,14 +19,13 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] in cart.php, aggiungere campo per indirizzo di spedizione
+- [ ] controlli lato client in form
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
 <hr>
 
-<br><br><br>
 
 ## NOTES:
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
