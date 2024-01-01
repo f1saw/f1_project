@@ -29,6 +29,7 @@ if (check_admin_auth($user)) {
     header("location:  /f1_project/views/private/store/all.php");
 }
 else {
+    $_SESSION['redirection'] = "/f1_project/controllers/store/delete.php?id=${${$_GET['id']??''}}";
     error("401", "not_authorized", "\controllers\store\delete.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
 }
 exit;

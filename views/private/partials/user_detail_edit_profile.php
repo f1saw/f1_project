@@ -1,3 +1,17 @@
+<?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
+
+require_once("controllers/auth/auth.php");
+
+[$login_allowed, $user] = check_cookie();
+if(!check_user_auth($user)){
+    $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_edit_profile.php";
+    error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    exit;
+}
+?>
 <div class="container-fluid">
     <?php include("views/partials/navbar.php"); ?>
     <main>

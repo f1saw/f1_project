@@ -13,7 +13,7 @@ require_once("controllers/auth/auth.php");
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
-    if (isset($_POST["ids"]) && isset($_POST["titles"]) && isset($_POST["teams"]) && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"])) {
+    if (isset($_POST["ids"]) && isset($_POST["titles"]) /* && isset($_POST["teams"]) */ && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"]) && isset($_POST["address"])) {
 
         /* CLEANING INPUT */
         $ids = htmlentities($_POST["ids"]);
@@ -24,17 +24,25 @@ if ($login_allowed) {
         $prices = htmlentities($_POST["prices"]);
         $sizes = htmlentities($_POST["sizes"]);
         $total = htmlentities($_POST["total"]);
+        $address = preg_replace('/\s+/', ' ', htmlentities($_POST["address"]));
+
+        // Check input values
+        if ($address == '' || $address == ' ') {
+            error("500", "Address is empty.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
+            exit;
+        }
 
         /* DB */
         $conn = DB::connect("\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
         $ids = $conn->real_escape_string($ids);
         $titles = $conn->real_escape_string($titles);
-        $teams = $conn->real_escape_string($teams);
+        // $teams = $conn->real_escape_string($teams);
         $quantities = $conn->real_escape_string($quantities);
         $imgs = $conn->real_escape_string($imgs);
         $prices = $conn->real_escape_string($prices);
         $sizes = $conn->real_escape_string($sizes);
         $total = $conn->real_escape_string($total);
+        $address = $conn->real_escape_string($address);
 
         try {
             $order_id = generate_random_string(5);
@@ -43,30 +51,35 @@ if ($login_allowed) {
             $quantities_array = explode("\t", $quantities);
             $prices_array = explode("\t", $prices);
             $sizes_array = explode("\t", $sizes);
-            //
             $imgs_array = explode("\t", $imgs);
             $titles_array = explode("\t", $titles);
-            $teams_array = explode("\t", $teams);
+            // $teams_array = explode("\t", $teams);
 
-            // Check if every product in the cart is still available, if NOT I cannot create and order id
-            /* for ($i = 0; $i < count($products_id_array) - 1; $i++) {
-                $product = DB::get_record_by_field($conn,
-                    "SELECT id FROM products WHERE id = ?;",
-                    ["i"],
-                    $products_id_array[$i],
-                "orders\create.php",
-                    "/f1_project/views/public/store/cart.php");
-            } */
+            // Check input (e.g. input not valid if ids="5 null 3"; title => "null null t-shirt")
+            for ($i = 0; $i < count($products_id_array) - 1; $i++) {
+                if ($products_id_array[$i] == null || preg_match('/^\s*$/', $products_id_array[$i])
+                || $sizes_array[$i] == null || preg_match('/^\s*$/', $sizes_array[$i])
+                || $quantities_array[$i] == null || preg_match('/^\s*$/', $quantities_array[$i])
+                || $prices_array[$i] == null || preg_match('/^\s*$/', $prices_array[$i])
+                || $imgs_array[$i] == null || preg_match('/^\s*$/', $imgs_array[$i])
+                || $titles_array[$i] == null || preg_match('/^\s*$/', $titles_array[$i])) {
+                    error("500", "Some fields are empty.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
+                    exit;
+                }
+            }
 
+            // Create order in DB
             DB::p_stmt_no_select($conn,
                 "INSERT INTO orders VALUES (?, ?, ?, ?, ?);",
                 ["s", "i", "s", "s", "i"],
-                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d H:i:s'), "Via ...", $total],
+                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d H:i:s'), $address, $total],
                 "\controller\orders\create.php",
                 "/f1_project/views/public/store/cart.php");
 
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
 
+                // Create relation order-products
+                // If a product in the order is not available anymore, the order will be deleted through the use of the last parameter ($order_id)
                 DB::p_stmt_no_select($conn,
                     "INSERT INTO orders_products VALUES (?, ?, ?, ?, ?);",
                     ["s", "i", "s", "i", "i"],
@@ -75,7 +88,6 @@ if ($login_allowed) {
                     "/f1_project/views/public/store/cart.php",
                     $order_id);
             }
-
 
             $subject = "Ready to goooo! You've just completed your order :)";
             $body = "";
@@ -91,6 +103,8 @@ if ($login_allowed) {
 
             [$int, $dec] = str2int_dec($total);
             $body .= "Total: <strong>$int.$dec &euro;</strong>";
+            $body .= "<hr>";
+            $body .= "Address: $address";
             send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {
@@ -111,6 +125,7 @@ if ($login_allowed) {
         error("500", "Fields not provided.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
     }
 } else {
+    $_SESSION['redirection'] = "/f1_project/controllers/orders/create.php";
     error("401", "Unauthorised access!", "\controller\orders\create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

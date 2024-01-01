@@ -31,7 +31,7 @@ SAW project about F1
 ## NOTES:
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 - Cos'è assets/image/User_detail*
-- Rivedere utilizzo utility/msg_error.php
+- Rivedere utilizzo utility/msg_error.php (reindirizzare secondo edit.php?id=$id)
 
 ## ALL:
 - [ ] Difference between !...! and /.../ in regex (fare test) 

@@ -160,6 +160,7 @@ if (check_user_auth($user)) {
     header("location: /f1_project/views/private/users/all.php");
 }
 else{
+    $_SESSION['redirection'] = "/f1_project/controllers/users/edit.php?id=${${$_POST['Button_id']??''}}";
     error("401", "not_authorized", "\controllers\users\\edit.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

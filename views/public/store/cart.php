@@ -42,7 +42,7 @@ require_once ("DB/DB.php");
     <?php succ_msg_alert(); ?>
     <?php err_msg_alert(); ?>
 
-    <main class="container-fluid mt-0 mt-md-5">
+    <main class="container-fluid mt-0 mt-lg-5">
 
         <div class="text-light">
             <span class="text-light h2 d-flex align-items-end gap-3">
@@ -71,7 +71,7 @@ require_once ("DB/DB.php");
         <div id="second-body" class="d-none">
             <hr class="rounded mt-5">
             <div class="row d-flex justify-content-between gap-3 mt-4">
-                <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-md-5">
+                <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-lg-5 mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start align-items-center gap-4">
 
                     <input type="hidden" name="ids" id="ids" value="" required>
                     <input type="hidden" name="titles" id="titles" value="" required>
@@ -86,12 +86,20 @@ require_once ("DB/DB.php");
                         <span class="material-symbols-outlined">credit_card</span>
                         <span class="text">Complete order</span>
                     </button>
+
+                    <div>
+                        <label for="address" class="form-label text-box"><strong>ADDRESS</strong></label><br>
+                        <div class="input-group">
+                            <span class="input-group-text material-symbols-outlined text-dark text-box" id="address-addon">home</span>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Your address" aria-describedby="address-addon" required>
+                        </div>
+                    </div>
                 </form>
 
                 <!-- Loading circle -->
                 <?php include ("views/partials/loading.php"); ?>
 
-                <label class="col-12 col-md-5 text-center text-md-end">
+                <label class="col-12 col-lg-4 text-center text-lg-end">
                     <span>
                         Total (<span id="count-items"></span>): <strong class="total-price"></strong>
                     </span>

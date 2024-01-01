@@ -53,6 +53,7 @@ if (check_admin_auth($user)) {
         exit;
     }
 } else {
+    $_SESSION['redirection'] = "/f1_project/controllers/auth/newsletter/send_email.php";
     error("401", "Unauthorized access", "send_email.php", "/f1_project/views/public/auth/login.php");
     exit;
 }

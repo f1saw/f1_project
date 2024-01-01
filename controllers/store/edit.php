@@ -87,6 +87,7 @@ if (check_admin_auth($user)) {
         error("500", "Fields not provided.", "\controllers\store\\edit.php", "/f1_project/views/private/store/all.php");
     }
 } else {
+    $_SESSION['redirection'] = "/f1_project/controllers/store/edit.php?id=${${$_POST['id']??''}}";
     error("401", "Unauthorised access!", "\controllers\store\\edit.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

@@ -10,6 +10,7 @@ require_once("utility/msg_error.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
+    $_SESSION['redirection'] = "/f1_project/users/delete.php?id=${${$_GET['id']??''}}";
     error("401", "not_authorized", "\controllers\users\delete.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

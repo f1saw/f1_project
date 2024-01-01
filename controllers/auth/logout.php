@@ -37,6 +37,7 @@ if (check_user_auth()) {
     header("Location: /f1_project/views/public/auth/login.php");
 
 } else {
+    $_SESSION['redirection'] = "/f1_project/controllers/auth/logout.php";
     error("401", "not_authorized", "\controllers\auth\logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

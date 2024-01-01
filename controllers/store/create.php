@@ -82,6 +82,7 @@ if (check_admin_auth($user)) {
         error("500", "Fields not provided.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
     }
 } else {
+    $_SESSION['redirection'] = "/f1_project/controllers/store/create.php";
     error("401", "Unauthorised access!", "\controllers\store\create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

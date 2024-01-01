@@ -10,6 +10,7 @@ require_once("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
+    $_SESSION['redirection'] = "/f1_project/views/private/store/new.php";
     error("401", "not_authorized", "\\views\private\store\\new.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

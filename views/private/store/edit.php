@@ -11,8 +11,7 @@ require_once("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
-    $id = $_GET["id"]??"";
-    $_SESSION['redirection'] = "/f1_project/views/private/store/edit.php?id=$id";
+    $_SESSION['redirection'] = "/f1_project/views/private/store/edit.php?id=${${$_GET['id']??''}}";
     error("401", "not_authorized", "\\views\private\store\\edit.php", "/f1_project/views/public/auth/login.php", "Unauthorised access.");
     exit;
 }

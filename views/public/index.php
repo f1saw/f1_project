@@ -21,10 +21,10 @@ $json_cards_data = json_decode($json, true);
     <title>Home</title>
     <meta charset="UTF-8">
 
+    <?php include("views/partials/head.php"); ?>
+
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
-
-    <?php include("views/partials/head.php"); ?>
 </head>
 
 <body class="bg-dark">
