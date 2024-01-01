@@ -6,7 +6,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once ("utility/utility_func.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
-require_once ("auth/auth.php");
+require_once ("controllers/auth/auth.php");
 
 const NEW_PASSWORD_LENGTH = 5;
 
@@ -18,19 +18,19 @@ if (!$login_allowed) {
         /* CLEANING INPUT */
         $email = preg_replace('!\s+!', '', $_POST["email"]);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            error("-1", "Email not an email", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+            error("-1", "Email not an email", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
             exit;
         }
 
         /* DB */
-        $conn = DB::connect("controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+        $conn = DB::connect("controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
         $email = $conn->real_escape_string($email);
 
         $user_db = DB::get_record_by_field($conn,
             "SELECT id, email FROM Users WHERE email = ?;",
             ['s'],
             [$email],
-            "controllers/auth/lost_password.php",
+            "controllers\auth\lost_password.php",
             "/f1_project/views/public/auth/lost_password.php")[0];
 
         if ($user_db) {
@@ -44,11 +44,11 @@ if (!$login_allowed) {
                     "UPDATE Users SET password = ? WHERE id = ?;",
                     ["s", "i"],
                     [$hash_pwd, $user_db["id"]],
-                    "controllers/auth/lost_password.php",
+                    "controllers\auth\lost_password.php",
                     "/f1_project/views/public/auth/lost_password.php");
 
                 if (!$conn->close()) {
-                    error("500", "conn_close()", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+                    error("500", "conn_close()", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
                     exit;
                 }
 
@@ -63,13 +63,13 @@ if (!$login_allowed) {
                 header("Location: /f1_project/views/public/auth/login.php");;
                 exit;
             } catch (Exception $e) {
-                error("-1", "Exception: $e", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+                error("-1", "Exception: $e", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
                 exit;
             }
 
         } else {
             // EMAIL DOES NOT exists in DB
-            error("-1", "Email DOES NOT exists.", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+            error("-1", "Email DOES NOT exists.", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
             exit;
         }
 
@@ -77,10 +77,10 @@ if (!$login_allowed) {
 
 
     } else {
-        error("401", "Fields not provided.", "controllers/auth/lost_password.php", "/f1_project/views/public/auth/lost_password.php");
+        error("401", "Fields not provided.", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
         exit;
     }
 } else {
-    header("Location: /f1_project/views/public/index.php");;
+    header("Location: /f1_project/views/public/index.php");
     exit;
 }

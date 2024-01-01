@@ -3,8 +3,8 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once ("DB/DB.php");
-require_once ("auth/auth.php");
+require_once("DB/DB.php");
+require_once("controllers/auth/auth.php");
 
 if (check_user_auth()) {
 
@@ -16,11 +16,11 @@ if (check_user_auth()) {
             "DELETE FROM Cookies WHERE id = ?;",
             ["s"],
             [$_COOKIE["my_f1_cookie_id"]],
-            "logout.php",
+            "\controllers\auth\logout.php",
             "/f1_project/views/public/auth/login.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close: $conn->error", "logout.php", "auth/login.php");
+            error("500", "conn_close: $conn->error", "\controllers\auth\logout.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
@@ -28,7 +28,6 @@ if (check_user_auth()) {
         $cookie_exp_date = time() - 3600;
         setcookie("my_f1_cookie_id", $cookie_id, $cookie_exp_date);
     }
-
 
     session_destroy();
 
@@ -38,6 +37,6 @@ if (check_user_auth()) {
     header("Location: /f1_project/views/public/auth/login.php");
 
 } else {
-    error("401", "not_authorized", "logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    error("401", "not_authorized", "\controllers\auth\logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

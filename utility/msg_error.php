@@ -1,4 +1,6 @@
 <?php
+if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
+    error("500", "set_include_path()");
 require_once("utility/error_handling.php");
 
 //TODO: e_code e e_msg da rivedere
@@ -6,24 +8,24 @@ require_once("utility/error_handling.php");
 function msg_err_user_delete($msg) : void{
     error("401",
         " Unauthorized access.",
-        "/f1_project/views/private/user_delete.php",
-        "/f1_project/views/private/table_users.php",
+        "/f1_project/controllers/users/delete.php",
+        "/f1_project/views/private/users/all.php",
         $msg);
 }
 
 function msg_err_edit_user($msg) : void{
     error("401",
         " Unauthorized access.",
-        "/f1_project/views/private/edit_user.php",
-        "/f1_project/views/private/user_detail.php",
+        "/f1_project/controllers/users/edit.php",
+        "/f1_project/views/private/users/detail.php",
         $msg);
 }
 
 function msg_err_edit_user_admin($msg) : void{
     error("401",
         " Unauthorized access.",
-        "/f1_project/views/private/edit_user.php",
-        "/f1_project/views/private/table_users.php",
+        "/f1_project/controllers/users/edit.php",
+        "/f1_project/views/private/users/all.php",
         $msg);
 }
 

@@ -3,12 +3,12 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once ("auth/auth.php");
+require_once ("controllers/auth/auth.php");
 require_once ("views/partials/alert.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<!--xmlns="http://www.w3.org/1999/html"-->
 <head>
     <title>Newsletter</title>
     <meta charset="UTF-8">
@@ -28,9 +28,11 @@ require_once ("views/partials/alert.php");
         <main>
             <div class="flex-container d-flex justify-content-center">
                 <div class="container-element px-3">
+
                     <?php err_msg_alert(); ?>
                     <?php succ_msg_alert(); ?>
-                    <form id="newsletter" action="send_email.php" method="post">
+
+                    <form id="newsletter" action="/f1_project/controllers/newsletter/send_email.php" method="post">
                         <span class="d-flex justify-content-center">
                             <label for="subject" class="form-label d-flex gap-2">
                                 <span class="material-symbols-outlined text-danger">mail</span>

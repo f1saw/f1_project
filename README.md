@@ -19,6 +19,7 @@ SAW project about F1
 <hr>
 
 ## MATTE:
+- [ ] in cart.php, aggiungere campo per indirizzo di spedizione
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
@@ -29,10 +30,15 @@ SAW project about F1
 
 ## NOTES:
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
+- Cos'è assets/image/User_detail*
+- Rivedere utilizzo utility/msg_error.php
 
 ## ALL:
 - [ ] Difference between !...! and /.../ in regex (fare test) 
 - [ ] Footer
+- [ ] fare redirect su 404.php per ogni file tipo controllers/controllers/auth/auth.php
+- [ ] mettere err_msg e succ_msg in dashboard.php
+- [ ] confirm email non è lo script adeguato per i test automatici (mantenere aggiornato anche registration.php)
 - [ ] Proteggere file privati da accesso web (es. keys.ini)
 - [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
 - [ ] cosine necessarie x accessibilità (es. alt nelle immagini, + test con browser accessibile, ...)
@@ -43,6 +49,8 @@ SAW project about F1
 - [ ] Generic error page
 - [ ] Renderizzare dashboard differenti in base al ruolo dell'utente
 - [ ] Textarea nei form attraverso libreria JS consigliata da Ribaudo
+- [ ] rivedere tutti i tag @TODO
+- [ ] commentare script di login, registrazione, ...
 
 ## EXTRA:
 - [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...

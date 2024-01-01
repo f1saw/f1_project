@@ -3,32 +3,31 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("utility/store.php");
 require_once ("DB/DB.php");
 require_once("views/partials/alert.php");
 
-
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
     $_SESSION['redirection'] = "/f1_project/views/private/store/all.php";
-    error("401", "not_authorized", "store\all.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    error("401", "not_authorized", "\\views\private\store\all.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 set_session($user);
 
-$conn = DB::connect("store\all.php", "f1_project/views/private/dashboard.php");
+$conn = DB::connect("\\views\private\store\all.php", "f1_project/views/private/dashboard.php");
 [$num_products, $products] = DB::stmt_get_record_by_field($conn,
     "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
                 Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id
             ORDER BY Products.id DESC;",
-    "store\all.php",
-"f1_project/views/private/dashboard.php");
+    "\\views\private\store\all.php",
+    "f1_project/views/private/dashboard.php");
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "store/all.php", "/f1_project/views/private/dashboard.php");
+    error("500", "conn_close()", "\\views\private\store\all.php", "f1_project/views/private/dashboard.php");
     exit;
 }
 ?>
@@ -42,14 +41,16 @@ if (!$conn->close()) {
     <?php include("views/partials/head.php"); ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="/f1_project/assets/css/admin/table_style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
+
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script> $(document).ready( function () { $('#table').DataTable({ order: [[0, 'desc'] ]}); }); </script>
 </head>
 
 <body class="vh-100 dark">
     <div class="container-fluid">
+
         <?php include("views/partials/navbar.php") ?>
 
         <div class="flex-container d-flex flex-column justify-content-center align-items-center mt-5">

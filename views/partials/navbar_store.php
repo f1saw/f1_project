@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/controllers/auth/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
                                 <span>Logout</span>
                             </a>

@@ -1,13 +1,11 @@
 <?php
-
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
-require_once("auth/auth.php");
-
-if (session_status() == PHP_SESSION_NONE) session_start();
+require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
 if (check_admin_auth($user)) {
@@ -39,13 +37,13 @@ if (check_admin_auth($user)) {
             || $team_id == "" || $team_id == " "
             || $color == "" || $color == " "
             || $size == "" || $size == " ") {
-            error("-1", "Empty input fields.", "store\create.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("-1", "Empty input fields.", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
             exit;
         }
 
         // REGEX PRICE xx.yy
         if (!preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "store/edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("-1", "Price NOT valid.", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -58,7 +56,7 @@ if (check_admin_auth($user)) {
         }*/
 
         /* DB */
-        $conn = DB::connect("store/edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+        $conn = DB::connect("\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
         $id = $conn->real_escape_string($id);
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
@@ -73,11 +71,11 @@ if (check_admin_auth($user)) {
             "UPDATE Products SET title=?, description=?, price=?, img_url=?, team_id=?, color=?, size=? WHERE id = ?",
             ["s", "s", "i", "s", "i", "s", "s", "i"],
             [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $id],
-            "store/edit.php",
-            "/f1_project/views/private/store/edit_form.php");
+            "\controllers\store\\edit.php",
+            "/f1_project/views/private/store/edit.php?id=$id");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "store/edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("500", "conn_close()", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
             exit;
         }
 
@@ -86,9 +84,9 @@ if (check_admin_auth($user)) {
         header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "store/edit.php", "/f1_project/views/private/store/all.php");
+        error("500", "Fields not provided.", "\controllers\store\\edit.php", "/f1_project/views/private/store/all.php");
     }
 } else {
-    error("401", "Unauthorised access!", "store/edit.php", "/f1_project/views/public/auth/login.php");
+    error("401", "Unauthorised access!", "\controllers\store\\edit.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

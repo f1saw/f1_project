@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once("views/partials/alert.php");
 require_once ("utility/store.php");
@@ -44,7 +44,7 @@ if (!$conn->close()) {
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/store.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/store/store.css">
 </head>
 
 <body>
@@ -165,5 +165,5 @@ if (!$conn->close()) {
 </body>
 
 <script src="/f1_project/assets/js/navbar.js"></script>
-<script src="/f1_project/assets/js/store.js"></script>
+<script src="/f1_project/assets/js/store/store.js"></script>
 </html>

@@ -33,6 +33,6 @@
     "title": "Store",
     "text": "Buy <strong>official</strong> merchandise",
     "img_url": "https://cdn-5.motorsport.com/images/amp/0qXjNlQ6/s6/charles-leclerc-ferrari-carlos.jpg",
-    "link": "#"
+    "link": "/f1_project/views/public/store/store.php"
   }
 ]

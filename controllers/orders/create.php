@@ -1,16 +1,14 @@
 <!-- TODO: LocalStorage.clear() -->
 <?php
-
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 require_once ("utility/store.php");
 require_once ("utility/utility_func.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
-require_once("auth/auth.php");
-
-if (session_status() == PHP_SESSION_NONE) session_start();
+require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
@@ -28,7 +26,7 @@ if ($login_allowed) {
         $total = htmlentities($_POST["total"]);
 
         /* DB */
-        $conn = DB::connect("orders/create.php", "/f1_project/views/public/store/cart.php");
+        $conn = DB::connect("\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
         $ids = $conn->real_escape_string($ids);
         $titles = $conn->real_escape_string($titles);
         $teams = $conn->real_escape_string($teams);
@@ -39,7 +37,7 @@ if ($login_allowed) {
         $total = $conn->real_escape_string($total);
 
         try {
-            $order_id = generate_random_string(29);
+            $order_id = generate_random_string(5);
 
             $products_id_array = explode("\t", $ids);
             $quantities_array = explode("\t", $quantities);
@@ -63,16 +61,17 @@ if ($login_allowed) {
             DB::p_stmt_no_select($conn,
                 "INSERT INTO orders VALUES (?, ?, ?, ?, ?);",
                 ["s", "i", "s", "s", "i"],
-                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d'), "Via ...", $total],
-                "orders/create.php",
+                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d H:i:s'), "Via ...", $total],
+                "\controller\orders\create.php",
                 "/f1_project/views/public/store/cart.php");
 
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
+
                 DB::p_stmt_no_select($conn,
                     "INSERT INTO orders_products VALUES (?, ?, ?, ?, ?);",
                     ["s", "i", "s", "i", "i"],
                     [$order_id, $products_id_array[$i], $sizes_array[$i], $quantities_array[$i], $prices_array[$i]],
-                    "orders/create.php",
+                    "\controller\orders\create.php",
                     "/f1_project/views/public/store/cart.php",
                     $order_id);
             }
@@ -95,7 +94,7 @@ if ($login_allowed) {
             send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {
-                error("500", "conn_close()", "orders/create.php", "/f1_project/views/public/store/cart.php");
+                error("500", "conn_close()", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
                 exit;
             }
 
@@ -104,14 +103,14 @@ if ($login_allowed) {
             header("Location: /f1_project/views/public/store/cart.php");
 
         } catch (Exception $e) {
-            error("500", "generate_random_string(): $e", "orders/create.php", "/f1_project/views/public/store/cart.php");
+            error("500", "generate_random_string(): $e", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
         }
 
 
     } else {
-        error("500", "Fields not provided.", "orders/create.php", "/f1_project/views/public/store/cart.php");
+        error("500", "Fields not provided.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
     }
 } else {
-    error("401", "Unauthorised access!", "orders/create.php", "/f1_project/views/public/auth/login.php");
+    error("401", "Unauthorised access!", "\controller\orders\create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

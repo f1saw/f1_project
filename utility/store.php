@@ -1,5 +1,4 @@
 <?php
-
 function get_data_id($product): string {
     return " data-id=\"" . $product["Products.id"] .
         "\" data-title=\"" . $product["Products.title"] .

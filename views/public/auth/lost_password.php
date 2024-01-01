@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
 include("views/partials/alert.php");

@@ -1,8 +1,7 @@
 <?php
-
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-$_DEFAULT_ERROR_REDIRECT = "index.php";
+$_DEFAULT_ERROR_REDIRECT = "/f1_project/views/public/index.php";
 
 function error($e_code = "", $e_msg = "", $source = "", $redirect = "", $e_usr_msg = "") : void {
     global $_DEFAULT_ERROR_REDIRECT;
@@ -18,7 +17,6 @@ function error($e_code = "", $e_msg = "", $source = "", $redirect = "", $e_usr_m
 
     $_SESSION["err"] = 1;
     $_SESSION["err_msg"] = ($e_usr_msg != "")? $e_usr_msg:$e_msg;
-    // header("Location: http://".$_SERVER['HTTP_HOST'].$formaction;
     $redirect = ($redirect != "")? $redirect : $_DEFAULT_ERROR_REDIRECT;
     header("Location: $redirect");
     exit;

@@ -21,14 +21,14 @@
         })
     });
 function goToProfile(){
-    window.location.href = "/f1_project/views/private/user_detail.php"
+    window.location.href = "/f1_project/views/private/users/detail.php"
 }
 function goToOrders(){
     window.location.href = "/f1_project/views/private/orders/all.php"
 }
 
  function goToTable(){
-     window.location.href = "/f1_project/views/private/table_users.php"
+     window.location.href = "/f1_project/views/private/users/all.php"
  }
 
  function goToStoreManagement() {

@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("views/partials/alert.php");
@@ -12,10 +12,10 @@ require_once("views/partials/alert.php");
 if (check_user_auth($user)) {
     set_session($user);
     if (check_admin_auth($user)) {
-        header("Location: /f1_project/views/private/table_users.php");
+        header("Location: /f1_project/views/private/users/all.php");
     } else {
         echo "Logged but in user mode";
-        echo "<a href='/f1_project/views/private/logout.php'>Logout</a>";
+        echo "<a href='/f1_project/controllers/auth/logout.php'>Logout</a>";
     }
     exit;
 }
@@ -65,11 +65,11 @@ if (check_user_auth($user)) {
         <?php }
         else if (isset($_SESSION["confirm_email"]) && $_SESSION["confirm_email"]){
             unset($_SESSION["confirm_email"]);
-            header("location: auth/login.php");
+            header("location: /f1_project/views/public/auth/login.php");
             exit;
         }
         else{ ?>
-        <form id="register-form" action="/f1_project/auth/registration_email.php" method="POST" class="container-element reg">
+        <form id="register-form" action="/f1_project/controllers/auth/registration_email.php" method="POST" class="container-element reg">
 
             <div style="margin-left: 10px; margin-right: 10px">
             <?php $function = "document.getElementsByClassName('reg')[0].style.height = '550px'; 

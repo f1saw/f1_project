@@ -4,9 +4,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
 
 require_once("utility/error_handling.php");
 
-
 $ini = parse_ini_file("config/keys.ini");
-
 
 class DB {
 
@@ -95,4 +93,3 @@ class DB {
         return $stmt;
     }
 }
-

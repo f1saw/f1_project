@@ -5,7 +5,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once ("controllers/news/news.php");
 require_once ("views/partials/public/news_cards.php");
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12";
 

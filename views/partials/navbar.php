@@ -35,13 +35,13 @@
                     [$login_allowed, $user] = check_cookie();
                     if (!check_user_auth($user)) {?>
                         <div class="nav-item">
-                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="auth/login.php">
+                            <a class="nav-link btn btn-danger text-light px-4 d-flex gap-2" href="/f1_project/views/public/auth/login.php">
                                 <span class="material-symbols-outlined">login</span>
                                 <span>Login</span>
                             </a>
                         </div>
                         <div class="nav-item my_outline_animation">
-                            <a class="nav-link text-light d-flex gap-2" href="auth/registration.php">
+                            <a class="nav-link text-light d-flex gap-2" href="/f1_project/views/public/auth/registration.php">
                                 <span class="material-symbols-outlined">how_to_reg</span>
                                 <span>Registration</span>
                             </a>
@@ -69,7 +69,7 @@
                             </div>
                         <?php } ?>
                         <div class="nav-item">
-                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/logout.php">
+                            <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/controllers/auth/logout.php">
                                 <span class="material-symbols-outlined">logout</span>
                                 <span>Logout</span>
                             </a>

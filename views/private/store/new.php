@@ -3,26 +3,26 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
 require_once("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
-    error("401", "not_authorized", "store\\new.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    error("401", "not_authorized", "\\views\private\store\\new.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 set_session($user);
 
-$conn = DB::connect("new_form.php", "/f1_project/views/private/table_users.php");
+$conn = DB::connect("\\views\private\store\\new.php", "/f1_project/views/private/users/all.php");
 [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
     "SELECT * FROM Teams;",
-    "store\\new.php",
-    "/f1_project/views/private/store/all.php");
+    "\\views\private\store\\new.php",
+    "/f1_project/views/private/users/all.php");
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "store\\new.php", "/f1_project/views/private/store/all.php");
+    error("500", "conn_close()", "\\views\private\store\\new.php", "/f1_project/views/private/users/all.php");
     exit;
 }
 ?>
@@ -38,7 +38,7 @@ if (!$conn->close()) {
     <!--modificare la navbar-->
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/product_new.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/admin/product_new.css">
 </head>
 
 <body class="vh-100 bg-dark">
@@ -136,8 +136,10 @@ if (!$conn->close()) {
                     <hr>
 
                     <div class="row col-12 d-flex justify-content-end align-items-center mx-1 mb-3 gap-3">
+
                         <!-- Loading circle -->
                         <?php include ("views/partials/loading.php"); ?>
+
                         <button type="submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <strong>Create</strong>

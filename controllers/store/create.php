@@ -1,13 +1,11 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
+if(session_status() == PHP_SESSION_NONE) session_start();
 
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
-require_once("auth/auth.php");
-
-
-if(session_status() == PHP_SESSION_NONE) session_start();
+require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
 if (check_admin_auth($user)) {
@@ -37,13 +35,13 @@ if (check_admin_auth($user)) {
             || $team_id == "" || $team_id == " "
             || $color == "" || $color == " "
             || $size == "" || $size == " ") {
-            error("-1", "Empty input fields.", "store\create.php", "/f1_project/views/private/store/new.php");
+            error("-1", "Empty input fields.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
             exit;
         }
 
         // REGEX PRICE xx.yy
         if ($price && !preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "store\create.php", "/f1_project/views/private/store/new.php");
+            error("-1", "Price NOT valid.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -55,7 +53,7 @@ if (check_admin_auth($user)) {
         }*/
 
         /* DB */
-        $conn = DB::connect("create.php", "/f1_project/views/private/store/new.php");
+        $conn = DB::connect("\controllers\store\create.php", "/f1_project/views/private/store/new.php");
         $title = $conn->real_escape_string($title);
         $desc = $conn->real_escape_string($desc);
         $price = number_format($conn->real_escape_string($price), 2) * 100;
@@ -69,11 +67,10 @@ if (check_admin_auth($user)) {
         "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
         ["s", "s", "i", "s", "i", "s", "s"],
         [$title, $desc, $price, $img_url_str, $team_id, $color, $size],
-        "create.php",
-        "/f1_project/views/private/store/new_form.php");
+            "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "create.php", "/f1_project/views/private/store/new.php");
+            error("500", "conn_close()", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
             exit;
         }
 
@@ -82,9 +79,9 @@ if (check_admin_auth($user)) {
         header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "create.php", "/f1_project/views/private/store/new.php");
+        error("500", "Fields not provided.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
     }
 } else {
-    error("401", "Unauthorised access!", "create.php", "/f1_project/views/public/auth/login.php");
+    error("401", "Unauthorised access!", "\controllers\store\create.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

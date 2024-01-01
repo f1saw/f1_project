@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("views/partials/alert.php");
@@ -16,10 +16,10 @@ require_once("views/partials/alert.php");
     <title>Login</title>
     <meta charset="UTF-8">
 
+    <?php include("views/partials/head.php"); ?>
+
     <link rel="stylesheet" href="/f1_project/assets/css/log_reg_style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-
-    <?php include("views/partials/head.php"); ?>
 </head>
 
 <?php
@@ -32,16 +32,14 @@ if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) &&
 <?php } ?>
 
 <?php
-if(session_status() == PHP_SESSION_NONE) session_start();
-
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
     if (check_admin_auth($user)) {
-        header("Location: /f1_project/views/private/table_users.php");
+        header("Location: /f1_project/views/private/users/all.php");
     } else {
         echo "Logged but in user mode";
-        echo "<a href='/f1_project/views/private/logout.php'>Logout</a>";
+        echo "<a href='/f1_project/controllers/auth/logout.php'>Logout</a>";
     }
     exit;
 }
@@ -53,7 +51,7 @@ if (check_user_auth($user)) {
 <?php include("views/partials/navbar_log_reg.php"); ?>
 
         <div class="flex-container d-flex justify-content-center">
-            <form id="login-form" action="../../../auth/login.php" class="container-element log" method="POST">
+            <form id="login-form" action="/f1_project/controllers/auth/login.php" class="container-element log" method="POST">
 
                 <div style="margin-left: 10px; margin-right: 10px">
                 <?php $function = "document.getElementsByClassName('container-element')[0].style.height = '480px'" ?>
@@ -61,7 +59,7 @@ if (check_user_auth($user)) {
                 <?php succ_msg_alert($function); ?>
                 </div>
 
-                <fiedlset>
+                <fieldset>
                     <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                         <span class="material-symbols-outlined">passkey</span>
                         <strong>LOGIN</strong>
@@ -114,7 +112,7 @@ if (check_user_auth($user)) {
                             <span class="d-inline d-xxl-inline">Register</span>
                         </a>
                     </div>
-                </fiedlset>
+                </fieldset>
             </form>
         </div>
 </div>

@@ -1,20 +1,12 @@
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
-
-require_once ("utility/utility_func.php");
-require_once("utility/error_handling.php");
-require_once ("DB/DB.php");
-require_once ("auth/auth.php");
-
-
-
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-
-
-
-
+require_once("utility/utility_func.php");
+require_once("utility/error_handling.php");
+require_once("DB/DB.php");
+require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!$login_allowed) {
@@ -27,13 +19,12 @@ if (!$login_allowed) {
         $remember_me = isset($_POST["remember_me"]) ? 1:0;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            error("-1", "Email not an email", "login.php", "/f1_project/views/public/auth/login.php");
+            error("-1", "Email not an email", "\auth\login.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
-
         /* DB */
-        $conn = DB::connect("login.php", "/f1_project/views/public/auth/login.php");
+        $conn = DB::connect("\auth\login.php", "/f1_project/views/public/auth/login.php");
 
         $email = $conn->real_escape_string($email);
         $password = $conn->real_escape_string($password);
@@ -43,7 +34,7 @@ if (!$login_allowed) {
             "SELECT Users.id AS 'Users.id', Users.first_name AS 'Users.first_name', Users.last_name AS 'Users.last_name', Users.email AS 'Users.email', Users.password AS 'Users.password', Users.role AS 'Users.role', Users.date_of_birth AS 'Users.date_of_birth', Users.img_url AS 'Users.img_url', Users.newsletter AS 'Users.newsletter' FROM Users WHERE email = ?;",
             ['s'],
             [$email],
-            "login.php",
+            "\auth\login.php",
             "/f1_project/views/public/auth/login.php")[0];
 
 
@@ -63,14 +54,14 @@ if (!$login_allowed) {
                         "INSERT INTO Cookies VALUES (?, ?, ?);",
                         ["s", "s", "i"],
                         [$cookie_id, $cookie_value, $cookie_exp_date],
-                        "login.php",
+                        "\auth\login.php",
                         "/f1_project/views/public/auth/login.php");
 
                     DB::p_stmt_no_select($conn,
                         "UPDATE Users SET cookie_id = ? WHERE id = ?;",
                         ["s", "i"],
                         [$cookie_id, $user["Users.id"]],
-                        "login.php",
+                        "\auth\login.php",
                         "/f1_project/views/public/auth/login.php");
 
 
@@ -111,7 +102,7 @@ if (!$login_allowed) {
                         "../views/public/auth/login.php");
                     } */
                 } catch (Exception $e) {
-                    error("500", "generate_random_string()", "login.php", "/f1_project/views/public/auth/login.php");
+                    error("500", "generate_random_string()", "\auth\login.php", "/f1_project/views/public/auth/login.php");
                     exit;
                 }
             }
@@ -121,12 +112,12 @@ if (!$login_allowed) {
             $login_allowed = 0;
         }
         if (!$conn->close()) {
-            error("500", "conn_close()", "login.php", "/f1_project/views/public/auth/login.php");
+            error("500", "conn_close()", "\auth\login.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
     } else {
-        error("401", "Fields not provided.", "login.php", "/f1_project/views/public/auth/login.php");
+        error("401", "Fields not provided.", "\auth\login.php", "/f1_project/views/public/auth/login.php");
         exit;
     }
 }
@@ -138,20 +129,12 @@ if ($login_allowed) {
     if(isset($_SESSION["redirection"])) {
         header("Location: {$_SESSION['redirection']}");
         unset($_SESSION['redirection']);
-        exit;
     }
     else {
         header("Location: /f1_project/views/public/index.php");
-        exit;
     }
 
 } else {
-    error("401", "Email and pwd NOT correct", "login.php", "/f1_project/views/public/auth/login.php");
-    exit;
+    error("401", "Email and pwd NOT correct", "\auth\login.php", "/f1_project/views/public/auth/login.php");
 }
-
-
-
-
-
-
+exit;

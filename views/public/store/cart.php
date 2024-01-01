@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once("views/partials/alert.php");
 require_once ("utility/store.php");
@@ -20,7 +20,7 @@ require_once ("DB/DB.php");
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
     <link rel="stylesheet" href="/f1_project/assets/css/index_style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/store.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/store/store.css">
     <link rel="stylesheet" href="/f1_project/assets/css/store/cart.css">
 </head>
 
@@ -103,5 +103,5 @@ require_once ("DB/DB.php");
 </body>
 
 <script src="/f1_project/assets/js/navbar.js"></script>
-<script src="/f1_project/assets/js/cart.js"></script>
+<script src="/f1_project/assets/js/store/cart.js"></script>
 </html>

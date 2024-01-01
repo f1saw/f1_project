@@ -3,7 +3,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-require_once("auth/auth.php");
+require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("utility/store.php");
 require_once ("DB/DB.php");
@@ -12,12 +12,12 @@ require_once("views/partials/alert.php") ;
 [$login_allowed, $user] = check_cookie();
 if (!check_user_auth($user)) {
     $_SESSION['redirection'] = "/f1_project/views/private/orders/all.php";
-    error("401", "not_authorized", "store/all.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    error("401", "not_authorized", "\\views\private\orders\all.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 set_session($user);
 
-$conn = DB::connect("orders\all.php", "/f1_project/views/private/dashboard.php");
+$conn = DB::connect("\\views\private\store\all.php", "/f1_project/views/private/dashboard.php");
 $orders = (array)DB::get_record_by_field($conn,
     "SELECT orders.id AS 'Orders.id', orders.date AS 'Orders.date', orders.amount AS 'Orders.amount', 
                 products.id AS 'Products.id', products.title AS 'Products.title', products.img_url AS 'Products.img_url', 
@@ -25,15 +25,16 @@ $orders = (array)DB::get_record_by_field($conn,
            FROM orders_products 
                 JOIN orders ON orders_products.order_id = orders.id 
                 JOIN products ON orders_products.product_id = products.id
-           WHERE orders.user_id = ?;",
+           WHERE orders.user_id = ?
+           ORDER BY orders.date DESC;",
     ["i"],
     [$user["Users.id"]],
-    "orders\all.php",
+    "\\views\private\orders\all.php",
     "/f1_project/views/private/dashboard.php");
 $num_orders = count($orders);
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "orders\all.php", "/f1_project/views/private/dashboard.php");
+    error("500", "conn_close()", "\\views\private\orders\all.php", "/f1_project/views/private/dashboard.php");
     exit;
 }
 ?>
@@ -47,14 +48,16 @@ if (!$conn->close()) {
     <?php include("views/partials/head.php"); ?>
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/table_style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="/f1_project/assets/css/admin/table_style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
+
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script> $(document).ready( function () { $('#table').DataTable(); }); </script>
 </head>
 
 <body class="vh-100 dark">
     <div class="container-fluid">
+
         <?php include("views/partials/navbar.php") ?>
 
         <div class="flex-container d-flex flex-column justify-content-center align-items-center mt-3 mt-md-5">
@@ -106,7 +109,7 @@ if (!$conn->close()) {
                             } ?>
                             <tr>
                                 <th class='text-center'>
-                                    <?php echo $i ?>
+                                    <?php echo $order["Orders.id"] ?>
                                 </th>
                                 <td class="text-center">
                                     <a href="/f1_project/views/public/store/product.php?id=<?php echo $order["Products.id"] ?>" target="_blank" class="text-decoration-none"><?php echo $order["Products.title"] ?></a>
