@@ -109,7 +109,7 @@ if (check_user_auth($user)) {
                             <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
                         </div>
                         <div class="form-text mx-1 text-light"><p class="text-box"> your <strong>Top secret</strong> email :P </p></div>
-                        <div id="select-info" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                        <div id="select-info-email" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
@@ -169,6 +169,6 @@ if (check_user_auth($user)) {
 </div>
 </body>
 
-<script src="/f1_project/assets/js/validators/email.js"></script>
+<script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
 </html>

@@ -64,7 +64,7 @@ if (check_user_auth($user)) {
                                 <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
                                 <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
                             </div>
-                            <div id="select-info" class="d-none d-flex gap-2 mt-1 py-1">
+                            <div id="select-info-email" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>
                                 <span class=""></span>
                             </div>
@@ -86,5 +86,5 @@ if (check_user_auth($user)) {
         </div>
     </div>
 </body>
-<script src="/f1_project/assets/js/validators/email.js"></script>
+<script src="/f1_project/assets/js/validators/user.js"></script>
 </html>

@@ -72,7 +72,7 @@ if (check_user_auth($user)) {
                                 <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
                                 <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
                             </div>
-                            <div id="select-info" class="d-none d-flex gap-2 mt-1 py-1">
+                            <div id="select-info-email" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>
                                 <span class=""></span>
                             </div>
@@ -83,9 +83,12 @@ if (check_user_auth($user)) {
                             <label for="password" class="form-label"><strong>PASSWORD</strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="password-addon">lock</span>
-                                <input type="password" class="form-control" id="password" name="pass" placeholder="Password" aria-describedby="password-addon" required>
+                                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" aria-describedby="password-addon" required>
                             </div>
-
+                            <div id="select-info-pass" class="d-none d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-3 mt-4">
@@ -127,6 +130,6 @@ if (check_user_auth($user)) {
 </div>
 </body>
 
-<script src="/f1_project/assets/js/validators/email.js"></script>
+<script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
 </html>
