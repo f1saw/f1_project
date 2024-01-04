@@ -66,11 +66,15 @@ if (check_user_auth($user)) {
                     </legend>
                     <hr>
                     <div class="row mb-3">
-                        <div class="col-12 text-box" >
+                        <div class="col-12 text-box">
                             <label for="email" class="form-label"><strong>EMAIL</strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
                                 <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
+                            </div>
+                            <div id="select-info" class="d-none d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
                             </div>
                         </div>
                     </div>
@@ -84,7 +88,7 @@ if (check_user_auth($user)) {
 
                         </div>
                     </div>
-                    <div class="row mb-3 mt-5">
+                    <div class="row mb-3 mt-4">
                         <div class="col-12 d-flex flex-row gap-1 text-box">
                             <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me">
                             <label class="form-check-label mx-1 d-flex align-items-center justify-content-start gap-2" for="remember_me" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<div class='d-flex justify-content-center align-items-center gap-2'>Provided by <span class='material-symbols-outlined'>cookie</span></div>">
@@ -101,8 +105,13 @@ if (check_user_auth($user)) {
                             </a>
                         </div>
                     </div>
+                    <div class="text-box col-12">
+                        <label>
+                            <label class="text-danger">*</label> Compulsory fields
+                        </label>
+                    </div>
                     <hr>
-                    <div class="row col-12 d-flex justify-content-center align-items-center mx-1 gap-3">
+                    <div class="row col-12 d-flex justify-content-center align-items-center mx-1 gap-3 mb-3">
                         <button type="submit" class="btn btn-danger col-8 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined text-light">login</span>
                             <strong>Sign in</strong>
@@ -118,6 +127,6 @@ if (check_user_auth($user)) {
 </div>
 </body>
 
-
+<script src="/f1_project/assets/js/validators/email.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
 </html>

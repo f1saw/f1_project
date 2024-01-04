@@ -16,7 +16,7 @@ class DB {
 
         $conn = new mysqli($ini["hostname"], $ini["username"], $ini["password"], $ini["database"], $ini["port"]);
         if ($conn->connect_errno) {
-            error("500", "mysqli error: $conn->connect_errno", $source, $redirect_error);
+            error("500", "mysqli error: $conn->error", $source, $redirect_error);
             exit;
         }
         $conn->set_charset("utf8mb4");

@@ -58,5 +58,6 @@ SAW project about F1
 
 
 ## SOURCES:
+- https://verifalia.com/validate-email
 - <a href="https://www.f1-fansite.com/">f1-fansite</a>
 - <a href="https://wallpapercave.com/">wallpapercave</a>
