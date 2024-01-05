@@ -7,8 +7,8 @@
         </button>
 
         <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between align-items-center" id="navbarNav">
-            <form class="d-none d-lg-flex" role="search" name="search_bar">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-none d-lg-flex" method="GET" role="search" action="/f1_project/views/public/search/search.php" name="search_bar">
+                <input class="form-control me-2" type="search" name="search" id="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-danger" type="submit">Search</button>
             </form>
 
@@ -59,7 +59,7 @@
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
                                     <img class="profile-img" src="<?php echo $_SESSION["img_url"]; ?>" alt="Profile">
                                 <?php } else{ ?>
-                                    <img class="profile-img" src="../../assets/images/foto-profilo.jpg" alt="Profile">
+                                    <img class="profile-img" src="/f1_project/assets/images/foto-profilo.jpg" alt="Profile">
                                 <?php }?>
 
                                 <span>Dashboard</span>
