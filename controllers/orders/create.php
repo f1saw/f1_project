@@ -117,7 +117,7 @@ if ($login_allowed) {
             header("Location: /f1_project/views/public/store/cart.php");
 
         } catch (Exception $e) {
-            error("500", "generate_random_string(): $e", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
+            error("500", "Exception: $e", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
         }
 
 

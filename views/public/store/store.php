@@ -120,7 +120,7 @@ if (!$conn->close()) {
                                 <div class="modal-body">
                                     <?php $size = explode(";", $product["Products.size"]); ?>
                                     <select id="s-size-<?php echo $product["Products.id"]; ?>" class="form-select rounded-pill" aria-label="Select size">
-                                        <option value="ns" class="option_invalid" selected>Select size</option>
+                                        <option value="" class="option_invalid" selected>Select size</option>
                                         <?php
                                         foreach ($size as $s) {
                                             echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";

@@ -19,7 +19,7 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] controlli lato client in form
+- [X] controlli lato client in form (js do not submit form if there are fields not valid)
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
@@ -28,11 +28,13 @@ SAW project about F1
 
 
 ## NOTES:
+- search.php => search ! match /\s*/
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 - Cos'è assets/image/User_detail*
 - Rivedere utilizzo utility/msg_error.php (reindirizzare secondo edit.php?id=$id)
 
 ## ALL:
+- [ ] uniformare name e id degli input con quelli richiesti dalla prof
 - [ ] Difference between !...! and /.../ in regex (fare test) 
 - [ ] Footer
 - [ ] fare redirect su 404.php per ogni file tipo controllers/controllers/auth/auth.php
@@ -58,5 +60,6 @@ SAW project about F1
 
 
 ## SOURCES:
+- https://verifalia.com/validate-email
 - <a href="https://www.f1-fansite.com/">f1-fansite</a>
 - <a href="https://wallpapercave.com/">wallpapercave</a>
