@@ -205,7 +205,7 @@ if (!$product) {
                             <!-- Loading circle -->
                             <?php include ("views/partials/loading.php"); ?>
 
-                            <button type="submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                            <button type="submit" id="btn-submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                                 <span class="material-symbols-outlined">add</span>
                                 <strong>Update</strong>
                             </button>

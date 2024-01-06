@@ -104,6 +104,15 @@ function send_mail(array $recipients, string $subject, string $body, array $bcc 
     $mail->Subject = $subject;
     $mail->Body = $body;
 
+    // TODO: (to verify) Options required to avoid "SMTP Error: Could not connect to SMTP host. Failed to connect to server"
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+
     // BCC implemented in order to respect privacy
     foreach ($bcc as $recipient) {
         $mail->addBCC($recipient["email"]?? $recipient);

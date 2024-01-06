@@ -27,20 +27,28 @@ if(!check_user_auth($user)){
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="edit_firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
+                                    <label for="fname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
                                 </span>
                                 <div class="input-group">
-                                    <input type="text" id="edit_firstname" name="edit_firstname" class="form-control text-box" placeholder="<?php echo $element["first_name"]; ?>">
+                                    <input type="text" id="fname" name="edit_firstname" class="form-control text-box" placeholder="<?php echo $element["first_name"]; ?>">
+                                </div>
+                                <div id="input-info-fname" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="edit_lastname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
+                                    <label for="lname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
                                 </span>
                                 <div class="input-group d-flex text-center">
-                                    <input type="text" id="edit_lastname" name="edit_lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
+                                    <input type="text" id="lname" name="edit_lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
+                                </div>
+                                <div id="input-info-lname" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +103,7 @@ if(!check_user_auth($user)){
 
                     <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                         <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
-                        <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                        <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                         <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                     </div>
                 </div>
@@ -147,10 +155,14 @@ if(!check_user_auth($user)){
                     <div class="row mb-3">
                         <div class="col-12">
                             <span class="d-flex justify-content-center">
-                                <label for="edit_img" class="form-label"><strong class="text-red">Url img</strong></label><br>
+                                <label for="img_url" class="form-label"><strong class="text-red">Url img</strong></label><br>
                             </span>
                             <div class="input-group d-flex text-center">
-                                <input type="text" id="edit_img" name="edit_img" class="form-control text-box" placeholder="<?php echo $element["img_url"]; ?>">
+                                <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="<?php echo $element["img_url"]; ?>">
+                            </div>
+                            <div id="input-info-img_url" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
                             </div>
                         </div>
                     </div>
@@ -180,7 +192,7 @@ if(!check_user_auth($user)){
 
                     <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                         <button type="button" name="other_info" onclick="last_page()" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
-                        <button type="submit" name="Button_id" value="<?php echo $element["id"]; ?>" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                        <button type="submit" name="Button_id" value="<?php echo $element["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                         <button type="button" name="other_info" style="border: unset" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                     </div>
                 </div>

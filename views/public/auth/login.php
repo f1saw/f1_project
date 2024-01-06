@@ -115,7 +115,7 @@ if (check_user_auth($user)) {
                     </div>
                     <hr>
                     <div class="row col-12 d-flex justify-content-center align-items-center mx-1 gap-3 mb-3">
-                        <button type="submit" class="btn btn-danger col-8 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                        <button type="submit" id="btn-submit" class="btn btn-danger col-8 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                             <span class="material-symbols-outlined text-light">login</span>
                             <strong>Sign in</strong>
                         </button>

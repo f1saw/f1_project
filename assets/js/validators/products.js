@@ -11,6 +11,7 @@ const err_input_info = (id, err_msg) => {
     $(`#input-info-${id} span:first-child`).text("warning").addClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).html(`${err_msg}`).addClass("text-danger");
     $(`#input-info-${id}`).removeClass("d-none");
+    $("#btn-submit").attr("disabled", true)
 }
 
 const clear_input_info = id => {
@@ -85,6 +86,18 @@ const validators_products = {
     }
 }
 
+const check_all = validators => {
+    let isValid = true;
+    for (const [key, value] of Object.entries(validators)) {
+        value.ids.forEach((id, index) => {
+            isValid = isValid && value.validator(id, $(`#${id}`).val(), value.params);
+        })
+    }
+    if (isValid) {
+        $("#btn-submit").attr("disabled", false)
+    }
+}
+
 for (const [key, value] of Object.entries(validators_products)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {
@@ -93,6 +106,7 @@ for (const [key, value] of Object.entries(validators_products)) {
                 err_input_info(id, value.err_msg)
             } else {
                 clear_input_info(value.ids)
+                check_all(validators_products)
             }
         })
     })
