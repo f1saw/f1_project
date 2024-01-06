@@ -109,7 +109,7 @@ if (!$product) {
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
-                                    <input type="text" id="price" class="form-control" name="price" placeholder="50.00" value="<?php echo $int . "." . $dec; ?>" aria-describedby="price-addon" required>
+                                    <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" value="<?php echo $int . "." . $dec; ?>" aria-describedby="price-addon" required>
                                 </div>
                                 <div id="input-info-price" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
@@ -119,7 +119,7 @@ if (!$product) {
                             <div class="col-6">
                                 <label for="team" class="form-label"><strong>TEAM <label class="text-danger">*</label></strong></label>
                                 <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size" required>
-                                    <option value="ns" class="option_invalid" selected disabled>Select team</option>
+                                    <option value="" class="option_invalid" selected disabled>Select team</option>
                                     <?php
                                     foreach ($teams as $team) {
                                         echo "<option value=" . $team["id"] . " class='option_valid' " . (($team["id"] == $product["Teams.id"])? " selected":"") . ">" . $team["name"] . "</option>";

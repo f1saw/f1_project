@@ -54,7 +54,7 @@ if(!check_user_auth($user)){
                                 <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                 <label class="form-control text-box"><?php echo $element["email"] ?></label>
                                 <?php } else {?>
-                                <input type="text" id="email" name="edit_email" class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
+                                <input type="text" id="email" name="edit_email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
                                 <?php } ?>
                             </div>
                             <div id="input-info-email" class="d-none text-box d-flex gap-2 mt-1 py-1">

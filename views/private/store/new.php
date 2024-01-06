@@ -88,7 +88,7 @@ if (!$conn->close()) {
                             <label for="price" class="form-label"><strong>PRICE <label class="text-danger">*</label></strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
-                                <input type="text" id="price" class="form-control" name="price" placeholder="50.00" aria-describedby="price-addon" required>
+                                <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" aria-describedby="price-addon" required>
                             </div>
                             <div id="input-info-price" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>
@@ -98,7 +98,7 @@ if (!$conn->close()) {
                         <div class="col-6">
                             <label for="team" class="form-label"><strong>TEAM <label class="text-danger">*</label></strong></label>
                             <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
-                                <option value="ns" class="option_invalid" selected disabled>Select team</option>
+                                <option value="" class="option_invalid" selected disabled>Select team</option>
                                 <?php
                                 foreach ($teams as $team) {
                                     echo "<option value=" . $team["id"] . " class='option_valid'>" . $team["name"] . "</option>";

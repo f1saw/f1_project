@@ -19,7 +19,7 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] controlli lato client in form (js do not submit form if there are fields not valid) || rename #select-info in #input-info
+- [ ] controlli lato client in form (js do not submit form if there are fields not valid)
 - [ ] uniformare name e id degli input con quelli richiesti dalla prof
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
@@ -29,6 +29,7 @@ SAW project about F1
 
 
 ## NOTES:
+- search.php => search ! match /\s*/
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 - Cos'è assets/image/User_detail*
 - Rivedere utilizzo utility/msg_error.php (reindirizzare secondo edit.php?id=$id)
