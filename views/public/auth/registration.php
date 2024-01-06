@@ -109,7 +109,7 @@ if (check_user_auth($user)) {
                             <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
                         </div>
                         <div class="form-text mx-1 text-light"><p class="text-box"> your <strong>Top secret</strong> email :P </p></div>
-                        <div id="select-info-email" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                        <div id="input-info-email" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
@@ -122,12 +122,20 @@ if (check_user_auth($user)) {
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
+                        <div id="input-info-pass" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                            <span class="material-symbols-outlined"></span>
+                            <span class=""></span>
+                        </div>
                     </div>
                     <div class="col-12 col-lg-6">
                         <label for="password_confirm" class="form-label text-box"><strong>REPEAT PASSWORD</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
                             <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Repeat password">
+                        </div>
+                        <div id="input-info-pass-confirm" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                            <span class="material-symbols-outlined"></span>
+                            <span class=""></span>
                         </div>
                     </div>
                 </div>

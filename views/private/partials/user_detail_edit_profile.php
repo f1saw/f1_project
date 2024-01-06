@@ -48,14 +48,18 @@ if(!check_user_auth($user)){
                     <div class="row mb-3">
                         <div class="col-12">
                             <span class="d-flex justify-content-center">
-                                <label for="edit_email" class="form-label"><strong class="text-red">Email</strong></label><br>
+                                <label for="email" class="form-label"><strong class="text-red">Email</strong></label><br>
                             </span>
                             <div class="input-group d-flex text-center">
                                 <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                 <label class="form-control text-box"><?php echo $element["email"] ?></label>
                                 <?php } else {?>
-                                <input type="text" id="edit_email" name="edit_email" class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
+                                <input type="text" id="email" name="edit_email" class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
                                 <?php } ?>
+                            </div>
+                            <div id="input-info-email" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
                             </div>
                         </div>
                     </div>
@@ -106,28 +110,36 @@ if(!check_user_auth($user)){
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="edit_pass" class="form-label"><strong class="text-red">Password</strong></label><br>
+                                    <label for="pass" class="form-label"><strong class="text-red">Password</strong></label><br>
                                 </span>
                                 <div class="input-group d-flex text-center">
                                     <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                         <label class="form-control text-box">Not allowed</label>
                                     <?php } else {?>
-                                    <input type="password" id="edit_pass" name="edit_pass" class="form-control text-box" placeholder="password">
+                                    <input type="password" id="pass" name="edit_pass" class="form-control text-box" placeholder="password">
                                     <?php } ?>
+                                </div>
+                                <div id="input-info-pass" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="edit_pass_confirm" class="form-label"><strong class="text-red">Confirm password</strong></label><br>
+                                    <label for="pass-confirm" class="form-label"><strong class="text-red">Confirm password</strong></label><br>
                                 </span>
                                 <div class="input-group d-flex text-center">
                                     <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                         <label class="form-control text-box">Not allowed</label>
                                     <?php } else {?>
-                                    <input type="password" id="edit_pass_confirm" name="edit_pass_confirm" class="form-control text-box" placeholder="confirm password">
+                                    <input type="password" id="pass-confirm" name="edit_pass_confirm" class="form-control text-box" placeholder="confirm password">
                                     <?php } ?>
+                                </div>
+                                <div id="input-info-pass-confirm" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                         </div>
@@ -180,4 +192,5 @@ if(!check_user_auth($user)){
     </main>
 </div>
 
+<script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/users/edit.js"></script>

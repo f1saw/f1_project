@@ -72,7 +72,7 @@ if (check_user_auth($user)) {
                                 <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
                                 <input type="email" id="email" class="form-control" name="email" placeholder="name@example.com" aria-describedby="email-addon" required>
                             </div>
-                            <div id="select-info-email" class="d-none d-flex gap-2 mt-1 py-1">
+                            <div id="input-info-email" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>
                                 <span class=""></span>
                             </div>
@@ -80,12 +80,12 @@ if (check_user_auth($user)) {
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 text-box">
-                            <label for="password" class="form-label"><strong>PASSWORD</strong></label><br>
+                            <label for="pass" class="form-label"><strong>PASSWORD</strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="password-addon">lock</span>
                                 <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" aria-describedby="password-addon" required>
                             </div>
-                            <div id="select-info-pass" class="d-none d-flex gap-2 mt-1 py-1">
+                            <div id="input-info-pass" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>
                                 <span class=""></span>
                             </div>

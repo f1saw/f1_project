@@ -19,7 +19,8 @@ SAW project about F1
 <hr>
 
 ## MATTE:
-- [ ] controlli lato client in form
+- [ ] controlli lato client in form (js do not submit form if there are fields not valid) || rename #select-info in #input-info
+- [ ] uniformare name e id degli input con quelli richiesti dalla prof
 - [ ] ragionare su DB al posto del LocalStorage per memorizzare il carrello degli utenti
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 - [ ] Circuits (Calendar 2024 web scraping) + Weather API location | https://www.formula1.com/en/racing/2024.html
