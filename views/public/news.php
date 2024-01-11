@@ -11,7 +11,7 @@ require_once ("controllers/news/news.php");
 require_once ("views/partials/public/news_cards.php");
 require_once("controllers/auth/auth.php");
 
-const COL_CARD = "col-3";
+const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
 [$title_list, $img_list, $link_list] = f1_scrape_news(BASE_URL);
 ?>
