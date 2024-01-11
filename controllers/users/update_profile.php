@@ -13,7 +13,7 @@ require_once("utility/msg_error.php");
 if (check_user_auth($user)) {
     set_session($user);
 
-    $post_name = ["edit_firstname", "edit_lastname", "edit_email", "edit_date_of_birth", "edit_pass",
+    $post_name = ["firstname", "lastname", "email", "edit_date_of_birth", "pass",
         "edit_news", "edit_img", "edit_role"];
 
     $e_firstname = 0;
@@ -33,7 +33,7 @@ if (check_user_auth($user)) {
             $_POST[$post_name[$j]] = preg_replace('!\s+!', '', $_POST[$post_name[$j]]);
     }
 
-    if(isset($_POST[$post_name[$e_password]]) && !isset($_POST["edit_pass_confirm"])){
+    if(isset($_POST[$post_name[$e_password]]) && !isset($_POST["confirm"])){
         msg_error($_POST["Button_id"], $_SESSION["role"], $_SESSION["id"],"Please confirm the password");
         exit;
     }
@@ -41,9 +41,9 @@ if (check_user_auth($user)) {
     if(isset($_POST[$post_name[$e_password]]))
         $_POST[$post_name[$e_password]] = trim($_POST[$post_name[$e_password]]);
 
-    if(isset($_POST["edit_pass_confirm"]) && $_POST["edit_pass_confirm"] != "") {
-        $_POST["edit_pass_confirm"] = trim($_POST["edit_pass_confirm"]);
-        if ($_POST["edit_pass_confirm"] == " ") {
+    if(isset($_POST["confirm"]) && $_POST["confirm"] != "") {
+        $_POST["confirm"] = trim($_POST["confirm"]);
+        if ($_POST["confirm"] == " ") {
             msg_error($_POST["Button_id"], $_SESSION["role"], $_SESSION["id"],"Empty input fields.");
             exit;
         }
@@ -73,7 +73,7 @@ if (check_user_auth($user)) {
     }
 
     if(isset($_POST[$post_name[$e_password]]) && $_POST[$post_name[$e_password]] != "") {
-        if ($_POST[$post_name[$e_password]] != $_POST["edit_pass_confirm"]) {
+        if ($_POST[$post_name[$e_password]] != $_POST["confirm"]) {
             msg_error($_POST["Button_id"], $_SESSION["role"], $_SESSION["id"],"Mismatched passwords.");
             exit;
         }
@@ -101,10 +101,10 @@ if (check_user_auth($user)) {
             $_POST[$post_name[$e_role]] = 1;
         }
 
-        $conn = DB::connect("\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+        $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         $check_role = check_user_role($conn,
             [$_POST["Button_id"]],
-            "\controllers\users\\edit.php",
+            "\controllers\users\\update_profile.php",
             "/f1_project/views/private/dashboard.php");
 
         if ($check_role){
@@ -114,18 +114,18 @@ if (check_user_auth($user)) {
     }
 
     if(isset($_POST[$post_name[$e_email]])){
-        $conn = DB::connect("\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+        $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         $check = DB::get_record_by_field(
             $conn,
             "SELECT email FROM users WHERE email = ?",
             ["s"],
             [$_POST[$post_name[$e_email]]],
-            "\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+            "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         if($check != null){
             msg_err_edit_user("Email already in use");
         }
         if (!$conn->close()) {
-            error("500", "conn_close()", "\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+            error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
             exit;
         }
     }
@@ -136,22 +136,22 @@ if (check_user_auth($user)) {
                 continue;
             }
             $change_value = $_POST[$post_name[$i]];
-            $conn = DB::connect("\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+            $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
             DB::p_stmt_no_select(
                 $conn,
                 "UPDATE users SET $db_col_edit[$i] = '$change_value' WHERE id = ?",
                 ["i"],
                 [$_POST['Button_id']],
-                "\controllers\users\\edit.php", "/f1_project/views/private/users/all.php"
+                "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php"
             );
             if (!$conn->close()) {
-                error("500", "conn_close()", "\controllers\users\\edit.php", "/f1_project/views/private/users/all.php");
+                error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
                 exit;
             }
         }
     }
     $_SESSION["success"] = 1;
-    $_SESSION["success_msg"] = "Modification completed successfully.";
+    $_SESSION["success_msg"] = "Update completed successfully.";
     if(isset($_SESSION['redirection'])){
         header("Location: {$_SESSION['redirection']}");
         unset($_SESSION['redirection']);
@@ -160,7 +160,7 @@ if (check_user_auth($user)) {
     header("location: /f1_project/views/private/users/all.php");
 }
 else{
-    $_SESSION['redirection'] = "/f1_project/controllers/users/edit.php?id=${${$_POST['Button_id']??''}}";
-    error("401", "not_authorized", "\controllers\users\\edit.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    $_SESSION['redirection'] = "/f1_project/controllers/users/update_profile.php?id=${${$_POST['Button_id']??''}}";
+    error("401", "not_authorized", "\controllers\users\\update_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

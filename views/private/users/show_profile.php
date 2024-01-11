@@ -55,12 +55,12 @@ if (check_user_auth($user)) {
         }
     }
     else{
-        error("500", "User is NULL", "\\views\users\detail.php", "/f1_project/views/private/dashboard.php");
+        error("500", "User is NULL", "\\views\users\show_profile.php", "/f1_project/views/private/dashboard.php");
     }
 }
 else{
-    $_SESSION['redirection'] = "/f1_project/views/private/users/detail.php?id={${${$_GET['id']??''}}}";
-    error("401", "not_authorized", "\\views\users\detail.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    $_SESSION['redirection'] = "/f1_project/views/private/users/show_profile.php?id={${${$_GET['id']??''}}}";
+    error("401", "not_authorized", "\\views\users\show_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
 ?>

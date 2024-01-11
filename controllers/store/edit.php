@@ -34,13 +34,13 @@ if (check_admin_auth($user)) {
             || $title == "" || $title == " "
             || $price == "" || $price == " "
             || $team_id == "" || $team_id == " ") {
-            error("-1", "Empty input fields.", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("-1", "Empty input fields.", "\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");
             exit;
         }
 
         // REGEX PRICE xx.yy
         if (!preg_match("/^\d+([,.]\d{1,2})?$/", $price)) {
-            error("-1", "Price NOT valid.", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("-1", "Price NOT valid.", "\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");
             exit;
         }
         $price = preg_replace("/,/", ".", $price);
@@ -55,7 +55,7 @@ if (check_admin_auth($user)) {
         /* CHECK INPUT LENGTHS */
 
         /* DB */
-        $conn = DB::connect("\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+        $conn = DB::connect("\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");
         $price = number_format($price, 2) * 100;
         $img_url_str = implode("\t", $img_url);
         $team_id = intval($team_id);
@@ -66,7 +66,7 @@ if (check_admin_auth($user)) {
         foreach ([$id, $title, $desc, $price, $img_url_str, $team_id, $color, $size] as $input) {
             if (PRODUCTS_MAX_LENGTHS[$i] >= 0 && strlen($input) > PRODUCTS_MAX_LENGTHS[$i]) {
                 $tmp = ucfirst(PRODUCTS_ARRAY[$i]);
-                error("500", "$tmp is TOO long.", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+                error("500", "$tmp is TOO long.", "\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");
                 exit;
             }
             $i++;
@@ -76,11 +76,11 @@ if (check_admin_auth($user)) {
             "UPDATE Products SET title=?, description=?, price=?, img_url=?, team_id=?, color=?, size=? WHERE id = ?",
             ["s", "s", "i", "s", "i", "s", "s", "i"],
             [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $id],
-            "\controllers\store\\edit.php",
-            "/f1_project/views/private/store/edit.php?id=$id");
+            "\controllers\store\\update_profile.php",
+            "/f1_project/views/private/store/update_profile.php?id=$id");
 
         if (!$conn->close()) {
-            error("500", "conn_close()", "\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");
+            error("500", "conn_close()", "\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");
             exit;
         }
 
@@ -89,10 +89,10 @@ if (check_admin_auth($user)) {
         header("Location: /f1_project/views/private/store/all.php");
 
     } else {
-        error("500", "Fields not provided.", "\controllers\store\\edit.php", "/f1_project/views/private/store/all.php");
+        error("500", "Fields not provided.", "\controllers\store\\update_profile.php", "/f1_project/views/private/store/all.php");
     }
 } else {
-    $_SESSION['redirection'] = "/f1_project/controllers/store/edit.php?id=${${$_POST['id']??''}}";
-    error("401", "Unauthorised access!", "\controllers\store\\edit.php", "/f1_project/views/public/auth/login.php");
+    $_SESSION['redirection'] = "/f1_project/controllers/store/update_profile.php?id=${${$_POST['id']??''}}";
+    error("401", "Unauthorised access!", "\controllers\store\\update_profile.php", "/f1_project/views/public/auth/login.php");
 }
 exit;

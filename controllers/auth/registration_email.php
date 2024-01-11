@@ -19,13 +19,13 @@ if ($login_allowed) {
 }
 
 /* -- ERROR | fields NOT set -- */
-if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["password_confirm"])) {
+if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])) {
 
-    $first_name = $_POST["fname"];
-    $last_name = $_POST["lname"];
+    $first_name = $_POST["firstname"];
+    $last_name = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $password_confirm = $_POST["password_confirm"];
+    $confirm = $_POST["confirm"];
     $date_of_birth = $_POST["date_of_birth"] ?? "";
     $newsletter = isset($_POST["newsletter"]) ? 1 : 0;
 
@@ -34,14 +34,14 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     $email = preg_replace('!\s+!', '', $email);
     $date_of_birth = preg_replace('!\s+!', ' ', $date_of_birth);
     $password = trim($password);
-    $password_confirm = trim($password_confirm);
+    $confirm = trim($confirm);
 
     /* -- ERROR | Empty input fields -- */
     if ($first_name == "" || $first_name == " "
         || $last_name == "" || $last_name == " "
         || $email == "" || $email == " "
         || $password == ""
-        || $password_confirm == ""
+        || $confirm == ""
         /*|| $date_of_birth == "" || $date_of_birth == " "*/) {
         error("-1", "Empty input fields.", "\auth\\registration_email.php", "/f1_project/views/public/auth/registration.php");
         exit;
@@ -63,7 +63,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     }
 
     /* -- ERROR | passwords (mis)matching -- */
-    if ($password != $password_confirm) {
+    if ($password != $confirm) {
         error("-1", "Mismatched passwords.", "\auth\\registration_email.php", "/f1_project/views/public/auth/registration.php");
         exit;
     }
@@ -87,12 +87,12 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
         $_SESSION["confirm_email"] = false;
 
         // I need to temporarily keep the recording values in memory
-        $_SESSION["tmp_fname"] = $first_name;
-        $_SESSION["tmp_lname"] = $last_name;
+        $_SESSION["tmp_firstname"] = $first_name;
+        $_SESSION["tmp_lastname"] = $last_name;
         $_SESSION["tmp_email"] = $email;
         $_SESSION["tmp_date_of_birth"] = $date_of_birth;
         $_SESSION["tmp_pass"] = $password;
-        $_SESSION["tmp_cpass"] = $password_confirm;
+        $_SESSION["tmp_cpass"] = $confirm;
         $_SESSION["tmp_hpass"] = $hash_password;
         $_SESSION["tmp_news"] = $newsletter;
 

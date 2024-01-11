@@ -11,40 +11,40 @@ require_once("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
-    $_SESSION['redirection'] = "/f1_project/views/private/store/edit.php?id=${${$_GET['id']??''}}";
-    error("401", "not_authorized", "\\views\private\store\\edit.php", "/f1_project/views/public/auth/login.php", "Unauthorised access.");
+    $_SESSION['redirection'] = "/f1_project/views/private/store/update_profile.php?id=${${$_GET['id']??''}}";
+    error("401", "not_authorized", "\\views\private\store\\update_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorised access.");
     exit;
 }
 set_session($user);
 
 if (!isset($_GET["id"]) || !$_GET["id"]) {
-    error("500", "product_id_not_specified", "\\views\private\store\\edit.php", "/f1_project/views/private/store/all.php", "PRODUCT ID NOT specified.");
+    error("500", "product_id_not_specified", "\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php", "PRODUCT ID NOT specified.");
     exit;
 }
 
 /* Product look up in DB */
-$conn = DB::connect("\\views\private\store\\edit.php", "/f1_project/views/private/store/all.php");
+$conn = DB::connect("\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
 $id = intval($_GET["id"])?? -1;
 $product = DB::get_record_by_field($conn,
     "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?;",
     ["i"],
     [$id],
-    "\\views\private\store\\edit.php",
+    "\\views\private\store\\update_profile.php",
     "/f1_project/views/private/store/all.php")[0];
 
 [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
     "SELECT * FROM Teams;",
-    "\\views\private\store\\edit.php",
+    "\\views\private\store\\update_profile.php",
     "/f1_project/views/private/store/all.php");
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "\\views\private\store\\edit.php", "/f1_project/views/private/store/all.php");
+    error("500", "conn_close()", "\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
     exit;
 }
 
 if (!$product) {
-    error("500", "product_look_up", "\\views\private\store\\edit.php", "/f1_project/views/private/store/all.php");
+    error("500", "product_look_up", "\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
     exit;
 }
 ?>

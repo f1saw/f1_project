@@ -79,7 +79,7 @@ if (!$conn->close()) {
                         foreach ($users as $user) { ?>
                             <tr>
                                 <th class='text-center'>
-                                    <a href='/f1_project/views/private/users/detail.php/?id=<?php echo $user["id"] ?>' class="text-decoration-none" style="color: #4a82fc">
+                                    <a href='/f1_project/views/private/users/show_profile.php/?id=<?php echo $user["id"] ?>' class="text-decoration-none" style="color: #4a82fc">
                                         <?php echo $user["id"]; ?>
                                     </a>
                                 </th>

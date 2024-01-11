@@ -7,14 +7,14 @@ require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 
-if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SESSION["tmp_email"]) && isset($_SESSION["tmp_pass"]) && isset($_SESSION["tmp_cpass"]) && isset($_SESSION["tmp_hpass"])) {
+if (isset($_SESSION["tmp_firstname"]) && isset($_SESSION["tmp_lastname"]) && isset($_SESSION["tmp_email"]) && isset($_SESSION["tmp_pass"]) && isset($_SESSION["tmp_cpass"]) && isset($_SESSION["tmp_hpass"])) {
 
     $conn = DB::connect("\auth\confirm_email.php", "/f1_project/views/public/registration.php");
 
     $hash_password = $_SESSION["tmp_hpass"];
 
-    unset($_SESSION["tmp_fname"]);
-    unset($_SESSION["tmp_lname"]);
+    unset($_SESSION["tmp_firstname"]);
+    unset($_SESSION["tmp_lastname"]);
     unset($_SESSION["tmp_email"]);
     unset($_SESSION["tmp_pass"]);
     unset($_SESSION["tmp_cpass"]);

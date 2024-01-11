@@ -21,7 +21,7 @@
         })
     });
 function goToProfile(){
-    window.location.href = "/f1_project/views/private/users/detail.php"
+    window.location.href = "../../views/private/users/show_profile.php"
 }
 function goToOrders(){
     window.location.href = "/f1_project/views/private/orders/all.php"

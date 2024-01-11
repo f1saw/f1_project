@@ -57,12 +57,12 @@ const validatePassword = (id, password) => {
 
 const validators_user = {
     "firstname": {
-        ids: ["fname"],
+        ids: ["firstname"],
         validator: validateMaxLength,
         err_msg: ["First name is too <strong class='text-danger'>LONG</strong>"]
     },
     "lastname": {
-        ids: ["lname"],
+        ids: ["lastname"],
         validator: validateMaxLength,
         err_msg: ["Last name is too <strong class='text-danger'>LONG</strong>"]
     },

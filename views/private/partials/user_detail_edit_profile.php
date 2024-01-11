@@ -16,7 +16,7 @@ if(!check_user_auth($user)){
     <?php include("views/partials/navbar.php"); ?>
     <main>
         <div id="bg-profile" class="flex-container d-flex justify-content-center">
-            <form id="profile-data" class="container-element" method="POST" action="/f1_project/controllers/users/edit.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
+            <form id="profile-data" class="container-element" method="POST" action="/f1_project/controllers/users/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                 <div id="page1">
                     <div class="d-flex justify-content-center">
                         <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo $element['img_url']; else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
@@ -27,12 +27,12 @@ if(!check_user_auth($user)){
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="fname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
+                                    <label for="firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
                                 </span>
                                 <div class="input-group">
-                                    <input type="text" id="fname" name="edit_firstname" class="form-control text-box" placeholder="<?php echo $element["first_name"]; ?>">
+                                    <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="<?php echo $element["first_name"]; ?>">
                                 </div>
-                                <div id="input-info-fname" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                <div id="input-info-firstname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
                                     <span class=""></span>
                                 </div>
@@ -41,12 +41,12 @@ if(!check_user_auth($user)){
                         <div class="col-12 col-md-6">
                             <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="lname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
+                                    <label for="lastname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
                                 </span>
                                 <div class="input-group d-flex text-center">
-                                    <input type="text" id="lname" name="edit_lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
+                                    <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
                                 </div>
-                                <div id="input-info-lname" class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                <div id="input-info-lastname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
                                     <span class=""></span>
                                 </div>
@@ -62,7 +62,7 @@ if(!check_user_auth($user)){
                                 <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                 <label class="form-control text-box"><?php echo $element["email"] ?></label>
                                 <?php } else {?>
-                                <input type="text" id="email" name="edit_email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
+                                <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
                                 <?php } ?>
                             </div>
                             <div id="input-info-email" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -124,7 +124,7 @@ if(!check_user_auth($user)){
                                     <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                         <label class="form-control text-box">Not allowed</label>
                                     <?php } else {?>
-                                    <input type="password" id="pass" name="edit_pass" class="form-control text-box" placeholder="password">
+                                    <input type="password" id="pass" name="pass" class="form-control text-box" placeholder="password">
                                     <?php } ?>
                                 </div>
                                 <div id="input-info-pass" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -142,7 +142,7 @@ if(!check_user_auth($user)){
                                     <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                         <label class="form-control text-box">Not allowed</label>
                                     <?php } else {?>
-                                    <input type="password" id="pass-confirm" name="edit_pass_confirm" class="form-control text-box" placeholder="confirm password">
+                                    <input type="password" id="pass-confirm" name="confirm" class="form-control text-box" placeholder="confirm password">
                                     <?php } ?>
                                 </div>
                                 <div id="input-info-pass-confirm" class="d-none text-box d-flex gap-2 mt-1 py-1">

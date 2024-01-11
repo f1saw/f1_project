@@ -69,7 +69,7 @@ if (check_user_auth($user)) {
             exit;
         }
         else{ ?>
-        <form id="register-form" action="/f1_project/controllers/auth/registration_email.php" method="POST" class="container-element reg">
+        <form id="register-form" action="/f1_project/controllers/auth/registration.php" method="POST" class="container-element reg">
 
             <div style="margin-left: 10px; margin-right: 10px">
             <?php $function = "document.getElementsByClassName('reg')[0].style.height = '550px'; 
@@ -85,23 +85,23 @@ if (check_user_auth($user)) {
                 <hr>
                 <div class="row mb-3">
                     <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                        <label for="fname" class="form-label text-box"><strong>FIRST NAME</strong></label><br>
+                        <label for="firstname" class="form-label text-box"><strong>FIRST NAME</strong></label><br>
                         <div class="input-group">
-                            <span class="input-group-text material-symbols-outlined text-dark text-box" id="fname-addon">badge</span>
-                            <input type="text" id="fname" name="fname" class="form-control" placeholder="Your first name" aria-describedby="fname-addon" required>
+                            <span class="input-group-text material-symbols-outlined text-dark text-box" id="firstname-addon">badge</span>
+                            <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Your first name" aria-describedby="firstname-addon" required>
                         </div>
-                        <div id="input-info-fname" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                        <div id="input-info-firstname" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <label for="lname" class="form-label text-box"><strong>LAST NAME</strong></label><br>
+                        <label for="lastname" class="form-label text-box"><strong>LAST NAME</strong></label><br>
                         <div class="input-group">
-                            <span class="input-group-text material-symbols-outlined text-dark text-box" id="fname-addon">badge</span>
-                            <input type="text" id="lname" name="lname" class="form-control" placeholder="Your last name" required>
+                            <span class="input-group-text material-symbols-outlined text-dark text-box" id="firstname-addon">badge</span>
+                            <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Your last name" required>
                         </div>
-                        <div id="input-info-lname" class="d-none d-flex gap-2 mt-1 py-1 text-box">
+                        <div id="input-info-lastname" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
@@ -123,10 +123,10 @@ if (check_user_auth($user)) {
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-                        <label for="password" class="form-label text-box"><strong>PASSWORD</strong></label><br>
+                        <label for="pass" class="form-label text-box"><strong>PASSWORD</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
-                            <input type="password" class="form-control" id="pass" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
                         </div>
                         <div id="input-info-pass" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
@@ -134,10 +134,10 @@ if (check_user_auth($user)) {
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
-                        <label for="password_confirm" class="form-label text-box"><strong>REPEAT PASSWORD</strong></label><br>
+                        <label for="pass-confirm" class="form-label text-box"><strong>REPEAT PASSWORD</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
-                            <input type="password" class="form-control" id="pass-confirm" name="password_confirm" placeholder="Repeat password">
+                            <input type="password" class="form-control" id="pass-confirm" name="confirm" placeholder="Repeat password">
                         </div>
                         <div id="input-info-pass-confirm" class="d-none d-flex gap-2 mt-1 py-1 text-box">
                             <span class="material-symbols-outlined"></span>
