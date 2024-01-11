@@ -22,33 +22,23 @@ function select_user($id) : array{
         // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
         // ritono sul profilo e non nella table
         $_SESSION['redirection'] = "/f1_project/show_profile.php";
-        $current_id = $_SESSION["id"];
+        $id = $_SESSION["id"];
     }
 
-    if(!isset($current_id)) {
-        $conn = DB::connect();
-        $element = DB::get_record_by_field($conn,
-            "SELECT * FROM Users WHERE id = ?",
-            ["i"],
-            [$id],
-            "\show_profile.php",
-            "/f1_project/show_profile.php")[0];
-        if (!$conn->close()) {
-            error("500", "conn_close()", "\show_profile.php", "/f1_project/views/private/users/all.php");
-            exit;
-        }
-    }
-    else{
-        $element = [];
+    // echo "\n\n--" . $current_id . "--\n\n";
 
-        $element["id"]            = $_SESSION["id"];
-        $element["first_name"]    = $_SESSION["first_name"];
-        $element["last_name"]     = $_SESSION["last_name"];
-        $element["email"]         = $_SESSION["email"];
-        $element["date_of_birth"] = $_SESSION["date_of_birth"];
-        $element["cookie_id"]     = $_SESSION["cookie_id"];
-        $element["img_url"]       = $_SESSION["img_url"];
+    $conn = DB::connect();
+    $element = DB::get_record_by_field($conn,
+        "SELECT * FROM Users WHERE id = ?",
+        ["i"],
+        [$id],
+        "\show_profile.php",
+        "/f1_project/show_profile.php")[0];
+    if (!$conn->close()) {
+        error("500", "conn_close()", "\show_profile.php", "/f1_project/views/private/users/all.php");
+        exit;
     }
+    
     return $element;
 }
 

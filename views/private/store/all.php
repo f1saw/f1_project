@@ -144,8 +144,6 @@ if (!$conn->close()) {
                 <!-- Loading circle -->
                 <?php include ("views/partials/loading.php"); ?>
             </div>
-            <!-- TODO: just for testing -->
-            <?php session_destroy(); ?>
         </div>
     </div>
 

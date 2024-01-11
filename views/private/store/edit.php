@@ -230,8 +230,6 @@ if (!$product) {
                 <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="..." src="">
                 <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded " alt="..." src="">
             </div>
-            <!-- TODO: just for testing -->
-            <?php session_destroy(); ?>
         </div>
     </div>
 

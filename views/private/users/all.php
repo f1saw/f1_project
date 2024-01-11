@@ -120,8 +120,6 @@ if (!$conn->close()) {
                     </div>
                 <?php } ?>
             </div>
-            <!-- TODO: just for testing -->
-            <?php session_destroy(); ?>
         </div>
     </div>
 

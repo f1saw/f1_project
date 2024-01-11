@@ -122,7 +122,8 @@ if (check_user_auth($user)) {
             [$_POST[$post_name[$e_email]]],
             "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         if($check != null){
-            msg_err_edit_user("Email already in use");
+            $_POST[$post_name[$e_email]] = ""; 
+            //msg_err_edit_user("Email already in use");
         }
         if (!$conn->close()) {
             error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
@@ -130,6 +131,9 @@ if (check_user_auth($user)) {
         }
     }
 
+    if (!isset($_POST["Button_id"])) {
+        $_POST["Button_id"] = $_SESSION["id"];
+    }
     for($i=0; $i < 8; ++$i) {
         if (isset($_POST[$post_name[$i]]) && isset($_POST['Button_id'])) {
             if($_POST[$post_name[$i]] == "") {
@@ -157,10 +161,11 @@ if (check_user_auth($user)) {
         unset($_SESSION['redirection']);
         exit;
     }
+
     header("location: /f1_project/views/private/users/all.php");
 }
 else{
-    $_SESSION['redirection'] = "/f1_project/update_profile.php?id=${${$_POST['Button_id']??''}}";
+    $_SESSION['redirection'] = "/f1_project/update_profile.php?id={${${$_POST['Button_id']??''}}}";
     error("401", "not_authorized", "\controllers\users\\update_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }
