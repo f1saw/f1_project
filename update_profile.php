@@ -122,8 +122,9 @@ if (check_user_auth($user)) {
             [$_POST[$post_name[$e_email]]],
             "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         if($check != null){
-            $_POST[$post_name[$e_email]] = ""; 
-            //msg_err_edit_user("Email already in use");
+            $_POST[$post_name[$e_email]] = "";
+            $_SESSION["err"] = 1;
+            $_SESSION["err_msg"] = "Email already in use";
         }
         if (!$conn->close()) {
             error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
@@ -154,8 +155,10 @@ if (check_user_auth($user)) {
             }
         }
     }
-    $_SESSION["success"] = 1;
-    $_SESSION["success_msg"] = "Update completed successfully.";
+    if (!isset($_SESSION["err"]) || $_SESSION["err"] === 0) {
+        $_SESSION["success"] = 1;
+        $_SESSION["success_msg"] = "Update completed successfully.";
+    }
     if(isset($_SESSION['redirection'])){
         header("Location: {$_SESSION['redirection']}");
         unset($_SESSION['redirection']);
