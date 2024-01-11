@@ -34,15 +34,6 @@ if ($login_allowed) {
 
         /* DB */
         $conn = DB::connect("\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
-        $ids = $conn->real_escape_string($ids);
-        $titles = $conn->real_escape_string($titles);
-        // $teams = $conn->real_escape_string($teams);
-        $quantities = $conn->real_escape_string($quantities);
-        $imgs = $conn->real_escape_string($imgs);
-        $prices = $conn->real_escape_string($prices);
-        $sizes = $conn->real_escape_string($sizes);
-        $total = $conn->real_escape_string($total);
-        $address = $conn->real_escape_string($address);
 
         try {
             $order_id = generate_random_string(5);

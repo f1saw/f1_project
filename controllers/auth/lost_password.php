@@ -24,7 +24,6 @@ if (!$login_allowed) {
 
         /* DB */
         $conn = DB::connect("controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
-        $email = $conn->real_escape_string($email);
 
         $user_db = DB::get_record_by_field($conn,
             "SELECT id, email FROM Users WHERE email = ?;",

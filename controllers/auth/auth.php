@@ -27,7 +27,6 @@ function check_cookie(): array {
 
     if (isset($_COOKIE["my_f1_cookie_id"]) && isset($_COOKIE["my_f1_cookie_value"])) {
         $conn = DB::connect();
-        $_COOKIE["my_f1_cookie_id"] = $conn->real_escape_string($_COOKIE["my_f1_cookie_id"]);
         $user = DB::get_record_by_field($conn,
             "SELECT Users.id AS 'Users.id', Users.first_name AS 'Users.first_name', Users.last_name AS 'Users.last_name', Users.email AS 'Users.email', Users.password AS 'Users.password', Users.role AS 'Users.role', Users.date_of_birth AS 'Users.date_of_birth', Users.img_url AS 'Users.img_url', Users.newsletter AS 'Users.newsletter', Cookies.id AS 'Cookies.id', Cookies.value AS 'Cookies.value', Cookies.expiration_date AS 'Cookies.expiration_date' FROM Users JOIN Cookies ON Users.cookie_id = Cookies.id WHERE Cookies.id = ? AND Cookies.expiration_date > ?;",
             ["s", "i"],

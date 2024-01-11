@@ -26,10 +26,6 @@ if (!$login_allowed) {
         /* DB */
         $conn = DB::connect("\auth\login.php", "/f1_project/views/public/auth/login.php");
 
-        $email = $conn->real_escape_string($email);
-        $password = $conn->real_escape_string($password);
-        $remember_me = $conn->real_escape_string($remember_me);
-
         $user = DB::get_record_by_field($conn,
             "SELECT Users.id AS 'Users.id', Users.first_name AS 'Users.first_name', Users.last_name AS 'Users.last_name', Users.email AS 'Users.email', Users.password AS 'Users.password', Users.role AS 'Users.role', Users.date_of_birth AS 'Users.date_of_birth', Users.img_url AS 'Users.img_url', Users.newsletter AS 'Users.newsletter' FROM Users WHERE email = ?;",
             ['s'],

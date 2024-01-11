@@ -32,7 +32,14 @@ class DB {
         return $conn;
     }
 
+    public static function clean_input($conn, &$params) : void {
+        for ($i=0; $i<count($params); ++$i)
+            $conn->real_escape_string($params[$i]);
+    }
+
     public static function get_record_by_field($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = "") {
+
+        self::clean_input($conn, $params);
 
         $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error);
 
@@ -69,6 +76,9 @@ class DB {
     }
 
     public static function p_stmt_no_select($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = "", $order_delete_id = null): void {
+
+        self::clean_input($conn, $params);
+
         $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error, $order_delete_id);
 
         if (!$stmt->close()) {
@@ -78,6 +88,9 @@ class DB {
     }
 
     public static function p_stmt_bind_execute($conn, $query, $type_params, $params, $source = "", $redirect_error  = "", $order_delete_id = null) {
+
+        self::clean_input($conn, $params);
+
         $s_type_params = implode("", $type_params);
 
         if (!$stmt = $conn->prepare($query)) {

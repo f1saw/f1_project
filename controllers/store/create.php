@@ -52,14 +52,9 @@ if (check_admin_auth($user)) {
 
         /* DB */
         $conn = DB::connect("\controllers\store\create.php", "/f1_project/views/private/store/new.php");
-        $title = $conn->real_escape_string($title);
-        $desc = $conn->real_escape_string($desc);
-        $price = number_format($conn->real_escape_string($price), 2) * 100;
+        $price = number_format($price, 2) * 100;
         $img_url_str = implode("\t", $img_url);
-        $img_url_str = $conn->real_escape_string($img_url_str);
-        $team_id = intval($conn->real_escape_string($team_id));
-        $color = $conn->real_escape_string($color);
-        $size = $conn->real_escape_string($size);
+        $team_id = intval($team_id);
 
         /* CHECK INPUT LENGTHS */
         // $input_array = [$title, $desc, $price, $img_url, $team_id, $color, $size];

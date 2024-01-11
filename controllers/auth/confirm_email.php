@@ -13,11 +13,6 @@ if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SE
 
     $hash_password = $_SESSION["tmp_hpass"];
 
-    $email = $conn->real_escape_string($_SESSION["tmp_email"]);
-    $first_name = $conn->real_escape_string($_SESSION["tmp_fname"]);
-    $last_name = $conn->real_escape_string($_SESSION["tmp_lname"]);
-    $password = $conn->real_escape_string($_SESSION["tmp_pass"]);
-    $password_confirm = $conn->real_escape_string($_SESSION["tmp_cpass"]);
     unset($_SESSION["tmp_fname"]);
     unset($_SESSION["tmp_lname"]);
     unset($_SESSION["tmp_email"]);
@@ -26,7 +21,7 @@ if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SE
     unset($_SESSION["tmp_hpass"]);
 
     if (isset($_SESSION["tmp_date_of_birth"])) {
-        $date_of_birth = $conn->real_escape_string($_SESSION["tmp_date_of_birth"]);
+        $date_of_birth = $_SESSION["tmp_date_of_birth"];
         unset($_SESSION["tmp_date_of_birth"]);
     }
 

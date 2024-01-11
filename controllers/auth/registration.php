@@ -68,13 +68,6 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     /* DB */
     $conn = DB::connect("\controllers\auth\\registration.php", "/f1_project/views/public/auth/registration.php");
 
-    $email = $conn->real_escape_string($email);
-    $first_name = $conn->real_escape_string($first_name);
-    $last_name = $conn->real_escape_string($last_name);
-    $date_of_birth = $conn->real_escape_string($date_of_birth);
-    $password = $conn->real_escape_string($password);
-    $password_confirm = $conn->real_escape_string($password_confirm);
-
     DB::p_stmt_no_select($conn,
         "INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0, ?, null, null, ?);",
         ["s", "s", "s", "s", "s", "i"],
