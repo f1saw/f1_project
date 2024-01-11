@@ -73,6 +73,7 @@ if (!$conn->close()) {
     <?php include ("views/partials/loading.php"); ?>
 
     <main class="home-cards mt-5">
+
         <?php include("views/partials/store/view_product.php") ?>
 
         <div class="page-selector d-flex justify-content-center align-items-center gap-3 py-5">

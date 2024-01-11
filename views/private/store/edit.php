@@ -87,12 +87,20 @@ if (!$product) {
                                     <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
                                     <input type="text" id="title" class="form-control" name="title" placeholder="Title" value="<?php echo $product["Products.title"] ?>" aria-describedby="title-addon" required>
                                 </div>
+                                <div id="input-info-title" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="desc" class="form-label"><strong>DESCRIPTION</strong></label>
-                                <textarea class="form-control" id="desc" name="desc" rows="2" placeholder="Description" required><?php echo $product["Products.description"]; ?></textarea>
+                                <textarea class="form-control" id="desc" name="desc" rows="2" placeholder="Description"><?php echo $product["Products.description"]; ?></textarea>
+                                <div id="input-info-desc" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -101,19 +109,27 @@ if (!$product) {
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
-                                    <input type="text" id="price" class="form-control" name="price" placeholder="50.00" value="<?php echo $int . "." . $dec; ?>" aria-describedby="price-addon" required>
+                                    <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" value="<?php echo $int . "." . $dec; ?>" aria-describedby="price-addon" required>
+                                </div>
+                                <div id="input-info-price" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label for="team" class="form-label"><strong>TEAM</strong></label>
+                                <label for="team" class="form-label"><strong>TEAM <label class="text-danger">*</label></strong></label>
                                 <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size" required>
-                                    <option value="ns" class="option_invalid" selected disabled>Select team</option>
+                                    <option value="" class="option_invalid" selected disabled>Select team</option>
                                     <?php
                                     foreach ($teams as $team) {
                                         echo "<option value=" . $team["id"] . " class='option_valid' " . (($team["id"] == $product["Teams.id"])? " selected":"") . ">" . $team["name"] . "</option>";
                                     }
                                     ?>
                                 </select>
+                                <div id="input-info-team_id" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -127,7 +143,11 @@ if (!$product) {
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
-                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo preg_replace("/;/", " ", strtoupper($product["Products.size"])) ?>" placeholder="XS S M" aria-describedby="size-addon" required>
+                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo preg_replace("/;/", " ", strtoupper($product["Products.size"])) ?>" placeholder="XS S M" aria-describedby="size-addon">
+                                </div>
+                                <div id="input-info-size" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -140,7 +160,11 @@ if (!$product) {
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="color-addon">palette</span>
-                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo preg_replace("/;/", " ", $product["Products.color"]) ?>" placeholder="red black" aria-describedby="color-addon" required>
+                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo preg_replace("/;/", " ", $product["Products.color"]) ?>" placeholder="red black" aria-describedby="color-addon">
+                                </div>
+                                <div id="input-info-color" class="d-none d-flex gap-2 mt-1 py-1">
+                                    <span class="material-symbols-outlined"></span>
+                                    <span class=""></span>
                                 </div>
                             </div>
                         </div>
@@ -168,6 +192,10 @@ if (!$product) {
                                     <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" value="<?php echo $img2 ?>" placeholder="https://image.url" aria-describedby="img-2-addon">
                                 </div>
                             </div>
+                            <div id="input-info-images" class="d-none d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
+                            </div>
                         </div>
 
                         <hr>
@@ -177,7 +205,7 @@ if (!$product) {
                             <!-- Loading circle -->
                             <?php include ("views/partials/loading.php"); ?>
 
-                            <button type="submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
+                            <button type="submit" id="btn-submit" class="btn-reverse-color btn btn-danger col-12 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
                                 <span class="material-symbols-outlined">add</span>
                                 <strong>Update</strong>
                             </button>
@@ -207,6 +235,7 @@ if (!$product) {
         </div>
     </div>
 
+    <script src="/f1_project/assets/js/validators/products.js"></script>
     <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
     <script src="/f1_project/assets/js/store/crud.js"></script>
     <script src="/f1_project/assets/js/loading-crud.js"></script>

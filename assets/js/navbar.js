@@ -26,7 +26,7 @@ const onConfirm = (event, size_param = null) => {
     if (!curr_cart) curr_cart = []
 
     const size = size_param?? $("#s-size").val();
-    if (size !== "ns") {
+    if (size !== "") {
         const index = curr_cart.findIndex(item => {
             return item.id === event.target.dataset.id && item.size === size;
         })

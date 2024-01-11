@@ -10,12 +10,15 @@ require_once("controllers/auth/auth.php");
 [$login_allowed, $user] = check_cookie();
 if (check_admin_auth($user)) {
 
-    if (isset($_POST["title"]) && isset($_POST["desc"]) && isset($_POST["price"]) && isset($_POST["color"]) && isset($_POST["team_id"]) && isset($_POST["size"])) {
+    if (isset($_POST["title"]) && isset($_POST["price"]) && isset($_POST["team_id"])) {
 
         /* CLEANING INPUT */
         $title = preg_replace('/\s+/', ' ', htmlentities($_POST["title"]));
-        $desc = preg_replace('/\s+/', ' ', htmlentities($_POST["desc"]));
+        $desc = preg_replace('/\s+/', ' ', htmlentities($_POST["desc"]??""));
         $price = preg_replace('/\s+/', '', htmlentities($_POST["price"]));
+        $team_id = preg_replace('/\s+/', '', htmlentities($_POST["team_id"]));
+        $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"]??"")));
+        $size = preg_replace("/\s+/", ";", strtolower(htmlentities((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE )));
         $img_url = [];
         if (isset($_POST["img_url_1"])) {
             $img_url[0] = $_POST["img_url_1"]? htmlentities($_POST["img_url_1"]):"";
@@ -24,17 +27,11 @@ if (check_admin_auth($user)) {
             $index = !($img_url[0] === "");
             $img_url[$index] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
         }
-        $team_id = preg_replace('!\s+!', '', htmlentities($_POST["team_id"]));
-        $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"])));
-        $size = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["size"])));
 
         /* -- ERROR | Empty input fields -- */
         if ($title == "" || $title == " "
-            || $desc == "" || $desc == " "
             || $price == "" || $price == " "
-            || $team_id == "" || $team_id == " "
-            || $color == "" || $color == " "
-            || $size == "" || $size == " ") {
+            || $team_id == "" || $team_id == " ") {
             error("-1", "Empty input fields.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
             exit;
         }
@@ -52,6 +49,7 @@ if (check_admin_auth($user)) {
             exit;
         }*/
 
+
         /* DB */
         $conn = DB::connect("\controllers\store\create.php", "/f1_project/views/private/store/new.php");
         $title = $conn->real_escape_string($title);
@@ -62,6 +60,18 @@ if (check_admin_auth($user)) {
         $team_id = intval($conn->real_escape_string($team_id));
         $color = $conn->real_escape_string($color);
         $size = $conn->real_escape_string($size);
+
+        /* CHECK INPUT LENGTHS */
+        // $input_array = [$title, $desc, $price, $img_url, $team_id, $color, $size];
+        $i = 0;
+        foreach ([null, $title, $desc, $price, $img_url_str, $team_id, $color, $size] as $input) {
+            if (PRODUCTS_MAX_LENGTHS[$i] >= 0 && strlen($input) > PRODUCTS_MAX_LENGTHS[$i]) {
+                $tmp = ucfirst(PRODUCTS_ARRAY[$i]);
+                error("500", "$tmp is TOO long.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
+                exit;
+            }
+            $i++;
+        }
 
         DB::p_stmt_no_select($conn,
         "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",

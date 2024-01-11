@@ -86,7 +86,7 @@ if (!$conn->close()) {
 
                                 <?php for($i = 0;$i < count($correspondence_vector); $i++){?>
                                     <td class='text-center'>
-                                        <?php echo $product[$correspondence_vector[$i]]; ?>
+                                        <?php echo (strlen($product[$correspondence_vector[$i]]) < 70)? $product[$correspondence_vector[$i]] : (substr($product[$correspondence_vector[$i]], 0 , 70) . " [...]"); ?>
                                     </td>
                                 <?php } ?>
 
@@ -123,14 +123,6 @@ if (!$conn->close()) {
                         </tbody>
                     </table>
 
-                    <div class="row d-flex justify-content-end py-3">
-                        <a href="/f1_project/views/private/store/new.php" class="text-decoration-none d-flex justify-content-end">
-                            <button class="col-12 col-md-5 col-lg-3 col-xxl-2 btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
-                                <span class="material-symbols-outlined">add</span>
-                                <span>Create</span>
-                            </button>
-                        </a>
-                    </div>
                 <?php } else { ?>
                     <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                         <span class="material-symbols-outlined">description</span>
@@ -139,6 +131,15 @@ if (!$conn->close()) {
                         </span>
                     </div>
                 <?php } ?>
+
+                <div class="d-flex justify-content-end py-3">
+                    <a href="/f1_project/views/private/store/new.php" class="text-decoration-none">
+                        <button class="btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                            <span class="material-symbols-outlined">add</span>
+                            <span>Create</span>
+                        </button>
+                    </a>
+                </div>
 
                 <!-- Loading circle -->
                 <?php include ("views/partials/loading.php"); ?>

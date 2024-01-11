@@ -114,7 +114,7 @@ if (!$product) {
                     <div class="mt-4 d-flex justify-content-start align-items-center gap-2">
                         <label for="s-size">Size: </label>
                         <select name="s-size" id="s-size" class="form-select rounded-pill" aria-label="Select size">
-                            <option value="ns" class="option_invalid" selected>Select size</option>
+                            <option value="" class="option_invalid" selected>Select size</option>
                             <?php
                             foreach ($size as $s) {
                                 echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";
