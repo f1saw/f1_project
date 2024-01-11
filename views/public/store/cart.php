@@ -24,8 +24,8 @@ require_once ("DB/DB.php");
     <link rel="stylesheet" href="/f1_project/assets/css/store/cart.css">
 </head>
 
-<body>
-<div class="container-fluid bg-dark">
+<body class=" bg-dark">
+<div class="container-fluid">
 
     <label id="order-success" class="d-none"><?php echo ($_SESSION["success"])??""; ?></label>
     <script>

@@ -47,8 +47,8 @@ if (!$conn->close()) {
     <link rel="stylesheet" href="/f1_project/assets/css/store/store.css">
 </head>
 
-<body>
-<div class="container-fluid bg-dark">
+<body class="bg-dark">
+<div class="container-fluid">
 
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
