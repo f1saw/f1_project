@@ -52,6 +52,7 @@ if (isset($_SESSION["tmp_fname"]) && isset($_SESSION["tmp_lname"]) && isset($_SE
     $_SESSION["confirm_email"] = true;
     header("Location: /f1_project/views/public/confirm.html");
 } else {
+    session_destroy();
     error("-1", "Input fields NOT provided.", "\auth\confirm_email.php", "/f1_project/views/public/registration.php");
     exit;
 }

@@ -11,8 +11,8 @@ SAW project about F1
 
 ## MAURI:
 - [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
-- [ ] search bar -> queury database prodotti e visualizzare in una pagina
-- [ ] Formattazione su schermo mobile non funziona + parti bianche volanti
+- [x] search bar -> queury database prodotti e visualizzare in una pagina
+- [x] Formattazione su schermo mobile non funziona + parti bianche volanti
 - [ ] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
 
 

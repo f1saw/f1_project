@@ -47,8 +47,8 @@ if (!$product) {
     <?php include("views/partials/head.php"); ?>
 </head>
 
-<body>
-<div class="container-fluid bg-dark">
+<body class="bg-dark">
+<div class="container-fluid">
 
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
