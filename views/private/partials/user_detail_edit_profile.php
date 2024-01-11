@@ -16,7 +16,7 @@ if(!check_user_auth($user)){
     <?php include("views/partials/navbar.php"); ?>
     <main>
         <div id="bg-profile" class="flex-container d-flex justify-content-center">
-            <form id="profile-data" class="container-element" method="POST" action="/f1_project/controllers/users/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
+            <form id="profile-data" class="container-element" method="POST" action="/f1_project/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                 <div id="page1">
                     <div class="d-flex justify-content-center">
                         <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo $element['img_url']; else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"

@@ -94,6 +94,6 @@ if(!check_user_auth($user)){
 
 <script>
     function my_function(){
-        window.open("/f1_project/views/private/users/show_profile.php/?edit=1&id=<?php echo $element["id"]; ?>","_self");
+        window.open("/f1_project/show_profile.php/?edit=1&id=<?php echo $element["id"]; ?>","_self");
     }
 </script>

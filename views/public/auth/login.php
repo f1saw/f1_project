@@ -39,7 +39,7 @@ if (check_user_auth($user)) {
         header("Location: /f1_project/views/private/users/all.php");
     } else {
         echo "Logged but in user mode";
-        echo "<a href='/f1_project/controllers/auth/logout.php'>Logout</a>";
+        echo "<a href='/f1_project/logout.php'>Logout</a>";
     }
     exit;
 }
@@ -51,7 +51,7 @@ if (check_user_auth($user)) {
 <?php include("views/partials/navbar_log_reg.php"); ?>
 
         <div class="flex-container d-flex justify-content-center">
-            <form id="login-form" action="/f1_project/controllers/auth/login.php" class="container-element log" method="POST">
+            <form id="login-form" action="/f1_project/login.php" class="container-element log" method="POST">
 
                 <div style="margin-left: 10px; margin-right: 10px">
                 <?php $function = "document.getElementsByClassName('container-element')[0].style.height = '480px'" ?>

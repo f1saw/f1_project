@@ -59,7 +59,7 @@ if (check_user_auth($user)) {
     }
 }
 else{
-    $_SESSION['redirection'] = "/f1_project/views/private/users/show_profile.php?id={${${$_GET['id']??''}}}";
+    $_SESSION['redirection'] = "/f1_project/show_profile.php?id={${${$_GET['id']??''}}}";
     error("401", "not_authorized", "\\views\users\show_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

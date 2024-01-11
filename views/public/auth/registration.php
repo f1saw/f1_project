@@ -15,7 +15,7 @@ if (check_user_auth($user)) {
         header("Location: /f1_project/views/private/users/all.php");
     } else {
         echo "Logged but in user mode";
-        echo "<a href='/f1_project/controllers/auth/logout.php'>Logout</a>";
+        echo "<a href='/f1_project/logout.php'>Logout</a>";
     }
     exit;
 }
@@ -69,7 +69,7 @@ if (check_user_auth($user)) {
             exit;
         }
         else{ ?>
-        <form id="register-form" action="/f1_project/controllers/auth/registration.php" method="POST" class="container-element reg">
+        <form id="register-form" action="/f1_project/registration.php" method="POST" class="container-element reg">
 
             <div style="margin-left: 10px; margin-right: 10px">
             <?php $function = "document.getElementsByClassName('reg')[0].style.height = '550px'; 

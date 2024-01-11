@@ -21,7 +21,7 @@ function select_user($id) : array{
     if($id == null) {
         // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
         // ritono sul profilo e non nella table
-        $_SESSION['redirection'] = "/f1_project/views/private/users/show_profile.php";
+        $_SESSION['redirection'] = "/f1_project/show_profile.php";
         $current_id = $_SESSION["id"];
     }
 
@@ -31,10 +31,10 @@ function select_user($id) : array{
             "SELECT * FROM Users WHERE id = ?",
             ["i"],
             [$id],
-            "users/show_profile.php",
-            "/f1_project/views/private/users/show_profile.php")[0];
+            "\show_profile.php",
+            "/f1_project/show_profile.php")[0];
         if (!$conn->close()) {
-            error("500", "conn_close()", "users/show_profile.php", "/f1_project/views/private/users/all.php");
+            error("500", "conn_close()", "\show_profile.php", "/f1_project/views/private/users/all.php");
             exit;
         }
     }

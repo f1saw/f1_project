@@ -16,11 +16,11 @@ if (check_user_auth()) {
             "DELETE FROM Cookies WHERE id = ?;",
             ["s"],
             [$_COOKIE["my_f1_cookie_id"]],
-            "\controllers\auth\logout.php",
+            "\logout.php",
             "/f1_project/views/public/auth/login.php");
 
         if (!$conn->close()) {
-            error("500", "conn_close: $conn->error", "\controllers\auth\logout.php", "/f1_project/views/public/auth/login.php");
+            error("500", "conn_close: $conn->error", "\logout.php", "/f1_project/views/public/auth/login.php");
             exit;
         }
 
@@ -37,7 +37,7 @@ if (check_user_auth()) {
     header("Location: /f1_project/views/public/auth/login.php");
 
 } else {
-    $_SESSION['redirection'] = "/f1_project/controllers/auth/logout.php";
-    error("401", "not_authorized", "\controllers\auth\logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
+    $_SESSION['redirection'] = "/f1_project/logout.php";
+    error("401", "not_authorized", "\logout.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
 }

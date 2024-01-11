@@ -16,15 +16,15 @@ function msg_err_user_delete($msg) : void{
 function msg_err_edit_user($msg) : void{
     error("401",
         " Unauthorized access.",
-        "/f1_project/controllers/users/update_profile.php",
-        "/f1_project/views/private/users/show_profile.php",
+        "/f1_project/update_profile.php",
+        "/f1_project/show_profile.php",
         $msg);
 }
 
 function msg_err_edit_user_admin($msg) : void{
     error("401",
         " Unauthorized access.",
-        "/f1_project/controllers/users/update_profile.php",
+        "/f1_project/update_profile.php",
         "/f1_project/views/private/users/all.php",
         $msg);
 }
