@@ -32,6 +32,7 @@ SAW project about F1
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 - Cos'è assets/image/User_detail*
 - Rivedere utilizzo utility/msg_error.php (reindirizzare secondo edit.php?id=$id)
+- Error Handling: order a product which has been deleted
 
 ## ALL:
 - [ ] uniformare name e id degli input con quelli richiesti dalla prof
