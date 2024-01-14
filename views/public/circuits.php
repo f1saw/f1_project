@@ -36,7 +36,7 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
         const get_weather = async city => {
             city = city.replace(" ", "+")
             console.log(city)
-            const API_KEY = "<?php echo htmlentities($ini["API_KEY"]); ?>";
+            const API_KEY = "<?php echo $ini["API_KEY"]; ?>";
             fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`)
                 .then(response => response.json())
                 .then(json => {
@@ -50,7 +50,7 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
                             console.log(json)
 
                             // create a new Date object with the current date and time
-                            var date = new Date();
+                            const date = new Date();
 
                             // use the toLocaleString() method to display the date in different timezones
                             const localTime = date.toLocaleString(navigator.language, {
@@ -58,7 +58,7 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
                                 minute: '2-digit',
                                 timeZone: json.timezone
                             });
-                            console.log(navigator.language + "\n" + localTime)
+                            console.log(navigator.language + "\n" + localTime + " " + city + " " + json.timezone)
 
                             const weather = json.current.weather[0];
                             const temp = Math.round((json.current.temp - 273.15) * 10) / 10;
@@ -88,11 +88,14 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch py-3">
                     <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                         <div class="card-img">
-                            <img style="" src="<?php echo $circuit->img_url; ?>" class="card-img-top" alt="...">
+                            <img style="" src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body d-flex align-items-end">
                             <div class="w-100">
-                                <h6 class="card-title text-danger pippo"><?php echo $circuit->gp_name; ?></h6>
+                                <div class="d-flex justify-content-between card-title">
+                                    <h6 class="text-danger"><?php echo htmlentities($circuit->gp_name); ?></h6>
+                                    <h6><?php echo htmlentities($circuit->race_date); ?></h6>
+                                </div>
                                 <div class="d-flex justify-content-between align-content-center">
                                     <div>
                                         <span id="curr-weather-<?php echo preg_replace("/\s/", "-", $circuit->circuit_place); ?>-main"></span>
@@ -106,11 +109,11 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
                                 </div>
                                 <hr>
                                 <p class="card-text">
-                                    Round: <?php echo "<strong>" . $circuit->round . "</strong>/" . count($circuits); ?>
+                                    Round: <?php echo "<strong>" . htmlentities($circuit->round) . "</strong>/" . count($circuits); ?>
                                     <br>
-                                    Circuit name: <strong><?php echo $circuit->circuit_name; ?></strong>
+                                    Circuit name: <strong><?php echo htmlentities($circuit->circuit_name); ?></strong>
                                     <br>
-                                    Location: <strong><?php echo $circuit->circuit_place; ?></strong>
+                                    Location: <strong><?php echo htmlentities($circuit->circuit_place); ?></strong>
                                     <br>
                                 </p>
                             </div>
