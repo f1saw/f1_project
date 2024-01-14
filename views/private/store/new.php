@@ -101,7 +101,7 @@ if (!$conn->close()) {
                                 <option value="" class="option_invalid" selected disabled>Select team</option>
                                 <?php
                                 foreach ($teams as $team) {
-                                    echo "<option value=" . $team["id"] . " class='option_valid'>" . $team["name"] . "</option>";
+                                    echo "<option value=" . htmlentities($team["id"]) . " class='option_valid'>" . htmlentities($team["name"]) . "</option>";
                                 }
                                 ?>
                             </select>

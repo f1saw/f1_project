@@ -25,9 +25,7 @@ function select_user($id) : array{
         $id = $_SESSION["id"];
     }
 
-    // echo "\n\n--" . $current_id . "--\n\n";
-
-    $conn = DB::connect();
+    $conn = DB::connect("\utility\utility_func.php");
     $element = DB::get_record_by_field($conn,
         "SELECT * FROM Users WHERE id = ?",
         ["i"],

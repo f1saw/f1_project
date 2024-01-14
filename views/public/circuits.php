@@ -36,7 +36,7 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
         const get_weather = async city => {
             city = city.replace(" ", "+")
             console.log(city)
-            const API_KEY = "<?php echo $ini["API_KEY"]; ?>";
+            const API_KEY = "<?php echo htmlentities($ini["API_KEY"]); ?>";
             fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`)
                 .then(response => response.json())
                 .then(json => {

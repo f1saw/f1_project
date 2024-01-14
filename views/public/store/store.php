@@ -60,8 +60,8 @@ if (!$conn->close()) {
         </h3>
         <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
             <?php foreach($teams as $team) { ?>
-                <a href="?team=<?php echo $team["id"]?>">
-                    <img src="<?php echo $team["logo_url"]; ?>" alt="<?php echo $team["name"]; ?>">
+                <a href="?team=<?php echo htmlentities($team["id"]); ?>">
+                    <img src="<?php echo htmlentities($team["logo_url"]); ?>" alt="<?php echo htmlentities($team["name"]); ?>">
                 </a>
             <?php } ?>
         </div>
@@ -74,7 +74,7 @@ if (!$conn->close()) {
 
     <main class="home-cards mt-5">
 
-        <?php include("views/partials/store/view_product.php") ?>
+        <?php include("views/partials/store/view_products.php") ?>
 
         <div class="page-selector d-flex justify-content-center align-items-center gap-3 py-5">
             <button class="btn btn-navigate-page d-flex justify-content-center align-items-center" id="prev-page">

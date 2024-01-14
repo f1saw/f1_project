@@ -88,8 +88,12 @@ const check_all = validators => {
     let isValid = true;
     for (const [key, value] of Object.entries(validators)) {
         value.ids.forEach((id, index) => {
-            isValid = isValid && value.validator(id, $(`#${id}`).val());
+            const input_element = $(`#${id}`);
+            if (input_element !== undefined && input_element.val() !== undefined) {
+                isValid = isValid && value.validator(id, input_element.val());
+            }
         })
+        if (!isValid) break;
     }
     if (isValid) {
         $(".btn-submit,#btn-submit").attr("disabled", false)
@@ -99,7 +103,6 @@ const check_all = validators => {
 for (const value of Object.values(validators_user)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {
-        console.log()
         const dom_element = $(`#${id}`)
         if (dom_element.val() !== undefined) {
             dom_element.on('input', event => {

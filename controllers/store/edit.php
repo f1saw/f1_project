@@ -13,20 +13,20 @@ if (check_admin_auth($user)) {
     if (isset($_POST["id"]) && isset($_POST["title"]) && isset($_POST["price"]) && isset($_POST["team_id"])) {
 
         /* CLEANING INPUT */
-        $id = preg_replace('/\s+/', '', htmlentities($_POST["id"]));
-        $title = preg_replace('/\s+/', ' ', htmlentities($_POST["title"]));
-        $desc = preg_replace('/\s+/', ' ', htmlentities($_POST["desc"]??""));
-        $price = preg_replace('/\s+/', '', htmlentities($_POST["price"]));
-        $team_id = preg_replace('!\s+!', '', htmlentities($_POST["team_id"]));
-        $color = preg_replace("/\s+/", ";", strtolower(htmlentities($_POST["color"]??"")));
-        $size = preg_replace("/\s+/", ";", strtolower(htmlentities((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE )));
+        $id = preg_replace('/\s+/', '', $_POST["id"]);
+        $title = preg_replace('/\s+/', ' ', $_POST["title"]);
+        $desc = preg_replace('/\s+/', ' ', $_POST["desc"]??"");
+        $price = preg_replace('/\s+/', '', $_POST["price"]);
+        $team_id = preg_replace('!\s+!', '', $_POST["team_id"]);
+        $color = preg_replace("/\s+/", ";", strtolower($_POST["color"]??""));
+        $size = preg_replace("/\s+/", ";", strtolower((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE ));
         $img_url = [];
         if (isset($_POST["img_url_1"])) {
-            $img_url[0] = $_POST["img_url_1"]? htmlentities($_POST["img_url_1"]):"";
+            $img_url[0] = $_POST["img_url_1"]?:"";
         }
         if (isset($_POST["img_url_2"])) {
             $index = !($img_url[0] === "");
-            $img_url[$index] = $_POST["img_url_2"]? htmlentities($_POST["img_url_2"]):"";
+            $img_url[$index] = $_POST["img_url_2"]?:"";
         }
 
         /* -- ERROR | Empty input fields -- */
