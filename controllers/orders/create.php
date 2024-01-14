@@ -16,15 +16,15 @@ if ($login_allowed) {
     if (isset($_POST["ids"]) && isset($_POST["titles"]) /* && isset($_POST["teams"]) */ && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"]) && isset($_POST["address"])) {
 
         /* CLEANING INPUT */
-        $ids = htmlentities($_POST["ids"]);
-        $titles = htmlentities($_POST["titles"]);
-        $teams = htmlentities($_POST["teams"]);
-        $quantities = htmlentities($_POST["quantities"]);
-        $imgs = htmlentities($_POST["imgs"]);
-        $prices = htmlentities($_POST["prices"]);
-        $sizes = htmlentities($_POST["sizes"]);
-        $total = htmlentities($_POST["total"]);
-        $address = preg_replace('/\s+/', ' ', htmlentities($_POST["address"]));
+        $ids = $_POST["ids"];
+        $titles = $_POST["titles"];
+        $teams = $_POST["teams"];
+        $quantities = $_POST["quantities"];
+        $imgs = $_POST["imgs"];
+        $prices = $_POST["prices"];
+        $sizes = $_POST["sizes"];
+        $total = $_POST["total"];
+        $address = preg_replace('/\s+/', ' ', $_POST["address"]);
 
         // Check input values
         if ($address == '' || $address == ' ') {
@@ -52,7 +52,7 @@ if ($login_allowed) {
                 || $sizes_array[$i] == null || preg_match('/^\s*$/', $sizes_array[$i])
                 || $quantities_array[$i] == null || preg_match('/^\s*$/', $quantities_array[$i])
                 || $prices_array[$i] == null || preg_match('/^\s*$/', $prices_array[$i])
-                || $imgs_array[$i] == null || preg_match('/^\s*$/', $imgs_array[$i])
+                // || $imgs_array[$i] == null || preg_match('/^\s*$/', $imgs_array[$i])
                 || $titles_array[$i] == null || preg_match('/^\s*$/', $titles_array[$i])) {
                     error("500", "Some fields are empty.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
                     exit;

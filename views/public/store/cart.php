@@ -27,7 +27,7 @@ require_once ("DB/DB.php");
 <body class=" bg-dark">
 <div class="container-fluid">
 
-    <label id="order-success" class="d-none"><?php echo ($_SESSION["success"])??""; ?></label>
+    <label id="order-success" class="d-none"><?php echo htmlentities(($_SESSION["success"])??""); ?></label>
     <script>
         // JS script required at this point because it must be after the label defined at the previous row (row 30) in order to get its values,
         // and it must be before the include for the navbar (otherwise, an outdated cart would be considered during the render of the navbar)

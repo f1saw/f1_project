@@ -41,7 +41,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
                     News
                     <span class="material-symbols-outlined text-danger">download</span>
                 </span>
-                (provided by <a href="<?php echo end($link_list); ?>" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
+                (provided by <a href="<?php echo htmlentities(end($link_list)); ?>" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
             </span>
             <?php echo_news_cards($title_list, $img_list, $link_list, MAX_NEWS_NEWS, COL_CARD); ?>
         </main>

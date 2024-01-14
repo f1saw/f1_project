@@ -29,10 +29,10 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
     $date_of_birth = $_POST["date_of_birth"] ?? "";
     $newsletter = isset($_POST["newsletter"]) ? 1 : 0;
 
-    $first_name = preg_replace('!\s+!', '', $first_name);
-    $last_name = preg_replace('!\s+!', '', $last_name);
-    $email = preg_replace('!\s+!', '', $email);
-    $date_of_birth = preg_replace('!\s+!', ' ', $date_of_birth);
+    $first_name = preg_replace('/\s+/', '', $first_name);
+    $last_name = preg_replace('/\s+/', '', $last_name);
+    $email = preg_replace('/\s+/', '', $email);
+    $date_of_birth = preg_replace('/\s+/', ' ', $date_of_birth);
     $password = trim($password);
     $confirm = trim($confirm);
 
