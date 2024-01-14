@@ -52,7 +52,7 @@ if (!$conn->close()) {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
 
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    <script> $(document).ready( function () { $('#table').DataTable(); }); </script>
+    <script> $(document).ready( function () { $('#table').DataTable({ order: [[5, 'desc'] ]}); }); </script>
 </head>
 
 <body class="vh-100 dark">
@@ -109,26 +109,31 @@ if (!$conn->close()) {
                             } ?>
                             <tr>
                                 <th class='text-center'>
-                                    <?php echo $order["Orders.id"] ?>
+                                    <?php echo htmlentities($order["Orders.id"]); ?>
                                 </th>
                                 <td class="text-center">
-                                    <a href="/f1_project/views/public/store/product.php?id=<?php echo $order["Products.id"] ?>" target="_blank" class="text-decoration-none"><?php echo $order["Products.title"] ?></a>
+                                    <a href="/f1_project/views/public/store/product.php?id=<?php echo htmlentities($order["Products.id"]); ?>" target="_blank" class="text-decoration-none"><?php echo $order["Products.title"] ?></a>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo strtoupper($order["Orders_Products.size"]) ?>
+                                    <?php echo htmlentities(strtoupper($order["Orders_Products.size"])); ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $order["Orders_Products.quantity"] ?>
+                                    <?php echo htmlentities($order["Orders_Products.quantity"]); ?>
                                 </td>
                                 <td class="text-center">
-                                    <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $order["Products.img_url"]; ?>" alt="Profile pictures.">
+                                    <?php if($order["Products.img_url"] != ''){ ?>
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($order["Products.img_url"]); ?>" alt="Product picture">
+                                    <?php
+                                    } else { ?>
+                                        <span class='material-symbols-outlined'>close</span>
+                                    <?php } ?>
                                 </td>
                                 <td class='text-center'>
-                                    <?php echo $order["Orders.date"] ?>
+                                    <?php echo htmlentities($order["Orders.date"]); ?>
                                 </td>
                                 <td class='text-center'>
                                     <?php [$int, $dec] = str2int_dec($order["Orders_Products.unit_price"]  * $order["Orders_Products.quantity"]); ?>
-                                    <strong><?php echo $int . "." . $dec ?></strong> €
+                                    <strong><?php echo htmlentities($int . "." . $dec); ?></strong> €
                                 </td>
                             </tr>
                         <?php } ?>

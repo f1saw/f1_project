@@ -57,7 +57,7 @@ else{
 
     <h1 class="d-flex justify-content-center text-align-center">STORE</h1>
     <main class="home-cards mt-5">
-        <?php include("views/partials/store/view_product.php") ?>
+        <?php include("views/partials/store/view_products.php") ?>
     </main>
 </body>
 

@@ -44,7 +44,7 @@ if (!$conn->close()) {
 }
 
 if (!$product) {
-    error("500", "product_look_up", "\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
+    error("500", "Product NOT found", "\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
     exit;
 }
 ?>
@@ -52,7 +52,7 @@ if (!$product) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><?php echo $product["Products.title"] ?></title>
+    <title><?php echo htmlentities($product["Products.title"]); ?></title>
     <meta charset="UTF-8">
 
     <?php include("views/partials/head.php"); ?>
@@ -73,11 +73,11 @@ if (!$product) {
 
                     <?php err_msg_alert(); ?>
 
-                    <input type="hidden" name="id" value="<?php echo $id; ?>" required>
+                    <input type="hidden" name="id" value="<?php echo htmlentities($id); ?>" required>
                     <fiedlset>
                         <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                             <span class="material-symbols-outlined">edit_note</span>
-                            <b>EDIT</b> (<?php echo (strlen($product["Products.title"]) < 20)? $product["Products.title"] : (substr($product["Products.title"], 0 , 20) . " [...]") ?>)
+                            <b>EDIT</b> (<?php echo htmlentities((strlen($product["Products.title"]) < 20)? $product["Products.title"] : (substr($product["Products.title"], 0 , 20) . " [...]")); ?>)
                         </legend>
                         <hr>
                         <div class="row mb-3">
@@ -85,7 +85,7 @@ if (!$product) {
                                 <label for="title" class="form-label"><strong>TITLE <label class="text-danger">*</label></strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
-                                    <input type="text" id="title" class="form-control" name="title" placeholder="Title" value="<?php echo $product["Products.title"] ?>" aria-describedby="title-addon" required>
+                                    <input type="text" id="title" class="form-control" name="title" placeholder="Title" value="<?php echo htmlentities($product["Products.title"]); ?>" aria-describedby="title-addon" required>
                                 </div>
                                 <div id="input-info-title" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
@@ -96,7 +96,7 @@ if (!$product) {
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="desc" class="form-label"><strong>DESCRIPTION</strong></label>
-                                <textarea class="form-control" id="desc" name="desc" rows="2" placeholder="Description"><?php echo $product["Products.description"]; ?></textarea>
+                                <textarea class="form-control" id="desc" name="desc" rows="2" placeholder="Description"><?php echo htmlentities($product["Products.description"]); ?></textarea>
                                 <div id="input-info-desc" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
                                     <span class=""></span>
@@ -109,7 +109,7 @@ if (!$product) {
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
-                                    <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" value="<?php echo $int . "." . $dec; ?>" aria-describedby="price-addon" required>
+                                    <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" value="<?php echo htmlentities($int . "." . $dec); ?>" aria-describedby="price-addon" required>
                                 </div>
                                 <div id="input-info-price" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
@@ -122,7 +122,7 @@ if (!$product) {
                                     <option value="" class="option_invalid" selected disabled>Select team</option>
                                     <?php
                                     foreach ($teams as $team) {
-                                        echo "<option value=" . $team["id"] . " class='option_valid' " . (($team["id"] == $product["Teams.id"])? " selected":"") . ">" . $team["name"] . "</option>";
+                                        echo "<option value=" . htmlentities($team["id"]) . " class='option_valid' " . (($team["id"] == $product["Teams.id"])? " selected":"") . ">" . htmlentities($team["name"]) . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -143,7 +143,7 @@ if (!$product) {
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
-                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo preg_replace("/;/", " ", strtoupper($product["Products.size"])) ?>" placeholder="XS S M" aria-describedby="size-addon">
+                                    <input type="text" id="size" class="form-control" name="size" value="<?php echo htmlentities(preg_replace("/;/", " ", strtoupper($product["Products.size"]))); ?>" placeholder="XS S M" aria-describedby="size-addon">
                                 </div>
                                 <div id="input-info-size" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
@@ -160,7 +160,7 @@ if (!$product) {
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="color-addon">palette</span>
-                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo preg_replace("/;/", " ", $product["Products.color"]) ?>" placeholder="red black" aria-describedby="color-addon">
+                                    <input type="text" id="color" class="form-control" name="color" value="<?php echo htmlentities(preg_replace("/;/", " ", $product["Products.color"])); ?>" placeholder="red black" aria-describedby="color-addon">
                                 </div>
                                 <div id="input-info-color" class="d-none d-flex gap-2 mt-1 py-1">
                                     <span class="material-symbols-outlined"></span>
@@ -182,14 +182,14 @@ if (!$product) {
                                 <label for="img_url_1" class="form-label"><strong>IMAGE (1)</strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="img-1-addon">image</span>
-                                    <input type="text" id="img_url_1" class="img_url form-control" name="img_url_1" value="<?php echo $img1 ?>" placeholder="https://image.url" aria-describedby="img-1-addon">
+                                    <input type="text" id="img_url_1" class="img_url form-control" name="img_url_1" value="<?php echo htmlentities($img1); ?>" placeholder="https://image.url" aria-describedby="img-1-addon">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <label for="img_url_2" class="form-label"><strong>IMAGE (2)</strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="img-2-addon">image</span>
-                                    <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" value="<?php echo $img2 ?>" placeholder="https://image.url" aria-describedby="img-2-addon">
+                                    <input type="text" id="img_url_2" class="img_url form-control" name="img_url_2" value="<?php echo htmlentities($img2); ?>" placeholder="https://image.url" aria-describedby="img-2-addon">
                                 </div>
                             </div>
                             <div id="input-info-images" class="d-none d-flex gap-2 mt-1 py-1">

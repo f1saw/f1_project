@@ -79,20 +79,20 @@ if (!$conn->close()) {
                         foreach ($users as $user) { ?>
                             <tr>
                                 <th class='text-center'>
-                                    <a href='/f1_project/show_profile.php/?id=<?php echo $user["id"] ?>' class="text-decoration-none" style="color: #4a82fc">
-                                        <?php echo $user["id"]; ?>
+                                    <a href='/f1_project/show_profile.php/?id=<?php echo htmlentities($user["id"]); ?>' class="text-decoration-none" style="color: #4a82fc">
+                                        <?php echo htmlentities($user["id"]); ?>
                                     </a>
                                 </th>
 
                                 <?php for($i = 0;$i < 6; ++$i){?>
                                 <td class='text-center'>
-                                    <?php echo $user[$correspondence_vector[$i]]; ?>
+                                    <?php echo htmlentities($user[$correspondence_vector[$i]]); ?>
                                 </td>
                                 <?php } ?>
 
                                 <td class='text-center'>
                                     <?php if($user["img_url"] != ''){ ?>
-                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo $user['img_url']; ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo htmlentities($user['img_url']); ?>" alt="Profile pictures.">
                                     <?php
                                     }
                                     else{ ?>
@@ -102,7 +102,7 @@ if (!$conn->close()) {
                                 </td>
 
                                 <td class='text-center delete-loading'>
-                                    <a href='/f1_project/controllers/users/delete.php/?id=<?php echo $user["id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
+                                    <a href='/f1_project/controllers/users/delete.php/?id=<?php echo htmlentities($user["id"]); ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                         <span class='material-icons text-danger'>delete</span>
                                     </a>
                                 </td>

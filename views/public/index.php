@@ -91,15 +91,15 @@ $json_cards_data = json_decode($json, true);
                         <div class="col d-flex align-items-stretch">
                             <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                                 <div class="card-img">
-                                    <img src="<?php echo $card["img_url"] ?>" class="card-img-top" alt="...">
+                                    <img src="<?php echo htmlentities($card["img_url"]); ?>" class="card-img-top" alt="...">
                                 </div>
                                 <div class="card-body d-flex align-items-end">
                                     <div class="w-100">
-                                        <h5 class="card-title text-danger"><?php echo $card["title"] ?></h5>
+                                        <h5 class="card-title text-danger"><?php echo htmlentities($card["title"]); ?></h5>
                                         <hr>
-                                        <p class="card-text"><?php echo $card["text"] ?></p>
+                                        <p class="card-text"><?php echo htmlentities($card["text"]); ?></p>
                                         <p class="card-text">
-                                            <a href="<?php echo $card["link"] ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
+                                            <a href="<?php echo htmlentities($card["link"]); ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
                                                 <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
                                                     <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
                                                     Check it out!

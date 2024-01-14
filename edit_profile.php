@@ -85,7 +85,7 @@ if (check_user_auth($user)) {
                     <form id="profile-data" class="container-element" method="POST" action="/f1_project/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                         <div id="page1">
                             <div class="d-flex justify-content-center">
-                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo $element['img_url']; else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                      alt="profile picture">
                             </div>
                             <br>
@@ -96,7 +96,7 @@ if (check_user_auth($user)) {
                                     <label for="firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
                                 </span>
                                         <div class="input-group">
-                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="<?php echo $element["first_name"]; ?>">
+                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="<?php echo htmlentities($element["first_name"]); ?>">
                                         </div>
                                         <div id="input-info-firstname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -126,9 +126,9 @@ if (check_user_auth($user)) {
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
-                                            <label class="form-control text-box"><?php echo $element["email"] ?></label>
+                                            <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
                                         <?php } else {?>
-                                            <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
+                                            <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo htmlentities($element["email"]); ?>" >
                                         <?php } ?>
                                     </div>
                                     <div id="input-info-email" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -169,14 +169,14 @@ if (check_user_auth($user)) {
 
                             <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                                 <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
-                                <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                                <button type="submit" name="Button_id" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                                 <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
 
                         <div id="page2" style="display: none">
                             <div class="d-flex justify-content-center">
-                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo $element['img_url']; else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                      alt="profile picture">
                             </div>
                             <br>
@@ -224,7 +224,7 @@ if (check_user_auth($user)) {
                                 <label for="img_url" class="form-label"><strong class="text-red">Url img</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
-                                        <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="<?php echo $element["img_url"]; ?>">
+                                        <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="<?php echo htmlentities($element["img_url"]); ?>">
                                     </div>
                                     <div id="input-info-img_url" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                         <span class="material-symbols-outlined"></span>
@@ -247,7 +247,7 @@ if (check_user_auth($user)) {
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
-                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="<?php echo $element["role"]; ?>">
+                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="<?php echo htmlentities($element["role"]); ?>">
                                         <?php } else{ ?>
                                             <label class="form-control text-box"> <?php ($_SESSION["role"] == 1)? print "Admin": print "User"; ?> </label>
                                         <?php } ?>
@@ -258,7 +258,7 @@ if (check_user_auth($user)) {
 
                             <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                                 <button type="button" name="other_info" onclick="last_page()" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
-                                <button type="submit" name="Button_id" value="<?php echo $element["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                                <button type="submit" name="Button_id" value="<?php echo htmlentities($element["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                                 <button type="button" name="other_info" style="border: unset" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
