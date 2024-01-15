@@ -131,6 +131,10 @@ if (check_user_auth($user)) {
                                             <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo $element["email"]; ?>" >
                                         <?php } ?>
                                     </div>
+                                    <div class="text-box d-flex gap-2 mt-1 py-1">
+                                        <span id="status_symbol" style="display: none" class="material-symbols-outlined text-danger">warning</span>
+                                        <span id="status" class="text-danger"></span>
+                                    </div>
                                     <div id="input-info-email" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                         <span class="material-symbols-outlined"></span>
                                         <span class=""></span>
@@ -169,7 +173,7 @@ if (check_user_auth($user)) {
 
                             <div id="button_div" class="row mb-3 d-flex justify-content-center button">
                                 <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
-                                <button type="submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                                <button type="submit" id="btn-submit" name="Button_id" value="<?php echo $_GET["id"]; ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                                 <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
