@@ -16,7 +16,7 @@ if (!$login_allowed) {
     if (isset($_POST["email"])) {
 
         /* CLEANING INPUT */
-        $email = preg_replace('!\s+!', '', $_POST["email"]);
+        $email = preg_replace('/\s+/', '', $_POST["email"]);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             error("-1", "Email not an email", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
             exit;
@@ -51,7 +51,6 @@ if (!$login_allowed) {
                     exit;
                 }
 
-
                 $body = "Your new credentials:<br>";
                 $body .= "EMAIL: $email<br>";
                 $body .= "New password: $new_password";
@@ -71,9 +70,6 @@ if (!$login_allowed) {
             error("-1", "Email DOES NOT exists.", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");
             exit;
         }
-
-
-
 
     } else {
         error("401", "Fields not provided.", "controllers\auth\lost_password.php", "/f1_project/views/public/auth/lost_password.php");

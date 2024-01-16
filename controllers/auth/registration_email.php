@@ -8,9 +8,7 @@ require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 require_once("utility/utility_func.php");
 
-// TODO: conferma registrazione via mail
 // TODO: sistemare parametri error
-// TODO: bloccare pagina in caso di utente già registrato
 
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {

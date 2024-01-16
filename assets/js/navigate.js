@@ -2,7 +2,7 @@ function teams(){
     window.location.href = "/f1_project/views/public/teams.php";
 }
 
-function circuit(){
+function circuits(){
     window.location.href = "/f1_project/views/public/circuits.php";
 }
 

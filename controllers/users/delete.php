@@ -48,7 +48,7 @@ if($check_role){
 
 $conn = DB::connect("\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
 DB::p_stmt_no_select($conn,
-    "DELETE FROM Users WHERE id = ?",
+    "DELETE FROM Users WHERE id = ?;",
     ["i"],
     [$_GET["id"]],
     "\controllers\users\delete.php",

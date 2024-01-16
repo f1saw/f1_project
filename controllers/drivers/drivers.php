@@ -4,8 +4,7 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
 
 const BASE_URL = "https://www.formula1.com/en/drivers.html";
 
-function f1_scrape_drivers($base_url): array
-{
+function f1_scrape_drivers($base_url): array {
 
     // Init arrays of interest
     $team_list = [];

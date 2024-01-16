@@ -26,10 +26,12 @@ if (check_admin_auth($user)) {
         "\controllers\store\delete.php",
         "/f1_project/views/private/store/all.php")[0]["img_url"];
     $imgs = explode("\t", $imgs_str);
+    // Analyze each image
     foreach ($imgs as $img) {
+        // If it matches, it means that the image is stored on AWS S3
+        // I Have to delete it from the bucket
         if (preg_match("#^http://f1-saw.s3.eu-central-1.amazonaws.com/*#", $img)) {
             $img = explode("http://f1-saw.s3.eu-central-1.amazonaws.com/", $img)[1];
-            // I have to delete image from S3 bucket
             [$region, $version, $access_key_id, $secret_access_key, $bucket] = config_aws_s3();
             $s3 = new S3Client([
                 "version" => $version,
@@ -54,8 +56,7 @@ if (check_admin_auth($user)) {
         }
     }
 
-
-
+    /* Delete Products from DB */
     DB::p_stmt_no_select($conn,
         "DELETE FROM Products WHERE id = ?",
         ["i"],

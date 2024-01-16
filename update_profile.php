@@ -122,7 +122,7 @@ if (check_user_auth($user)) {
     $_POST["edit_img"] = $_POST["edit_img"]??"";
 
     // No image urls provided, so "images-local" should be taken into account
-    if ($_POST["edit_img"] == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]) {
+    if ($_POST["edit_img"] == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]["name"]) {
 
         // Make sure to look for empty file names and paths, the array might contain empty strings. Use array_filter() before count.
         //$files = array_filter($_FILES['image-local']['name']);

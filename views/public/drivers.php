@@ -3,8 +3,8 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 if(session_status() == PHP_SESSION_NONE) session_start();
 
-require_once ("controllers/Drivers/drivers.php");
-require_once ("controllers/Drivers/info_drivers.php");
+require_once("controllers/drivers/drivers.php");
+require_once("controllers/drivers/info_drivers.php");
 require_once ("views/partials/public/drivers_cards.php");
 require_once("controllers/auth/auth.php");
 
@@ -40,7 +40,7 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <button type="button" onclick="circuit()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <button type="button" onclick="circuits()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
                     <span style="font-size: 20px">2024 Circuits</span>
                 </span>
             </div>

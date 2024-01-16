@@ -11,7 +11,7 @@ if (check_user_auth()) {
     /* DELETE COOKIE */
     if (isset($_COOKIE["my_f1_cookie_id"]) && isset($_COOKIE["my_f1_cookie_value"]) &&
         $_COOKIE["my_f1_cookie_id"] && $_COOKIE["my_f1_cookie_value"]) {
-        $conn = DB::connect();
+        $conn = DB::connect("\controllers\auth\logout.php", "/f1_project/views/private/dashboard.php");
         DB::p_stmt_no_select($conn,
             "DELETE FROM Cookies WHERE id = ?;",
             ["s"],

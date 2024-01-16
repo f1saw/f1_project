@@ -96,6 +96,10 @@ const validators_products = {
     }
 }
 
+/**
+ * Enable (or Disable) btn-submit if essential inputs are valid (or NOT)
+ * @param validators
+ */
 const check_all = validators => {
     let isValid = true;
     for (const [key, value] of Object.entries(validators)) {

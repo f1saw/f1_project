@@ -21,6 +21,8 @@ if(isset($_GET["url"])) {
 
     echo json_encode($array_value);
 }
+
+// TODO: si può eliminare?
 function f1_scrape_info_drivers($base_url): array
 {
 

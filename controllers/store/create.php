@@ -33,6 +33,7 @@ if (check_admin_auth($user)) {
 
         // No image urls provided, so "images-local" should be taken into account
         if ($img_url[0] == "" && $img_url[1] == "" && isset($_FILES["images-local"]) && $_FILES["images-local"]) {
+
             // Make sure to look for empty file names and paths, the array might contain empty strings. Use array_filter() before count.
             $files = array_filter($_FILES['images-local']['name']);
             $total = count($_FILES["images-local"]["name"]);
@@ -49,11 +50,11 @@ if (check_admin_auth($user)) {
                     error("-1", "AWS S3: $statusMsg.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
                     exit;
                 }
+                // Save the uploaded image url in img_url array
                 $img_url[$index] = $s3_file_link;
                 $index++;
             }
         }
-
 
 
         /* -- ERROR | Empty input fields -- */

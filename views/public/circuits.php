@@ -5,7 +5,6 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 
 $ini = parse_ini_file("config/keys.ini");
 
-require_once ("controllers/calendar/calendar.php");
 require_once ("views/partials/public/news_cards.php");
 require_once("controllers/auth/auth.php");
 
@@ -84,7 +83,7 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
                     <button type="button" onclick="statistics()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span style="font-size: 20px">2024 Statistics</span>
+                    <span style="font-size: 20px">2023 Statistics</span>
                 </span>
             </div>
 

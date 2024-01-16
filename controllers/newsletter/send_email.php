@@ -14,8 +14,8 @@ if (check_admin_auth($user)) {
 
     if (isset($_POST["subject"]) && $_POST["subject"] && isset($_POST["text"]) && $_POST["text"]) {
 
-        $subject = preg_replace('!\s+!', '', $_POST["subject"]);
-        $body = preg_replace('!\s+!', '', $_POST["text"]);
+        $subject = preg_replace('/\s+/', '', $_POST["subject"]);
+        $body = preg_replace('/\s+/', '', $_POST["text"]);
 
         if (!$subject  || !$body) {
             error("500", "Fields NOT provided", "send_email.php", "/f1_project/views/private/newsletter/newsletter.php");

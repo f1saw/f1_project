@@ -13,7 +13,7 @@ require_once("utility/store.php");
 
 if (isset($_GET["search"]) && $_GET["search"]!=""){
     $search = $_GET["search"];
-    $conn = DB::connect();
+    $conn = DB::connect("\\views\public\search.php", "/f1_project/views/public/index.php");
     [$num_products, $products] = DB::stmt_get_record_by_field(
         $conn,
         " SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url' 

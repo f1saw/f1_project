@@ -95,6 +95,10 @@ const validators_user = {
     }
 }
 
+/**
+ * Enable (or Disable) btn-submit if essential inputs are valid (or NOT)
+ * @param validators
+ */
 const check_all = validators => {
     let isValid = true;
     for (const [key, value] of Object.entries(validators)) {
@@ -143,16 +147,16 @@ function check_email() {
             .then(response => response.json())
             .then(data => {
                 if (data.exists) {
-                    status_email.textContent = 'email already used, try a different one.';
+                    status_email.textContent = 'Email already used, try a different one.';
                     status_symbol.style.removeProperty('display');
-                    for (var i = 0; i < submit.length; i++) {
+                    for (let i = 0; i < submit.length; i++) {
                         submit[i].disabled = true;
                     }
                 }
                 if (data.exists_no_match) {
                     status_email.textContent = '';
                     status_symbol.style.display = 'none';
-                    for (var i = 0; i < submit.length; i++) {
+                    for (let i = 0; i < submit.length; i++) {
                         submit[i].disabled = false;
                     }
                 }

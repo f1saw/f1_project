@@ -13,6 +13,7 @@ require_once("controllers/auth/auth.php");
 [$login_allowed, $user] = check_cookie();
 if ($login_allowed) {
 
+    /* INPUT SET */
     if (isset($_POST["ids"]) && isset($_POST["titles"]) /* && isset($_POST["teams"]) */ && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"]) && isset($_POST["address"])) {
 
         /* CLEANING INPUT */
@@ -85,10 +86,11 @@ if ($login_allowed) {
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
                 $size = strtoupper($sizes_array[$i]);
                 [$int, $dec] = str2int_dec($prices_array[$i]);
+                $img = ($imgs_array[$i] !== null && !preg_match("/^\s*$/", $imgs_array[$i]))? "<img src='$imgs_array[$i]' width='65px;' alt='product picture'>":"";
                 $body .= "$titles_array[$i]<br>";
                 $body .= "Size: $size<br>";
                 $body .= "[$quantities_array[$i]x <strong>$int.$dec &euro;</strong>]<br>";
-                $body .= "<img src='$imgs_array[$i]' width='65px;' alt='product picture'>";
+                $body .= $img;
                 $body .= "<hr>";
             }
 

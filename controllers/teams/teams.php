@@ -2,8 +2,7 @@
 
 const BASE_URL_TEAMS = "https://www.formula1.com/en/teams.html";
 
-function f1_scrape_teams($base_url): array
-{
+function f1_scrape_teams($base_url): array {
 
     // Init arrays of interest
     $team_list = [];
@@ -37,7 +36,6 @@ function f1_scrape_teams($base_url): array
 
         $name_list[] = $name;
     }
-
 
     $node_list = $xpath->query('//span[@class="last-name f1-uppercase f1-bold--xs d-block d-lg-inline"]');
     foreach ($node_list as $n) {

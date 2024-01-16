@@ -7,13 +7,17 @@ const items_cart = cart => {
     return cnt;
 }
 
+// Get current information about the cart
 const cart_notification_dot = $("#cart-notification-dot");
 const user_id = $("#user-id").text()
 const curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
 const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
-cart_notification_dot.text(text)
+if (text !== "0") {
+    cart_notification_dot.text(text)
+}
 
 $(() => {
+    // Update cart information when the storage is updated
     window.addEventListener('storage', function() {
         const curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
         const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
@@ -23,20 +27,29 @@ $(() => {
     })
 })
 
+/* Product selected */
 const onConfirm = (event, size_param = null) => {
+    // Get current cart
+    // If there is no, it should be created (empty array)
     let curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
     if (!curr_cart) curr_cart = []
 
+    // Get size selected of the product
     const size = size_param?? $("#s-size").val();
     if (size !== "") {
-        let pushed = 0;
+        // Size correct (NOT EMPTY)
+        let pushed = 0; // flag to identify if the product is pushed to the cart
+        // Find index if the product is already in the cart (same ID and same SIZE)
         const index = curr_cart.findIndex(item => {
             return item.id === event.target.dataset.id && item.size === size;
         })
 
         if (index !== -1) {
+            // Product already in the cart
+            // So only increasing by 1 the quantity is needed
             curr_cart[index].quantity++;
         } else {
+            // Product should be pushed to the cart
             // Prevent from pushing undefined items in the cart
             if (event.target.dataset.title !== undefined) {
                 pushed = 1;
@@ -57,8 +70,13 @@ const onConfirm = (event, size_param = null) => {
         console.log(curr_cart)
         localStorage.setItem(`cart-${user_id}`, JSON.stringify(curr_cart))
 
-        cart_notification_dot.text(items_cart(curr_cart));
+        const len = items_cart(curr_cart);
+        if (len !== 0) {
+            cart_notification_dot.text(len)
+        }
 
+        // size_param === null  => It means the user clicked from a specific product page
+        // otherwise            => It means the user clicked from the general store page
         if (size_param === null) {
             if (pushed) {
                 // The previous page was the product page (the size has not been passed as a function parameter)
@@ -84,6 +102,8 @@ const onConfirm = (event, size_param = null) => {
             }
         }
     } else {
+        // size_param === null  => It means the user clicked from a specific product page
+        // otherwise            => It means the user clicked from the general store page
         if (size_param === null) {
             // The previous page was the product page (the size has not been passed as a function parameter)
             $("#select-info span:first-child").text("warning").addClass("text-danger").removeClass("text-success");

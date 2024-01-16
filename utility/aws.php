@@ -6,6 +6,8 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require 'vendor/autoload.php';
 use Aws\S3\S3Client;
 
+const PREFIX_LENGTH = 5;
+
 $ini = parse_ini_file("config/keys.ini");
 
 function config_aws_s3(): array {
@@ -13,7 +15,16 @@ function config_aws_s3(): array {
     return [$ini["aws_region"], $ini["aws_version"], $ini["aws_access_key"], $ini["aws_secret_key"], $ini["aws_bucket"]];
 }
 
+/**
+ * Function used to upload a specific image on AWS S3 (configuration params are already provided inside the function)
+ * @param $filename
+ * @param $file_temp_src
+ * @return array
+ */
 function aws_s3_upload($filename, $file_temp_src): array {
+
+    // Make each filename unique in the bucket
+    $filename = date('dmYHis').str_replace(" ", "", basename($filename));
 
     $status = "danger";
     $statusMsg = "";
@@ -26,9 +37,10 @@ function aws_s3_upload($filename, $file_temp_src): array {
     $file_type = pathinfo($filename, PATHINFO_EXTENSION);
     $allow_types = array('jpg', 'png', 'jpeg');
     if (in_array($file_type, $allow_types)) {
+
         // File temp source
-        // TODO: file_temp_src[0] if there is only one image, there should be two images
         if (is_uploaded_file($file_temp_src)) {
+
             // Instantiate an AWS S3 client
             $s3 = new S3Client([
                 "version" => $version,
@@ -42,7 +54,6 @@ function aws_s3_upload($filename, $file_temp_src): array {
             ]);
 
             try {
-
                 $result = $s3->putObject([
                     "Bucket" => $bucket,
                     "Key" => $filename,
@@ -58,6 +69,8 @@ function aws_s3_upload($filename, $file_temp_src): array {
                 }
             } catch (AWS\S3\Exception\S3Exception $e) {
                 $api_error = $e->getMessage();
+            } catch (Exception $e) {
+                $statusMsg = $e;
             }
 
             if (empty($api_error)) {

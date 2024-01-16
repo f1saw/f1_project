@@ -21,7 +21,6 @@ function f1_scrape_news($base_url): array {
     @$html->loadHtml($page);
     $xpath = new DOMXPath($html);
 
-
     $node_list = $xpath->query('//picture[@class="f1-cc--photo"]//source');
     // Increasing by 2 each time because otherwise there would have been duplicates
     // In this situation I obtain 7 news elements
@@ -39,8 +38,6 @@ function f1_scrape_news($base_url): array {
         // Append in array
         $img_list[] = $link;
     }
-    // echo $img_list[1] . "<br><br>";
-
 
     $node_list = $xpath->query('//div[@class="f1-homepage--hero"]//div[@class="f1-cc--caption"]');
     foreach ($node_list as $n) {
@@ -68,15 +65,12 @@ function f1_scrape_news($base_url): array {
         $title = [$title[1], $title[2], $title[3]];
         $title_list[] = $title;
     }
-    // echo $title_list[1] . "<br><br>";
-
 
     $node_list = $xpath->query('//div[@class="f1-homepage--hero"]//a');
     foreach ($node_list as $n) {
         $link = $base_url . $n->getAttribute("href");
         $link_list[] = $link;
     }
-    // echo $link_list[1] . "<br><br>";
 
     return [$title_list, $img_list, $link_list];
 }

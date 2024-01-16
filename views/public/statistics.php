@@ -66,7 +66,7 @@ else
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
                     <span style="font-size: 20px">2024 Circuits</span>
-                    <button type="button" onclick="circuit()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                    <button type="button" onclick="circuits()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>
         </div>

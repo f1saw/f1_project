@@ -26,8 +26,10 @@ SAW project about F1
 <hr>
 
 ## NOTES:
+- Redirect update_profile.php ( => show_profile.php OPPURE su users/all.php)
 - Upload immagini 413 (file too large)
-- Correggere parametri di error_log
+- Sistemare parametri del log di errori (mettere err msg anche in dashboard e index)
+- Verificare pulizia input, isset e prepare statement dove necesario (controllo di aver usato query semplici solo dove permesso)
 - Correggere UPDATE profilo (una chiamata unica con tutti i campi || Se no ci bastona)
 - Search bar server => circuiti, drivers, teams
 - DB::connect() => empty params

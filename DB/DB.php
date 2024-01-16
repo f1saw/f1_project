@@ -12,7 +12,13 @@ const PRODUCTS_MAX_LENGTHS = [-1, 150, 500, -1, 700, -1, 20, 20];
 
 class DB {
 
-    public static function connect($source = "N/A", $redirect_error = ""): mysqli {
+    /**
+     * Connect to DB (credentials are already inside the function)
+     * @param string $source
+     * @param string $redirect_error
+     * @return mysqli
+     */
+    public static function connect(string $source = "N/A", string $redirect_error = ""): mysqli {
         global $ini;
 
         error_reporting(0);
@@ -32,15 +38,31 @@ class DB {
         return $conn;
     }
 
-    public static function clean_input($conn, &$params) : void {
+    /**
+     * Escape parameters
+     * @param mysqli $conn
+     * @param $params
+     * @return void
+     */
+    public static function clean_input(mysqli $conn, &$params) : void {
         for ($i=0; $i<count($params); ++$i) {
             $params[$i] = $conn->real_escape_string($params[$i]);
         }
     }
 
-    public static function get_record_by_field($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = "") {
+    /**
+     * Get record from DB through Prepared Statement
+     * @param mysqli $conn
+     * @param string $query
+     * @param array $type_params
+     * @param array $params
+     * @param string $source
+     * @param string $redirect_error
+     * @return array => result of $res->fetch_all(MYSQLI_ASSOC)
+     */
+    public static function get_record_by_field(mysqli $conn, string $query, array $type_params, array $params, string $source = "N/A", string $redirect_error = "") : array {
 
-        self::clean_input($conn, $params);
+        // self::clean_input($conn, $params); || NOT NEEDED BC PREPARED STMT
 
         $stmt = self::p_stmt_bind_execute($conn, $query, $type_params, $params, $source, $redirect_error);
 
@@ -61,14 +83,32 @@ class DB {
         return $element;
     }
 
-    public static function stmt_no_select($conn, $query, $source = "N/A", $redirect_error = ""): void {
+    /**
+     * Simple Query execution.
+     * Not designed for "SELECT" (it does not return anything)
+     * @param mysqli $conn
+     * @param string $query
+     * @param string $source
+     * @param string $redirect_error
+     * @return void
+     */
+    public static function stmt_no_select(mysqli $conn, string $query, string $source = "N/A", string $redirect_error = ""): void {
         if (!$conn->query($query)) {
             error("500", "mysqli: $conn->error", $source, $redirect_error);
             exit;
         }
     }
 
-    public static function stmt_get_record_by_field($conn, $query, $source = "NA", $redirect_error = "") {
+    /**
+     * Execute query (SELECT).
+     * It returns $res->query($query)
+     * @param mysqli $conn
+     * @param string $query
+     * @param string $source
+     * @param string $redirect_error
+     * @return array|void
+     */
+    public static function stmt_get_record_by_field(mysqli $conn, string $query, string $source = "NA", string $redirect_error = "") {
         if (!($res = $conn->query($query))) {
             error("500", "mysqli: $conn->error", $source, $redirect_error);
             exit;
@@ -76,7 +116,18 @@ class DB {
         return [$res->num_rows, $res->fetch_all(MYSQLI_ASSOC)];
     }
 
-    public static function p_stmt_no_select($conn, $query, $type_params, $params, $source = "N/A", $redirect_error = "", $order_delete_id = null): void {
+    /**
+     * Prepared statement (NOT designed for SELECT)
+     * @param mysqli $conn
+     * @param string $query
+     * @param array $type_params => array (e.g. ["s", "i", ...])
+     * @param array $params => array (e.g. [$id, $name, ...])
+     * @param string $source
+     * @param string $redirect_error
+     * @param string|null $order_delete_id => required if an order should also be deleted (e.g. You try to buy a product which has been recently deleted)
+     * @return void
+     */
+    public static function p_stmt_no_select(mysqli $conn, string $query, array $type_params, array $params, string $source = "N/A", string $redirect_error = "", string $order_delete_id = null): void {
 
         // self::clean_input($conn, $params);
 
@@ -88,7 +139,18 @@ class DB {
         }
     }
 
-    public static function p_stmt_bind_execute($conn, $query, $type_params, $params, $source = "", $redirect_error  = "", $order_delete_id = null) {
+    /**
+     * Just bind and execute Prepared Statement
+     * @param mysqli $conn
+     * @param string $query
+     * @param array $type_params => array (e.g. ["s", "i", ...])
+     * @param array $params => array (e.g. [$id, $name, ...])
+     * @param string $source
+     * @param string $redirect_error
+     * @param string|null $order_delete_id
+     * @return mysqli_stmt|void
+     */
+    public static function p_stmt_bind_execute(mysqli $conn, string $query, array $type_params, array $params, string $source = "", string $redirect_error  = "", string $order_delete_id = null) {
 
         // self::clean_input($conn, $params);
 
