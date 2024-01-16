@@ -27,7 +27,7 @@
     "title": "Statistics",
     "text": "<strong>Data</strong> lover? This section is for you!",
     "img_url": "https://hoteldelaville.com/wp-content/uploads/2021/06/gran-premio-di-monza-informazioni-1000x634.jpg",
-    "link": "#"
+    "link": "/f1_project/views/public/statistics.php"
   },
   {
     "title": "Store",
