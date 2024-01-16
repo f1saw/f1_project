@@ -116,3 +116,39 @@ for (const value of Object.values(validators_user)) {
         }
     })
 }
+
+const element = [document.getElementById('register-form'), document.getElementById("profile-data")];
+element.forEach(check_email);
+function check_email() {
+    addEventListener("change", function (event){
+        event.preventDefault();
+
+        const form_email = document.getElementById("email");
+        const status_email = document.getElementById("status");
+        const status_symbol = document.getElementById("status_symbol");
+        const submit = document.getElementsByClassName("btn-submit")
+        const email = form_email.value.trim();
+        fetch(`http://localhost:63342/f1_project/controllers/auth/check_email_client.php?email=${encodeURIComponent(email)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) {
+                    status_email.textContent = 'email already used, try a different one.';
+                    status_symbol.style.removeProperty('display');
+                    for (var i = 0; i < submit.length; i++) {
+                        submit[i].disabled = true;
+                    }
+                }
+                if (data.exists_no_match) {
+                    status_email.textContent = '';
+                    status_symbol.style.display = 'none';
+                    for (var i = 0; i < submit.length; i++) {
+                        submit[i].disabled = false;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error in API call:', error);
+                status_email.textContent = 'Email check failed.';
+            });
+    })
+}

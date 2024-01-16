@@ -15,19 +15,19 @@
     "title": "Drivers",
     "text": "Discover the secrets of your favorite Drivers <strong>:)</strong>",
     "img_url": "https://www.sportinglad.com/wp-content/uploads/2023/08/ezgif.com-gif-maker.webp",
-    "link": "#"
+    "link": "/f1_project/views/public/drivers.php"
   },
   {
     "title": "Teams",
     "text": "Discover the <strong>history</strong> of each Team",
     "img_url": "https://f1ntastic.com/wp-content/uploads/2022/03/2022-F1-Teams-Cover.jpg",
-    "link": "#"
+    "link": "/f1_project/views/public/teams.php"
   },
   {
     "title": "Statistics",
     "text": "<strong>Data</strong> lover? This section is for you!",
     "img_url": "https://hoteldelaville.com/wp-content/uploads/2021/06/gran-premio-di-monza-informazioni-1000x634.jpg",
-    "link": "#"
+    "link": "/f1_project/views/public/statistics.php"
   },
   {
     "title": "Store",

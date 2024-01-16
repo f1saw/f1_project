@@ -36,15 +36,21 @@ body {
 
 @media screen and (max-width: 992px) {
     .container-element{
-        max-width: 70%;
-        width: 100%;
+        width: 50%;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .container-element{
-        max-width: 70%;
-        width: 100%;
+        top: 50px;
+        width: 70%;
+        height: 570px;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .container-element {
+        width: 90%;
     }
 }
 
@@ -171,7 +177,7 @@ hr {
 @media screen and (max-height: 460px) {
     .container-element{
         top: 40px;
-        max-width: 70%;
+        max-width: 90%;
         max-height: 200px;
         width: 100%;
     }
