@@ -17,6 +17,10 @@ const clear_input_info = ids => {
 
 }
 
+const validateMaxFiles = (id, value, params) => {
+    return $("#images-local")[0].files.length <= params;
+}
+
 const validateMaxLength = (id, value) => {
     // if value is undefined, it means it is not shown on the page.
     // it does not count as valid/not valid.
@@ -82,6 +86,13 @@ const validators_user = {
         validator: validateMaxLength,
         err_msg: ["Image url is too <strong class='text-danger'>LONG</strong>"]
     },
+    "image_local": {
+        ids: ["image-local"],
+        validator: validateMaxFiles,
+        params: 1,
+        err_msg: ["You can upload a maximum of <strong class='text-danger'>ONE</strong> image"],
+        err_id: "image-local"
+    }
 }
 
 const check_all = validators => {

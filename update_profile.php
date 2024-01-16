@@ -8,6 +8,8 @@ require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("utility/utility_func.php");
 require_once("utility/msg_error.php");
+require_once ("utility/aws.php");
+const MAX_NUMBER_FILES = 1;
 
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
@@ -113,6 +115,41 @@ if (check_user_auth($user)) {
         }
     }
 
+
+
+
+    /* IMAGE HANDLING */
+    $_POST["edit_img"] = $_POST["edit_img"]??"";
+
+    // No image urls provided, so "images-local" should be taken into account
+    if ($_POST["edit_img"] == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]) {
+
+        // Make sure to look for empty file names and paths, the array might contain empty strings. Use array_filter() before count.
+        //$files = array_filter($_FILES['image-local']['name']);
+        // var_dump($_FILES["image-local"]);
+        if (gettype($_FILES["image-local"]["name"]) !== "string") {
+            // It is an array, so multiple files have been uploaded.
+            // This is NOT allowed
+            // TODO: redirect to users/all.php o su show_profile.php
+            error("-1", "Max number of files exceeded.", "\update_profile.php", "/f1_project/views/private/users/all.php");
+            exit;
+        }
+
+        $s3_file_link = "";
+
+        $file_temp_src = $_FILES["image-local"]["tmp_name"];
+        $filename = $_FILES["image-local"]["name"];
+
+        [$status, $statusMsg, $s3_file_link] = aws_s3_upload($filename, $file_temp_src);
+        if ($status == "danger") {
+            error("-1", "AWS S3: $statusMsg.", "\update_profile.php", "/f1_project/show_profile.php");
+            exit;
+        }
+        $_POST["edit_img"] = $s3_file_link;
+    }
+
+
+
     if(isset($_POST[$post_name[$e_email]])){
         $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         $check = DB::get_record_by_field(
@@ -142,7 +179,7 @@ if (check_user_auth($user)) {
             }
             $change_value = $_POST[$post_name[$i]];
             $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
-            $change_value = $conn->real_escape_string($change_value);
+            $change_value = $conn->real_escape_string($change_value); // do not do escape if prepared statement
             DB::p_stmt_no_select(
                 $conn,
                 "UPDATE users SET $db_col_edit[$i] = '$change_value' WHERE id = ?",

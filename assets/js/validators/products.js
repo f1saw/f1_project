@@ -23,6 +23,9 @@ const clear_input_info = id => {
     $(`#input-info-${id}`).addClass("d-none");
 }
 
+const validateMaxFiles = (id, value, params) => {
+    return $("#images-local")[0].files.length <= params;
+}
 
 const validateMaxLength = (id, value, params) => {
     // test required to handle image urls length
@@ -83,6 +86,13 @@ const validators_products = {
         params: [MAX_IMGS_LENGTH],
         err_msg: "Image URLs are too <strong class='text-danger'>LONG</strong>",
         err_id: "images"
+    },
+    "images_local": {
+        ids: ["images-local"],
+        validator: validateMaxFiles,
+        params: 2,
+        err_msg: "You can upload a maximum of <strong class='text-danger'>TWO</strong> images",
+        err_id: "images-local"
     }
 }
 
