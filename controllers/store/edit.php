@@ -6,6 +6,9 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
+require_once ("utility/aws.php");
+
+const MAX_NUMBER_FILES = 2;
 
 [$login_allowed, $user] = check_cookie();
 if (check_admin_auth($user)) {
@@ -28,6 +31,30 @@ if (check_admin_auth($user)) {
             $index = !($img_url[0] === "");
             $img_url[$index] = $_POST["img_url_2"]?:"";
         }
+
+        // No image urls provided, so "images-local" should be taken into account
+        if ($img_url[0] == "" && $img_url[1] == "" && isset($_FILES["images-local"]) && $_FILES["images-local"]) {
+            // Make sure to look for empty file names and paths, the array might contain empty strings. Use array_filter() before count.
+            $files = array_filter($_FILES['images-local']['name']);
+            $total = count($_FILES["images-local"]["name"]);
+            if ($total > MAX_NUMBER_FILES) {
+                error("-1", "Max number of files exceeded.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
+                exit;
+            }
+
+            $file_temp_src = $_FILES["images-local"]["tmp_name"];
+            $index = 0;
+            foreach ($_FILES["images-local"]["name"] as $filename) {
+                [$status, $statusMsg, $s3_file_link] = aws_s3_upload($filename, $file_temp_src[$index]);
+                if ($status == "danger") {
+                    error("-1", "AWS S3: $statusMsg.", "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
+                    exit;
+                }
+                $img_url[$index] = $s3_file_link;
+                $index++;
+            }
+        }
+
 
         /* -- ERROR | Empty input fields -- */
         if ($id == "" || $id == " "
@@ -52,7 +79,7 @@ if (check_admin_auth($user)) {
             exit;
         }*/
 
-        /* CHECK INPUT LENGTHS */
+        /* TODO: CHECK INPUT LENGTHS */
 
         /* DB */
         $conn = DB::connect("\controllers\store\\update_profile.php", "/f1_project/views/private/store/update_profile.php?id=$id");

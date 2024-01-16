@@ -10,8 +10,11 @@ require_once ("views/partials/public/news_cards.php");
 require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
-const CALENDAR_URL = "https://en.wikipedia.org/wiki/2024_Formula_One_World_Championship";
-$circuits = f1_scrape_calendar(CALENDAR_URL);
+
+// const CALENDAR_URL = "https://en.wikipedia.org/wiki/2024_Formula_One_World_Championship";
+//$circuits = f1_scrape_calendar(CALENDAR_URL);
+// JSON to achieve accuracy in weather API location
+$circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controllers\calendar\circuits.json"));
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +38,19 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
     <script>
         const get_weather = async city => {
             city = city.replace(" ", "+")
-            console.log(city)
+            // console.log(city)
             const API_KEY = "<?php echo $ini["API_KEY"]; ?>";
             fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`)
                 .then(response => response.json())
                 .then(json => {
-                    console.log(json)
+                    // console.log(json)
                     const lat = json[0]["lat"];
                     const lon = json[0]["lon"];
 
                     fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
                         .then(response => response.json())
                         .then(json => {
-                            console.log(json)
+                            // console.log(json)
 
                             // create a new Date object with the current date and time
                             const date = new Date();
@@ -58,7 +61,7 @@ $circuits = f1_scrape_calendar(CALENDAR_URL);
                                 minute: '2-digit',
                                 timeZone: json.timezone
                             });
-                            console.log(navigator.language + "\n" + localTime + " " + city + " " + json.timezone)
+                            // console.log(navigator.language + "\n" + localTime + " " + city + " " + json.timezone)
 
                             const weather = json.current.weather[0];
                             const temp = Math.round((json.current.temp - 273.15) * 10) / 10;

@@ -35,6 +35,7 @@ if (!$conn->close()) {
     <meta charset="UTF-8">
 
     <?php include("views/partials/head.php"); ?>
+    <?php include ("views/partials/toggle_head.php"); ?>
 
     <!--modificare la navbar-->
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
@@ -49,7 +50,7 @@ if (!$conn->close()) {
     <div class="container-fluid row d-flex flex-row justify-content-center align-items-center gap-3 mt-5">
         <div class="col-12 col-md-10">
 
-            <form action="/f1_project/controllers/store/create.php" id="form-loading" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded" method="POST">
+            <form action="/f1_project/controllers/store/create.php" enctype="multipart/form-data" id="form-loading" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded" method="POST">
 
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>
@@ -141,7 +142,21 @@ if (!$conn->close()) {
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <!-- Local Images -->
+                    <div class="row mb-4 d-none" id="image-local-div">
+                        <div class="col-12">
+                            <label for="images" class="form-label"><strong>UPLOAD IMAGE(S)</strong></label>
+                            <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="images-local" name="images-local[]" multiple>
+                        </div>
+                        <div id="input-info-images-local" class="d-none d-flex gap-2 mt-1 py-1">
+                            <span class="material-symbols-outlined"></span>
+                            <span class=""></span>
+                        </div>
+                    </div>
+
+                    <!-- Web Images -->
+                    <div class="row mb-4" id="image-url-div">
                         <div class="col-6">
                             <label for="img_url_1" class="form-label"><strong>IMAGE (1)</strong></label><br>
                             <div class="input-group">
@@ -159,6 +174,14 @@ if (!$conn->close()) {
                         <div id="input-info-images" class="d-none d-flex gap-2 mt-1 py-1">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <div class="col-12 d-flex justify-content-start align-items-center gap-2">
+                            <label class="checkbox-inline" for="choose-file-upload"></label>
+                            <input type="checkbox" id="choose-file-upload" data-toggle="toggle" data-on="Local" data-off="URL" data-onstyle="danger" data-offstyle="border border-danger">
                         </div>
                     </div>
 
@@ -197,6 +220,7 @@ if (!$conn->close()) {
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 <script src="/f1_project/assets/js/store/crud.js"></script>
 <script src="/f1_project/assets/js/loading-crud.js"></script>
+<script src="/f1_project/assets/js/image_upload.js"></script>
 
 </body>
 </html>

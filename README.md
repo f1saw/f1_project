@@ -16,10 +16,20 @@ SAW project about F1
 <hr>
 
 ## MATTE:
+- [ ] AWS-S3 (error validator file extension)
+  - https://s3.console.aws.amazon.com/s3/get-started?region=eu-north-1&region=eu-north-1 
+  - https://www.youtube.com/watch?v=f6pees-RYPs
+  - https://stackoverflow.com/questions/2704314/multiple-file-upload-in-php
+  - TODO: controlli client side estensione file immagini
+  - Rimuovere la propria foto profilo
 - [ ] NOT Working: dynamic tooltip on "cart" in order to quickly remove items from cart
 <hr>
 
 ## NOTES:
+- Upload immagini 413 (file too large)
+- Correggere parametri di error_log
+- Correggere UPDATE profilo (una chiamata unica con tutti i campi || Se no ci bastona)
+- Search bar server => circuiti, drivers, teams
 - DB::connect() => empty params
 - Cosa significa "Logged but in user mode, Logout" => fare redirect su dashboard?
 - Cos'è assets/image/User_detail*
@@ -61,3 +71,5 @@ SAW project about F1
 - <a href="https://www.f1-fansite.com/">f1-fansite</a>
 - <a href="https://wallpapercave.com/">wallpapercave</a>
 - (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
+- https://openweathermap.org/api
+- aws s3
