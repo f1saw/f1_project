@@ -43,18 +43,11 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
                 </span>
                 (provided by <a href="https://www.formula1.com/en/drivers.html" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
             </span>
-        <?php echo_drivers_cards($name_list, $lastname_list, $flag_list, $team_list, $number_list, $img_list, $json_info_link, $info, COL_CARD); ?>
+        <?php echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD); ?>
     </main>
 </div>
 
-<script>
-    function show_driver(id) {
-        $(`#num${id}`).removeClass('d-none');
-        $(`#info_driver${id}`).addClass('d-none');
-    }
-</script>
-
-<script src="/f1_project/controllers/Drivers/info_drivers.js"></script>
+<script src="/f1_project/assets/js/info_drivers.js"></script>
 </body>
 </html>
 
