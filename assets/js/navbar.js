@@ -17,7 +17,9 @@ $(() => {
     window.addEventListener('storage', function() {
         const curr_cart = JSON.parse(localStorage.getItem(`cart-${user_id}`))
         const text = (curr_cart && curr_cart.length)? items_cart(curr_cart):""
-        cart_notification_dot.text(text)
+        if (text !== "0") {
+            cart_notification_dot.text(text)
+        }
     })
 })
 
@@ -27,6 +29,7 @@ const onConfirm = (event, size_param = null) => {
 
     const size = size_param?? $("#s-size").val();
     if (size !== "") {
+        let pushed = 0;
         const index = curr_cart.findIndex(item => {
             return item.id === event.target.dataset.id && item.size === size;
         })
@@ -34,17 +37,21 @@ const onConfirm = (event, size_param = null) => {
         if (index !== -1) {
             curr_cart[index].quantity++;
         } else {
-            curr_cart.push({
-                "id": event.target.dataset.id,
-                "title": event.target.dataset.title,
-                "description": event.target.dataset.description,
-                "size": size,
-                "price": event.target.dataset.price,
-                "img_url": event.target.dataset.img,
-                "team_id": event.target.dataset.team_id,
-                "team_name": event.target.dataset.team_name,
-                "quantity": 1
-            })
+            // Prevent from pushing undefined items in the cart
+            if (event.target.dataset.title !== undefined) {
+                pushed = 1;
+                curr_cart.push({
+                    "id": event.target.dataset.id,
+                    "title": event.target.dataset.title,
+                    "description": event.target.dataset.description,
+                    "size": size,
+                    "price": event.target.dataset.price,
+                    "img_url": event.target.dataset.img,
+                    "team_id": event.target.dataset.team_id,
+                    "team_name": event.target.dataset.team_name,
+                    "quantity": 1
+                })
+            }
         }
 
         console.log(curr_cart)
@@ -53,24 +60,28 @@ const onConfirm = (event, size_param = null) => {
         cart_notification_dot.text(items_cart(curr_cart));
 
         if (size_param === null) {
-            // The previous page was the product page (the size has not been passed as a function parameter)
-            $("#select-info span:first-child").text("check").addClass("text-success").removeClass("text-danger");
-            $("#select-info span:nth-child(2)").text("Added successfully!").addClass("text-success").removeClass("text-danger");
-            $("#select-info").removeClass("d-none");
-            $(".btn-add-cart :last-child").text("Added!");
+            if (pushed) {
+                // The previous page was the product page (the size has not been passed as a function parameter)
+                $("#select-info span:first-child").text("check").addClass("text-success").removeClass("text-danger");
+                $("#select-info span:nth-child(2)").text("Added successfully!").addClass("text-success").removeClass("text-danger");
+                $("#select-info").removeClass("d-none");
+                $(".btn-add-cart :last-child").text("Added!");
 
-            setTimeout(() => {
-                $(".btn-add-cart :last-child").text("Add to cart!");
-            }, 2000)
+                setTimeout(() => {
+                    $(".btn-add-cart :last-child").text("Add to cart!");
+                }, 2000)
+            }
         } else {
-            // The previous page was the store page (the size has been passed as a function parameter)
-            $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-success").removeClass("btn-danger");
-            $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Added");
+            if (pushed) {
+                // The previous page was the store page (the size has been passed as a function parameter)
+                $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-success").removeClass("btn-danger");
+                $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Added");
 
-            setTimeout(() => {
-                $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-danger").removeClass("btn-success");
-                $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Add it!");
-            }, 2000)
+                setTimeout(() => {
+                    $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-danger").removeClass("btn-success");
+                    $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Add it!");
+                }, 2000)
+            }
         }
     } else {
         if (size_param === null) {

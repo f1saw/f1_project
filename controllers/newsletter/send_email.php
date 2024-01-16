@@ -22,8 +22,8 @@ if (check_admin_auth($user)) {
             exit;
         }
 
-        $subject = htmlentities($_POST["subject"]);
-        $body = htmlentities($_POST["text"]);
+        $subject = $_POST["subject"];
+        $body = $_POST["text"];
 
         $conn = DB::connect("send_email.php", "/f1_project/views/private/newsletter/send_email.php");
         [$num_users, $recipients] = DB::stmt_get_record_by_field($conn,

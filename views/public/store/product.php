@@ -28,7 +28,7 @@ if (!$conn->close()) {
 }
 
 if (!$product) {
-    error("500", "product_look_up", "product.php", "/f1_project/views/public/store/store.php");
+    error("500", "Product NOT found.", "product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 ?>
@@ -36,7 +36,7 @@ if (!$product) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><?php echo $product["Products.title"] ?></title>
+    <title><?php echo htmlentities($product["Products.title"]); ?></title>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
@@ -66,11 +66,11 @@ if (!$product) {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $img_urls[0]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                            <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="...">
                         </div>
                         <?php if ($img_urls[1]) { ?>
                             <div class="carousel-item">
-                                <img src="<?php echo $img_urls[1]; ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                                <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="...">
                             </div>
                         <?php } ?>
                     </div>
@@ -86,7 +86,7 @@ if (!$product) {
             </div>
         <?php } ?>
         <div class="col-12 col-sm-6">
-            <h3><?php echo $product["Products.title"]; ?></h3>
+            <h3><?php echo htmlentities($product["Products.title"]); ?></h3>
             <hr>
                 <div>
                     <?php if ($product["Products.color"]) { ?>
@@ -96,17 +96,17 @@ if (!$product) {
                             $str_color .= ucfirst($color) . " ";
                         }
                         ?>
-                        <label for="s-color">Color: <?php echo $str_color; ?></label>
+                        <label for="s-color">Color: <?php echo htmlentities($str_color); ?></label>
                     <?php } ?>
 
                     <?php if ($img_urls != null) { ?>
                         <?php foreach ($img_urls as $img) { ?>
-                            <img class="mx-3" src="<?php echo $img; ?>" height="50px" alt="">
+                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="">
                         <?php } ?>
                     <?php } ?>
                 </div>
             <?php if ($product["Teams.name"]) { ?>
-                <label for="s-team-name" class="mt-3">Team: <?php echo $product["Teams.name"]; ?></label>
+                <label for="s-team-name" class="mt-3">Team: <?php echo htmlentities($product["Teams.name"]); ?></label>
             <?php } ?>
             <?php if ($product["Products.size"]) { ?>
                 <?php $size = explode(";", $product["Products.size"]); ?>
@@ -117,7 +117,7 @@ if (!$product) {
                             <option value="" class="option_invalid" selected>Select size</option>
                             <?php
                             foreach ($size as $s) {
-                                echo "<option value='$s' class='option_valid'>" . strtoupper($s). "</option>";
+                                echo "<option value='$s' class='option_valid'>" . htmlentities(strtoupper($s)) . "</option>";
                             }
                             ?>
                         </select>
@@ -131,7 +131,7 @@ if (!$product) {
             <hr>
             <div class="d-flex justify-content-end gap-3">
                 <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
-                <h3>€ <?php echo "$int.$dec" ?></h3>
+                <h3>€ <?php echo htmlentities("$int.$dec"); ?></h3>
                 <div <?php echo get_data_id($product); ?> class="d-flex flex-row gap-2 pb-1 hover-red">
                     <div <?php echo get_data_id($product); ?> class="btn-add-cart btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
                         <span <?php echo get_data_id($product); ?> class="material-symbols-outlined">shopping_bag</span>
@@ -151,7 +151,7 @@ if (!$product) {
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <label><?php echo $product["Products.description"]; ?></label>
+                            <label><?php echo htmlentities($product["Products.description"]); ?></label>
                         </div>
                     </div>
                 </div>

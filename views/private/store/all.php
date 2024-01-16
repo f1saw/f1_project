@@ -79,20 +79,20 @@ if (!$conn->close()) {
                         foreach ($products as $product) { ?>
                             <tr>
                                 <th class='text-center'>
-                                    <a href='edit.php/?id=<?php echo $product["Products.id"] ?>' class="text-decoration-none" style="color: #4a82fc">
-                                        <?php echo $product["Products.id"]; ?>
+                                    <a href='edit.php/?id=<?php echo htmlentities($product["Products.id"]); ?>' class="text-decoration-none" style="color: #4a82fc">
+                                        <?php echo htmlentities($product["Products.id"]); ?>
                                     </a>
                                 </th>
 
                                 <?php for($i = 0;$i < count($correspondence_vector); $i++){?>
                                     <td class='text-center'>
-                                        <?php echo (strlen($product[$correspondence_vector[$i]]) < 70)? $product[$correspondence_vector[$i]] : (substr($product[$correspondence_vector[$i]], 0 , 70) . " [...]"); ?>
+                                        <?php echo htmlentities((strlen($product[$correspondence_vector[$i]]) < 70)? $product[$correspondence_vector[$i]] : (substr($product[$correspondence_vector[$i]], 0 , 70) . " [...]")); ?>
                                     </td>
                                 <?php } ?>
 
                                 <td class="text-center">
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
-                                    € <?php echo $int . "." . $dec ?>
+                                    € <?php echo htmlentities($int . "." . $dec); ?>
                                 </td>
 
                                 <td class='text-center' >
@@ -100,10 +100,10 @@ if (!$conn->close()) {
                                     if ($product["Products.img_url"]) {
                                         $img = explode("\t", $product["Products.img_url"]);
                                         if($img && $img[0] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[0]; ?>" alt="Product pictures.">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="Product pictures.">
                                         <?php }
                                         if($img && $img[1] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo $img[1]; ?>" alt="Product pictures.">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="Product pictures.">
                                         <?php
                                         }
                                     } else { ?>
@@ -113,7 +113,7 @@ if (!$conn->close()) {
                                 </td>
 
                                 <td class='text-center delete-loading'>
-                                    <a href='/f1_project/controllers/store/delete.php/?id=<?php echo $product["Products.id"] ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
+                                    <a href='/f1_project/controllers/store/delete.php/?id=<?php echo htmlentities($product["Products.id"]); ?>' class='my-auto d-flex align-items-center justify-content-center text-decoration-none'>
                                         <span class='material-icons text-danger'>delete</span>
                                     </a>
                                 </td>

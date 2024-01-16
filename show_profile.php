@@ -76,18 +76,18 @@ if (check_user_auth($user)) {
                             <?php succ_msg_alert($function); ?>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo $element['img_url']; else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                            <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                  alt="profile picture">
                         </div>
                         <br>
                         <div class="row mb-3">
                             <div class="col-12 col-md-6">
                                 <div class="col-12">
-                            <span class="d-flex justify-content-center">
-                                <label class="form-label"><strong class=" text-red">Firstname</strong></label><br>
-                            </span>
+                                    <span class="d-flex justify-content-center">
+                                        <label class="form-label"><strong class=" text-red">Firstname</strong></label><br>
+                                    </span>
                                     <div class="input-group d-flex text-center">
-                                        <label class="form-control text-box" ><?php ($element["first_name"] != "")?print $element["first_name"]: print "No element";?></label>
+                                        <label class="form-control text-box" ><?php ($element["first_name"] != "")?print htmlentities($element["first_name"]): print "No element";?></label>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@ if (check_user_auth($user)) {
                                 <label class="form-label"><strong class="text-red">Lastname</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
-                                        <label class="form-control text-box" ><?php ($element["last_name"] != "")?print $element["last_name"]: print "No element"; ?></label>
+                                        <label class="form-control text-box" ><?php ($element["last_name"] != "")?print htmlentities($element["last_name"]): print "No element"; ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ if (check_user_auth($user)) {
                             <label class="form-label"><strong class="text-red">Email</strong></label><br>
                         </span>
                                 <div class="input-group d-flex text-center">
-                                    <label class="form-control text-box"><?php ($element["email"] != "")?print $element["email"]: print "No element"; ?></label>
+                                    <label class="form-control text-box"><?php ($element["email"] != "")?print htmlentities($element["email"]): print "No element"; ?></label>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ if (check_user_auth($user)) {
                                 <label class="form-label"><strong class="text-red">Date of birth</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
-                                        <label class="form-control text-box" ><?php ($element["date_of_birth"] != "")?print $element["date_of_birth"]: print "No element"; ?></label>
+                                        <label class="form-control text-box" ><?php ($element["date_of_birth"] != "")?print htmlentities($element["date_of_birth"]): print "No element"; ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ if (check_user_auth($user)) {
                                 <label class="form-label"><strong class="text-red">Remember me</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
-                                        <label class="form-control text-box" ><?php ($element["cookie_id"] != null)? print "Active": print "inactive" ?></label>
+                                        <label class="form-control text-box" ><?php ($element["cookie_id"] != null)? print "Active": print "Not Active" ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@ if (check_user_auth($user)) {
 
         <script>
             function my_function(){
-                window.open("/f1_project/edit_profile.php/?id=<?php echo $element["id"]; ?>","_self");
+                window.open("/f1_project/edit_profile.php/?id=<?php echo htmlentities($element["id"]); ?>","_self");
             }
         </script>
 

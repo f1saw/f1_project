@@ -142,6 +142,7 @@ if (check_user_auth($user)) {
             }
             $change_value = $_POST[$post_name[$i]];
             $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
+            $change_value = $conn->real_escape_string($change_value);
             DB::p_stmt_no_select(
                 $conn,
                 "UPDATE users SET $db_col_edit[$i] = '$change_value' WHERE id = ?",
