@@ -3,7 +3,7 @@ function teams(){
 }
 
 function circuit(){
-    window.location.href = "";
+    window.location.href = "/f1_project/views/public/circuits.php";
 }
 
 function drivers(){
