@@ -23,11 +23,7 @@ function f1_scrape_drivers($base_url): array
     $node_list = $xpath->query('//div[@class="listing-item--team f1--xxs f1-color--gray5"]');
     foreach ($node_list as $n) {
         $team = $n->nodeValue;
-        /*
-        Replace blank spaces in the read string, the limit of the replacements is just 2
-            - Limit 2 imposed to obtain this situation (not affect the title)
-                "News {title}" => ";News;{title}"
-        */
+
         $team = preg_replace("/\s+/", ";", $team, 2);
         $team = explode(";", $team);
 
@@ -37,13 +33,6 @@ function f1_scrape_drivers($base_url): array
     $node_list = $xpath->query('//span[@class="d-block f1--xxs f1-color--carbonBlack"]');
     foreach ($node_list as $n) {
         $name = $n->nodeValue;
-        /*
-        Replace blank spaces in the read string, the limit of the replacements is just 2
-            - Limit 2 imposed to obtain this situation (not affect the title)
-                "News {title}" => ";News;{title}"
-        */
-        //$name = preg_replace("/\s+/", ";", $name, 2);
-        //$name = explode(";", $name);
 
         $name_list[] = $name;
     }
@@ -52,13 +41,6 @@ function f1_scrape_drivers($base_url): array
     $node_list = $xpath->query('//span[@class="d-block f1-bold--s f1-color--carbonBlack"]');
     foreach ($node_list as $n) {
         $lastname = $n->nodeValue;
-        /*
-        Replace blank spaces in the read string, the limit of the replacements is just 2
-            - Limit 2 imposed to obtain this situation (not affect the title)
-                "News {title}" => ";News;{title}"
-        */
-        //$name = preg_replace("/\s+/", ";", $name, 2);
-        //$name = explode(";", $name);
 
         $lastname_list[] = $lastname;
     }
@@ -69,15 +51,6 @@ function f1_scrape_drivers($base_url): array
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
 
-        // Explode needed because there are multiple images in data-srcset attribute
-        // I want the last of them (better resolution)
-        //$array = explode(",", $link);
-        //$link = end($array);
-        // Instructions needed because the original string is "{img_url} 2x"
-        // and "2x" is not relevant, so I can split by blank spaces and obtain "{img_url}"
-        //$link = explode(" ", $link)[1];
-
-        // Append in array
         $img_list[] = $link;
     }
     //echo $img_list[1] . "<br><br>";
@@ -87,15 +60,6 @@ function f1_scrape_drivers($base_url): array
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
 
-        // Explode needed because there are multiple images in data-srcset attribute
-        // I want the last of them (better resolution)
-        //$array = explode(",", $link);
-        //$link = end($array);
-        // Instructions needed because the original string is "{img_url} 2x"
-        // and "2x" is not relevant, so I can split by blank spaces and obtain "{img_url}"
-        //$link = explode(" ", $link)[1];
-
-        // Append in array
         $number_list[] = $link;
     }
 
@@ -104,15 +68,6 @@ function f1_scrape_drivers($base_url): array
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
 
-        // Explode needed because there are multiple images in data-srcset attribute
-        // I want the last of them (better resolution)
-        //$array = explode(",", $link);
-        //$link = end($array);
-        // Instructions needed because the original string is "{img_url} 2x"
-        // and "2x" is not relevant, so I can split by blank spaces and obtain "{img_url}"
-        //$link = explode(" ", $link)[1];
-
-        // Append in array
         $flag_list[] = $link;
     }
 
