@@ -15,7 +15,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Drivers</title>
+    <title>Teams</title>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
@@ -31,18 +31,33 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
     <main>
         <br>
-        <span class="title text-light">
-                <span class="text-light h2">
-                    2024 Drivers
-                    <span class="material-symbols-outlined text-danger">download</span>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="title text-light">
+                <span class="text-light h2 d-flex justify-content-start align-items-center">
+                    <button type="button" onclick="drivers()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span style="font-size: 20px">2024 Drivers</span>
                 </span>
-                (provided by <a href="https://www.formula1.com/en/teams.html" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
-            </span>
+            </div>
+
+
+            <div class="title text-light d-flex justify-content-center">
+                    <span class="text-light h2">
+                        2024 Teams
+                    </span>
+            </div>
+
+            <div class="title text-light">
+                <span class="text-light h2 d-flex justify-content-start align-items-center">
+                    <span style="font-size: 20px">2023 Statistics</span>
+                    <button type="button" onclick="statistics()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                </span>
+            </div>
+        </div>
         <?php echo_teams_cards($name_list, $lastname_list, $team_list, $img_list, COL_CARD); ?>
     </main>
 </div>
 
-<script src="/f1_project/assets/js/info_drivers.js"></script>
+<script src="/f1_project/assets/js/navigate.js"></script>
 </body>
 </html>
 

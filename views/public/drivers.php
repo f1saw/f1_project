@@ -36,17 +36,33 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
 
     <main>
         <br>
-        <span class="title text-light">
-                <span class="text-light h2">
-                    2024 Drivers
-                    <span class="material-symbols-outlined text-danger">download</span>
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="title text-light">
+                <span class="text-light h2 d-flex justify-content-start align-items-center">
+                    <button type="button" onclick="circuit()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span style="font-size: 20px">2024 Circuits</span>
                 </span>
-                (provided by <a href="https://www.formula1.com/en/drivers.html" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
-            </span>
+            </div>
+
+            <div class="title text-light">
+                <span class="text-light h2 d-flex justify-content-start align-items-center">
+                    2024 Drivers
+                </span>
+            </div>
+
+            <div class="title text-light">
+                    <span class="text-light h2 d-flex justify-content-start align-items-center"">
+                        <span style="font-size: 20px">2024 Teams</span>
+                        <button type="button" onclick="teams()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                    </span>
+            </div>
+        </div>
         <?php echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD); ?>
     </main>
 </div>
 
+<script src="/f1_project/assets/js/navigate.js"></script>
 <script src="/f1_project/assets/js/info_drivers.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@
     "title": "Teams",
     "text": "Discover the <strong>history</strong> of each Team",
     "img_url": "https://f1ntastic.com/wp-content/uploads/2022/03/2022-F1-Teams-Cover.jpg",
-    "link": "#"
+    "link": "/f1_project/views/public/teams.php"
   },
   {
     "title": "Statistics",
