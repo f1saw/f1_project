@@ -70,7 +70,16 @@ else
                 </span>
             </div>
         </div>
-        <?php echo_stat_cards($info, $date, $car, $laps, COL_CARD); ?>
+        <?php if (count($info) > 0) {
+            echo_stat_cards($info, $date, $car, $laps, COL_CARD);
+        } else { ?>
+            <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                <span class="material-symbols-outlined">description</span>
+                <span class="mx-2">
+                    <b>INFO</b>&nbsp;| No Data available!
+                </span>
+            </div>
+        <?php } ?>
     </main>
 </div>
 

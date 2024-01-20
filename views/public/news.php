@@ -43,7 +43,16 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
                 </span>
                 (provided by <a href="<?php echo htmlentities(end($link_list)); ?>" target="_blank" class="text-info text-decoration-none">formula1.com</a>)
             </span>
-            <?php echo_news_cards($title_list, $img_list, $link_list, MAX_NEWS_NEWS, COL_CARD); ?>
+            <?php if (count($title_list) > 0) {
+                echo_news_cards($title_list, $img_list, $link_list, MAX_NEWS_NEWS, COL_CARD);
+            } else { ?>
+                <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                    <span class="material-symbols-outlined">description</span>
+                    <span class="mx-2">
+                    <b>INFO</b>&nbsp;| No Data available!
+                </span>
+                </div>
+            <?php } ?>
         </main>
     </div>
 </body>

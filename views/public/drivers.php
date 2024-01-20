@@ -52,13 +52,21 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
             </div>
 
             <div class="title text-light">
-                    <span class="text-light h2 d-flex justify-content-start align-items-center"">
-                        <span style="font-size: 20px">2024 Teams</span>
-                        <button type="button" onclick="teams()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
-                    </span>
+                <span class="text-light h2 d-flex justify-content-start align-items-center"">
+                <span style="font-size: 20px">2024 Teams</span>
+                <button type="button" onclick="teams()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
             </div>
         </div>
-        <?php echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD); ?>
+        <?php if (count($name_list) > 0) {
+            echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD);
+        } else { ?>
+            <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                <span class="material-symbols-outlined">description</span>
+                <span class="mx-2">
+                    <b>INFO</b>&nbsp;| No Data available!
+                </span>
+            </div>
+        <?php } ?>
     </main>
 </div>
 
