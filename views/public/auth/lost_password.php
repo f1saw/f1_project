@@ -85,6 +85,6 @@ if (check_user_auth($user)) {
             </form>
         </div>
     </div>
-</body>
 <script src="/f1_project/assets/js/validators/user.js"></script>
+</body>
 </html>

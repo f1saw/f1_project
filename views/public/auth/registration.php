@@ -186,8 +186,8 @@ if (check_user_auth($user)) {
         ?>
     </div>
 </div>
-</body>
 
 <script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
+</body>
 </html>

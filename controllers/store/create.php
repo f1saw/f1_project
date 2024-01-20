@@ -98,9 +98,9 @@ if (check_admin_auth($user)) {
         }
 
         DB::p_stmt_no_select($conn,
-        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
-        ["s", "s", "i", "s", "i", "s", "s"],
-        [$title, $desc, $price, $img_url_str, $team_id, $color, $size],
+        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
+        ["s", "s", "i", "s", "i", "s", "s", "s"],
+        [$title, $desc, $price, $img_url_str, $team_id, $color, $size, ""],
             "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
 
         if (!$conn->close()) {

@@ -14,21 +14,23 @@ if(!isset($_GET["id"]) || !$_GET["id"]) {
     exit;
 }
 
-$conn = DB::connect("product.php", "/f1_project/views/public/store/store.php");
+$conn = DB::connect("\\views\public\store\product.php", "/f1_project/views/public/store/store.php");
 $product = DB::get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Products.alt AS 'Products.alt',
+                    Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' 
+            FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?",
     ["i"],
     [$_GET["id"]],
-    "product.php",
+    "\\views\public\store\product.php",
     "/f1_project/views/public/store/store.php")[0];
 
 if (!$conn->close()) {
-    error("500", "conn_close()", "product.php", "/f1_project/views/public/store/store.php");
+    error("500", "conn_close()", "\\views\public\store\product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 
 if (!$product) {
-    error("500", "Product NOT found.", "product.php", "/f1_project/views/public/store/store.php");
+    error("500", "Product NOT found.", "\\views\public\store\product.php", "/f1_project/views/public/store/store.php");
     exit;
 }
 ?>
@@ -53,7 +55,10 @@ if (!$product) {
     <!-- Nav -->
     <?php include ("views/partials/navbar_store.php")?>
 
+    <!-- Product section -->
     <main class="mt-4 mx-auto p-3 row d-flex justify-content-center align-items-stretch">
+
+        <!-- Eventual product images visualization -->
         <?php if ($product["Products.img_url"]) { ?>
             <?php $img_urls = explode("\t", $product["Products.img_url"]); ?>
             <div class="col-12 col-sm-6">
@@ -66,11 +71,11 @@ if (!$product) {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                            <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo ($alts[0] !== "")? htmlentities($alts[0]):"Product picture"; ?>">
                         </div>
                         <?php if ($img_urls[1]) { ?>
                             <div class="carousel-item">
-                                <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="...">
+                                <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo ($alts[1] !== "")? htmlentities($alts[1]):"Product picture"; ?>">
                             </div>
                         <?php } ?>
                     </div>
@@ -85,6 +90,8 @@ if (!$product) {
                 </div>
             </div>
         <?php } ?>
+
+        <!-- Product info -->
         <div class="col-12 col-sm-6">
             <h3><?php echo htmlentities($product["Products.title"]); ?></h3>
             <hr>
@@ -101,7 +108,7 @@ if (!$product) {
 
                     <?php if ($img_urls != null) { ?>
                         <?php foreach ($img_urls as $img) { ?>
-                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="">
+                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="<?php echo ($alt !== "")? htmlentities($alt):"Product picture" ?>">
                         <?php } ?>
                     <?php } ?>
                 </div>
@@ -128,7 +135,9 @@ if (!$product) {
                     </div>
                 </div>
             <?php } ?>
+
             <hr>
+
             <div class="d-flex justify-content-end gap-3">
                 <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                 <h3>€ <?php echo htmlentities("$int.$dec"); ?></h3>
@@ -192,7 +201,6 @@ if (!$product) {
             </div>
         </div>
     </main>
-</body>
-
 <script src="/f1_project/assets/js/navbar.js"></script>
+</body>
 </html>

@@ -26,7 +26,8 @@ if (!isset($_GET["id"]) || !$_GET["id"]) {
 $conn = DB::connect("\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
 $id = intval($_GET["id"])?? -1;
 $product = DB::get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Products.alt AS 'Products.alt',
+                    Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?;",
     ["i"],
     [$id],

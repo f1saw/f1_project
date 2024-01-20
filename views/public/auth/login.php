@@ -47,8 +47,8 @@ if (check_user_auth($user)) {
 
 <body class="bg-dark vh-100">
 
-<div id="bg-login" class="container-fluid">
-<?php include("views/partials/navbar_log_reg.php"); ?>
+    <div id="bg-login" class="container-fluid">
+    <?php include("views/partials/navbar_log_reg.php"); ?>
 
         <div class="flex-container d-flex justify-content-center">
             <form id="login-form" action="/f1_project/login.php" class="container-element log" method="POST">
@@ -127,9 +127,8 @@ if (check_user_auth($user)) {
                 </fieldset>
             </form>
         </div>
-</div>
-</body>
-
+    </div>
 <script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
+</body>
 </html>

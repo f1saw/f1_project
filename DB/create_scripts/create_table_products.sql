@@ -10,6 +10,7 @@ create table products
     team_id     int                       not null,
     color       varchar(20)               null,
     size        varchar(20) default 'one' not null,
+    alt         varchar(400)              null,
     constraint team___fk
         foreign key (team_id) references teams (id)
             on update cascade on delete cascade

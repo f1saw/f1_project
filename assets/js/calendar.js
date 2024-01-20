@@ -7,6 +7,13 @@ $(() => {
     })
 })
 
+/**
+ * This function requires the name of the city,
+ * and it will set the proper divs with the proper information
+ * obtained through Open Weather Map API.
+ * @param city
+ * @returns {Promise<void>}
+ */
 const get_weather = async city => {
     city = city.replace(" ", "+")
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`)

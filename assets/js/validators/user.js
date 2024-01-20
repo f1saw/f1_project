@@ -1,5 +1,11 @@
 const MAX_LENGTH = 255;
 
+/**
+ * Error detected in input fields,
+ * so showing a proper message (err_msg) and disabling submit button is performed.
+ * @param id
+ * @param err_msg
+ */
 const err_input_info = (id, err_msg) => {
     $(`#input-info-${id} span:first-child`).text("warning").addClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).html(`${err_msg}`).addClass("text-danger");
@@ -59,6 +65,14 @@ const validatePassword = (id, password) => {
     }
 }
 
+/**
+ * Object designed to store validating information
+ * key: string
+ * ids: array containing the list of ids to perform the validator function on
+ * validator: function used to validate input given
+ * params: containing validator function parameters
+ * err_msg: array of strings where to specify message if an error is detected
+ */
 const validators_user = {
     "firstname": {
         ids: ["firstname"],
@@ -115,6 +129,10 @@ const check_all = validators => {
     }
 }
 
+
+/**
+ * Add "input" event listener on each input field
+ */
 for (const value of Object.values(validators_user)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {
@@ -132,6 +150,11 @@ for (const value of Object.values(validators_user)) {
     })
 }
 
+/**
+ * Perform check_email function on each element of the array.
+ * The function asks a backend controller function if the email given is already in the database
+ * (email has to be unique)
+ */
 const element = [document.getElementById('register-form'), document.getElementById("profile-data")];
 element.forEach(check_email);
 function check_email() {

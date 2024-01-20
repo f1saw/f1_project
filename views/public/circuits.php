@@ -66,7 +66,7 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
                         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch py-3">
                             <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                                 <div class="card-img">
-                                    <img style="height: 200px; width: 350px; object-fit: cover; " src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top" alt="...">
+                                    <img style="height: 200px; width: 350px; object-fit: cover; " src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top" alt="<?php echo htmlentities($circuit->alt); ?>">
                                 </div>
                                 <div class="card-body d-flex align-items-end">
                                     <div class="w-100">

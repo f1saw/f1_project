@@ -53,6 +53,6 @@ if(!check_user_auth($user)){
         </main>
     </div>
 
-    <script src="/f1_project/assets/js/dashboard_script.js"></script>
+<script src="/f1_project/assets/js/dashboard_script.js"></script>
 </body>
 </html>

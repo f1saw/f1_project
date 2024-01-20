@@ -4,7 +4,7 @@
             <div class="<?php echo htmlentities($col_card); ?> d-flex align-items-stretch py-3">
                 <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                     <div class="card-img">
-                        <img src="<?php echo htmlentities($img_list[$i]); ?>" class="card-img-top" alt="...">
+                        <img src="<?php echo htmlentities($img_list[$i]); ?>" class="card-img-top" alt="News thumbnail.">
                     </div>
                     <div class="card-body d-flex align-items-end">
                         <div class="w-100">

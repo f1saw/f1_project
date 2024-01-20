@@ -20,4 +20,3 @@ create table users
         foreign key (cookie_id) references cookies (id)
             on update cascade on delete set null
 );
-

@@ -1,6 +1,6 @@
 <?php
 //check_user_role() return true if user is admin, false otherwise
-function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") : bool{
+function check_user_role($conn, $params, $source = "", $redirect_error = "") : bool{
 
     $role = DB::get_record_by_field($conn,
         "SELECT role FROM Users WHERE id = ?",

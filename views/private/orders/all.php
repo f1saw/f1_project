@@ -122,7 +122,7 @@ if (!$conn->close()) {
                                 </td>
                                 <td class="text-center">
                                     <?php if($order["Products.img_url"] != ''){ ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($order["Products.img_url"]); ?>" alt="Product picture">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($order["Products.img_url"]); ?>" alt="<?php echo htmlentities($order["Products.alt"]) ?>">
                                     <?php
                                     } else { ?>
                                         <span class='material-symbols-outlined'>close</span>

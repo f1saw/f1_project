@@ -4,6 +4,12 @@ const MAX_IMGS_LENGTH = 700;
 const MAX_COLOR_LENGTH = 20;
 const MAX_SIZE_LENGTH = 20;
 
+/**
+ * Error detected in input fields,
+ * so showing a proper message (err_msg) and disabling submit button is performed.
+ * @param id
+ * @param err_msg
+ */
 const err_input_info = (id, err_msg) => {
     // assignment needed in order to select the proper div where to display errors with images length
     id = (/^img_url_/.test(id))? validators_products["images"].err_id : id;
@@ -45,6 +51,14 @@ const validateTeam = (id, value) => {
     return /^[0-9]+$/.test(value)
 }
 
+/**
+ * Object designed to store validating information
+ * key: string
+ * ids: array containing the list of ids to perform the validator function on
+ * validator: function used to validate input given
+ * params: array containing validator function parameters
+ * err_msg: string where to specify message if an error is detected
+ */
 const validators_products = {
     "title": {
         ids: ["title"],
@@ -112,6 +126,9 @@ const check_all = validators => {
     }
 }
 
+/**
+ * Add "input" event listener on each input field
+ */
 for (const [key, value] of Object.entries(validators_products)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {

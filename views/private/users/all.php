@@ -92,7 +92,7 @@ if (!$conn->close()) {
 
                                 <td class='text-center'>
                                     <?php if($user["img_url"] != ''){ ?>
-                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo htmlentities($user['img_url']); ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo htmlentities($user['img_url']); ?>" alt="<?php echo ($user["alt"] !== "")? htmlentities($user["alt"]):"Profile picture"; ?>">
                                     <?php
                                     }
                                     else{ ?>

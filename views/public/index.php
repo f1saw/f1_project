@@ -91,15 +91,15 @@ $json_cards_data = json_decode($json, true);
                         <div class="col d-flex align-items-stretch">
                             <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                                 <div class="card-img">
-                                    <img src="<?php echo $card["img_url"]; ?>" class="card-img-top" alt="...">
+                                    <img src="<?php echo htmlentities($card["img_url"]); ?>" class="card-img-top" alt="<?php echo htmlentities($card["alt"]); ?>">
                                 </div>
                                 <div class="card-body d-flex align-items-end">
                                     <div class="w-100">
-                                        <h5 class="card-title text-danger"><?php echo $card["title"]; ?></h5>
+                                        <h5 class="card-title text-danger"><?php echo htmlentities($card["title"]); ?></h5>
                                         <hr>
                                         <p class="card-text"><?php echo $card["text"]; ?></p>
                                         <p class="card-text">
-                                            <a href="<?php echo $card["link"]; ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
+                                            <a href="<?php echo htmlentities($card["link"]); ?>" class="card-link text-decoration-none d-flex flex-row justify-content-end">
                                                 <span class="my_outline_animation d-flex flex-row gap-2 pb-1 hover-red">
                                                     <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
                                                     Check it out!
@@ -112,12 +112,22 @@ $json_cards_data = json_decode($json, true);
                             </div>
                         </div>
                     <?php } ?>
-
                 </div>
+
+                <div class="mt-5 who-we-are">
+                    <h2>Who we are</h2>
+                    <hr>
+                    <div>
+                        F1 SAW was born from two passionates about Formula 1.<br>
+                        We designed our website to perform different actions with it.<br>
+                        You can <a href="/f1_project/views/public/store/store.php" target="_blank" class="h5">BUY</a> official products, keep yourself updated with the most recent <a href="/f1_project/views/public/news.php" target="_blank" class="h5">NEWS</a>
+                        and, also, navigate in different <a href="/f1_project/views/public/statistics.php" target="_blank" class="h5">STATISTICS</a>, such as Drivers, Teams, Calendar 2024 and GP results (from 1950 to 2023).
+                    </div>
+                </div>
+
             </div>
 
         </section>
-
     </main>
 </div>
 </body>

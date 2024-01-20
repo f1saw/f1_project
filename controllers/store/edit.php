@@ -102,9 +102,9 @@ if (check_admin_auth($user)) {
         }
 
         DB::p_stmt_no_select($conn,
-            "UPDATE Products SET title=?, description=?, price=?, img_url=?, team_id=?, color=?, size=? WHERE id = ?",
-            ["s", "s", "i", "s", "i", "s", "s", "i"],
-            [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $id],
+            "UPDATE Products SET title=?, description=?, price=?, img_url=?, team_id=?, color=?, size=?, alt=? WHERE id = ?",
+            ["s", "s", "i", "s", "i", "s", "s", "s", "i"],
+            [$title, $desc, $price, $img_url_str, $team_id, $color, $size, "", $id],
             "\controllers\store\\update_profile.php",
             "/f1_project/views/private/store/update_profile.php?id=$id");
 

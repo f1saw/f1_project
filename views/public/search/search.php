@@ -50,6 +50,7 @@ else{
     <!-- Nav -->
     <?php include("views/partials/navbar_store.php") ?>
 
+    <!-- Message alert div -->
     <?php err_msg_alert(); ?>
 
     <!-- Loading circle -->
@@ -59,8 +60,7 @@ else{
     <main class="home-cards mt-5">
         <?php include("views/partials/store/view_products.php") ?>
     </main>
-</body>
-
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/store.js"></script>
+</body>
 </html>

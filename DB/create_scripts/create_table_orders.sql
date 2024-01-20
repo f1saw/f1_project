@@ -11,4 +11,3 @@ create table orders
         foreign key (user_id) references users (id)
             on update cascade on delete cascade
 );
-
