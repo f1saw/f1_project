@@ -57,7 +57,6 @@ if (check_admin_auth($user)) {
             }
         }
 
-
         /* -- ERROR | Empty input fields -- */
         if ($id == "" || $id == " "
             || $title == "" || $title == " "

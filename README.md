@@ -10,8 +10,9 @@ SAW project about F1
 <hr>
 
 ## MAURI:
-- [ ] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
-- [ ] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
+- [x] quando viene cambiata la mail errore se già presente, altrimenti mandare email per verifica
+- [x] **+** in edit_user => htmlentities, real_escape_string + conn->close@32
+- [ ] line 128 edit_profile => si può eliminare il div?
 
 <hr>
 

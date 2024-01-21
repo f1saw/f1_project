@@ -32,16 +32,15 @@ if (check_user_auth($user)) {
 
 <body class="bg-dark vh-100">
 
-    <div id="bg-login" class="container-fluid">
+    <div id="bg-login" class="container-fluid d-flex justify-content-center align-items-center">
         <?php include ("views/partials/navbar_log_reg.php"); ?>
 
-        <div class="flex-container d-flex justify-content-center">
-            <form id="login-form" action="/f1_project/controllers/auth/lost_password.php" class="container-element log p-2" method="POST">
+        <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+            <form id="login-form" action="/f1_project/controllers/auth/lost_password.php" class="container-element lost-pass log p-2" method="POST">
 
                 <div style="margin-left: 10px; margin-right: 10px">
-                    <?php $function = "document.getElementsByClassName('container-element')[0].style.height = '480px'" ?>
-                    <?php err_msg_alert($function); ?>
-                    <?php succ_msg_alert($function); ?>
+                    <?php err_msg_alert(); ?>
+                    <?php succ_msg_alert(); ?>
                 </div>
 
                 <fieldset>
@@ -52,9 +51,9 @@ if (check_user_auth($user)) {
                     <hr>
                     <div class="row mb-3">
                         <div class="text-box">
-                            Write your email that you used to register on our website.
+                            <span class="margin-right">Write your email that you used to register on our website.</span>
                             <br>
-                            If correct, we will send your new password
+                            <span class="margin-right">If correct, we will send your new password</span>
                         </div>
                     </div>
                     <div class="row mb-3">

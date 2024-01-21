@@ -19,7 +19,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/news.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
     <?php include("views/partials/head.php"); ?>
 </head>
 
@@ -34,22 +34,20 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
         <div class="d-flex justify-content-between align-items-center">
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <button type="button" onclick="drivers()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span style="font-size: 20px">2024 Drivers</span>
+                    <button type="button" id="drivers" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span class="left_element">2024 Drivers</span>
                 </span>
             </div>
 
 
-            <div class="title text-light d-flex justify-content-center">
-                    <span class="text-light h2">
-                        2024 Teams
-                    </span>
+            <div class="text-light margin h2 d-flex justify-content-start align-items-center">
+                    <span class="central_element">2024 Teams</span>
             </div>
 
             <div class="title text-light">
-                <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <span style="font-size: 20px">2023 Statistics</span>
-                    <button type="button" onclick="statistics()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                <span class="text-light h2 d-flex justify-content-end align-items-center">
+                    <span class="right_element">2023 Statistics</span>
+                    <button type="button" id="statistics" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>
         </div>

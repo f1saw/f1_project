@@ -25,7 +25,7 @@ else
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/news.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
     <?php include("views/partials/head.php"); ?>
 </head>
 
@@ -38,19 +38,20 @@ else
     <main>
         <br>
         <div class="d-flex justify-content-between align-items-center">
+
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <button type="button" onclick="teams()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span style="font-size: 20px">2024 Teams</span>
+                    <button type="button" id="teams" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span class="left_element">2024 Teams</span>
                 </span>
             </div>
 
 
             <div class="title text-light d-flex justify-content-center">
                 <div class="d-flex flex-column align-items-center">
-                    <span class="text-light h2">
-                        <?php  isset($_GET["year"])? print $_GET["year"]: print "2023" ?> Statistics
-                    </span>
+                    <div class="text-light margin h2 d-flex justify-content-start align-items-center">
+                        <span class="central_element"><?php  isset($_GET["year"])? print $_GET["year"]: print "2023" ?> Statistics</span>
+                    </div>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Select Year</a>
                         <ul style="max-height: 280px; overflow-y: auto" class="dropdown-menu">
@@ -64,9 +65,9 @@ else
             </div>
 
             <div class="title text-light">
-                <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <span style="font-size: 20px">2024 Circuits</span>
-                    <button type="button" onclick="circuits()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                <span class="text-light h2 d-flex justify-content-end align-items-center">
+                    <span class="right_element">2024 Circuits</span>
+                    <button type="button" id="circuits" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>
         </div>

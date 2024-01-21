@@ -76,10 +76,11 @@
                         </div>
                     <?php } ?>
                 </div>
-                <form class="d-flex flex-row d-lg-none" role="search" name="search_bar">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex flex-row d-lg-none" method="GET" role="search" action="/f1_project/views/public/search/search.php" name="search_bar">
+                    <input class="form-control me-2" type="search" name="search" id="search_mobile" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-danger" type="submit">Search</button>
                 </form>
+
             </div>
         </div>
     </div>

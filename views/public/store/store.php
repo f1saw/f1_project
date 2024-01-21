@@ -87,6 +87,7 @@ if (!$conn->close()) {
             </button>
         </div>
     </main>
+</div>
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/store.js"></script>
 </body>

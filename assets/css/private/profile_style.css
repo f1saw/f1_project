@@ -20,12 +20,13 @@ body {
 .container-element{
     position: relative;
     backdrop-filter: blur(5px);
-    width: 40%;
+    width: 50%;
     height: 480px;
     border-radius: 10px;
-    top: 100px;
     border-style: solid;
     border-color: #ff1300;
+    margin-right:auto;
+    margin-left:auto;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -34,15 +35,17 @@ body {
     width: 0;
 }
 
+/*media query width*/
+
 @media screen and (max-width: 992px) {
     .container-element{
-        width: 50%;
+        width: 70%;
     }
 }
 
+
 @media screen and (max-width: 767px) {
     .container-element{
-        top: 50px;
         width: 70%;
         height: 570px;
     }
@@ -50,7 +53,7 @@ body {
 
 @media screen and (max-width: 480px){
     .container-element {
-        width: 90%;
+        width: 95%;
     }
 }
 
@@ -59,13 +62,17 @@ body {
     background-size: cover;
     background-position: bottom;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #bg-profile #profile-data {
     background: rgba(87, 87, 87, .6);
 }
 
-#photo_profile{
+.photo_profile{
     position: relative;
     object-fit: cover;
     width: 70px;
@@ -161,44 +168,61 @@ hr {
     left: 20px;
 }
 
+#upload-img {
+    margin: 0 !important;
+}
+
+#img_url {
+    position: relative;
+    right: 25px;
+}
+
+#image-local {
+    position: relative;
+    right: 15px;
+}
+
+.n-border {
+    border: unset;
+}
+
+/*media query height*/
+
 @media screen and (max-height: 680px) {
     .container-element{
-        max-width: 70%;
-        max-height: 270px;
-        width: 100%;
+        width: 70%;
+        max-height: 400px;
     }
 
-    #button_div {
+    .button_div {
         position: relative;
         bottom: 20px !important;"
     }
 }
 
+@media screen and (max-height: 568px){
+    .container-element {
+        height: 350px;
+    }
+}
+
+
 @media screen and (max-height: 460px) {
     .container-element{
-        top: 40px;
-        max-width: 90%;
         max-height: 200px;
-        width: 100%;
     }
 
-    #button_div {
-        position: relative;
-        bottom: 20px !important;"
+    #checkbox_div {
+        margin: 10px !important;
     }
 }
 
 @media screen and (max-height: 290px) {
     .container-element{
-        top: 10px;
-        max-width: 70%;
-        max-height: 150px;
-        width: 100%;
-    }
-
-    #button_div {
         position: relative;
-        bottom: 20px !important;"
+        bottom: 10%;
+        max-height: 150px;
+        width: 70%;
     }
 }
 

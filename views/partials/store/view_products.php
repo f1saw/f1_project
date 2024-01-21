@@ -6,7 +6,7 @@
         <?php foreach ($products as $product) { ?>
 
             <div class="d-none col d-flex align-items-stretch product" id="product-<?php echo htmlentities($i); ?>">
-                <a href="product.php?id=<?php echo htmlentities($product["Products.id"]); ?>" class="w-100 text-decoration-none">
+                <form method="get" action="product.php?id=<?php echo htmlentities($product["Products.id"]); ?>" class="w-100 text-decoration-none">
                     <div class="card bordered border-danger border-3 p-2 h-100">
                         <div class="card-img">
                             <img src="<?php echo htmlentities(explode("\t", $product["Products.img_url"])[0]); ?>" class="card-img-top" alt="<?php $alt = explode("\t", $product["Products.alt"])[0]; echo htmlentities(($alt !== "")?$alt:$product["Products.title"]); ?>">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </form>
             </div>
 
             <!-- Modal (to choose size) -->
@@ -39,7 +39,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Select size</h5>
+                            <h5 class="modal-title">Select size</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

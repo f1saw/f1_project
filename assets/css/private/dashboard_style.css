@@ -61,16 +61,6 @@ main {
     transition: all 500ms ease;
 }
 
-@media screen and (max-width: 768px) {
-    .flex-container {
-        flex-direction: column;
-    }
-
-    .flex-title {
-        transform: rotate(0deg) !important;
-    }
-}
-
 .flex-slide:hover {
     -webkit-flex-grow: 3;
     flex-grow: 3;
@@ -81,15 +71,6 @@ main {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-}
-
-@media screen and (max-width: 768px) {
-    .profile {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/profile_768.jpg");
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
-    }
 }
 
 @keyframes aboutFlexSlide {
@@ -114,15 +95,6 @@ main {
     background-attachment: fixed;
 }
 
-@media screen and (max-width: 768px) {
-    .product {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/sfondo_product1.jpg");
-        background-size: cover;
-        background-position: center bottom;
-        background-attachment: fixed;
-    }
-}
-
 .flex-title-product{
     position: relative;
     top: 19%
@@ -136,6 +108,28 @@ main {
 }
 
 @media screen and (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-title {
+        transform: rotate(0deg) !important;
+    }
+
+    .profile {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/profile_768.jpg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+
+    .product {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/sfondo_product1.jpg");
+        background-size: cover;
+        background-position: center bottom;
+        background-attachment: fixed;
+    }
+
     .table-users {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/logo_table.jpg");
         background-size: cover;
@@ -143,3 +137,4 @@ main {
         background-attachment: fixed;
     }
 }
+

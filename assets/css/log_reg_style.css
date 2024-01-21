@@ -11,33 +11,52 @@ main {
     margin: auto;
 }
 
-.flex-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    display: -webkit-flex;
-    display: flex;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.flex-container::-webkit-scrollbar {
-    width: 0;
-}
-
 
 .container-element {
-    position: relative;
     background: rgba(87, 87, 87, .6);
     backdrop-filter: blur(5px);
-    height: 480px;
-    width: 40%;
     border-radius: 10px;
-    top: 100px;
     border-style: solid;
     border-color: #ff1300;
+    margin-bottom: 15%;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+@media screen and (max-width: 992px) {
+    .registration {
+        height: 550px;
+    }
+}
+
+@media screen and (max-height: 700px) and (max-width: 500px) {
+    .container-element {
+        height: 450px;
+        width: 100%;
+    }
+
+    .lost-pass {
+        height: 380px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .container-element {
+        height: 300px;
+        width: 80%;
+    }
+}
+
+@media screen and (max-height: 468px) {
+    .container-element {
+        height: 250px;
+    }
+}
+
+@media screen and (max-height: 280px) {
+    .container-element {
+        height: 200px;
+    }
 }
 
 .container-element::-webkit-scrollbar {
@@ -49,6 +68,10 @@ main {
     background-size: cover;
     overflow: hidden;
     background-position: bottom;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #bg-register {
@@ -56,14 +79,10 @@ main {
     background-size: cover;
     background-position: top;
     overflow: hidden;
-}
-
-.reg {
-    height: 550px;
-}
-
-.log {
-    width: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .text-box {
@@ -87,84 +106,39 @@ legend {
     margin-left: 14px;
 }
 
-@media screen and (max-width: 992px) {
-    .container-element{
-        max-width: 50%;
-        height: 480px;
-        width: 100%;
-    }
+#div_button {
+    margin-bottom: 3%;
+}
 
-    .reg {
-        max-width: 50%;
-        height: 550px;
-        width: 100%;
+ul {
+    padding: 0 !important;
+    position: absolute;
+    right: 0;
+}
+
+.margin-right {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 768px){
+    ul {
+        top: 11px;
     }
 }
 
-@media screen and (max-width: 767px) {
-    .container-element{
-        max-width: 70%;
-        height: 480px;
-        width: 100%;
+@media screen and (max-width: 410px){
+    ul {
+        position: relative;
+        max-width: 90px;
+        left: 20px;
     }
 
-    .reg {
-        max-width: 70%;
-        height: 480px;
-        width: 100%;
-    }
-}
-
-@media screen and (min-height: 1100px) {
-    .container-element{
-        top: 200px;
-    }
-}
-
-@media screen and (max-height: 680px) {
-    .container-element{
-        max-width: 70%;
-        max-height: 270px;
-        width: 100%;
+    .nav-text{
+        display: none;
     }
 
-    .reg {
-        max-width: 70%;
-        height: 480px;
-        width: 100%;
-    }
-}
-
-@media screen and (max-height: 460px) {
-    .container-element{
-        top: 50px;
-        max-width: 70%;
-        max-height: 200px;
-        width: 100%;
-    }
-
-    .reg {
-        max-width: 70%;
-        height: 480px;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .container-element {
-        max-width: 70%;
-        height: 500px;
-    }
-
-    .reg {
-        max-width: 70%;
-        height: 500px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #bg-login {
-        background-position: bottom;
-        background-position-x: 38%;
+    .li-position {
+        position: relative;
+        right: 35px
     }
 }

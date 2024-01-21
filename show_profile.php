@@ -11,7 +11,7 @@ require_once("DB/DB.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="h">
 <head>
     <title>User detail</title>
     <meta charset="UTF-8">
@@ -20,15 +20,6 @@ require_once("DB/DB.php");
 
     <link rel="stylesheet" href="/f1_project/assets/css/private/profile_style.css">
 </head>
-
-<?php if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) && $_SESSION["success"]){ ?>
-<style>
-    .container-element{
-        height: 550px;
-        top: 55px;
-    }
-</style>
-<?php } ?>
 
 <body class="bg-dark">
 
@@ -52,11 +43,8 @@ if (check_user_auth($user)) {
                 <div id="bg-profile" class="flex-container d-flex justify-content-center" >
                     <div id="profile-data" class="container-element">
                         <div style="margin-left: 10px; margin-right: 10px">
-                            <?php $function = "var x = document.getElementsByClassName('container-element')[0];
-                                       x.style.height = '480px';
-                                       x.style.top    = '100px';" ?>
-                            <?php err_msg_alert($function); ?>
-                            <?php succ_msg_alert($function); ?>
+                            <?php err_msg_alert(); ?>
+                            <?php succ_msg_alert(); ?>
                         </div>
                         <div class="d-flex justify-content-center">
                             <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
@@ -64,7 +52,7 @@ if (check_user_auth($user)) {
                                      alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
                             <?php } else { ?>
                                 <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
-                            <?php }?>
+                            <?php } ?>
                         </div>
                         <br>
                         <div class="row mb-3">
@@ -123,7 +111,7 @@ if (check_user_auth($user)) {
                         </div>
                         <br>
                         <div id="button_div" class="row mb-3 d-flex justify-content-center button">
-                            <button onclick="my_function()" type="button" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Edit profile</button>
+                            <button id="viewProfile" type="button" class="btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Edit profile</button>
                         </div>
                     </div>
                 </div>
@@ -131,9 +119,9 @@ if (check_user_auth($user)) {
         </div>
 
         <script>
-            function my_function(){
-                window.open("/f1_project/edit_profile.php/?id=<?php echo $element["id"]; ?>","_self");
-            }
+            $(`#viewProfile`).on("click", () => {
+                window.open("/f1_project/edit_profile.php/?id=<?php echo htmlentities($element["id"]); ?>","_self");
+            })
         </script>
 
 <?php
