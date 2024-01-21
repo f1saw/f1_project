@@ -6,12 +6,12 @@ $("#profile-data").on('submit', () => {
     $(".lds-ring-container").removeClass("d-none");
 })
 
-function last_page(){
-    document.getElementById("page1").style.removeProperty('display');
-    document.getElementById("page2").style.display = "none";
-}
+$("#goToNextPage").on('click', () => {
+    $("#page1").addClass("d-none");
+    $("#page2").removeClass("d-none");
+})
 
-function next_page(){
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("page2").style.removeProperty('display');
-}
+$("#goToLastPage").on('click', () => {
+    $("#page2").addClass("d-none");
+    $("#page1").removeClass("d-none");
+})

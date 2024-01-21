@@ -166,15 +166,15 @@ if (check_user_auth($user)) {
                             <br>
 
                             <div id="button_div" class="row mb-3 d-flex justify-content-center button">
-                                <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
+                                <button type="button" name="other_info_back" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
 
                                 <button type="submit" id="btn-submit" name="Button_id" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
 
-                                <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
+                                <button id="goToNextPage" type="button" name="other_info_next" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
 
-                        <div id="page2" style="display: none">
+                        <div id="page2" class="d-none">
                             <div class="d-flex justify-content-center">
                                 <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                      alt="profile picture">
@@ -285,9 +285,9 @@ if (check_user_auth($user)) {
                             <br>
 
                             <div id="button_div" class="row mb-3 d-flex justify-content-center button">
-                                <button type="button" name="other_info" onclick="last_page()" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
+                                <button id="goToLastPage" type="button" name="other_info" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
                                 <button type="submit" name="Button_id" value="<?php echo htmlentities($element["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
-                                <button type="button" name="other_info" style="border: unset" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
+                                <button type="button" name="other_info" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
 

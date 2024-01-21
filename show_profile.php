@@ -11,7 +11,7 @@ require_once("DB/DB.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="h">
 <head>
     <title>User detail</title>
     <meta charset="UTF-8">
