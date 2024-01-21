@@ -31,34 +31,13 @@ if (check_admin_auth($user)) {
         // If it matches, it means that the image is stored on AWS S3
         // I Have to delete it from the bucket
         if (preg_match("#^http://f1-saw.s3.eu-central-1.amazonaws.com/*#", $img)) {
-            $img = explode("http://f1-saw.s3.eu-central-1.amazonaws.com/", $img)[1];
-            [$region, $version, $access_key_id, $secret_access_key, $bucket] = config_aws_s3();
-            $s3 = new S3Client([
-                "version" => $version,
-                "region" => $region,
-                "credentials" => [
-                    "key" => $access_key_id,
-                    "secret" => $secret_access_key
-                ],
-                // TODO: scheme to change in 'https' when deploy to live server if it uses https
-                'scheme' => 'http'
-            ]);
-
-            try {
-                $result = $s3->deleteObject([
-                    'Bucket' => $bucket,
-                    'Key' => $img
-                ]);
-            }
-            catch (S3Exception $e) {
-                exit('Error: ' . $e->getAwsErrorMessage() . PHP_EOL);
-            }
+            aws_delete_img($img);
         }
     }
 
     /* Delete Products from DB */
     DB::p_stmt_no_select($conn,
-        "DELETE FROM Products WHERE id = ?",
+        "DELETE FROM Products WHERE id = ?;",
         ["i"],
         [$_GET["id"]],
         "\controllers\store\delete.php",

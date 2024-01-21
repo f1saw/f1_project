@@ -61,7 +61,7 @@ if (!$conn->close()) {
         <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
             <?php foreach($teams as $team) { ?>
                 <a href="?team=<?php echo htmlentities($team["id"]); ?>">
-                    <img src="<?php echo htmlentities($team["logo_url"]); ?>" alt="<?php echo htmlentities($team["name"]) . " Picture"; ?>">
+                    <img src="<?php echo htmlentities($team["logo_url"]); ?>" alt="<?php echo htmlentities($team["name"]) . " Logo"; ?>">
                 </a>
             <?php } ?>
         </div>

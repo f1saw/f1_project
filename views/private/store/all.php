@@ -99,12 +99,12 @@ if (!$conn->close()) {
                                     <?php
                                     if ($product["Products.img_url"]) {
                                         $img = explode("\t", $product["Products.img_url"]);
-                                        $alt = ["", ""];
+                                        $alt = explode("\t", $product["Products.alt"]);
                                         if($img && $img[0] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="<?php echo htmlentities($alt[0]); ?>">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="<?php echo htmlentities(($alt[0] !== "")?$alt[0]:$product["Products.title"]); ?>">
                                         <?php }
                                         if($img && $img[1] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="<?php echo htmlentities($alt[1]); ?>">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="<?php echo htmlentities(($alt[1] && $alt[1] !== "")?$alt[1]:$product["Products.title"]); ?>">
                                         <?php
                                         }
                                     } else { ?>

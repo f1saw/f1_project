@@ -61,6 +61,7 @@ if (!$product) {
         <!-- Eventual product images visualization -->
         <?php if ($product["Products.img_url"]) { ?>
             <?php $img_urls = explode("\t", $product["Products.img_url"]); ?>
+            <?php $alts = explode("\t", $product["Products.alt"]); ?>
             <div class="col-12 col-sm-6">
                 <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -71,11 +72,11 @@ if (!$product) {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo ($alts[0] !== "")? htmlentities($alts[0]):"Product picture"; ?>">
+                            <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo htmlentities(($alts[0] !== "")? $alts[0]:$product["Products.title"]); ?>">
                         </div>
                         <?php if ($img_urls[1]) { ?>
                             <div class="carousel-item">
-                                <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo ($alts[1] !== "")? htmlentities($alts[1]):"Product picture"; ?>">
+                                <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo htmlentities(($alts[1] && $alts[1] !== "")? $alts[1]:$product["Products.title"]); ?>">
                             </div>
                         <?php } ?>
                     </div>
@@ -107,8 +108,8 @@ if (!$product) {
                     <?php } ?>
 
                     <?php if ($img_urls != null) { ?>
-                        <?php foreach ($img_urls as $img) { ?>
-                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="<?php echo ($alt !== "")? htmlentities($alt):"Product picture" ?>">
+                        <?php foreach ($img_urls as $index => $img) { ?>
+                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="<?php echo htmlentities(($alts[$index] && $alts[$index] !== "")? $alts[$index]:$product["Products.title"]); ?>">
                         <?php } ?>
                     <?php } ?>
                 </div>
@@ -161,40 +162,6 @@ if (!$product) {
                     <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <label><?php echo htmlentities($product["Products.description"]); ?></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                            Details
-                        </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>
-                                    Made in Italy
-                                </li>
-                                <li>
-                                    Edizione speciale GP Las Vegas 2023
-                                </li>
-                                <li>
-                                    Not for race
-                                </li>
-                                <li>
-                                    Scudetto Ferrari
-                                </li>
-                                <li>
-                                    Loghi sponsor
-                                </li>
-                                <li>
-                                    Il capo è disponibile solo nella misura di Charles Leclerc (taglia S italiana)
-                                </li>
-                                <li>
-                                    Composizione Primaria: 58% Fibra aramidica 39% Viscosa 3% Elastan
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

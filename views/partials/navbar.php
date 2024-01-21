@@ -52,7 +52,7 @@
                             <a class="my_outline_animation text-decoration-none hover-red d-flex align-items-end pb-2 gap-2" href="/f1_project/views/private/dashboard.php">
 
                                 <?php if(isset($_SESSION["img_url"]) && $_SESSION["img_url"] != NULL){ ?>
-                                    <img class="profile-img" style="object-fit: cover;" src="<?php echo htmlentities($_SESSION["img_url"]); ?>" alt="<?php echo ($_SESSION["alt"] != "")? htmlentities($_SESSION["alt"]):"Profile picture"; ?>">
+                                    <img class="profile-img" style="object-fit: cover;" src="<?php echo htmlentities($_SESSION["img_url"]); ?>" alt="<?php echo ($_SESSION["first_name"]? htmlentities($_SESSION["first_name"]):"") . " Profile picture"; ?>">
                                 <?php } else{ ?>
                                     <img class="profile-img" style="object-fit: cover" src="/f1_project/assets/images/foto-profilo.jpg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
                                 <?php }?>

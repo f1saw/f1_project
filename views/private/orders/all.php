@@ -20,7 +20,7 @@ set_session($user);
 $conn = DB::connect("\\views\private\store\all.php", "/f1_project/views/private/dashboard.php");
 $orders = (array)DB::get_record_by_field($conn,
     "SELECT orders.id AS 'Orders.id', orders.date AS 'Orders.date', orders.amount AS 'Orders.amount', 
-                products.id AS 'Products.id', products.title AS 'Products.title', products.img_url AS 'Products.img_url', 
+                products.id AS 'Products.id', products.title AS 'Products.title', products.img_url AS 'Products.img_url', products.alt AS 'Products.alt',
                 orders_products.size AS 'Orders_Products.size', orders_products.quantity AS 'Orders_Products.quantity', orders_products.unit_price AS 'Orders_Products.unit_price'
            FROM orders_products 
                 JOIN orders ON orders_products.order_id = orders.id 
@@ -89,16 +89,6 @@ if (!$conn->close()) {
                         </thead>
                         <tbody>
                         <?php
-                        /* $orders_post_processed = [];
-                        foreach ($orders as $order) {
-                            if ($orders_post_processed[$order["Orders.id"]] === null) {
-                                $orders_post_processed[$order["Orders.id"]] = [
-                                        "titles" => [...$orders["Products.title"]]
-                                ];
-                            }
-                        }
-
-                        $titles = []; */
                         $orders_id = [];
 
                         $i = 0;
@@ -122,7 +112,7 @@ if (!$conn->close()) {
                                 </td>
                                 <td class="text-center">
                                     <?php if($order["Products.img_url"] != ''){ ?>
-                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($order["Products.img_url"]); ?>" alt="<?php echo htmlentities($order["Products.alt"]) ?>">
+                                        <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($order["Products.img_url"]); ?>" alt="<?php echo htmlentities(($order["Products.alt"] && $order["Products.alt"] !== "")?$order["Products.alt"]:$order["Products.title"]); ?>">
                                     <?php
                                     } else { ?>
                                         <span class='material-symbols-outlined'>close</span>

@@ -32,10 +32,6 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
         <!-- Nav -->
         <?php include ("views/partials/navbar.php");?>
 
-        <script>
-
-        </script>
-
         <main>
             <br>
             <div class="d-flex justify-content-between align-items-center">

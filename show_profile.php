@@ -77,7 +77,7 @@ if (check_user_auth($user)) {
                         </div>
                         <div class="d-flex justify-content-center">
                             <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
-                                 alt="profile picture">
+                                 alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
                         </div>
                         <br>
                         <div class="row mb-3">
@@ -145,7 +145,7 @@ if (check_user_auth($user)) {
 
         <script>
             function my_function(){
-                window.open("/f1_project/edit_profile.php/?id=<?php echo htmlentities($element["id"]); ?>","_self");
+                window.open("/f1_project/edit_profile.php/?id=<?php echo $element["id"]; ?>","_self");
             }
         </script>
 

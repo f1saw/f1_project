@@ -1,6 +1,7 @@
 const MAX_TITLE_LENGTH = 150;
 const MAX_DESCRIPTION_LENGTH = 500;
 const MAX_IMGS_LENGTH = 700;
+const MAX_ALTS_LENGTHS = 400;
 const MAX_COLOR_LENGTH = 20;
 const MAX_SIZE_LENGTH = 20;
 
@@ -13,6 +14,7 @@ const MAX_SIZE_LENGTH = 20;
 const err_input_info = (id, err_msg) => {
     // assignment needed in order to select the proper div where to display errors with images length
     id = (/^img_url_/.test(id))? validators_products["images"].err_id : id;
+    id = (/^alt_/.test(id))? validators_products["alts"].err_id : id;
 
     $(`#input-info-${id} span:first-child`).text("warning").addClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).html(`${err_msg}`).addClass("text-danger");
@@ -23,6 +25,7 @@ const err_input_info = (id, err_msg) => {
 const clear_input_info = id => {
     // assignment needed in order to select the proper div where to display errors with images length
     id = (/^img_url_/.test(id))? validators_products["images"].err_id : id;
+    id = (/^alt_/.test(id))? validators_products["alts"].err_id : id;
 
     $(`#input-info-${id} span:first-child`).text("").removeClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).text("").removeClass("text-danger");
@@ -34,6 +37,13 @@ const validateMaxFiles = (id, value, params) => {
 }
 
 const validateMaxLength = (id, value, params) => {
+
+    // test required to handle alts length
+    if (/^alt_/.test(id)) {
+        const other = id === validators_products["alts"].ids[0]? 1:0;
+        value += $(`#${validators_products["alts"].ids[other]}`).val();
+        console.log(value.length <= params[0])
+    }
     // test required to handle image urls length
     if (/^img_url_/.test(id)) {
         const other = id === validators_products["images"].ids[0]? 1:0;
@@ -107,6 +117,13 @@ const validators_products = {
         params: 2,
         err_msg: "You can upload a maximum of <strong class='text-danger'>TWO</strong> images",
         err_id: "images-local"
+    },
+    "alts": {
+        ids: ["alt_1", "alt_2"],
+        validator: validateMaxLength,
+        params: [MAX_ALTS_LENGTHS],
+        err_msg: "ALT descriptions are too <strong class='text-danger'>LONG</strong>",
+        err_id: "alts"
     }
 }
 

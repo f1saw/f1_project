@@ -4,6 +4,8 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 require 'vendor/autoload.php';
+
+use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 
 const PREFIX_LENGTH = 5;
@@ -87,4 +89,29 @@ function aws_s3_upload($filename, $file_temp_src): array {
     }
 
     return [$status, $statusMsg, $s3_file_link];
+}
+
+function aws_delete_img($img): void {
+    $img = explode("http://f1-saw.s3.eu-central-1.amazonaws.com/", $img)[1];
+    [$region, $version, $access_key_id, $secret_access_key, $bucket] = config_aws_s3();
+    $s3 = new S3Client([
+        "version" => $version,
+        "region" => $region,
+        "credentials" => [
+            "key" => $access_key_id,
+            "secret" => $secret_access_key
+        ],
+        // TODO: scheme to change in 'https' when deploy to live server if it uses https
+        'scheme' => 'http'
+    ]);
+
+    try {
+        $s3->deleteObject([
+            'Bucket' => $bucket,
+            'Key' => $img
+        ]);
+    }
+    catch (S3Exception $e) {
+        error("500", 'Error: ' . $e->getAwsErrorMessage() . PHP_EOL);
+    }
 }

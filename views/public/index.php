@@ -43,13 +43,13 @@ $json_cards_data = json_decode($json, true);
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100 img-carousel rounded" alt="F1 2022">
+                    <img src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100 img-carousel rounded" alt="Blue and Pink Alpine F1 car 2022">
                 </div>
                 <div class="carousel-item">
-                    <img src="/f1_project/assets/images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Mercedes">
+                    <img src="/f1_project/assets/images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="Black F1 Mercedes car">
                 </div>
                 <div class="carousel-item">
-                    <img src="/f1_project/assets/images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="F1 Ferrari">
+                    <img src="/f1_project/assets/images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="Red F1 Ferrari car">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
