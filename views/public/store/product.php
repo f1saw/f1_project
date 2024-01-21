@@ -192,7 +192,7 @@ if (!$product) {
             </div>
         </div>
     </main>
-</body>
 
 <script src="/f1_project/assets/js/navbar.js"></script>
+</body>
 </html>
