@@ -75,7 +75,7 @@ if (check_user_auth($user)) {
                             <span class="material-symbols-outlined text-light">mail</span>
                             <strong>Send new password</strong>
                         </button>
-                        <a href="/f1_project/views/public/auth/registration.php" class="my_outline_animation col-12 col-md-4 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
+                        <a href="/f1_project/views/public/auth/login.php" class="my_outline_animation col-12 col-md-4 text-center text-white text-decoration-none d-flex align-items-center justify-content-center gap-1 p-2 hover-red">
                             <span class="material-symbols-outlined text-light">login</span>
                             <span class="d-inline d-xxl-inline">Back to login</span>
                         </a>

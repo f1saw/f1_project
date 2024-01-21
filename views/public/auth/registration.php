@@ -142,7 +142,7 @@ if (check_user_auth($user)) {
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 col-sm-6 mb-3 mb-sm-0">
-                            <label for="date_of_birth" class="form-label text-box"><strong>Date of birth</strong></label>
+                            <label for="date_of_birth" class="form-label text-box"><strong>DATE OF BIRTH</strong></label>
                             <div class="input-group">
                                 <input id="date_of_birth" name="date_of_birth" class="form-control text-box" type="date" />
                             </div>
