@@ -31,3 +31,15 @@ main {
 .load-more * {
     color: white;
 }
+
+.who-we-are * {
+    color: white;
+}
+
+.who-we-are a {
+    text-decoration: none;
+}
+
+.who-we-are a:hover {
+    color: red;
+}

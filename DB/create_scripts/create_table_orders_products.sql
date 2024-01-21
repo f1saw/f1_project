@@ -14,4 +14,3 @@ create table orders_products
         foreign key (product_id) references products (id)
             on update cascade
 );
-

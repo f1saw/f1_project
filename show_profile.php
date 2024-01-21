@@ -29,31 +29,14 @@ require_once("DB/DB.php");
 if (check_user_auth($user)) {
     set_session($user);
 
-    if(check_admin_auth($user)) {
+    if (check_admin_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
         $element = select_user($id);
         unset($id);
-    }
-    else{
+    } else {
         $element = select_user(null);
     }
-    if($element != null) {
-    ?>
-
-        <?php
-        if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-            error("500", "set_include_path()");
-        if(session_status() == PHP_SESSION_NONE) session_start();
-
-        require_once("controllers/auth/auth.php");
-
-        [$login_allowed, $user] = check_cookie();
-        if(!check_user_auth($user)){
-            $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_show_profile.php";
-            error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
-            exit;
-        }
-        ?>
+    if($element != null) { ?>
         <div class="container-fluid" >
             <?php include("views/partials/navbar.php"); ?>
             <main >
@@ -64,8 +47,12 @@ if (check_user_auth($user)) {
                             <?php succ_msg_alert(); ?>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <img class="rounded-circle photo_profile" src="<?php if($element["img_url"] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
-                                 alt="profile picture">
+                            <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
+                                <img id="photo_profile" class="rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
+                                     alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
+                            <?php } else { ?>
+                                <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
+                            <?php } ?>
                         </div>
                         <br>
                         <div class="row mb-3">
@@ -138,13 +125,7 @@ if (check_user_auth($user)) {
         </script>
 
 <?php
-        //if (isset($_GET["edit"]) && $_GET["edit"] == 1) {
-          //  include("views/private/partials/user_detail_edit_profile.php");
-        //} else {
-          //  include("views/private/partials/user_detail_show_profile.php");
-        //}
-    }
-    else{
+    } else{
         error("500", "User is NULL", "\\views\users\show_profile.php", "/f1_project/views/private/dashboard.php");
     }
 }

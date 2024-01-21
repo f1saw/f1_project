@@ -1,9 +1,9 @@
 <?php
 //check_user_role() return true if user is admin, false otherwise
-function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") : bool{
+function check_user_role($conn, $params, $source = "", $redirect_error = "") : bool {
 
     $role = DB::get_record_by_field($conn,
-        "SELECT role FROM Users WHERE id = ?",
+        "SELECT role FROM Users WHERE id = ?;",
         ["i"],
         $params,
         $source,
@@ -17,7 +17,9 @@ function check_user_role($conn, $params, $source = "N/A", $redirect_error = "") 
 
 // Questa funzione ha lo scopo di estrarre le informazioni dell'utente che si decide di visualizzare
 // dalla dashboard. Se nessun utente è stato selezionato vengono ritornate le info dell'utente collegato
-function select_user($id) : array{
+function select_user($id) : array {
+    unset($_SESSION['redirection']);
+    //exit;
     if($id == null) {
         // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
         // ritono sul profilo e non nella table
@@ -27,7 +29,7 @@ function select_user($id) : array{
 
     $conn = DB::connect("\utility\utility_func.php");
     $element = DB::get_record_by_field($conn,
-        "SELECT * FROM Users WHERE id = ?",
+        "SELECT * FROM Users WHERE id = ?;",
         ["i"],
         [$id],
         "\show_profile.php",

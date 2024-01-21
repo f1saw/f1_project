@@ -10,26 +10,26 @@ require_once ("utility/store.php");
 require_once ("DB/DB.php");
 
 
-/** GET TEAMS */
-$conn = DB::connect("store.php", "/f1_project/views/public/index.php");
+/* GET TEAMS */
+$conn = DB::connect("\\views\public\store\store.php", "/f1_project/views/public/index.php");
 [$num_teams, $teams] = DB::stmt_get_record_by_field($conn,
     "SELECT * FROM Teams;",
-    "store.php",
+    "\\views\public\store\store.php",
     "/f1_project/views/public/index.php");
 
-/** GET Products (eventually filtered by team) */
+/* GET Products (eventually filtered by team) */
 $team_filter = (isset($_GET["team"]) && $_GET["team"])? ("WHERE team_id = " . $_GET["team"]):"";
 [$num_products, $products] = DB::stmt_get_record_by_field($conn,
     "SELECT 
-                Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
+                Products.id AS 'Products.id', Products.title AS 'Products.title', Products.color AS 'Products.color', Products.size AS 'Products.size', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Products.alt AS 'Products.alt', 
                 Teams.id AS 'Teams.id', Teams.name AS 'Teams.name', Teams.color_rgb_value AS 'Teams.color_rgb_value' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id 
             $team_filter 
             ORDER BY Products.id DESC;",
-    "store.php",
+    "\\views\public\store\store.php",
     "/f1_project/views/public/index.php");
 if (!$conn->close()) {
-    error("500", "conn_close()", "store.php", "/f1_project/views/public/index.php");
+    error("500", "conn_close()", "\\views\public\store\store.php", "/f1_project/views/public/index.php");
     exit;
 }
 ?>
@@ -61,7 +61,7 @@ if (!$conn->close()) {
         <div id="shop-by-team" class="row d-flex justify-content-center align-items-center gap-5 p-3">
             <?php foreach($teams as $team) { ?>
                 <a href="?team=<?php echo htmlentities($team["id"]); ?>">
-                    <img src="<?php echo htmlentities($team["logo_url"]); ?>" alt="<?php echo htmlentities($team["name"]); ?>">
+                    <img src="<?php echo htmlentities($team["logo_url"]); ?>" alt="<?php echo htmlentities($team["name"]) . " Logo"; ?>">
                 </a>
             <?php } ?>
         </div>
@@ -72,6 +72,7 @@ if (!$conn->close()) {
     <!-- Loading circle -->
     <?php include ("views/partials/loading.php"); ?>
 
+    <!-- Actual Products list -->
     <main class="home-cards mt-5">
 
         <?php include("views/partials/store/view_products.php") ?>
@@ -87,7 +88,6 @@ if (!$conn->close()) {
         </div>
     </main>
 </div>
-
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/store.js"></script>
 </body>

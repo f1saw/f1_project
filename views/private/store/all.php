@@ -19,7 +19,7 @@ set_session($user);
 
 $conn = DB::connect("\\views\private\store\all.php", "f1_project/views/private/dashboard.php");
 [$num_products, $products] = DB::stmt_get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', 
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.price AS 'Products.price', Products.img_url AS 'Products.img_url', Products.alt AS 'Products.alt', 
                 Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id
             ORDER BY Products.id DESC;",
@@ -99,11 +99,12 @@ if (!$conn->close()) {
                                     <?php
                                     if ($product["Products.img_url"]) {
                                         $img = explode("\t", $product["Products.img_url"]);
+                                        $alt = explode("\t", $product["Products.alt"]);
                                         if($img && $img[0] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="Product pictures.">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="<?php echo htmlentities(($alt[0] !== "")?$alt[0]:$product["Products.title"]); ?>">
                                         <?php }
                                         if($img && $img[1] != '') { ?>
-                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="Product pictures.">
+                                            <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="<?php echo htmlentities(($alt[1] && $alt[1] !== "")?$alt[1]:$product["Products.title"]); ?>">
                                         <?php
                                         }
                                     } else { ?>

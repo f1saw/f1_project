@@ -51,7 +51,16 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
                 </span>
             </div>
         </div>
-        <?php echo_teams_cards($name_list, $lastname_list, $team_list, $img_list, COL_CARD); ?>
+        <?php if (count($name_list) > 0) {
+            echo_teams_cards($name_list, $lastname_list, $team_list, $img_list, COL_CARD);
+        } else { ?>
+            <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
+                <span class="material-symbols-outlined">description</span>
+                <span class="mx-2">
+                    <b>INFO</b>&nbsp;| No Data available!
+                </span>
+            </div>
+        <?php } ?>
     </main>
 </div>
 

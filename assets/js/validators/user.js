@@ -1,5 +1,11 @@
 const MAX_LENGTH = 255;
 
+/**
+ * Error detected in input fields,
+ * so showing a proper message (err_msg) and disabling submit button is performed.
+ * @param id
+ * @param err_msg
+ */
 const err_input_info = (id, err_msg) => {
     $(`#input-info-${id} span:first-child`).text("warning").addClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).html(`${err_msg}`).addClass("text-danger");
@@ -18,7 +24,8 @@ const clear_input_info = ids => {
 }
 
 const validateMaxFiles = (id, value, params) => {
-    return $("#images-local")[0].files.length <= params;
+    const image_local = $("#images-local")[0];
+    return (image_local)? image_local.files.length <= params:true;
 }
 
 const validateMaxLength = (id, value) => {
@@ -32,7 +39,7 @@ const validateEmail = (id, email) => {
     return validateMaxLength(id, email) && String(email)
         .toLowerCase()
         .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
         );
 };
 
@@ -46,7 +53,7 @@ const validatePassword = (id, password) => {
     if (id === "pass") {
         const confirm = $("#pass-confirm").val();
         if (confirm !== undefined) {
-            console.log("C " + confirm)
+            //console.log("C " + confirm)
             return isValid && password === confirm;
         }
         return isValid;
@@ -59,6 +66,14 @@ const validatePassword = (id, password) => {
     }
 }
 
+/**
+ * Object designed to store validating information
+ * key: string
+ * ids: array containing the list of ids to perform the validator function on
+ * validator: function used to validate input given
+ * params: containing validator function parameters
+ * err_msg: array of strings where to specify message if an error is detected
+ */
 const validators_user = {
     "firstname": {
         ids: ["firstname"],
@@ -82,7 +97,7 @@ const validators_user = {
             "Retyped password does <strong class='text-danger'>NOT</strong> match with the original one"]
     },
     "img_url": {
-        ids: ["img_url"],
+        ids: ["img_url_1"],
         validator: validateMaxLength,
         err_msg: ["Image url is too <strong class='text-danger'>LONG</strong>"]
     },
@@ -115,6 +130,10 @@ const check_all = validators => {
     }
 }
 
+
+/**
+ * Add "input" event listener on each input field
+ */
 for (const value of Object.values(validators_user)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {
@@ -132,39 +151,49 @@ for (const value of Object.values(validators_user)) {
     })
 }
 
+/**
+ * Perform check_email function on each element of the array.
+ * The function asks a backend controller function if the email given is already in the database
+ * (email has to be unique)
+ */
 const element = [document.getElementById('register-form'), document.getElementById("profile-data")];
 element.forEach(check_email);
 function check_email() {
     addEventListener("change", function (event){
         event.preventDefault();
 
+        const original_email = document.getElementById("original-email");
         const form_email = document.getElementById("email");
         const status_email = document.getElementById("status");
         const status_symbol = document.getElementById("status_symbol");
         const submit = document.getElementsByClassName("btn-submit")
-        const email = form_email.value.trim();
-        fetch(`http://localhost:63342/f1_project/controllers/auth/check_email_client.php?email=${encodeURIComponent(email)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.exists) {
-                    status_email.textContent = 'Email already used, try a different one.';
-                    status_symbol.style.removeProperty('display');
-                    for (let i = 0; i < submit.length; i++) {
-                        submit[i].disabled = true;
+        const email = form_email?form_email.value.trim():"";
+        // 1st condition => it means that the loaded page is the registration one (there is no "original-email" input), so the email check is required
+        // Otherwise, checking if the new email provided is the same as the previous one is needed
+        if (!original_email || original_email.value.trim() !== email) {
+            fetch(`http://localhost:63342/f1_project/controllers/auth/check_email_client.php?email=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        status_email.textContent = 'Email already in use, try a different one.';
+                        status_symbol.style.removeProperty('display');
+                        for (let i = 0; i < submit.length; i++) {
+                            submit[i].disabled = true;
+                        }
                     }
-                }
-                if (data.exists_no_match) {
-                    status_email.textContent = '';
-                    status_symbol.style.display = 'none';
-                    for (let i = 0; i < submit.length; i++) {
-                        submit[i].disabled = false;
+                    if (data.exists_no_match) {
+                        status_email.textContent = '';
+                        status_symbol.style.display = 'none';
+                        for (let i = 0; i < submit.length; i++) {
+                            submit[i].disabled = false;
+                        }
                     }
-                }
-            })
-            .catch(error => {
-                console.error('Error in API call:', error);
-                status_email.textContent = 'Email check failed.';
-            });
+                })
+                .catch(error => {
+                    console.error('Error in API call:', error);
+                    status_email.textContent = 'Email check failed.';
+                });
+        }
     })
 }
 

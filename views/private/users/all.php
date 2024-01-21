@@ -92,7 +92,7 @@ if (!$conn->close()) {
 
                                 <td class='text-center'>
                                     <?php if($user["img_url"] != ''){ ?>
-                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo htmlentities($user['img_url']); ?>" alt="Profile pictures.">
+                                        <img style="width: 60px; height: 40px; object-fit: cover;" src="<?php echo htmlentities($user['img_url']); ?>" alt="<?php echo ($user["alt"] !== "")? htmlentities($user["alt"]):"Profile picture"; ?>">
                                     <?php
                                     }
                                     else{ ?>
@@ -115,8 +115,8 @@ if (!$conn->close()) {
                     <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                         <span class="material-symbols-outlined">description</span>
                         <span class="mx-2">
-                        <b>INFO</b>&nbsp;| No Data available!
-                    </span>
+                            <b>INFO</b>&nbsp;| No Data available!
+                        </span>
                     </div>
                 <?php } ?>
             </div>

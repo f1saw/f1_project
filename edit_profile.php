@@ -34,42 +34,11 @@ if (check_user_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
         $element = select_user($id);
         unset($id);
-    }
-    else{
+    } else {
         $element = select_user(null);
     }
-    if($element != null) {
-        ?>
-
-        <?php
-        if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-            error("500", "set_include_path()");
-        if(session_status() == PHP_SESSION_NONE) session_start();
-
-        require_once("controllers/auth/auth.php");
-
-        [$login_allowed, $user] = check_cookie();
-        if(!check_user_auth($user)){
-            $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_show_profile.php";
-            error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
-            exit;
-        }
-        ?>
-
-        <?php
-        if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-            error("500", "set_include_path()");
-        if(session_status() == PHP_SESSION_NONE) session_start();
-
-        require_once("controllers/auth/auth.php");
-
-        [$login_allowed, $user] = check_cookie();
-        if(!check_user_auth($user)){
-            $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_edit_profile.php";
-            error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
-            exit;
-        }
-        ?>
+    $_SESSION['redirection'] = "/f1_project/show_profile.php?id=" . $element['id'];
+    if($element != null) { ?>
         <div class="container-fluid">
             <?php include("views/partials/navbar.php"); ?>
             <main>
@@ -77,18 +46,22 @@ if (check_user_auth($user)) {
                     <form id="profile-data" class="container-element" enctype="multipart/form-data" method="POST" action="/f1_project/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                         <div id="page1">
                             <div class="d-flex justify-content-center">
-                                <img class="rounded-circle photo_profile" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
-                                     alt="profile picture">
+                                <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
+                                    <img id="photo_profile" class="rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
+                                         alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
+                                <?php } else { ?>
+                                    <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
+                                <?php } ?>
                             </div>
                             <br>
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6">
                                     <div class="col-12">
-                                <span class="d-flex justify-content-center">
-                                    <label for="firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
-                                </span>
+                                        <span class="d-flex justify-content-center">
+                                            <label for="firstname" class="form-label"><strong class="text-red">Firstname <span>*</span></strong></label><br>
+                                        </span>
                                         <div class="input-group">
-                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="<?php echo htmlentities($element["first_name"]); ?>">
+                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="First name" value="<?php echo htmlentities($element["first_name"]); ?>" required>
                                         </div>
                                         <div id="input-info-firstname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -99,10 +72,10 @@ if (check_user_auth($user)) {
                                 <div class="col-12 col-md-6">
                                     <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="lastname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
+                                    <label for="lastname" class="form-label"><strong class="text-red">Lastname <span>*</span></strong></strong></label><br>
                                 </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
+                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="Last name" value="<?php echo htmlentities($element["last_name"]); ?>" required>
                                         </div>
                                         <div id="input-info-lastname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -114,14 +87,17 @@ if (check_user_auth($user)) {
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <span class="d-flex justify-content-center">
-                                        <label for="email" class="form-label"><strong class="text-red">Email</strong></label><br>
+                                        <label for="email" class="form-label"><strong class="text-red">Email <span>*</span></strong></strong></label><br>
                                     </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                             <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
+                                            <input type="hidden" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } else {?>
-                                            <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo htmlentities($element["email"]); ?>" >
+                                            <input type="email" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } ?>
+                                        <input type="hidden" id="original-email" value="<?php echo htmlentities($element["email"]); ?>" required>
+
                                     </div>
 
                                     <!--TODO: messo la classe d-none perchè creava problemi nella visualizzazione -> si può eliminare?-->
@@ -145,20 +121,20 @@ if (check_user_auth($user)) {
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                             <label class="form-control text-box"><?php ($element["date_of_birth"] != null)? print $element["date_of_birth"]: print "No element"; ?></label>
                                         <?php } else {?>
-                                            <input type="date" id="edit_date_of_birth" name="edit_date_of_birth" class="form-control text-box" >
+                                            <input type="date" id="edit_date_of_birth" name="edit_date_of_birth" class="form-control text-box" value="<?php echo htmlentities($element["date_of_birth"]); ?>">
                                         <?php } ?>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                            <span class="d-flex justify-content-center">
-                                <label for="edit_news" class="form-label"><strong class="text-red">Newsletter</strong></label><br>
-                            </span>
+                                    <span class="d-flex justify-content-center">
+                                        <label for="edit_news" class="form-label"><strong class="text-red">Newsletter</strong></label><br>
+                                    </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                             <label class="form-control text-box"><?php ($element["newsletter"] != null)? print $element["newsletter"]: print "No element"; ?></label>
                                         <?php } else {?>
-                                            <input type="number" id="edit_news" name="edit_news" class="form-control text-box" placeholder="Active: 1  Inactive: 0">
+                                            <input type="number" id="edit_news" name="edit_news" class="form-control text-box" placeholder="Active: 1  Inactive: 0" value="<?php echo htmlentities($element["newsletter"]); ?>">
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -167,17 +143,21 @@ if (check_user_auth($user)) {
 
                             <div class="row mb-3 d-flex justify-content-center button button_div">
                                 <button type="button" name="other_info_back" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
-
-                                <button type="submit" id="btn-submit" name="Button_id" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
-
-                                <button id="goToNextPage" type="button" name="other_info_next" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_right</span></button>
+                                <button type="submit" id="btn-submit" name="id_to_update" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                                <button id="goToNextPage" type="button" name="other_info_next" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border">
+                                  <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
                             </div>
                         </div>
 
                         <div id="page2" class="d-none">
                             <div class="d-flex justify-content-center">
-                                <img class="rounded-circle photo_profile" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
-                                     alt="profile picture">
+                                <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
+                                    <img id="photo_profile" class="rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
+                                         alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
+                                <?php } else { ?>
+                                    <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
+                                <?php }?>
                             </div>
                             <br>
                             <div class="row mb-3">
@@ -190,7 +170,7 @@ if (check_user_auth($user)) {
                                             <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                                 <label class="form-control text-box">Not allowed</label>
                                             <?php } else {?>
-                                                <input type="password" id="pass" name="pass" class="form-control text-box" placeholder="password">
+                                                <input type="password" id="pass" name="pass" class="form-control text-box" placeholder="Password">
                                             <?php } ?>
                                         </div>
                                         <div id="input-info-pass" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -208,7 +188,7 @@ if (check_user_auth($user)) {
                                             <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                                 <label class="form-control text-box">Not allowed</label>
                                             <?php } else {?>
-                                                <input type="password" id="pass-confirm" name="confirm" class="form-control text-box" placeholder="confirm password">
+                                                <input type="password" id="pass-confirm" name="pass_confirm" class="form-control text-box" placeholder="Confirm password">
                                             <?php } ?>
                                         </div>
                                         <div id="input-info-pass-confirm" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -242,10 +222,10 @@ if (check_user_auth($user)) {
                                 <div class="row mb-3 col-9" id="image-url-div">
                                     <div class="col-12">
                                         <span class="d-flex justify-content-center">
-                                            <label for="img_url" class="form-label"><strong class="text-red">Url img</strong></label><br>
+                                            <label for="img_url_1" class="form-label"><strong class="text-red">Url img</strong></label><br>
                                         </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="<?php echo htmlentities($element["img_url"]); ?>">
+                                            <input type="text" id="img_url_1" name="edit_img" class="form-control text-box" placeholder="https//image.url" value="<?php echo htmlentities($element["img_url"]); ?>">
                                         </div>
                                         <div id="input-info-img_url" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -254,6 +234,7 @@ if (check_user_auth($user)) {
                                     </div>
                                 </div>
 
+                                <!-- Image upload methodology toggle -->
                                 <div id="checkbox_div" class="col-3 d-flex justify-content-center">
                                     <label class="checkbox-inline" for="choose-file-upload"></label>
                                     <input type="checkbox" id="choose-file-upload" data-toggle="toggle" data-on="Local" data-off="URL" data-onstyle="danger" data-offstyle="border border-danger">
@@ -275,7 +256,7 @@ if (check_user_auth($user)) {
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
-                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="<?php echo htmlentities($element["role"]); ?>">
+                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="Admin: 1 / User: 0" value="<?php echo htmlentities($element["role"]); ?>">
                                         <?php } else{ ?>
                                             <label class="form-control text-box"> <?php ($_SESSION["role"] == 1)? print "Admin": print "User"; ?> </label>
                                         <?php } ?>
@@ -286,7 +267,7 @@ if (check_user_auth($user)) {
 
                             <div class="row mb-3 d-flex justify-content-center button button_div">
                                 <button id="goToLastPage" type="button" name="other_info" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
-                                <button type="submit" name="Button_id" value="<?php echo htmlentities($element["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
+                                <button type="submit" name="id_to_update" value="<?php echo htmlentities($element["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                                 <button type="button" name="other_info" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
@@ -302,18 +283,11 @@ if (check_user_auth($user)) {
         <script src="/f1_project/assets/js/validators/user.js"></script>
         <script src="/f1_project/assets/js/image_upload.js"></script>
 
-        <?php
-        //if (isset($_GET["edit"]) && $_GET["edit"] == 1) {
-        //  include("views/private/partials/user_detail_edit_profile.php");
-        //} else {
-        //  include("views/private/partials/user_detail_show_profile.php");
-        //}
-    }
-    else{
+<?php
+    } else{
         error("500", "User is NULL", "\\views\users\show_profile.php", "/f1_project/views/private/dashboard.php");
     }
-}
-else{
+} else{
     $_SESSION['redirection'] = "/f1_project/show_profile.php?id={${${$_GET['id']??''}}}";
     error("401", "not_authorized", "\\views\users\show_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;

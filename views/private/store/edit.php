@@ -26,7 +26,8 @@ if (!isset($_GET["id"]) || !$_GET["id"]) {
 $conn = DB::connect("\\views\private\store\\update_profile.php", "/f1_project/views/private/store/all.php");
 $id = intval($_GET["id"])?? -1;
 $product = DB::get_record_by_field($conn,
-    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
+    "SELECT Products.id AS 'Products.id', Products.title AS 'Products.title', Products.description AS 'Products.description', Products.price AS 'Products.price', Products.size AS 'Products.size', Products.color AS 'Products.color', Products.img_url AS 'Products.img_url', Products.alt AS 'Products.alt',
+                    Teams.id AS 'Teams.id', Teams.name AS 'Teams.name' 
             FROM Products JOIN Teams ON Products.team_id = Teams.id WHERE Products.id = ?;",
     ["i"],
     [$id],
@@ -83,7 +84,7 @@ if (!$product) {
                         <hr>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="title" class="form-label"><strong>TITLE <label class="text-danger">*</label></strong></label><br>
+                                <label for="title" class="form-label"><strong>TITLE <span class="text-danger">*</span></strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
                                     <input type="text" id="title" class="form-control" name="title" placeholder="Title" value="<?php echo htmlentities($product["Products.title"]); ?>" aria-describedby="title-addon" required>
@@ -106,7 +107,7 @@ if (!$product) {
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label for="price" class="form-label"><strong>PRICE <label class="text-danger">*</label></strong></label><br>
+                                <label for="price" class="form-label"><strong>PRICE <span class="text-danger">*</span></strong></label><br>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                     <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
@@ -118,7 +119,7 @@ if (!$product) {
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label for="team" class="form-label"><strong>TEAM <label class="text-danger">*</label></strong></label>
+                                <label for="team" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
                                 <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size" required>
                                     <option value="" class="option_invalid" selected disabled>Select team</option>
                                     <?php
@@ -140,7 +141,6 @@ if (!$product) {
                                         <strong>SIZE</strong>
                                         <span class="material-symbols-outlined" style="color: aqua;">help</span>
                                     </label>
-                                    <label id="selected-size"></label>
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
@@ -191,6 +191,11 @@ if (!$product) {
                                 $img1 = explode("\t", $product["Products.img_url"])[0];
                                 $img2 = explode("\t", $product["Products.img_url"])[1];
                             }
+                            [$alt1, $alt2] = "";
+                            if ($product["Products.alt"] != "") {
+                                $alt1 = explode("\t", $product["Products.alt"])[0];
+                                $alt2 = explode("\t", $product["Products.alt"])[1];
+                            }
                             ?>
 
                             <div class="col-6">
@@ -213,6 +218,29 @@ if (!$product) {
                             </div>
                         </div>
 
+                        <!-- ALT images input -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="alt_1" class="form-label"><strong>ALT (1)</strong></label><br>
+                                <div class="input-group">
+                                    <span class="input-group-text material-symbols-outlined text-dark" id="alt-1-addon">description</span>
+                                    <input type="text" id="alt_1" class="form-control" name="alt_1" placeholder="Alt description for the 1st image" aria-describedby="alt-1-addon" value="<?php echo htmlentities($alt1); ?>">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="alt_2" class="form-label"><strong>ALT (2)</strong></label><br>
+                                <div class="input-group">
+                                    <span class="input-group-text material-symbols-outlined text-dark" id="alt-2-addon">description</span>
+                                    <input type="text" id="alt_2" class="form-control" name="alt_2" placeholder="Alt description for the 2nd image" aria-describedby="alt-2-addon" value="<?php echo htmlentities($alt2); ?>">
+                                </div>
+                            </div>
+                            <div id="input-info-alts" class="d-none d-flex gap-2 mt-1 py-1">
+                                <span class="material-symbols-outlined"></span>
+                                <span class=""></span>
+                            </div>
+                        </div>
+
+                        <!-- Image upload methodology toggle -->
                         <div class="row mb-3">
                             <div class="col-12 d-flex justify-content-start align-items-center gap-2">
                                 <label class="checkbox-inline" for="choose-file-upload"></label>
@@ -239,7 +267,7 @@ if (!$product) {
 
                         <div class="row col-12">
                             <label>
-                                <label class="text-danger">*</label> Compulsory fields
+                                <span class="text-danger">*</span> Compulsory fields
                             </label>
                         </div>
                     </fiedlset>
@@ -249,8 +277,8 @@ if (!$product) {
             </div>
 
             <div id="img-preview" class="d-none col-12 row d-flex justify-content-center">
-                <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="..." src="">
-                <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded " alt="..." src="">
+                <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="" src="">
+                <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded" alt="" src="">
             </div>
         </div>
     </div>

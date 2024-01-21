@@ -29,8 +29,9 @@ if (check_user_auth($user)) {
     if (check_admin_auth($user)) {
         header("Location: /f1_project/views/private/users/all.php");
     } else {
-        echo "Logged but in user mode";
-        echo "<a href='/f1_project/logout.php'>Logout</a>";
+        $_SESSION["err"] = 1;
+        $_SESSION["err_msg"] = "Not allowed operation.";
+        header("Location: /f1_project/views/public/index.php");
     }
     exit;
 }
@@ -60,12 +61,13 @@ if (check_user_auth($user)) {
                         <label for="email" class="form-label"><strong>EMAIL</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
-                            <input type="email" id="email" class="form-control" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' placeholder="name@example.com" aria-describedby="email-addon" required>
+                            <input type="email" id="email" class="form-control" name="email"  placeholder="name@example.com" aria-describedby="email-addon" required>
                         </div>
                         <div id="input-info-email" class="d-none d-flex gap-2 mt-1 py-1">
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
+                      </div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -88,21 +90,16 @@ if (check_user_auth($user)) {
                             Remember me
                             <span class="material-symbols-outlined" style="color: aqua;">help</span>
                         </label>
-                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 d-flex flex-row gap-1 hover-red text-box">
                         <a href="/f1_project/views/public/auth/lost_password.php" class="text-white text-decoration-none my_outline_animation mx-1 d-flex align-items-center justify-content-start gap-2 py-2">
                             <span style="margin-left: -5px" class="material-symbols-outlined">key_off</span>
-                            <span>Password dimenticata<strong> ?</strong></span>
+                            <span>Forgot password<strong> ?</strong></span>
                         </a>
                     </div>
                 </div>
-                <div class="text-box col-12">
-                    <label>
-                        <label class="text-danger">*</label> Compulsory fields
-                    </label>
-                </div>
+              
                 <hr>
                 <div class="row col-12 d-flex justify-content-center align-items-center mx-1 gap-3 mb-3">
                     <button type="submit" id="btn-submit" class="btn btn-danger col-8 col-sm-6 col-md-5 d-flex align-items-center justify-content-center gap-2">
@@ -118,8 +115,7 @@ if (check_user_auth($user)) {
         </form>
     </div>
 </div>
-</body>
-
 <script src="/f1_project/assets/js/validators/user.js"></script>
 <script src="/f1_project/assets/js/tooltip.js"></script>
+</body>
 </html>

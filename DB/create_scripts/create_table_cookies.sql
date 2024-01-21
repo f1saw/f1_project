@@ -6,4 +6,3 @@ create table cookies
     value           char(255) not null,
     expiration_date int       not null
 );
-

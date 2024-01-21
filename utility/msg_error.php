@@ -1,4 +1,5 @@
 <?php
+// TODO => rivedere dove utilizzato
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
 require_once("utility/error_handling.php");

@@ -1,4 +1,4 @@
-/** NUMBER ITEMS in cart DOT */
+/** Actual NUMBER of ITEMS in cart */
 const items_cart = cart => {
     let cnt = 0;
     cart.forEach(item => {

@@ -9,7 +9,7 @@
                 <form method="get" action="product.php?id=<?php echo htmlentities($product["Products.id"]); ?>" class="w-100 text-decoration-none">
                     <div class="card bordered border-danger border-3 p-2 h-100">
                         <div class="card-img">
-                            <img src="<?php echo htmlentities(explode("\t", $product["Products.img_url"])[0]); ?>" class="card-img-top" alt="...">
+                            <img src="<?php echo htmlentities(explode("\t", $product["Products.img_url"])[0]); ?>" class="card-img-top" alt="<?php $alt = explode("\t", $product["Products.alt"])[0]; echo htmlentities(($alt !== "")?$alt:$product["Products.title"]); ?>">
                         </div>
                         <div class="card-body d-flex align-items-end p-1">
                             <div class="w-100">
