@@ -72,7 +72,7 @@ if (check_user_auth($user)) {
                                 <div class="col-12 col-md-6">
                                     <div class="col-12">
                                 <span class="d-flex justify-content-center">
-                                    <label for="lastname" class="form-label"><strong class="text-red">Lastname <span>*</span></strong></strong></label><br>
+                                    <label for="lastname" class="form-label"><strong class="text-red">Lastname <span>*</span></strong></label><br>
                                 </span>
                                         <div class="input-group d-flex text-center">
                                             <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="Last name" value="<?php echo htmlentities($element["last_name"]); ?>" required>
@@ -87,21 +87,21 @@ if (check_user_auth($user)) {
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <span class="d-flex justify-content-center">
-                                        <label for="email" class="form-label"><strong class="text-red">Email <span>*</span></strong></strong></label><br>
+                                        <label for="email" class="form-label"><strong class="text-red">Email <span>*</span></strong></label><br>
                                     </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
-                                            <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
-                                            <input type="hidden" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
+                                            <label for="original-email" class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
+                                            <input type="email" id="email" name="email"  class="d-none form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } else {?>
                                             <input type="email" id="email" name="email"  class="form-control text-box rounded" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } ?>
-                                        <input type="hidden" id="original-email" value="<?php echo htmlentities($element["email"]); ?>" required>
+                                        <input type="email" id="original-email" class="d-none" value="<?php echo htmlentities($element["email"]); ?>" required>
 
                                     </div>
 
                                     <!--TODO: messo la classe d-none perchè creava problemi nella visualizzazione -> si può eliminare?-->
-                                    <div class="d-none text-box d-flex gap-2 mt-1 py-1">
+                                    <div class="text-box d-flex gap-2">
                                         <span id="status_symbol" style="display: none" class="material-symbols-outlined text-danger">warning</span>
                                         <span id="status" class="text-danger"></span>
                                     </div>

@@ -38,7 +38,6 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
 
       <script>
         function responsive(id) {
-
             if (window.screen.width < 576) {
                 $(`#responsive${id}`).removeClass('responsive');
                 $(`#img-responsive${id}`).removeClass('img-responsive');
@@ -67,12 +66,13 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
             </div>
           
             <div class="row">
+                <?php $i = 0?>
                 <?php if (count($circuits) > 0) { ?>
                     <?php foreach ($circuits as $circuit) { ?>
                         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch py-3">
                             <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                                 <div id="responsive<?php echo $i; ?>" class="card-img responsive">
-                                    <img id="img-responsive<?php echo $i; ?>" src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top img-responsive" alt="<?php echo htmlentities($circuit->alt); ?>">
+                                    <img id="img-responsive<?php echo $i;?>" src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top img-responsive" alt="<?php echo htmlentities($circuit->alt); ?>">
                                 </div>
                                 <div style="max-width: 350px" class="card-body d-flex align-items-end">
                                     <div class="w-100">
@@ -104,6 +104,10 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            responsive(<?php echo $i; ?>)
+                        </script>
+                        <?php ++$i; ?>
                     <?php } ?>
                 <?php } else { ?>
                     <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
@@ -112,12 +116,6 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
                             <b>INFO</b>&nbsp;| No Data available!
                         </span>
                     </div>
-                </div>
-                <script>
-                    responsive(<?php echo $i; ?>)
-                    get_weather("<?php echo $circuit->circuit_place; ?>");
-                </script>
-                <?php ++$i; ?>
             <?php } ?>
         </div>
     </main>

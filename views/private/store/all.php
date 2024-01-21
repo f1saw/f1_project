@@ -134,12 +134,12 @@ if (!$conn->close()) {
                 <?php } ?>
 
                 <div class="d-flex justify-content-end py-3">
-                    <a href="/f1_project/views/private/store/new.php" class="text-decoration-none">
+                    <form method="get" action="/f1_project/views/private/store/new.php" class="text-decoration-none">
                         <button class="btn btn-reverse-color rounded btn btn-danger d-flex justify-content-center align-items-center gap-2">
                             <span class="material-symbols-outlined">add</span>
                             <span>Create</span>
                         </button>
-                    </a>
+                    </form>
                 </div>
 
                 <!-- Loading circle -->

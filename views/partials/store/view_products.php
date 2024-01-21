@@ -6,7 +6,7 @@
         <?php foreach ($products as $product) { ?>
 
             <div class="d-none col d-flex align-items-stretch product" id="product-<?php echo htmlentities($i); ?>">
-                <form method="get" action="product.php?id=<?php echo htmlentities($product["Products.id"]); ?>" class="w-100 text-decoration-none">
+                <a href="product.php?id=<?php echo htmlentities($product["Products.id"]); ?>" class="w-100 text-decoration-none">
                     <div class="card bordered border-danger border-3 p-2 h-100">
                         <div class="card-img">
                             <img src="<?php echo htmlentities(explode("\t", $product["Products.img_url"])[0]); ?>" class="card-img-top" alt="<?php $alt = explode("\t", $product["Products.alt"])[0]; echo htmlentities(($alt !== "")?$alt:$product["Products.title"]); ?>">
@@ -21,21 +21,22 @@
                                         <?php [$int, $dec] = str2int_dec($product["Products.price"]); ?>
                                         <strong>€ <?php echo htmlentities($int . "." . $dec); ?></strong>
                                     </h5>
+                                    <!--TODO: span cambiare con div per problemi mistici-->  
                                     <span <?php echo get_data_id($product); ?> id="span-add-it-<?php echo $product["Products.id"]; ?>" class="btn-modal d-flex flex-row gap-2 pb-1 hover-red">
-                                        <button <?php echo get_data_id($product); ?> data-bs-toggle="modal" data-bs-target="#modal-<?php echo $product["Products.id"]; ?>" class="btn-add-cart btn-modal btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                                        <div <?php echo get_data_id($product); ?> data-bs-toggle="modal" data-bs-target="#modal-<?php echo $product["Products.id"]; ?>" class="btn-add-cart btn-modal btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
                                             <span <?php echo get_data_id($product); ?> class="btn-modal material-symbols-outlined">shopping_bag</span>
                                             <span <?php echo get_data_id($product); ?> class="btn-modal">Add it!</span>
-                                        </button>
+                                        </div>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </a>
             </div>
 
             <!-- Modal (to choose size) -->
-            <div class="modal fade" id="modal-<?php echo $product["Products.id"]; ?>" tabindex="-1" aria-labelledby="modal-<?php echo $product["Products.id"]; ?>Label" aria-hidden="true">
+            <div class="modal fade" id="modal-<?php echo $product["Products.id"]; ?>" tabindex="-1" aria-labelledby="modal-<?php echo $product["Products.id"]; ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">

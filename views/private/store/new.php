@@ -55,7 +55,7 @@ if (!$conn->close()) {
                 <?php err_msg_alert(); ?>
                 <?php succ_msg_alert(); ?>
 
-                <fiedlset>
+                <fieldset>
                     <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                         <span class="material-symbols-outlined">add</span>
                         <strong>NEW</strong>
@@ -97,7 +97,7 @@ if (!$conn->close()) {
                             </div>
                         </div>
                         <div class="col-6">
-                            <label for="team" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
+                            <label for="team_id" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
                             <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
                                 <option value="" class="option_invalid" selected disabled>Select team</option>
                                 <?php
@@ -146,7 +146,7 @@ if (!$conn->close()) {
                     <!-- Local Images -->
                     <div class="row mb-4 d-none" id="image-local-div">
                         <div class="col-12">
-                            <label for="images" class="form-label"><strong>UPLOAD IMAGE(S)</strong></label>
+                            <label for="images-local" class="form-label"><strong>UPLOAD IMAGE(S)</strong></label>
                             <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="images-local" name="images-local[]" multiple>
                         </div>
                         <div id="input-info-images-local" class="d-none d-flex gap-2 mt-1 py-1">
@@ -228,13 +228,13 @@ if (!$conn->close()) {
                             <span class="text-danger">*</span> Compulsory fields
                         </label>
                     </div>
-                </fiedlset>
+                </fieldset>
             </form>
         </div>
 
         <div id="img-preview" class="d-none col-12 row d-flex justify-content-center">
-            <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="" src="">
-            <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded" alt="" src="">
+            <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="" src="#">
+            <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded" alt="" src="#">
         </div>
     </div>
 
@@ -243,6 +243,7 @@ if (!$conn->close()) {
 <script src="/f1_project/assets/js/store/crud.js"></script>
 <script src="/f1_project/assets/js/loading-crud.js"></script>
 <script src="/f1_project/assets/js/image_upload.js"></script>
+<script src="/f1_project/assets/js/tooltip.js"></script>
 
 </body>
 </html>

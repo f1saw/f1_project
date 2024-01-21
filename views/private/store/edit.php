@@ -11,7 +11,7 @@ require_once("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
-    $_SESSION['redirection'] = "/f1_project/views/private/store/update_profile.php?id=${${$_GET['id']??''}}";
+    $_SESSION['redirection'] = "/f1_project/views/private/store/update_profile.php?id={${${$_GET['id']??''}}}";
     error("401", "not_authorized", "\\views\private\store\\update_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorised access.");
     exit;
 }
@@ -74,9 +74,9 @@ if (!$product) {
                 <form action="/f1_project/controllers/store/edit.php" enctype="multipart/form-data" id="form-loading" method="POST" class="container col-12 col-xl-6 py-3 border border-3 border-danger rounded">
 
                     <?php err_msg_alert(); ?>
-
-                    <input type="hidden" name="id" value="<?php echo htmlentities($id); ?>" required>
-                    <fiedlset>
+                    <label for="id"></label>
+                    <input type="text" class="d-none" id="id" name="id" value="<?php echo htmlentities($id); ?>" required>
+                    <fieldset>
                         <legend class="d-flex align-items-center justify-content-start gap-2 hover-red">
                             <span class="material-symbols-outlined">edit_note</span>
                             <b>EDIT</b> (<?php echo htmlentities((strlen($product["Products.title"]) < 20)? $product["Products.title"] : (substr($product["Products.title"], 0 , 20) . " [...]")); ?>)
@@ -119,9 +119,9 @@ if (!$product) {
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label for="team" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
+                                <label for="team_id" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
                                 <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select size" required>
-                                    <option value="" class="option_invalid" selected disabled>Select team</option>
+                                    <option value="" class="option_invalid" disabled>Select team</option>
                                     <?php
                                     foreach ($teams as $team) {
                                         echo "<option value=" . htmlentities($team["id"]) . " class='option_valid' " . (($team["id"] == $product["Teams.id"])? " selected":"") . ">" . htmlentities($team["name"]) . "</option>";
@@ -136,12 +136,12 @@ if (!$product) {
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label class="d-flex justify-content-between">
+                                <span class="d-flex justify-content-between">
                                     <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="size" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. XS S M L XL)">
                                         <strong>SIZE</strong>
                                         <span class="material-symbols-outlined" style="color: aqua;">help</span>
                                     </label>
-                                </label>
+                                </span>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="size-addon">sell</span>
                                     <input type="text" id="size" class="form-control" name="size" value="<?php echo htmlentities(preg_replace("/;/", " ", strtoupper($product["Products.size"]))); ?>" placeholder="XS S M" aria-describedby="size-addon">
@@ -152,13 +152,13 @@ if (!$product) {
                                 </div>
                             </div>
                             <div class="col-6">
-                                <label class="d-flex justify-content-between">
+                                <span class="d-flex justify-content-between">
                                     <label style="width: fit-content" class="form-label mx-1 d-flex align-items-center justify-content-start gap-2" for="color" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<strong>Blank space</strong> to separate<br>(eg. Red Orange Black)">
                                         <strong>COLOR</strong>
                                         <span class="material-symbols-outlined" style="color: aqua;">help</span>
                                     </label>
                                     <label id="selected-color"></label>
-                                </label>
+                                </span>
                                 <div class="input-group">
                                     <span class="input-group-text material-symbols-outlined text-dark" id="color-addon">palette</span>
                                     <input type="text" id="color" class="form-control" name="color" value="<?php echo htmlentities(preg_replace("/;/", " ", $product["Products.color"])); ?>" placeholder="red black" aria-describedby="color-addon">
@@ -173,7 +173,7 @@ if (!$product) {
                         <!-- Local Images -->
                         <div class="row mb-4 d-none" id="image-local-div">
                             <div class="col-12">
-                                <label for="images" class="form-label"><strong>UPLOAD IMAGE(S)</strong></label>
+                                <label for="images-local" class="form-label"><strong>UPLOAD IMAGE(S)</strong></label>
                                 <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="images-local" name="images-local[]" multiple>
                             </div>
                             <div id="input-info-images-local" class="d-none d-flex gap-2 mt-1 py-1">
@@ -270,15 +270,15 @@ if (!$product) {
                                 <span class="text-danger">*</span> Compulsory fields
                             </label>
                         </div>
-                    </fiedlset>
+                    </fieldset>
 
                 </form>
 
             </div>
 
             <div id="img-preview" class="d-none col-12 row d-flex justify-content-center">
-                <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="" src="">
-                <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded" alt="" src="">
+                <img id="img-url-1" class="d-none img-url col-12 col-sm-6 mb-3 mb-sm-0 rounded" alt="" src="#">
+                <img id="img-url-2" class="d-none img-url col-12 col-sm-6 rounded" alt="" src="#">
             </div>
         </div>
     </div>
@@ -288,5 +288,6 @@ if (!$product) {
     <script src="/f1_project/assets/js/store/crud.js"></script>
     <script src="/f1_project/assets/js/loading-crud.js"></script>
     <script src="/f1_project/assets/js/image_upload.js"></script>
+    <script src="/f1_project/assets/js/tooltip.js"></script>
 </body>
 </html>
