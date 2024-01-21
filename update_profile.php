@@ -191,7 +191,7 @@ if (check_user_auth($user)) {
                 "UPDATE users SET $db_col_edit[$i] = '$change_value' WHERE id = ?",
                 ["i"],
                 [$_POST['Button_id']],
-                "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php"
+                "\controllers\users\\update_profile.php", "/f1_project/show_profile.php?id=" . $_POST["Button_id"]
             );
             if (!$conn->close()) {
                 error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");

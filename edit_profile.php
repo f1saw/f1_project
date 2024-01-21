@@ -100,7 +100,7 @@ if (check_user_auth($user)) {
                                     <label for="firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
                                 </span>
                                         <div class="input-group">
-                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" value="<?php echo htmlentities($element["first_name"]); ?>">
+                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="First name" value="<?php echo htmlentities($element["first_name"]); ?>">
                                         </div>
                                         <div id="input-info-firstname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -114,7 +114,7 @@ if (check_user_auth($user)) {
                                     <label for="lastname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
                                 </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" value="<?php echo htmlentities($element["last_name"]); ?>">
+                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="Last name" value="<?php echo htmlentities($element["last_name"]); ?>">
                                         </div>
                                         <div id="input-info-lastname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -132,7 +132,7 @@ if (check_user_auth($user)) {
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                             <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
                                         <?php } else {?>
-                                            <input type="email" id="email" name="email"  class="form-control text-box" value="<?php echo htmlentities($element["email"]); ?>" >
+                                            <input type="email" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" >
                                             <input type="hidden" id="original-email" value="<?php echo htmlentities($element["email"]); ?>">
                                         <?php } ?>
                                     </div>
@@ -201,7 +201,7 @@ if (check_user_auth($user)) {
                                             <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                                 <label class="form-control text-box">Not allowed</label>
                                             <?php } else {?>
-                                                <input type="password" id="pass" name="pass" class="form-control text-box" placeholder="password">
+                                                <input type="password" id="pass" name="pass" class="form-control text-box" placeholder="Password">
                                             <?php } ?>
                                         </div>
                                         <div id="input-info-pass" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -219,7 +219,7 @@ if (check_user_auth($user)) {
                                             <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                                 <label class="form-control text-box">Not allowed</label>
                                             <?php } else {?>
-                                                <input type="password" id="pass-confirm" name="confirm" class="form-control text-box" placeholder="confirm password">
+                                                <input type="password" id="pass-confirm" name="confirm" class="form-control text-box" placeholder="Confirm password">
                                             <?php } ?>
                                         </div>
                                         <div id="input-info-pass-confirm" class="d-none text-box d-flex gap-2 mt-1 py-1">
@@ -256,7 +256,7 @@ if (check_user_auth($user)) {
                                             <label for="img_url" class="form-label"><strong class="text-red">Url img</strong></label><br>
                                         </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="img_url" name="edit_img" class="form-control text-box" value="<?php echo htmlentities($element["img_url"]); ?>">
+                                            <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="https//image.url" value="<?php echo htmlentities($element["img_url"]); ?>">
                                         </div>
                                         <div id="input-info-img_url" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -294,7 +294,7 @@ if (check_user_auth($user)) {
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
-                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" value="<?php echo htmlentities($element["role"]); ?>">
+                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="Admin: 1 / User: 0" value="<?php echo htmlentities($element["role"]); ?>">
                                         <?php } else{ ?>
                                             <label class="form-control text-box"> <?php ($_SESSION["role"] == 1)? print "Admin": print "User"; ?> </label>
                                         <?php } ?>
