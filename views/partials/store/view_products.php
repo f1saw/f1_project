@@ -23,10 +23,11 @@
                                     </h5>
                                     <!--TODO: span cambiare con div per problemi mistici-->  
                                     <span <?php echo get_data_id($product); ?> id="span-add-it-<?php echo $product["Products.id"]; ?>" class="btn-modal d-flex flex-row gap-2 pb-1 hover-red">
-                                        <div <?php echo get_data_id($product); ?> data-bs-toggle="modal" data-bs-target="#modal-<?php echo $product["Products.id"]; ?>" class="btn-add-cart btn-modal btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
+                                        <!--TODO: button non corretto => deve esserci span -->
+                                        <button <?php echo get_data_id($product); ?> data-bs-toggle="modal" data-bs-target="#modal-<?php echo $product["Products.id"]; ?>" class="btn-add-cart btn-modal btn-reverse-color btn btn-danger d-flex justify-content-center align-items-center gap-2">
                                             <span <?php echo get_data_id($product); ?> class="btn-modal material-symbols-outlined">shopping_bag</span>
                                             <span <?php echo get_data_id($product); ?> class="btn-modal">Add it!</span>
-                                        </div>
+                                        </button>
                                     </span>
                                 </div>
                             </div>

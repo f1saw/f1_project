@@ -66,7 +66,7 @@ if (!$product) {
                 <div id="Indicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#Indicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <?php if ($img_urls[1]) { ?>
+                        <?php if ($img_urls[1] && $img_urls[1] != "") { ?>
                             <button type="button" data-bs-target="#Indicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <?php } ?>
                     </div>
@@ -74,20 +74,22 @@ if (!$product) {
                         <div class="carousel-item active">
                             <img src="<?php echo htmlentities($img_urls[0]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo htmlentities(($alts[0] !== "")? $alts[0]:$product["Products.title"]); ?>">
                         </div>
-                        <?php if ($img_urls[1]) { ?>
+                        <?php if ($img_urls[1] && $img_urls[1] != "") { ?>
                             <div class="carousel-item">
                                 <img src="<?php echo htmlentities($img_urls[1]); ?>" class="d-block w-100 img-carousel rounded" alt="<?php echo htmlentities(($alts[1] && $alts[1] !== "")? $alts[1]:$product["Products.title"]); ?>">
                             </div>
                         <?php } ?>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#Indicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <?php if ($img_urls[0] && $img_urls[0] != "" && $img_urls[1] && $img_urls[1] != "") { ?>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#Indicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    <?php } ?>
                 </div>
             </div>
         <?php } ?>
@@ -108,8 +110,10 @@ if (!$product) {
                     <?php } ?>
 
                     <?php if ($img_urls != null) { ?>
-                        <?php foreach ($img_urls as $index => $img) { ?>
-                            <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="<?php echo htmlentities(($alts[$index] && $alts[$index] !== "")? $alts[$index]:$product["Products.title"]); ?>">
+                        <?php foreach ($img_urls as $index => $img) {
+                            if ($img != "") { ?>
+                                <img class="mx-3" src="<?php echo htmlentities($img); ?>" height="50px" alt="<?php echo htmlentities(($alts[$index] && $alts[$index] !== "")? $alts[$index]:$product["Products.title"]); ?>">
+                            <?php } ?>
                         <?php } ?>
                     <?php } ?>
                 </div>
