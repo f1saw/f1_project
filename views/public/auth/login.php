@@ -111,7 +111,7 @@ if (check_user_auth($user)) {
                     </div>
                     <div class="text-box col-12">
                         <label>
-                            <label class="text-danger">*</label> Compulsory fields
+                            <span class="text-danger">*</span> Compulsory fields
                         </label>
                     </div>
                     <hr>

@@ -63,7 +63,7 @@ if (!$conn->close()) {
                     <hr>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <label for="title" class="form-label"><strong>TITLE <label class="text-danger">*</label></strong></label><br>
+                            <label for="title" class="form-label"><strong>TITLE <span class="text-danger">*</span></strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="title-addon">title</span>
                                 <input type="text" id="title" class="form-control" name="title" placeholder="Title" aria-describedby="title-addon" required>
@@ -86,7 +86,7 @@ if (!$conn->close()) {
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <label for="price" class="form-label"><strong>PRICE <label class="text-danger">*</label></strong></label><br>
+                            <label for="price" class="form-label"><strong>PRICE <span class="text-danger">*</span></strong></label><br>
                             <div class="input-group">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="price-addon">euro</span>
                                 <input type="text" id="price" class="form-control" name="price" pattern="^[0-9]+([,.][0-9]{1,2})?$" placeholder="50.00" aria-describedby="price-addon" required>
@@ -97,7 +97,7 @@ if (!$conn->close()) {
                             </div>
                         </div>
                         <div class="col-6">
-                            <label for="team" class="form-label"><strong>TEAM <label class="text-danger">*</label></strong></label>
+                            <label for="team" class="form-label"><strong>TEAM <span class="text-danger">*</span></strong></label>
                             <select name="team_id" id="team_id" class="form-select rounded" aria-label="Select team" required>
                                 <option value="" class="option_invalid" selected disabled>Select team</option>
                                 <?php
@@ -225,7 +225,7 @@ if (!$conn->close()) {
                     </div>
                     <div class="row col-12">
                         <label>
-                            <label class="text-danger">*</label> Compulsory fields
+                            <span class="text-danger">*</span> Compulsory fields
                         </label>
                     </div>
                 </fiedlset>

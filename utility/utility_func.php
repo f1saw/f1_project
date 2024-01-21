@@ -1,9 +1,9 @@
 <?php
 //check_user_role() return true if user is admin, false otherwise
-function check_user_role($conn, $params, $source = "", $redirect_error = "") : bool{
+function check_user_role($conn, $params, $source = "", $redirect_error = "") : bool {
 
     $role = DB::get_record_by_field($conn,
-        "SELECT role FROM Users WHERE id = ?",
+        "SELECT role FROM Users WHERE id = ?;",
         ["i"],
         $params,
         $source,
@@ -29,7 +29,7 @@ function select_user($id) : array {
 
     $conn = DB::connect("\utility\utility_func.php");
     $element = DB::get_record_by_field($conn,
-        "SELECT * FROM Users WHERE id = ?",
+        "SELECT * FROM Users WHERE id = ?;",
         ["i"],
         [$id],
         "\show_profile.php",

@@ -97,7 +97,7 @@ const validators_user = {
             "Retyped password does <strong class='text-danger'>NOT</strong> match with the original one"]
     },
     "img_url": {
-        ids: ["img_url"],
+        ids: ["img_url_1"],
         validator: validateMaxLength,
         err_msg: ["Image url is too <strong class='text-danger'>LONG</strong>"]
     },
