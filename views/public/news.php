@@ -35,7 +35,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
         <?php include ("views/partials/navbar.php");?>
 
         <main>
-            <br
+            <br>
             <span class="title text-light">
                 <span class="text-light h2">
                     News

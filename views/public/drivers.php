@@ -28,9 +28,8 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
     <?php include("views/partials/head.php"); ?>
 </head>
 
-<script src="/f1_project/assets/js/info_drivers.js"></script>
-
 <body class="bg-dark">
+<script src="/f1_project/assets/js/info_drivers.js"></script>
 <div class="container-fluid">
 
     <!-- Nav -->

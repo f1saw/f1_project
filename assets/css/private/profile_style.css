@@ -72,7 +72,7 @@ body {
     background: rgba(87, 87, 87, .6);
 }
 
-#photo_profile{
+.photo_profile{
     position: relative;
     object-fit: cover;
     width: 70px;
@@ -194,7 +194,7 @@ hr {
         max-height: 400px;
     }
 
-    #button_div {
+    .button_div {
         position: relative;
         bottom: 20px !important;"
     }

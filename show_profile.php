@@ -64,7 +64,7 @@ if (check_user_auth($user)) {
                             <?php succ_msg_alert(); ?>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <img id="photo_profile" class="rounded-circle" src="<?php if($element["img_url"] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                            <img class="rounded-circle photo_profile" src="<?php if($element["img_url"] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                  alt="profile picture">
                         </div>
                         <br>

@@ -1,5 +1,5 @@
 <?php function echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link, $col_card): void { ?>
-    <div class="row"">
+    <div class="row">
         <?php for ($i = 0; $i < 20; $i++) { ?>
             <div class="<?php echo $col_card ?> d-flex align-items-stretch py-3">
                 <div id="div<?php echo $i ?>" class="w-100 card border border-danger border-3 p-2 d-flex flex-column justify-content-between">

@@ -77,7 +77,7 @@ if (check_user_auth($user)) {
                     <form id="profile-data" class="container-element" enctype="multipart/form-data" method="POST" action="/f1_project/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                         <div id="page1">
                             <div class="d-flex justify-content-center">
-                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                                <img class="rounded-circle photo_profile" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                      alt="profile picture">
                             </div>
                             <br>
@@ -165,7 +165,7 @@ if (check_user_auth($user)) {
                             </div>
                             <br>
 
-                            <div id="button_div" class="row mb-3 d-flex justify-content-center button">
+                            <div class="row mb-3 d-flex justify-content-center button button_div">
                                 <button type="button" name="other_info_back" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
 
                                 <button type="submit" id="btn-submit" name="Button_id" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
@@ -176,7 +176,7 @@ if (check_user_auth($user)) {
 
                         <div id="page2" class="d-none">
                             <div class="d-flex justify-content-center">
-                                <img id="photo_profile" class="rounded-circle" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
+                                <img class="rounded-circle photo_profile" src="<?php if($element['img_url'] != null) echo htmlentities($element['img_url']); else echo "/f1_project/assets/images/default_img_profile.jpeg"; ?>"
                                      alt="profile picture">
                             </div>
                             <br>
@@ -263,7 +263,7 @@ if (check_user_auth($user)) {
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6">
                                 <span class="d-flex justify-content-center">
-                                    <label for="edit_remember_me" class="form-label"><strong class="text-red">Remember me</strong></label><br>
+                                    <label class="form-label"><strong class="text-red">Remember me</strong></label><br>
                                 </span>
                                     <div class="input-group d-flex text-center">
                                         <label class="form-control text-box"><?php ($element["cookie_id"] != null)? print "Active": print "Inactive"; ?></label>
@@ -271,7 +271,7 @@ if (check_user_auth($user)) {
                                 </div>
                                 <div class="col 12 col-md-6">
                             <span class="d-flex justify-content-center">
-                                <label for="edit_role" class="form-label"><strong class=" text-red">role</strong></label><br>
+                                <label <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?> for="edit_role" <?php } ?> class="form-label"><strong class=" text-red">role</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
@@ -284,7 +284,7 @@ if (check_user_auth($user)) {
                             </div>
                             <br>
 
-                            <div id="button_div" class="row mb-3 d-flex justify-content-center button">
+                            <div class="row mb-3 d-flex justify-content-center button button_div">
                                 <button id="goToLastPage" type="button" name="other_info" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_left</span></button>
                                 <button type="submit" name="Button_id" value="<?php echo htmlentities($element["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
                                 <button type="button" name="other_info" class="navigate-right btn navigate btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center n-border"><span class="material-symbols-outlined">chevron_right</span></button>
