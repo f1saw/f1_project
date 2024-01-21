@@ -4,6 +4,7 @@ $().ready(() => {
     render_cart();
     $(".lds-ring-container").addClass("d-none");
     $("#cart-list").removeClass("d-none");
+    // Storage event listener, so the cart can be kept updated as soon as the user adds a new product
     window.addEventListener('storage', function() {
         const cart = JSON.parse(localStorage.getItem(`cart-${user_id}`));
         render_cart(cart);
@@ -33,9 +34,6 @@ const remove_on_click = (cart = curr_cart) => {
         if (cart[index].quantity < 1) {
             cart.splice(index, 1)
         }
-        /* curr_cart.splice(curr_cart.findIndex(item => {
-            return item.id === id_to_remove
-        }), 1); */
 
         // Set new current cart in LocalStorage and render changes
         localStorage.setItem(`cart-${user_id}`, JSON.stringify(cart));

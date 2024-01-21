@@ -7,4 +7,3 @@ create table teams
     logo_url        varchar(255) null,
     color_rgb_value char(11)     null
 );
-

@@ -1,12 +1,20 @@
 const MAX_TITLE_LENGTH = 150;
 const MAX_DESCRIPTION_LENGTH = 500;
 const MAX_IMGS_LENGTH = 700;
+const MAX_ALTS_LENGTHS = 400;
 const MAX_COLOR_LENGTH = 20;
 const MAX_SIZE_LENGTH = 20;
 
+/**
+ * Error detected in input fields,
+ * so showing a proper message (err_msg) and disabling submit button is performed.
+ * @param id
+ * @param err_msg
+ */
 const err_input_info = (id, err_msg) => {
     // assignment needed in order to select the proper div where to display errors with images length
     id = (/^img_url_/.test(id))? validators_products["images"].err_id : id;
+    id = (/^alt_/.test(id))? validators_products["alts"].err_id : id;
 
     $(`#input-info-${id} span:first-child`).text("warning").addClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).html(`${err_msg}`).addClass("text-danger");
@@ -17,6 +25,7 @@ const err_input_info = (id, err_msg) => {
 const clear_input_info = id => {
     // assignment needed in order to select the proper div where to display errors with images length
     id = (/^img_url_/.test(id))? validators_products["images"].err_id : id;
+    id = (/^alt_/.test(id))? validators_products["alts"].err_id : id;
 
     $(`#input-info-${id} span:first-child`).text("").removeClass("text-danger");
     $(`#input-info-${id} span:nth-child(2)`).text("").removeClass("text-danger");
@@ -28,6 +37,13 @@ const validateMaxFiles = (id, value, params) => {
 }
 
 const validateMaxLength = (id, value, params) => {
+
+    // test required to handle alts length
+    if (/^alt_/.test(id)) {
+        const other = id === validators_products["alts"].ids[0]? 1:0;
+        value += $(`#${validators_products["alts"].ids[other]}`).val();
+        console.log(value.length <= params[0])
+    }
     // test required to handle image urls length
     if (/^img_url_/.test(id)) {
         const other = id === validators_products["images"].ids[0]? 1:0;
@@ -45,6 +61,14 @@ const validateTeam = (id, value) => {
     return /^[0-9]+$/.test(value)
 }
 
+/**
+ * Object designed to store validating information
+ * key: string
+ * ids: array containing the list of ids to perform the validator function on
+ * validator: function used to validate input given
+ * params: array containing validator function parameters
+ * err_msg: string where to specify message if an error is detected
+ */
 const validators_products = {
     "title": {
         ids: ["title"],
@@ -93,6 +117,13 @@ const validators_products = {
         params: 2,
         err_msg: "You can upload a maximum of <strong class='text-danger'>TWO</strong> images",
         err_id: "images-local"
+    },
+    "alts": {
+        ids: ["alt_1", "alt_2"],
+        validator: validateMaxLength,
+        params: [MAX_ALTS_LENGTHS],
+        err_msg: "ALT descriptions are too <strong class='text-danger'>LONG</strong>",
+        err_id: "alts"
     }
 }
 
@@ -112,6 +143,9 @@ const check_all = validators => {
     }
 }
 
+/**
+ * Add "input" event listener on each input field
+ */
 for (const [key, value] of Object.entries(validators_products)) {
     // console.log(key, value);
     value.ids.forEach((id, index) => {

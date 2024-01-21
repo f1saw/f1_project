@@ -2,6 +2,14 @@
 const LOWER_BOUND = 0;
 const UPPER_BOUND = 9;
 const ITEMS_PER_PAGE = UPPER_BOUND - LOWER_BOUND + 1;
+
+/**
+ * Render products (got from .product CSS class select)
+ * using a lower and an upper bound.
+ * Page manipulation is possible
+ * @param lower
+ * @param upper
+ */
 const render_products = (lower, upper) => {
     const products = $(".product").toArray();
     const prev_btn = $("#prev-page");

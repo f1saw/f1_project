@@ -44,6 +44,7 @@ if ($login_allowed) {
             $prices_array = explode("\t", $prices);
             $sizes_array = explode("\t", $sizes);
             $imgs_array = explode("\t", $imgs);
+            $alts_array = explode("\t", $alts);
             $titles_array = explode("\t", $titles);
             // $teams_array = explode("\t", $teams);
 
@@ -84,9 +85,16 @@ if ($login_allowed) {
             $subject = "Ready to goooo! You've just completed your order :)";
             $body = "";
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
-                $size = strtoupper($sizes_array[$i]);
+                $titles_array[$i] = htmlentities($titles_array[$i]);
+                $alt = htmlentities(($alts_array[$i] && $alts_array[$i] !== "")? $alts_array[$i]:$titles_array[$i]);
+                $size = htmlentities(strtoupper($sizes_array[$i]));
+                $quantities_array[$i] = htmlentities($quantities_array[$i]);
                 [$int, $dec] = str2int_dec($prices_array[$i]);
-                $img = ($imgs_array[$i] !== null && !preg_match("/^\s*$/", $imgs_array[$i]))? "<img src='$imgs_array[$i]' width='65px;' alt='product picture'>":"";
+                $int = htmlentities($int);
+                $dec = htmlentities($dec);
+
+                $img = ($imgs_array[$i] !== null && !preg_match("/^\s*$/", $imgs_array[$i]))? htmlentities($imgs_array[$i]):"";
+                $img = "<img src='$img' width='65px;' alt='$alt'>";
                 $body .= "$titles_array[$i]<br>";
                 $body .= "Size: $size<br>";
                 $body .= "[$quantities_array[$i]x <strong>$int.$dec &euro;</strong>]<br>";
@@ -97,7 +105,7 @@ if ($login_allowed) {
             [$int, $dec] = str2int_dec($total);
             $body .= "Total: <strong>$int.$dec &euro;</strong>";
             $body .= "<hr>";
-            $body .= "Address: $address";
+            $body .= "Address: ${${htmlentities($address)}}";
             send_mail([$user["Users.email"]], $subject, $body);
 
             if (!$conn->close()) {

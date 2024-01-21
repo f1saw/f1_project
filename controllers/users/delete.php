@@ -7,6 +7,10 @@ require_once("controllers/auth/auth.php");
 require_once("DB/DB.php");
 require_once("utility/utility_func.php");
 require_once("utility/msg_error.php");
+require_once ("utility/aws.php");
+
+const SOURCE = "\controllers\users\delete.php";
+const REDIRECT = "/f1_project/views/private/users/all.php";
 
 [$login_allowed, $user] = check_cookie();
 if (!check_admin_auth($user)) {
@@ -28,24 +32,30 @@ if($_SESSION["id"] == $_GET["id"]) {
     exit;
 }
 
-$conn = DB::connect("\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
 
-// TODO: check_user_role() equivale a check_admin_auth() ?
-$check_role = check_user_role($conn,
-    [$_GET["id"]],
-    "\controllers\users\delete.php",
-    "/f1_project/controllers/users/delete.php");
-
+/* Retrieve role and image url */
+$conn = DB::connect(SOURCE, REDIRECT);
+$row = DB::get_record_by_field($conn,
+    "SELECT role, img_url FROM Users WHERE id = ?;",
+    ["i"],
+    [intval($_GET["id"])],
+    SOURCE,
+    REDIRECT)[0];
 if (!$conn->close()) {
-    error("500", "conn_close()", "\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
+    error("-1", "conn->close", SOURCE, REDIRECT);
     exit;
 }
-
-if($check_role){
-    msg_err_user_delete("You cannot delete an administrator.");
+$role = $row["role"];
+$image = ($row["img_url"] != "")? $row["img_url"]:-1;
+if ($row["role"] == 1) {
+    error("-1", "You cannot delete an Administrator.", SOURCE, REDIRECT);
     exit;
 }
+if (preg_match("#^http://f1-saw.s3.eu-central-1.amazonaws.com/*#", $row["img_url"])) {
+    aws_delete_img($row["img_url"]);
+}
 
+/* DELETE User */
 $conn = DB::connect("\controllers\users\delete.php", "/f1_project/views/private/users/all.php");
 DB::p_stmt_no_select($conn,
     "DELETE FROM Users WHERE id = ?;",

@@ -1,5 +1,5 @@
 <?php
-function err_msg_alert($function = null) : void{
+function err_msg_alert($function = null) : void {
     if (isset($_SESSION["err"]) && $_SESSION["err"]) { ?>
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mt-4 col-12" role="alert">
             <span class="material-symbols-outlined text-danger">warning</span>

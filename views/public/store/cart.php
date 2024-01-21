@@ -42,6 +42,7 @@ require_once ("DB/DB.php");
     <?php succ_msg_alert(); ?>
     <?php err_msg_alert(); ?>
 
+    <!-- Actual Cart visualization -->
     <main class="container-fluid mt-0 mt-lg-5">
 
         <div class="text-light">
@@ -108,8 +109,7 @@ require_once ("DB/DB.php");
         </div>
 
     </main>
-</body>
-
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/cart.js"></script>
+</body>
 </html>
