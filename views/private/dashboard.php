@@ -6,6 +6,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once ("DB/DB.php");
+require_once ("views/partials/alert.php");
 
 [$login_allowed, $user] = check_cookie();
 if(!check_user_auth($user)){
@@ -31,6 +32,8 @@ if(!check_user_auth($user)){
     <div class="container-fluid">
         <?php include ("views/partials/navbar.php"); ?>
         <main>
+            <?php err_msg_alert(); ?>
+            <?php succ_msg_alert(); ?>
             <div class="flex-container">
                 <div class="flex-slide profile">
                     <div class="flex-title flex-title-profile">Profile</div>

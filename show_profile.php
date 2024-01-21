@@ -42,6 +42,8 @@ if (check_user_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
         $element = select_user($id);
         unset($id);
+        //echo $_SESSION['redirection'];
+        //exit;
     }
     else{
         $element = select_user(null);

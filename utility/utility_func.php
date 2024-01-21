@@ -17,7 +17,9 @@ function check_user_role($conn, $params, $source = "", $redirect_error = "") : b
 
 // Questa funzione ha lo scopo di estrarre le informazioni dell'utente che si decide di visualizzare
 // dalla dashboard. Se nessun utente è stato selezionato vengono ritornate le info dell'utente collegato
-function select_user($id) : array{
+function select_user($id) : array {
+    unset($_SESSION['redirection']);
+    //exit;
     if($id == null) {
         // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
         // ritono sul profilo e non nella table

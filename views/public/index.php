@@ -6,6 +6,7 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once ("controllers/news/news.php");
 require_once ("views/partials/public/news_cards.php");
 require_once("controllers/auth/auth.php");
+require_once ("views/partials/alert.php");
 
 const COL_CARD = "col-12";
 
@@ -34,6 +35,9 @@ $json_cards_data = json_decode($json, true);
     <?php include ("views/partials/navbar.php");?>
 
     <main>
+        <?php err_msg_alert(); ?>
+        <?php succ_msg_alert(); ?>
+
         <!-- Showcase -->
         <div id="Indicators" class="carousel slide " data-bs-ride="carousel">
             <div class="carousel-indicators">

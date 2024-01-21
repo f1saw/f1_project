@@ -62,7 +62,7 @@ if (check_user_auth($user)) {
                             <label for="email" class="form-label"><strong>EMAIL</strong></label><br>
                             <div class="input-group mb-2">
                                 <span class="input-group-text material-symbols-outlined text-dark" id="email-addon">mail</span>
-                                <input type="email" id="email" class="form-control" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' placeholder="name@example.com" aria-describedby="email-addon" required>
+                                <input type="email" id="email" class="form-control" name="email"  placeholder="name@example.com" aria-describedby="email-addon" required>
                             </div>
                             <div id="input-info-email" class="d-none d-flex gap-2 mt-1 py-1">
                                 <span class="material-symbols-outlined"></span>

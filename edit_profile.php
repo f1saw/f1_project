@@ -47,6 +47,9 @@ if (check_user_auth($user)) {
     else{
         $element = select_user(null);
     }
+    $_SESSION['redirection'] = "/f1_project/show_profile.php?id=" . $element['id'];
+    //echo $_SESSION['redirection'];
+   // exit;
     if($element != null) {
     ?>
 
@@ -97,7 +100,7 @@ if (check_user_auth($user)) {
                                     <label for="firstname" class="form-label"><strong class="text-red">Firstname</strong></label><br>
                                 </span>
                                         <div class="input-group">
-                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" placeholder="<?php echo htmlentities($element["first_name"]); ?>">
+                                            <input type="text" id="firstname" name="firstname" class="form-control text-box" value="<?php echo htmlentities($element["first_name"]); ?>">
                                         </div>
                                         <div id="input-info-firstname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -111,7 +114,7 @@ if (check_user_auth($user)) {
                                     <label for="lastname" class="form-label"><strong class="text-red">Lastname</strong></label><br>
                                 </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" placeholder="<?php echo $element["last_name"]; ?>">
+                                            <input type="text" id="lastname" name="lastname" class="form-control text-box" value="<?php echo htmlentities($element["last_name"]); ?>">
                                         </div>
                                         <div id="input-info-lastname" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -129,7 +132,8 @@ if (check_user_auth($user)) {
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){ ?>
                                             <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
                                         <?php } else {?>
-                                            <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo htmlentities($element["email"]); ?>" >
+                                            <input type="email" id="email" name="email"  class="form-control text-box" value="<?php echo htmlentities($element["email"]); ?>" >
+                                            <input type="hidden" id="original-email" value="<?php echo htmlentities($element["email"]); ?>">
                                         <?php } ?>
                                     </div>
                                     <div class="text-box d-flex gap-2 mt-1 py-1">
@@ -152,20 +156,20 @@ if (check_user_auth($user)) {
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                             <label class="form-control text-box"><?php ($element["date_of_birth"] != null)? print $element["date_of_birth"]: print "No element"; ?></label>
                                         <?php } else {?>
-                                            <input type="date" id="edit_date_of_birth" name="edit_date_of_birth" class="form-control text-box" >
+                                            <input type="date" id="edit_date_of_birth" name="edit_date_of_birth" class="form-control text-box" value="<?php echo htmlentities($element["date_of_birth"]); ?>">
                                         <?php } ?>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                            <span class="d-flex justify-content-center">
-                                <label for="edit_news" class="form-label"><strong class="text-red">Newsletter</strong></label><br>
-                            </span>
+                                    <span class="d-flex justify-content-center">
+                                        <label for="edit_news" class="form-label"><strong class="text-red">Newsletter</strong></label><br>
+                                    </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]) { ?>
                                             <label class="form-control text-box"><?php ($element["newsletter"] != null)? print $element["newsletter"]: print "No element"; ?></label>
                                         <?php } else {?>
-                                            <input type="number" id="edit_news" name="edit_news" class="form-control text-box" placeholder="Active: 1  Inactive: 0">
+                                            <input type="number" id="edit_news" name="edit_news" class="form-control text-box" placeholder="Active: 1  Inactive: 0" value="<?php echo htmlentities($element["newsletter"]); ?>">
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -252,7 +256,7 @@ if (check_user_auth($user)) {
                                             <label for="img_url" class="form-label"><strong class="text-red">Url img</strong></label><br>
                                         </span>
                                         <div class="input-group d-flex text-center">
-                                            <input type="text" id="img_url" name="edit_img" class="form-control text-box" placeholder="<?php echo htmlentities($element["img_url"]); ?>">
+                                            <input type="text" id="img_url" name="edit_img" class="form-control text-box" value="<?php echo htmlentities($element["img_url"]); ?>">
                                         </div>
                                         <div id="input-info-img_url" class="d-none text-box d-flex gap-2 mt-1 py-1">
                                             <span class="material-symbols-outlined"></span>
@@ -290,7 +294,7 @@ if (check_user_auth($user)) {
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
-                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" placeholder="<?php echo htmlentities($element["role"]); ?>">
+                                            <input type="number" id="edit_role" name="edit_role" class="form-control text-box" value="<?php echo htmlentities($element["role"]); ?>">
                                         <?php } else{ ?>
                                             <label class="form-control text-box"> <?php ($_SESSION["role"] == 1)? print "Admin": print "User"; ?> </label>
                                         <?php } ?>

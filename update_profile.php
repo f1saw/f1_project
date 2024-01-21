@@ -13,6 +13,7 @@ const MAX_NUMBER_FILES = 1;
 
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
+
     set_session($user);
 
     $post_name = ["firstname", "lastname", "email", "edit_date_of_birth", "pass",
@@ -150,7 +151,8 @@ if (check_user_auth($user)) {
 
 
 
-    if(isset($_POST[$post_name[$e_email]])){
+    // NOT required. dbms will do it
+    /*if(isset($_POST[$post_name[$e_email]])){
         $conn = DB::connect("\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
         $check = DB::get_record_by_field(
             $conn,
@@ -167,12 +169,16 @@ if (check_user_auth($user)) {
             error("500", "conn_close()", "\controllers\users\\update_profile.php", "/f1_project/views/private/users/all.php");
             exit;
         }
-    }
+    }*/
+
+    echo "a";
+
 
     if (!isset($_POST["Button_id"])) {
         $_POST["Button_id"] = $_SESSION["id"];
     }
     for($i=0; $i < 8; ++$i) {
+        echo "b";
         if (isset($_POST[$post_name[$i]]) && isset($_POST['Button_id'])) {
             if($_POST[$post_name[$i]] == "") {
                 continue;
@@ -193,17 +199,24 @@ if (check_user_auth($user)) {
             }
         }
     }
+    echo "c";
+
     if (!isset($_SESSION["err"]) || $_SESSION["err"] === 0) {
         $_SESSION["success"] = 1;
         $_SESSION["success_msg"] = "Update completed successfully.";
     }
+    echo "d";
     if(isset($_SESSION['redirection'])){
+        //echo $_SESSION["redirection"];
+        //exit;
         header("Location: {$_SESSION['redirection']}");
         unset($_SESSION['redirection']);
         exit;
     }
 
+    echo "e";
     header("location: /f1_project/views/private/users/all.php");
+    exit;
 }
 else{
     $_SESSION['redirection'] = "/f1_project/update_profile.php?id={${${$_POST['Button_id']??''}}}";
