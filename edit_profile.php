@@ -94,7 +94,7 @@ if (check_user_auth($user)) {
                                             <label class="form-control text-box"><?php echo htmlentities($element["email"]); ?></label>
                                             <input type="hidden" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } else {?>
-                                            <input type="email" id="email" name="email"  class="form-control text-box" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
+                                            <input type="email" id="email" name="email"  class="form-control text-box rounded" placeholder="name@example.com" value="<?php echo htmlentities($element["email"]); ?>" required>
                                         <?php } ?>
                                         <input type="hidden" id="original-email" value="<?php echo htmlentities($element["email"]); ?>" required>
 
@@ -207,7 +207,7 @@ if (check_user_auth($user)) {
                                 <div class="row mb-3 d-none col-9" id="image-local-div">
                                     <div class="col-12">
                                         <span class="d-flex justify-content-center">
-                                            <label for="image-local" class="form-label"><strong class="text-red">UPLOAD IMAGE</strong></label><br>
+                                            <label for="image-local" class="form-label"><strong class="text-red">Upload image</strong></label><br>
                                         </span>
                                         <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="image-local" name="image-local">
 
