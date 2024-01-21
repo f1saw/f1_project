@@ -23,7 +23,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/news.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
 
     <?php include("views/partials/head.php"); ?>
 </head>

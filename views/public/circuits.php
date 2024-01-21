@@ -23,7 +23,7 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/news.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
 
     <?php include("views/partials/head.php"); ?>
 </head>
@@ -74,6 +74,14 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
                 })
                 .catch(err => console.log(err))
         }
+
+        function responsive(id) {
+
+            if (window.screen.width < 576) {
+                $(`#responsive${id}`).removeClass('responsive');
+                $(`#img-responsive${id}`).removeClass('img-responsive');
+            }
+        }
     </script>
 
     <main>
@@ -82,33 +90,33 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <button type="button" onclick="statistics()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span style="font-size: 20px">2023 Statistics</span>
+                    <button type="button" id="statistics" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span id="left_element" class="left_element">2024 Statistics</span>
                 </span>
             </div>
 
-            <div class="title text-light">
-                <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    2024 Calendar
-                </span>
+            <div class="text-light margin h2 d-flex justify-content-start align-items-center">
+                <span class="central_element">2024 Calendar</span>
             </div>
 
             <div class="title text-light">
-                <span class="text-light h2 d-flex justify-content-start align-items-center"">
-                <span style="font-size: 20px">2024 Drivers</span>
-                <button type="button" onclick="drivers()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
+                <span class="text-light h2 d-flex justify-content-end align-items-center">
+                    <span class="right_element">2023 Drivers</span>
+                    <button type="button" id="drivers" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>
+
         </div>
 
         <div class="row">
+            <?php $i = 0; ?>
             <?php foreach ($circuits as $circuit) { ?>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch py-3">
                     <div class="card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
-                        <div class="card-img">
-                            <img style="height: 200px; width: 350px; object-fit: cover; " src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top" alt="...">
+                        <div id="responsive<?php echo $i; ?>" class="card-img responsive">
+                            <img id="img-responsive<?php echo $i; ?>" src="<?php echo htmlentities($circuit->img_url); ?>" class="card-img-top img-responsive" alt="...">
                         </div>
-                        <div class="card-body d-flex align-items-end">
+                        <div style="max-width: 350px" class="card-body d-flex align-items-end">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between card-title">
                                     <h6 class="text-danger"><?php echo htmlentities($circuit->gp_name); ?></h6>
@@ -139,12 +147,20 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
                     </div>
                 </div>
                 <script>
+                    responsive(<?php echo $i; ?>)
                     get_weather("<?php echo $circuit->circuit_place; ?>");
                 </script>
+                <?php ++$i; ?>
             <?php } ?>
         </div>
     </main>
 </div>
 <script src="/f1_project/assets/js/navigate.js"></script>
+<script>
+    const x = document.getElementById("left_element")
+    if (window.screen.width < 468){
+        x.innerHTML = "2024 stat.";
+    }
+</script>
 </body>
 </html>

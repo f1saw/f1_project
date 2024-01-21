@@ -22,15 +22,6 @@ require_once("DB/DB.php");
     <link rel="stylesheet" href="/f1_project/assets/css/private/profile_style.css">
 </head>
 
-<?php if(isset($_SESSION["err"]) && $_SESSION["err"] || isset($_SESSION["success"]) && $_SESSION["success"]){ ?>
-<style>
-    .container-element{
-        height: 550px;
-        top: 55px;
-    }
-</style>
-<?php } ?>
-
 <body class="bg-dark">
 
 <?php
@@ -48,7 +39,7 @@ if (check_user_auth($user)) {
         $element = select_user(null);
     }
     if($element != null) {
-    ?>
+        ?>
 
         <?php
         if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
@@ -82,7 +73,7 @@ if (check_user_auth($user)) {
         <div class="container-fluid">
             <?php include("views/partials/navbar.php"); ?>
             <main>
-                <div id="bg-profile" class="flex-container d-flex justify-content-center">
+                <div id="bg-profile" class="flex-container d-flex justify-content-center ">
                     <form id="profile-data" class="container-element" enctype="multipart/form-data" method="POST" action="/f1_project/update_profile.php/?my_profile=<?php (isset($_GET["my_profile"]) && $_GET["my_profile"] == 1)?print 1: print 0 ?>">
                         <div id="page1">
                             <div class="d-flex justify-content-center">
@@ -132,7 +123,9 @@ if (check_user_auth($user)) {
                                             <input type="text" id="email" name="email" pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' class="form-control text-box" placeholder="<?php echo htmlentities($element["email"]); ?>" >
                                         <?php } ?>
                                     </div>
-                                    <div class="text-box d-flex gap-2 mt-1 py-1">
+
+                                    <!--TODO: messo la classe d-none perchè creava problemi nella visualizzazione -> si può eliminare?-->
+                                    <div class="d-none text-box d-flex gap-2 mt-1 py-1">
                                         <span id="status_symbol" style="display: none" class="material-symbols-outlined text-danger">warning</span>
                                         <span id="status" class="text-danger"></span>
                                     </div>
@@ -176,7 +169,7 @@ if (check_user_auth($user)) {
                                 <button type="button" name="other_info_back" style="border: unset" class="navigate-left navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_left</span></button>
 
                                 <button type="submit" id="btn-submit" name="Button_id" value="<?php echo htmlentities($_GET["id"]); ?>" class="btn-submit btn btn-danger col-6 col-sm-6 col-md-5 d-flex align-items-center justify-content-center">Confirm</button>
-                              
+
                                 <button type="button" name="other_info_next" onclick="next_page()" style="border: unset" class="navigate-right navigate btn btn-outline-light col-2 col-sm-2 col-md-1 d-flex justify-content-center"><span class="material-symbols-outlined">chevron_right</span></button>
                             </div>
                         </div>
@@ -228,13 +221,13 @@ if (check_user_auth($user)) {
 
 
 
-                            <div class="row mb-3 d-flex align-items-center">
+                            <div id="upload-img" class="row mb-3 d-flex justify-content-center align-items-center">
 
                                 <!-- LOCAL UPLOAD IMAGE -->
                                 <div class="row mb-3 d-none col-9" id="image-local-div">
                                     <div class="col-12">
                                         <span class="d-flex justify-content-center">
-                                            <label for="image-local" class="form-label"><strong class="text-danger">UPLOAD IMAGE</strong></label><br>
+                                            <label for="image-local" class="form-label"><strong class="text-red">UPLOAD IMAGE</strong></label><br>
                                         </span>
                                         <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="image-local" name="image-local">
 
@@ -261,19 +254,11 @@ if (check_user_auth($user)) {
                                     </div>
                                 </div>
 
-                                <div class="col-3">
+                                <div id="checkbox_div" class="col-3 d-flex justify-content-center">
                                     <label class="checkbox-inline" for="choose-file-upload"></label>
                                     <input type="checkbox" id="choose-file-upload" data-toggle="toggle" data-on="Local" data-off="URL" data-onstyle="danger" data-offstyle="border border-danger">
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
 
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6">
@@ -313,8 +298,8 @@ if (check_user_auth($user)) {
             </main>
         </div>
 
-        <script src="/f1_project/assets/js/validators/user.js"></script>
         <script src="/f1_project/assets/js/users/edit.js"></script>
+        <script src="/f1_project/assets/js/validators/user.js"></script>
         <script src="/f1_project/assets/js/image_upload.js"></script>
 
         <?php

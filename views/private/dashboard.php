@@ -34,20 +34,20 @@ if(!check_user_auth($user)){
             <div class="flex-container">
                 <div class="flex-slide profile">
                     <div class="flex-title flex-title-profile">Profile</div>
-                    <div onclick="goToProfile()" class="flex-about"><p class="text-center">Click here to view or edit your profile</p></div>
+                    <div id="goProfile" class="flex-about"><p class="text-center">Click here to view or edit your profile</p></div>
                 </div>
 
                 <?php if (check_admin_auth($user)) { ?>
                     <div class="flex-slide table-users">
                         <div class="flex-title">Table</div>
-                        <div onclick="goToTable()" class="flex-about mb-2"><p class="text-center">Click here to view all users</p></div>
-                        <div onclick="goToStoreManagement()" class="flex-about mt-2"><p class="text-center">Click here to manage the store</p></div>
+                        <div id="goTable" class="flex-about mb-2"><p class="text-center">Click here to view all users</p></div>
+                        <div id="GoStoreMan" class="flex-about mt-2"><p class="text-center">Click here to manage the store</p></div>
                     </div>
                 <?php } ?>
 
                 <div class="flex-slide product">
                     <div class="flex-title flex-title-product">Orders</div>
-                    <div onclick="goToOrders()" class="flex-about"><p class="text-center">Click here to view your orders</p></div>
+                    <div id="goOrders" class="flex-about"><p class="text-center">Click here to view your orders</p></div>
                 </div>
             </div>
         </main>

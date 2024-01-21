@@ -24,9 +24,11 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="/f1_project/assets/css/style.css">
-    <link rel="stylesheet" href="/f1_project/assets/css/news.css">
+    <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
     <?php include("views/partials/head.php"); ?>
 </head>
+
+<script src="/f1_project/assets/js/info_drivers.js"></script>
 
 <body class="bg-dark">
 <div class="container-fluid">
@@ -40,30 +42,29 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    <button type="button" onclick="circuits()" style="border: unset; padding-left: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span style="font-size: 20px">2024 Circuits</span>
+                    <button type="button" id="circuits" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <span class="left_element">2024 Circuits</span>
                 </span>
             </div>
 
-            <div class="title text-light">
-                <span class="text-light h2 d-flex justify-content-start align-items-center">
-                    2024 Drivers
-                </span>
+            <div class="text-light margin h2 d-flex justify-content-start align-items-center">
+                <span class="central_element">2024 Drivers</span>
             </div>
 
             <div class="title text-light">
-                    <span class="text-light h2 d-flex justify-content-start align-items-center"">
-                        <span style="font-size: 20px">2024 Teams</span>
-                        <button type="button" onclick="teams()" style="border: unset; padding-right: 20px" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red"><span class="material-symbols-outlined">chevron_right</span></button>
-                    </span>
+                <span class="text-light h2 d-flex justify-content-end align-items-center">
+                    <span class="right_element">2023 Teams</span>
+                    <button type="button" id="teams" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
+                </span>
             </div>
+
         </div>
         <?php echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD); ?>
     </main>
 </div>
 
 <script src="/f1_project/assets/js/navigate.js"></script>
-<script src="/f1_project/assets/js/info_drivers.js"></script>
+
 </body>
 </html>
 

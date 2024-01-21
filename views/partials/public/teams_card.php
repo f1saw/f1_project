@@ -23,7 +23,7 @@
                                     </li>
                                 </ul>
                                 <hr>
-                                <p><strong>Logo: </strong><img style="position: relative; left:140px; height: 40px; width: 40px" src="<?php echo $img_list[$j-1] ?>" alt="..."></p>
+                                <p class="d-flex justify-content-between"><strong>Logo: </strong><img style="height: 40px; width: 40px" src="<?php echo $img_list[$j-1] ?>" alt="..."></p>
                                 <?php ++$j; ?>
                                 <hr>
                             </div>
