@@ -43,45 +43,11 @@ if (check_user_auth($user)) {
         (isset($_GET["id"]) && $_GET["id"] != null) ? $id = $_GET["id"] : $id = null;
         $element = select_user($id);
         unset($id);
-    }
-    else{
+    } else {
         $element = select_user(null);
     }
     $_SESSION['redirection'] = "/f1_project/show_profile.php?id=" . $element['id'];
-    //echo $_SESSION['redirection'];
-   // exit;
-    if($element != null) {
-    ?>
-
-        <?php
-        if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-            error("500", "set_include_path()");
-        if(session_status() == PHP_SESSION_NONE) session_start();
-
-        require_once("controllers/auth/auth.php");
-
-        [$login_allowed, $user] = check_cookie();
-        if(!check_user_auth($user)){
-            $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_show_profile.php";
-            error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
-            exit;
-        }
-        ?>
-
-        <?php
-        if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
-            error("500", "set_include_path()");
-        if(session_status() == PHP_SESSION_NONE) session_start();
-
-        require_once("controllers/auth/auth.php");
-
-        [$login_allowed, $user] = check_cookie();
-        if(!check_user_auth($user)){
-            $_SESSION['redirection'] = "/f1_project/views/private/partials/user_detail_edit_profile.php";
-            error("401", "not_authorized", "dashboard.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
-            exit;
-        }
-        ?>
+    if($element != null) { ?>
         <div class="container-fluid">
             <?php include("views/partials/navbar.php"); ?>
             <main>
@@ -332,18 +298,11 @@ if (check_user_auth($user)) {
         <script src="/f1_project/assets/js/users/edit.js"></script>
         <script src="/f1_project/assets/js/image_upload.js"></script>
 
-        <?php
-        //if (isset($_GET["edit"]) && $_GET["edit"] == 1) {
-        //  include("views/private/partials/user_detail_edit_profile.php");
-        //} else {
-        //  include("views/private/partials/user_detail_show_profile.php");
-        //}
-    }
-    else{
+<?php
+    } else{
         error("500", "User is NULL", "\\views\users\show_profile.php", "/f1_project/views/private/dashboard.php");
     }
-}
-else{
+} else{
     $_SESSION['redirection'] = "/f1_project/show_profile.php?id={${${$_GET['id']??''}}}";
     error("401", "not_authorized", "\\views\users\show_profile.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
     exit;
