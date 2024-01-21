@@ -67,7 +67,6 @@ if (check_user_auth($user)) {
                             <span class="material-symbols-outlined"></span>
                             <span class=""></span>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -90,6 +89,7 @@ if (check_user_auth($user)) {
                             Remember me
                             <span class="material-symbols-outlined" style="color: aqua;">help</span>
                         </label>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 d-flex flex-row gap-1 hover-red text-box">

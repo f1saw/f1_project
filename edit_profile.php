@@ -47,10 +47,10 @@ if (check_user_auth($user)) {
                         <div id="page1">
                             <div class="d-flex justify-content-center">
                                 <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
-                                    <img id="photo_profile" class="rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
+                                    <img class="photo_profile rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
                                          alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
                                 <?php } else { ?>
-                                    <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
+                                    <img class="photo_profile rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
                                 <?php } ?>
                             </div>
                             <br>
@@ -153,10 +153,10 @@ if (check_user_auth($user)) {
                         <div id="page2" class="d-none">
                             <div class="d-flex justify-content-center">
                                 <?php if ($element["img_url"] != null && $element["img_url"] != "") { ?>
-                                    <img id="photo_profile" class="rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
+                                    <img class="photo_profile rounded-circle" src="<?php echo htmlentities($element['img_url']); ?>"
                                          alt="<?php echo ($element["first_name"]? htmlentities($element["first_name"]):"") . " Profile picture"; ?>">
                                 <?php } else { ?>
-                                    <img id="photo_profile" class="rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
+                                    <img class="photo_profile rounded-circle" src="/f1_project/assets/images/default_img_profile.jpeg" alt="Standard profile picture. Abstract design of the upper part of a human body with a question mark inside the head.">
                                 <?php }?>
                             </div>
                             <br>
@@ -252,7 +252,7 @@ if (check_user_auth($user)) {
                                 </div>
                                 <div class="col 12 col-md-6">
                             <span class="d-flex justify-content-center">
-                                <label <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?> for="edit_role" <?php } ?> class="form-label"><strong class=" text-red">role</strong></label><br>
+                                <label <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?> for="edit_role" <?php } ?> class="form-label"><strong class=" text-red">Role</strong></label><br>
                             </span>
                                     <div class="input-group d-flex text-center">
                                         <?php if($_SESSION["role"] == 1 && $_SESSION["id"] != $element["id"]){?>
