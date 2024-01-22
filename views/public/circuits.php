@@ -24,6 +24,11 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
     <link rel="stylesheet" href="/f1_project/assets/css/info_cards.css">
 
     <?php include("views/partials/head.php"); ?>
+
+    <script>
+        const API_KEY = "<?php echo $ini["API_KEY"]; ?>";
+    </script>
+    <script src="/f1_project/assets/js/calendar.js"></script>
 </head>
 
 <body class="bg-dark">
@@ -35,16 +40,6 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
         <main>
             <br>
             <div class="d-flex justify-content-between align-items-center">
-
-      <script>
-        function responsive(id) {
-            if (window.screen.width < 576) {
-                $(`#responsive${id}`).removeClass('responsive');
-                $(`#img-responsive${id}`).removeClass('img-responsive');
-            }
-        }
-    </script>
-
               <div class="title text-light">
                   <span class="text-light h2 d-flex justify-content-start align-items-center">
                       <button type="button" id="statistics" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
@@ -121,15 +116,5 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
     </main>
 </div>
 <script src="/f1_project/assets/js/navigate.js"></script>
-<script>
-    const x = document.getElementById("left_element")
-    if (window.screen.width < 468){
-        x.innerHTML = "2024 stat.";
-    }
-</script>
-<script>
-    const API_KEY = "<?php echo $ini["API_KEY"]; ?>";
-</script>
-<script src="/f1_project/assets/js/calendar.js"></script>
 </body>
 </html>

@@ -5,6 +5,11 @@ $(() => {
         get_weather(location.innerText)
             .then(r => {})
     })
+
+    const x = document.getElementById("left_element")
+    if (window.screen.width < 468){
+        x.innerHTML = "2023 stat.";
+    }
 })
 
 /**
@@ -50,4 +55,11 @@ const get_weather = async city => {
                 .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
+}
+
+function responsive(id) {
+    if (window.screen.width < 576) {
+        $(`#responsive${id}`).removeClass('responsive');
+        $(`#img-responsive${id}`).removeClass('img-responsive');
+    }
 }
