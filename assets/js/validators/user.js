@@ -130,7 +130,6 @@ const check_all = validators => {
     }
 }
 
-
 /**
  * Add "input" event listener on each input field
  */
@@ -196,4 +195,3 @@ function check_email() {
         }
     })
 }
-

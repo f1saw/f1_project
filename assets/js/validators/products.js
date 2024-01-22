@@ -42,7 +42,7 @@ const validateMaxLength = (id, value, params) => {
     if (/^alt_/.test(id)) {
         const other = id === validators_products["alts"].ids[0]? 1:0;
         value += $(`#${validators_products["alts"].ids[other]}`).val();
-        console.log(value.length <= params[0])
+        // console.log(value.length <= params[0])
     }
     // test required to handle image urls length
     if (/^img_url_/.test(id)) {

@@ -1,8 +1,7 @@
-let id = ['teams', 'circuits', 'drivers', 'statistics'];
+const id = ['teams', 'circuits', 'drivers', 'statistics'];
 for (let i=0; i<id.length; ++i){
     next_page(id[i]);
 }
-
 
 function next_page(id){
     $(`#${id}`).on("click", () => {

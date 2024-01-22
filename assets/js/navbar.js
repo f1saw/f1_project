@@ -68,7 +68,7 @@ const onConfirm = (event, size_param = null) => {
             }
         }
 
-        console.log(curr_cart)
+        // console.log(curr_cart)
         localStorage.setItem(`cart-${user_id}`, JSON.stringify(curr_cart))
 
         const len = items_cart(curr_cart);

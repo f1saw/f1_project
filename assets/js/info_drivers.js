@@ -4,7 +4,7 @@ function f1_scrape_info_drivers(id, url) {
         fetch(`http://localhost:63342/f1_project/controllers/drivers/info_drivers.php?url=${encodeURIComponent(url)}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data) {
                     const size = {width: 0, height: 0};
                     const div = document.getElementById('div' + id);
@@ -28,8 +28,8 @@ function f1_scrape_info_drivers(id, url) {
                     const info_html = `<div id="main_div" style="max-height: ${size.height}px; max-width: ${size.width}px;" class="card-body d-flex justify-content-center align-items-center">
                                 <div style="max-height: ${size.height}px; max-width: ${size.width}px;">
                                     <ul style="max-height: ${ul_size}px;">` +
-                        tmp
-                        + `</ul>
+                                tmp
+                                + `</ul>
                                 <hr id="hr${id}" style="position: absolute; top: ${hr_position_top}px; left: ${hr_position_left}px; width: ${hr_width}px">
                                 <div class="d-flex justify-content-center">
                                     <button id="button_id${id}" style="position: absolute; top: ${button_position}px;" type="button" class="btn card-link text-decoration-none d-flex justify-content-center">
@@ -43,9 +43,9 @@ function f1_scrape_info_drivers(id, url) {
                             </div>
                         </div>
                         <script>
-                        show_driver(${id});
-                        document.getElementById('div${id}').style.position = 'relative';
-                        document.getElementById('div${id}').style.height = '${size.height}px';
+                            show_driver(${id});
+                            document.getElementById('div${id}').style.position = 'relative';
+                            document.getElementById('div${id}').style.height = '${size.height}px';
                         </script>`
 
                     //console.log(info_html);
@@ -62,7 +62,6 @@ function f1_scrape_info_drivers(id, url) {
 window.addEventListener('orientationchange', () => {
     window.location.reload()
 })
-
 
 function show_driver(id) {
     $(`#button_id${id}`).on("click", () => {
