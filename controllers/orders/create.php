@@ -11,7 +11,7 @@ require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
-if ($login_allowed) {
+if (check_user_auth($user)) {
 
     /* INPUT SET */
     if (isset($_POST["ids"]) && isset($_POST["titles"]) /* && isset($_POST["teams"]) */ && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"]) && isset($_POST["address"])) {
@@ -44,7 +44,6 @@ if ($login_allowed) {
             $prices_array = explode("\t", $prices);
             $sizes_array = explode("\t", $sizes);
             $imgs_array = explode("\t", $imgs);
-            $alts_array = explode("\t", $alts);
             $titles_array = explode("\t", $titles);
             // $teams_array = explode("\t", $teams);
 
@@ -65,7 +64,7 @@ if ($login_allowed) {
             DB::p_stmt_no_select($conn,
                 "INSERT INTO orders VALUES (?, ?, ?, ?, ?);",
                 ["s", "i", "s", "s", "i"],
-                [$order_id, $user["Users.id"], (new DateTime())->format('Y-m-d H:i:s'), $address, $total],
+                [$order_id, $user["Users.id"]??$_SESSION["id"], (new DateTime())->format('Y-m-d H:i:s'), $address, $total],
                 "\controller\orders\create.php",
                 "/f1_project/views/public/store/cart.php");
 
@@ -86,7 +85,6 @@ if ($login_allowed) {
             $body = "";
             for ($i = 0; $i < count($products_id_array) - 1; $i++) {
                 $titles_array[$i] = htmlentities($titles_array[$i]);
-                $alt = htmlentities(($alts_array[$i] && $alts_array[$i] !== "")? $alts_array[$i]:$titles_array[$i]);
                 $size = htmlentities(strtoupper($sizes_array[$i]));
                 $quantities_array[$i] = htmlentities($quantities_array[$i]);
                 [$int, $dec] = str2int_dec($prices_array[$i]);
@@ -94,7 +92,7 @@ if ($login_allowed) {
                 $dec = htmlentities($dec);
 
                 $img = ($imgs_array[$i] !== null && !preg_match("/^\s*$/", $imgs_array[$i]))? htmlentities($imgs_array[$i]):"";
-                $img = "<img src='$img' width='65px;' alt='$alt'>";
+                $img = "<img src='$img' width='65px;' alt='{${$titles_array[$i]}}'>";
                 $body .= "$titles_array[$i]<br>";
                 $body .= "Size: $size<br>";
                 $body .= "[$quantities_array[$i]x <strong>$int.$dec &euro;</strong>]<br>";
@@ -106,7 +104,7 @@ if ($login_allowed) {
             $body .= "Total: <strong>$int.$dec &euro;</strong>";
             $body .= "<hr>";
             $body .= "Address: ${${htmlentities($address)}}";
-            send_mail([$user["Users.email"]], $subject, $body);
+            send_mail([$user["Users.email"]??$_SESSION["email"]], $subject, $body);
 
             if (!$conn->close()) {
                 error("500", "conn_close()", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
