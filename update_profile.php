@@ -7,7 +7,6 @@ require_once("controllers/auth/auth.php");
 require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("utility/utility_func.php");
-require_once("utility/msg_error.php");
 require_once ("utility/aws.php");
 
 const SOURCE = "\controllers\users\\update_profile.php";

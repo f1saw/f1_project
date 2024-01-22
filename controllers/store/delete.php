@@ -6,7 +6,6 @@ if(session_status() == PHP_SESSION_NONE) session_start();
 require_once("controllers/auth/auth.php");
 require_once("DB/DB.php");
 require_once("utility/utility_func.php");
-require_once("utility/msg_error.php");
 require_once ("utility/aws.php");
 
 use Aws\S3\S3Client;
