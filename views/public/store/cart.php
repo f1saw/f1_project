@@ -72,7 +72,7 @@ require_once ("DB/DB.php");
         <div id="second-body" class="d-none">
             <hr class="rounded mt-5">
             <div class="row d-flex justify-content-between gap-3 mt-4">
-                <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-lg-5 mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start align-items-center gap-4">
+                <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-lg-5 mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start align-items-center gap-sm-2 gap-xxl-4">
 
                     <label for="ids"></label>
                     <input type="text" class="d-none" name="ids" id="ids" value="" >
@@ -96,7 +96,7 @@ require_once ("DB/DB.php");
                         <span class="text">Complete order</span>
                     </button>
 
-                    <div>
+                    <div class="pt-3 pt-sm-0">
                         <label for="address" class="form-label text-box"><strong>ADDRESS</strong></label><br>
                         <div class="input-group">
                             <span class="input-group-text material-symbols-outlined text-dark text-box" id="address-addon">home</span>
