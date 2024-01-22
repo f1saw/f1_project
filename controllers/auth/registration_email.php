@@ -8,10 +8,8 @@ require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 require_once("utility/utility_func.php");
 
-// TODO: sistemare parametri error
-
 [$login_allowed, $user] = check_cookie();
-if ($login_allowed) {
+if ($login_allowed || check_user_auth($user)) {
     error("-1", "Already registered.", "\auth\\registration_email.php", "/f1_project/views/private/dashboard.php");
     exit;
 }
