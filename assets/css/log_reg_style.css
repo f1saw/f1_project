@@ -43,7 +43,14 @@ main {
 @media screen and (max-height: 600px) {
     .container-element {
         height: 300px;
-        width: 80%;
+        width: 50%;
+    }
+}
+
+@media screen and (max-height: 600px) and (max-width: 500px){
+    .container-element {
+        height: 300px;
+        width: 100%;
     }
 }
 
