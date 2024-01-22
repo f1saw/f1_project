@@ -1,7 +1,7 @@
 [
   {
     "title": "Circuits",
-    "text": "In this section you can see <strong>all</strong> the characteristic F1 circuits.",
+    "text": "In this section you can see <strong>all</strong> the 2024 F1 circuits.",
     "img_url": "https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.png",
     "link": "/views/public/circuits.php",
     "alt": "Austin Circuit"
@@ -22,7 +22,7 @@
   },
   {
     "title": "Teams",
-    "text": "Discover the <strong>history</strong> of each Team",
+    "text": "Discover the <strong>Teams</strong> which will race in 2024",
     "img_url": "https://f1ntastic.com/wp-content/uploads/2022/03/2022-F1-Teams-Cover.jpg",
     "link": "/f1_project/views/public/teams.php",
     "alt": "Collage of all ten team cars. From top-left to bottom-right: Ferrari, Mercedes, McLaren, Red Bull, AlphaTauri, Alpine, Hass, Aston Martin, Alfa Romeo and Williams"
