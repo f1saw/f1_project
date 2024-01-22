@@ -23,11 +23,12 @@ if (check_admin_auth($user)) {
         $team_id = preg_replace('!\s+!', '', $_POST["team_id"]);
         $color = preg_replace("/\s+/", ";", strtolower($_POST["color"]??""));
         $size = preg_replace("/\s+/", ";", strtolower((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE ));
-        $img_url = [];
+        $img_url = ["", ""];
         $img_url[0] = $_POST["img_url_1"]? preg_replace('/\s+/', ' ', $_POST["img_url_1"]):"";
         $index = !($img_url[0] === "");
         $img_url[$index] = $_POST["img_url_2"]? preg_replace('/\s+/', ' ', $_POST["img_url_2"]):"";
 
+        $alts = ["", ""];
         $alts[0] = $_POST["alt_1"]? preg_replace('/\s+/', ' ', $_POST["alt_1"]):"";
         $index = !($alts[0] === "");
         $alts[$index] = $_POST["alt_2"]? preg_replace('/\s+/', ' ', $_POST["alt_2"]):"";
