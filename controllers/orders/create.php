@@ -103,7 +103,7 @@ if (check_user_auth($user)) {
             [$int, $dec] = str2int_dec($total);
             $body .= "Total: <strong>$int.$dec &euro;</strong>";
             $body .= "<hr>";
-            $body .= "Address: ${${htmlentities($address)}}";
+            $body .= "Address: $address";
             send_mail([$user["Users.email"]??$_SESSION["email"]], $subject, $body);
 
             if (!$conn->close()) {

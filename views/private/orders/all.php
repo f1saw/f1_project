@@ -28,7 +28,7 @@ $orders = (array)DB::get_record_by_field($conn,
            WHERE orders.user_id = ?
            ORDER BY orders.date DESC;",
     ["i"],
-    [$user["Users.id"]],
+    [$user["Users.id"]??$_SESSION["id"]],
     "\\views\private\orders\all.php",
     "/f1_project/views/private/dashboard.php");
 $num_orders = count($orders);
