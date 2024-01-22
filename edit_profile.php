@@ -25,7 +25,6 @@ require_once("DB/DB.php");
 <body class="bg-dark">
 
 <?php
-// TODO error_redirector, link ai css non funzionano, why??
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
@@ -100,7 +99,6 @@ if (check_user_auth($user)) {
 
                                     </div>
 
-                                    <!--TODO: messo la classe d-none perchè creava problemi nella visualizzazione -> si può eliminare?-->
                                     <div class="text-box d-flex gap-2">
                                         <span id="status_symbol" style="display: none" class="material-symbols-outlined text-danger">warning</span>
                                         <span id="status" class="text-danger"></span>

@@ -97,12 +97,12 @@ const onConfirm = (event, size_param = null) => {
         } else {
             if (pushed) {
                 // The previous page was the store page (the size has been passed as a function parameter)
-                $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-success").removeClass("btn-danger");
-                $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Added");
+                $(`#span-add-it-${event.target.dataset.id} span`).addClass("btn-success").removeClass("btn-danger");
+                $(`#span-add-it-${event.target.dataset.id} span :last-child`).text("Added");
 
                 setTimeout(() => {
-                    $(`#span-add-it-${event.target.dataset.id} button`).addClass("btn-danger").removeClass("btn-success");
-                    $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Add it!");
+                    $(`#span-add-it-${event.target.dataset.id} span`).addClass("btn-danger").removeClass("btn-success");
+                    $(`#span-add-it-${event.target.dataset.id} span :last-child`).text("Add it!");
                 }, 2000)
             }
         }
@@ -120,10 +120,10 @@ const onConfirm = (event, size_param = null) => {
             }, 2000);
         } else {
             // The previous page was the store page (the size has been passed as a function parameter)
-            $(`#span-add-it-${event.target.dataset.id} button :last-child`).html("<strong>SIZE</strong>!");
+            $(`#span-add-it-${event.target.dataset.id} span :last-child`).html("<strong>SIZE</strong>!");
 
             setTimeout(() => {
-                $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Add it!");
+                $(`#span-add-it-${event.target.dataset.id} span :last-child`).text("Add it!");
             }, 2500)
         }
     }

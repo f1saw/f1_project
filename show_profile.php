@@ -24,7 +24,6 @@ require_once("DB/DB.php");
 <body class="bg-dark">
 
 <?php
-// TODO error_redirector, link ai css non funzionano, why??
 [$login_allowed, $user] = check_cookie();
 if (check_user_auth($user)) {
     set_session($user);
