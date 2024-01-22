@@ -48,7 +48,7 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
               </div>
 
               <div class="text-light margin h2 d-flex justify-content-start align-items-center">
-                  <span class="central_element">2024 Calendar</span>
+                  <span class="central_element">2024 Circuits</span>
               </div>
 
               <div class="title text-light">
