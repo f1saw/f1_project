@@ -1,28 +1,14 @@
 <?php
-//check_user_role() return true if user is admin, false otherwise
-function check_user_role($conn, $params, $source = "", $redirect_error = "") : bool {
-
-    $role = DB::get_record_by_field($conn,
-        "SELECT role FROM Users WHERE id = ?;",
-        ["i"],
-        $params,
-        $source,
-        $redirect_error)[0];
-
-    if($role["role"] == 1){
-        return true;
-    }
-    return false;
-}
-
-// Questa funzione ha lo scopo di estrarre le informazioni dell'utente che si decide di visualizzare
-// dalla dashboard. Se nessun utente è stato selezionato vengono ritornate le info dell'utente collegato
+/**
+ * This function retrieves the correct user information based on the provided ID.
+ * ID: null => the user to select is the one stored in $_SESSION
+ * ID: otherwise => querying the DB is required in order to collect the specified user information
+ * @param $id:
+ * @return array
+ */
 function select_user($id) : array {
     unset($_SESSION['redirection']);
-    //exit;
     if($id == null) {
-        // Setto la variabile di sessione cosi se modifico il profilo da apposita sezione
-        // ritono sul profilo e non nella table
         $_SESSION['redirection'] = "/f1_project/show_profile.php";
         $id = $_SESSION["id"];
     }
@@ -32,10 +18,10 @@ function select_user($id) : array {
         "SELECT * FROM Users WHERE id = ?;",
         ["i"],
         [$id],
-        "\show_profile.php",
+        "\utility\utility_func.php",
         "/f1_project/show_profile.php")[0];
     if (!$conn->close()) {
-        error("500", "conn_close()", "\show_profile.php", "/f1_project/views/private/users/all.php");
+        error("500", "conn_close()", "\utility\utility_func.php", "/f1_project/views/private/users/all.php");
         exit;
     }
     
@@ -94,7 +80,6 @@ function send_mail(array $recipients, string $subject, string $body, array $bcc 
     $mail->Subject = $subject;
     $mail->Body = $body;
 
-    // TODO: (to verify) Options required to avoid "SMTP Error: Could not connect to SMTP host. Failed to connect to server"
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
