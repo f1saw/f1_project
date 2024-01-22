@@ -117,7 +117,7 @@ main {
     }
 
     .profile {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/formula-1-british-gp-2021-race-2.jpg");
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/profile_768.jpg");
         background-size: cover;
         background-position: center center;
         background-attachment: fixed;
