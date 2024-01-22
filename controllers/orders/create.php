@@ -1,4 +1,3 @@
-<!-- TODO: LocalStorage.clear() -->
 <?php
 if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
     error("500", "set_include_path()");
@@ -16,7 +15,6 @@ if (check_user_auth($user)) {
     /* INPUT SET */
     if (isset($_POST["ids"]) && isset($_POST["titles"]) /* && isset($_POST["teams"]) */ && isset($_POST["quantities"]) &&  isset($_POST["imgs"]) && isset($_POST["prices"]) && isset($_POST["sizes"]) && isset($_POST["total"]) && isset($_POST["address"])) {
 
-        /* CLEANING INPUT */
         $ids = $_POST["ids"];
         $titles = $_POST["titles"];
         $teams = $_POST["teams"];
@@ -27,8 +25,7 @@ if (check_user_auth($user)) {
         $total = $_POST["total"];
         $address = preg_replace('/\s+/', ' ', $_POST["address"]);
 
-        // Check input values
-        if ($address == '' || $address == ' ') {
+        if (preg_match('/^\s*$/',$address)) {
             error("500", "Address is empty.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
             exit;
         }
@@ -104,7 +101,12 @@ if (check_user_auth($user)) {
             $body .= "Total: <strong>$int.$dec &euro;</strong>";
             $body .= "<hr>";
             $body .= "Address: $address";
-            send_mail([$user["Users.email"]??$_SESSION["email"]], $subject, $body);
+            $to = $user["Users.email"]??$_SESSION["email"];
+            if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+                error("-1", "EMAIL pattern NOT valid.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
+                exit;
+            }
+            send_mail([$to], $subject, $body);
 
             if (!$conn->close()) {
                 error("500", "conn_close()", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
@@ -118,7 +120,6 @@ if (check_user_auth($user)) {
         } catch (Exception $e) {
             error("500", "Exception: $e", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
         }
-
 
     } else {
         error("500", "Fields not provided.", "\controller\orders\create.php", "/f1_project/views/public/store/cart.php");
