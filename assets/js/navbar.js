@@ -48,6 +48,7 @@ const onConfirm = (event, size_param = null) => {
             // Product already in the cart
             // So only increasing by 1 the quantity is needed
             curr_cart[index].quantity++;
+            pushed = 1;
         } else {
             // Product should be pushed to the cart
             // Prevent from pushing undefined items in the cart
@@ -82,6 +83,10 @@ const onConfirm = (event, size_param = null) => {
                 // The previous page was the product page (the size has not been passed as a function parameter)
                 $("#select-info span:first-child").text("check").addClass("text-success").removeClass("text-danger");
                 $("#select-info span:nth-child(2)").text("Added successfully!").addClass("text-success").removeClass("text-danger");
+                setTimeout(() => {
+                    $("#select-info span:nth-child(2)").text("")
+                    $("#select-info span:first-child").text("")
+                }, 2000);
                 $("#select-info").removeClass("d-none");
                 $(".btn-add-cart :last-child").text("Added!");
 
@@ -109,6 +114,10 @@ const onConfirm = (event, size_param = null) => {
             $("#select-info span:first-child").text("warning").addClass("text-danger").removeClass("text-success");
             $("#select-info span:nth-child(2)").text("Please select a correct size!").addClass("text-danger").removeClass("text-success");
             $("#select-info").removeClass("d-none");
+            setTimeout(() => {
+                $("#select-info span:nth-child(2)").text("")
+                $("#select-info span:first-child").text("")
+            }, 2000);
         } else {
             // The previous page was the store page (the size has been passed as a function parameter)
             $(`#span-add-it-${event.target.dataset.id} button :last-child`).html("Select <strong>SIZE</strong>!");
