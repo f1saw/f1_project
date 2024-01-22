@@ -4,14 +4,15 @@ if (!set_include_path("{$_SERVER['DOCUMENT_ROOT']}"))
 if(session_status() == PHP_SESSION_NONE) session_start();
 
 require 'vendor/autoload.php';
-
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 
-const PREFIX_LENGTH = 5;
-
 $ini = parse_ini_file("config/keys.ini");
 
+/**
+ * Function used to retrieve configuration parameters from $ini file
+ * @return array: configuration parameters
+ */
 function config_aws_s3(): array {
     global $ini;
     return [$ini["aws_region"], $ini["aws_version"], $ini["aws_access_key"], $ini["aws_secret_key"], $ini["aws_bucket"]];
@@ -51,7 +52,6 @@ function aws_s3_upload($filename, $file_temp_src): array {
                     "key" => $access_key_id,
                     "secret" => $secret_access_key
                 ],
-                // TODO: scheme to change in 'https' when deploy to live server if it uses https
                 'scheme' => 'http'
             ]);
 
@@ -91,6 +91,11 @@ function aws_s3_upload($filename, $file_temp_src): array {
     return [$status, $statusMsg, $s3_file_link];
 }
 
+/**
+ * Function to delete an image from the AWS S3 bucket (the bucket is specified in the $ini file)
+ * @param $img: URL image to delete (e.g. http://f1-saw.s3.eu-central-1.amazonaws.com/filename.jpg)
+ * @return void
+ */
 function aws_delete_img($img): void {
     $img = explode("http://f1-saw.s3.eu-central-1.amazonaws.com/", $img)[1];
     [$region, $version, $access_key_id, $secret_access_key, $bucket] = config_aws_s3();
@@ -101,7 +106,6 @@ function aws_delete_img($img): void {
             "key" => $access_key_id,
             "secret" => $secret_access_key
         ],
-        // TODO: scheme to change in 'https' when deploy to live server if it uses https
         'scheme' => 'http'
     ]);
 

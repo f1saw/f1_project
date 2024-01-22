@@ -138,9 +138,6 @@ class DB {
      * @return mysqli_stmt
      */
     public static function p_stmt_bind_execute(mysqli $conn, string $query, array $type_params, array $params, string $source = "", string $redirect_error  = "", string $order_delete_id = null): mysqli_stmt {
-
-        // self::clean_input($conn, $params);
-
         $s_type_params = implode("", $type_params);
 
         if (!$stmt = $conn->prepare($query)) {
