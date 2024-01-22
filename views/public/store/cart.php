@@ -74,14 +74,22 @@ require_once ("DB/DB.php");
             <div class="row d-flex justify-content-between gap-3 mt-4">
                 <form action="/f1_project/controllers/orders/create.php" id="form-loading" method="POST" class="col-12 col-lg-5 mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start align-items-center gap-4">
 
-                    <input type="hidden" name="ids" id="ids" value="" required>
-                    <input type="hidden" name="titles" id="titles" value="" required>
-                    <input type="hidden" name="teams" id="teams" value="" required>
-                    <input type="hidden" name="imgs" id="imgs" value="" required>
-                    <input type="hidden" name="quantities" id="quantities" value="" required>
-                    <input type="hidden" name="prices" id="prices" value="" required>
-                    <input type="hidden" name="sizes" id="sizes" value="" required>
-                    <input type="hidden" name="total" id="total" value="" required>
+                    <label for="ids"></label>
+                    <input type="text" class="d-none" name="ids" id="ids" value="" >
+                    <label for="titles"></label>
+                    <input type="text" class="d-none" name="titles" id="titles" value="" >
+                    <label for="teams"></label>
+                    <input type="text" class="d-none" name="teams" id="teams" value="" >
+                    <label for="imgs"></label>
+                    <input type="text" class="d-none" name="imgs" id="imgs" value="" >
+                    <label for="quantities"></label>
+                    <input type="text" class="d-none" name="quantities" id="quantities" value="" >
+                    <label for="prices"></label>
+                    <input type="text" class="d-none" name="prices" id="prices" value="" >
+                    <label for="sizes"></label>
+                    <input type="text" class="d-none" name="sizes" id="sizes" value="" >
+                    <label for="total"></label>
+                    <input type="text" class="d-none" name="total" id="total" value="" >
 
                     <button type="submit" class="mx-auto mx-md-0 btn btn-warning d-flex gap-2 hover-yellow">
                         <span class="material-symbols-outlined">credit_card</span>
@@ -107,8 +115,8 @@ require_once ("DB/DB.php");
                 </label>
             </div>
         </div>
-
     </main>
+</div>
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/cart.js"></script>
 </body>

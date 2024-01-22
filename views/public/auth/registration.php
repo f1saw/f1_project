@@ -89,7 +89,7 @@ if (check_user_auth($user)) {
                         <div class="col-12 col-lg-6">
                             <label for="lastname" class="form-label text-box"><strong>LAST NAME</strong></label><br>
                             <div class="input-group">
-                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="firstname-addon">badge</span>
+                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="lastname-addon">badge</span>
                                 <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Your last name" required>
                             </div>
                             <div id="input-info-lastname" class="d-none d-flex gap-2 mt-1 py-1 text-box">
@@ -120,7 +120,7 @@ if (check_user_auth($user)) {
                         <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                             <label for="pass" class="form-label text-box"><strong>PASSWORD</strong></label><br>
                             <div class="input-group">
-                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
+                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="pass-addon">lock</span>
                                 <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
                             </div>
                             <div id="input-info-pass" class="d-none d-flex gap-2 mt-1 py-1 text-box">
@@ -131,7 +131,7 @@ if (check_user_auth($user)) {
                         <div class="col-12 col-lg-6">
                             <label for="pass-confirm" class="form-label text-box"><strong>REPEAT PASSWORD</strong></label><br>
                             <div class="input-group">
-                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="password-addon">lock</span>
+                                <span class="input-group-text material-symbols-outlined text-dark text-box" id="pass-confirm-addon">lock</span>
                                 <input type="password" class="form-control" id="pass-confirm" name="confirm" placeholder="Repeat password">
                             </div>
                             <div id="input-info-pass-confirm" class="d-none d-flex gap-2 mt-1 py-1 text-box">
