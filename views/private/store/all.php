@@ -102,6 +102,8 @@ if (!$conn->close()) {
                                         $alt = explode("\t", $product["Products.alt"]);
                                         if($img && $img[0] != '') { ?>
                                             <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[0]); ?>" alt="<?php echo htmlentities(($alt[0] !== "")?$alt[0]:$product["Products.title"]); ?>">
+                                        <?php } else { ?>
+                                            <span class='material-symbols-outlined'>close</span>
                                         <?php }
                                         if($img && $img[1] != '') { ?>
                                             <img style="width: 60px; height: 40px; object-fit: contain;" src="<?php echo htmlentities($img[1]); ?>" alt="<?php echo htmlentities(($alt[1] && $alt[1] !== "")?$alt[1]:$product["Products.title"]); ?>">
