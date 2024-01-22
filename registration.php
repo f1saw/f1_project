@@ -61,6 +61,17 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
         exit;
     }
     $hash_password = password_hash($password, PASSWORD_DEFAULT);
+    
+
+    /* CHECK INPUT LENGTHS */
+    // $input_array = [$id, $first_name, $last_name, $email, $password, $role, $date_of_birth, $cookie_id, $img_url, $newsletter$];
+    foreach ([null, $first_name, $last_name, $email, $hash_password, 0, $date_of_birth, null, null, $newsletter] as $index => $input) {
+        if (USERS_MAX_LENGTHS[$index] >= 0 && $input && strlen($input) > USERS_MAX_LENGTHS[$index]) {
+            $tmp = ucfirst(USERS_ARRAY[$index]);
+            error("500", "$tmp is TOO long.", "\controllers\auth\\registration.php", "/f1_project/views/public/auth/registration.php");
+            exit;
+        }
+    }
 
     /* DB */
     $conn = DB::connect("\controllers\auth\\registration.php", "/f1_project/views/public/auth/registration.php");

@@ -115,6 +115,7 @@ if ($role > -1) {
 
 /* IMAGE HANDLING */
 // No image urls provided, so "images-local" should be taken into account
+$s3_upload = 0;
 if ($img_url == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]["name"]) {
 
     // Make sure to look for empty file names and paths, the array might contain empty strings. Use array_filter() before count.
@@ -133,6 +134,7 @@ if ($img_url == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]["n
     $filename = $_FILES["image-local"]["name"];
 
     [$status, $statusMsg, $s3_file_link] = aws_s3_upload($filename, $file_temp_src);
+    $s3_upload = 1;
     if ($status == "danger") {
         error("-1", "AWS S3: $statusMsg.", SOURCE, REDIRECT);
         exit;
@@ -165,7 +167,19 @@ if ($previous_image != $img_url) {
 }
 
 
-// TODO: validate max length
+/* CHECK INPUT LENGTHS */
+// $input_array = [$id, $first_name, $last_name, $email, $password, $role, $date_of_birth, $cookie_id, $img_url, $newsletter$];
+foreach ([null, $firstname, $lastname, $email, $hash_password, $role, $date_of_birth, null, $img_url, $newsletter] as $index => $input) {
+    if (USERS_MAX_LENGTHS[$index] >= 0 && $input && strlen($input) > USERS_MAX_LENGTHS[$index]) {
+        $tmp = ucfirst(USERS_ARRAY[$index]);
+        if ($s3_upload) {
+            aws_delete_img($img_url);
+        }
+        error("500", "$tmp is TOO long.", SOURCE, REDIRECT);
+        exit;
+    }
+}
+
 
 $password_query = $password_change?"password = ?, ":"";
 $role_query = ($role > -1)?"role = ?, ":"";

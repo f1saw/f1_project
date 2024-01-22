@@ -6,6 +6,8 @@ require_once("utility/error_handling.php");
 
 $ini = parse_ini_file("config/keys.ini");
 
+const USERS_ARRAY = ["id", "first_name", "last_name", "email", "password", "role", "date_of_birth", "cookie_id", "img_url", "newsletter"];
+const USERS_MAX_LENGTHS = [-1, 255, 255, 255, 255, -1, 10, 255, 255, -1];
 const PRODUCTS_DEFAULT_SIZE = "one";
 const PRODUCTS_ARRAY = ["id", "title", "description", "price", "img_url", "team_id", "color", "size", "alt"];
 const PRODUCTS_MAX_LENGTHS = [-1, 150, 500, -1, 700, -1, 20, 20, 400];
