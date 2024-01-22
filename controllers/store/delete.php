@@ -17,22 +17,14 @@ if (check_admin_auth($user)) {
 
     $conn = DB::connect("\controllers\store\delete.php", "/f1_project/views/private/store/all.php");
 
-    // Delete AWS S3 images (if needed)
+    // Get Image URLs to eventually delete (if they are stored on AWS-S3 and the delete statement does not fail
     $imgs_str = DB::get_record_by_field($conn,
-    "SELECT img_url FROM Products WHERE id = ?;",
+        "SELECT img_url FROM Products WHERE id = ?;",
         ["i"],
         [$_GET["id"]],
         "\controllers\store\delete.php",
         "/f1_project/views/private/store/all.php")[0]["img_url"];
     $imgs = explode("\t", $imgs_str);
-    // Analyze each image
-    foreach ($imgs as $img) {
-        // If it matches, it means that the image is stored on AWS S3
-        // I Have to delete it from the bucket
-        if (preg_match("#^http://f1-saw.s3.eu-central-1.amazonaws.com/*#", $img)) {
-            aws_delete_img($img);
-        }
-    }
 
     /* Delete Products from DB */
     DB::p_stmt_no_select($conn,
@@ -41,6 +33,16 @@ if (check_admin_auth($user)) {
         [$_GET["id"]],
         "\controllers\store\delete.php",
         "/f1_project/views/private/store/all.php");
+
+    // Delete AWS S3 images (if needed) when the deletion statement went right
+    // Analyze each image
+    foreach ($imgs as $img) {
+        // If it matches, it means that the image is stored on AWS S3
+        // I Have to delete it from the bucket
+        if (preg_match("#^http://f1-saw.s3.eu-central-1.amazonaws.com/*#", $img)) {
+            aws_delete_img($img);
+        }
+    }
 
     if (!$conn->close()) {
         error("500", "conn_close()", "\controllers\store\delete.php", "/f1_project/views/private/store/all.php");
