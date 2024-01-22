@@ -151,7 +151,7 @@ class DB {
         if (!$stmt->execute()) {
             if ($order_delete_id)
                 DB::stmt_no_select($conn, "DELETE FROM orders WHERE id = '$order_delete_id';", "DB.php", "/f1_project/views/public/store/cart.php");
-            error("500", "stmt_execute error: $stmt->error", $source, $redirect_error, $order_delete_id?"Something went wrong! Maybe one of your products is not available anymore.":null);
+            error("500", "stmt_execute error: $stmt->error", $source, $redirect_error, $order_delete_id?"Something went wrong! Maybe one of your products is not available anymore.":"");
             exit;
         }
         return $stmt;
