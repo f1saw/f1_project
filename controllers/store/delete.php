@@ -20,7 +20,7 @@ if (check_admin_auth($user)) {
 
     // Delete AWS S3 images (if needed)
     $imgs_str = DB::get_record_by_field($conn,
-    "SELECT img_url FROM Products WHERE id = ?",
+    "SELECT img_url FROM Products WHERE id = ?;",
         ["i"],
         [$_GET["id"]],
         "\controllers\store\delete.php",
@@ -52,7 +52,7 @@ if (check_admin_auth($user)) {
     header("location:  /f1_project/views/private/store/all.php");
 }
 else {
-    $_SESSION['redirection'] = "/f1_project/controllers/store/delete.php?id=${${$_GET['id']??''}}";
+    $_SESSION['redirection'] = "/f1_project/controllers/store/delete.php?id={${${$_GET['id']??''}}}";
     error("401", "not_authorized", "\controllers\store\delete.php", "/f1_project/views/public/auth/login.php", "Unauthorized access.");
 }
 exit;
