@@ -28,50 +28,50 @@ if (!check_admin_auth($user)) {
     <script src="/f1_project/assets/js/newsletter.js" defer></script>
 </head>
 <body class="bg-dark">
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <?php include("views/partials/navbar.php");?>
+    <?php include("views/partials/navbar.php");?>
 
-        <main>
-            <div class="flex-container d-flex justify-content-center">
-                <div class="container-element px-3">
+    <main>
+        <div class="container-fluid vh-100 d-flex justify-content-center">
+            <div class="container-fluid container-element px-3">
 
-                    <?php err_msg_alert(); ?>
-                    <?php succ_msg_alert(); ?>
+                <?php err_msg_alert(); ?>
+                <?php succ_msg_alert(); ?>
 
-                    <form id="newsletter" action="/f1_project/controllers/newsletter/send_email.php" method="post">
+                <form id="newsletter" action="/f1_project/controllers/newsletter/send_email.php" method="post">
                         <span class="d-flex justify-content-center">
                             <label for="subject" class="form-label d-flex gap-2">
                                 <span class="material-symbols-outlined text-danger">mail</span>
                                 Subject
                             </label>
                         </span>
-                        <div class="input-group">
-                            <textarea class="form-control text-box" id="subject" name="subject" rows="1" cols="50"></textarea>
-                        </div>
-                        <br>
-                        <span class="d-flex justify-content-center">
+                    <div class="input-group">
+                        <textarea class="form-control text-box" id="subject" name="subject" rows="1" cols="50"></textarea>
+                    </div>
+                    <br>
+                    <span class="d-flex justify-content-center">
                             <label for="text" class="form-label d-flex gap-2">
                                 <span class="material-symbols-outlined text-danger">mail</span>
                                 Body
                             </label>
                         </span>
-                        <div class="input-group">
-                            <textarea class="form-control text-box" id="text" name="text" rows="5" cols="50"></textarea>
+                    <div class="input-group">
+                        <textarea class="form-control text-box" id="text" name="text" rows="5" cols="50"></textarea>
+                    </div>
+                    <div class="row mb-3 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 py-5">
+                        <button id="btn_submit" type="submit" class="btn btn-danger col-6 d-flex align-items-center justify-content-center gap-2 btn-reverse-color">
+                            <span class="material-symbols-outlined">send</span>
+                            <span id="send-txt">Send</span>
+                        </button>
+                        <div class="d-none lds-ring-container">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                         </div>
-                        <div class="row mb-3 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 py-5">
-                            <button id="btn_submit" type="submit" class="btn btn-danger col-12 col-md-5 col-lg-4 col-xxl-3 d-flex align-items-center justify-content-center gap-2 btn-reverse-color">
-                                <span class="material-symbols-outlined">send</span>
-                                <span id="send-txt">Send</span>
-                            </button>
-                            <div class="d-none lds-ring-container">
-                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+</div>
 </body>
 </html>

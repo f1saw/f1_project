@@ -16,15 +16,27 @@ main {
 .container-element{
     position: relative;
     backdrop-filter: blur(5px);
-    max-height: 55%;
     width: 40%;
-    height: 100%;
+    height: 420px;
     border-radius: 10px;
     top: 100px;
     border-style: solid;
     border-color: #ff1300;
     overflow: auto;
     overflow-x: hidden;
+}
+
+@media screen and (max-width: 768px){
+    .container-element {
+        width: 90%
+    }
+}
+
+@media screen and (max-height: 450px){
+    .container-element {
+        top:50px;
+        width: 90%;
+    }
 }
 
 .container-element::-webkit-scrollbar {

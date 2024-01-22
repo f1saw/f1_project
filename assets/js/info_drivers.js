@@ -59,6 +59,11 @@ function f1_scrape_info_drivers(id, url) {
     });
 }
 
+window.addEventListener('orientationchange', () => {
+    window.location.reload()
+})
+
+
 function show_driver(id) {
     $(`#button_id${id}`).on("click", () => {
         $(`#num${id}`).removeClass('d-none');
