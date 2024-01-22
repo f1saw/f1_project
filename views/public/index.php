@@ -47,13 +47,13 @@ $json_cards_data = json_decode($json, true);
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://wallpapercave.com/dwp2x/wp11269245.jpg" class="d-block w-100 img-carousel rounded" alt="Blue and Pink Alpine F1 car 2022">
+                    <img src="/f1_project/assets/images/230145-scuderia-ferrari-hungarian-gp-saturday_9ed40d92-6287-40c9-a6f2-97dc014e3588.jpg" class="d-block w-100 img-carousel rounded" alt="Red Ferrari F1 Car at sunset">
                 </div>
                 <div class="carousel-item">
                     <img src="/f1_project/assets/images/wp12074925-mercedes-formula-1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="Black F1 Mercedes car">
                 </div>
                 <div class="carousel-item">
-                    <img src="/f1_project/assets/images/wp12405472-ferrari-f1-4k-wallpapers.jpg" class="d-block w-100 img-carousel rounded" alt="Red F1 Ferrari car">
+                    <img src="/f1_project/assets/images/230064-scuderia-ferrari-usa-gp-2023-saturday_2ab8cee5-bc2b-4dd7-83b7-671526bc4eed.jpg" class="d-block w-100 img-carousel rounded" alt="View from the behind the starting grid of the USA Grand Prix. A lot of mechanics are carrying materials to their grid position.">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#Indicators" data-bs-slide="prev">
