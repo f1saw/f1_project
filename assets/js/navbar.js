@@ -120,7 +120,7 @@ const onConfirm = (event, size_param = null) => {
             }, 2000);
         } else {
             // The previous page was the store page (the size has been passed as a function parameter)
-            $(`#span-add-it-${event.target.dataset.id} button :last-child`).html("Select <strong>SIZE</strong>!");
+            $(`#span-add-it-${event.target.dataset.id} button :last-child`).html("<strong>SIZE</strong>!");
 
             setTimeout(() => {
                 $(`#span-add-it-${event.target.dataset.id} button :last-child`).text("Add it!");
