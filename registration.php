@@ -8,13 +8,10 @@ require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
-if ($login_allowed) {
+if ($login_allowed || check_user_auth($user)) {
     error("-1", "Already registered.", "\controllers\auth\\registration.php", "/f1_project/views/private/dashboard.php");
     exit;
 }
-
-// TODO: sistemare parametri error
-// TODO: bloccare pagina in caso di utente già registrato
 
 /* -- ERROR | fields NOT set -- */
 if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["pass"]) && isset($_POST["confirm"]) /* && isset($_POST["date_of_birth"])*/) {

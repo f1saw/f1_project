@@ -7,47 +7,53 @@ require_once("utility/error_handling.php");
 require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 
-if (isset($_SESSION["tmp_firstname"]) && isset($_SESSION["tmp_lastname"]) && isset($_SESSION["tmp_email"]) && isset($_SESSION["tmp_pass"]) && isset($_SESSION["tmp_cpass"]) && isset($_SESSION["tmp_hpass"])) {
+[$login_allowed, $user] = check_cookie();
+if (!$login_allowed && !check_user_auth($user)) {
+    if (isset($_SESSION["tmp_firstname"]) && isset($_SESSION["tmp_lastname"]) && isset($_SESSION["tmp_email"]) && isset($_SESSION["tmp_pass"]) && isset($_SESSION["tmp_cpass"]) && isset($_SESSION["tmp_hpass"])) {
 
-    $conn = DB::connect("\auth\confirm_email.php", "/f1_project/views/public/registration.php");
+        $conn = DB::connect("\auth\confirm_email.php", "/f1_project/views/public/registration.php");
 
-    $hash_password = $_SESSION["tmp_hpass"];
+        $hash_password = $_SESSION["tmp_hpass"];
 
-    unset($_SESSION["tmp_firstname"]);
-    unset($_SESSION["tmp_lastname"]);
-    unset($_SESSION["tmp_email"]);
-    unset($_SESSION["tmp_pass"]);
-    unset($_SESSION["tmp_cpass"]);
-    unset($_SESSION["tmp_hpass"]);
+        unset($_SESSION["tmp_firstname"]);
+        unset($_SESSION["tmp_lastname"]);
+        unset($_SESSION["tmp_email"]);
+        unset($_SESSION["tmp_pass"]);
+        unset($_SESSION["tmp_cpass"]);
+        unset($_SESSION["tmp_hpass"]);
 
-    if (isset($_SESSION["tmp_date_of_birth"])) {
-        $date_of_birth = $_SESSION["tmp_date_of_birth"];
-        unset($_SESSION["tmp_date_of_birth"]);
-    }
+        if (isset($_SESSION["tmp_date_of_birth"])) {
+            $date_of_birth = $_SESSION["tmp_date_of_birth"];
+            unset($_SESSION["tmp_date_of_birth"]);
+        }
 
-    if(isset($_SESSION["tmp_news"])){
-        $newsletter = $_SESSION["tmp_news"];
-        unset($_SESSION["tmp_news"]);
-    }
+        if(isset($_SESSION["tmp_news"])){
+            $newsletter = $_SESSION["tmp_news"];
+            unset($_SESSION["tmp_news"]);
+        }
 
-    DB::p_stmt_no_select($conn,
-        "INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0, ?, null, null, ?);",
-        ["s", "s", "s", "s", "s", "i"],
-        [$first_name, $last_name, $email, $hash_password, $date_of_birth??null, $newsletter??null],
-        "\auth\confirm_email.php",
-        "/f1_project/views/public/registration.php");
+        DB::p_stmt_no_select($conn,
+            "INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0, ?, null, null, ?);",
+            ["s", "s", "s", "s", "s", "i"],
+            [$first_name, $last_name, $email, $hash_password, $date_of_birth??null, $newsletter??null],
+            "\auth\confirm_email.php",
+            "/f1_project/views/public/registration.php");
 
-    if (!$conn->close()) {
-        error("500", "conn_close()", "\auth\confirm_email.php", "/f1_project/views/public/registration.php");
+        if (!$conn->close()) {
+            error("500", "conn_close()", "\auth\confirm_email.php", "/f1_project/views/public/registration.php");
+            exit;
+        }
+
+        $_SESSION["success"] = 1;
+        $_SESSION["success_msg"] = "Registration completed successfully.";
+        $_SESSION["confirm_email"] = true;
+        header("Location: /f1_project/views/public/confirm.html");
+    } else {
+        session_destroy();
+        error("-1", "Input fields NOT provided.", "\auth\confirm_email.php", "/f1_project/views/public/registration.php");
         exit;
     }
-
-    $_SESSION["success"] = 1;
-    $_SESSION["success_msg"] = "Registration completed successfully.";
-    $_SESSION["confirm_email"] = true;
-    header("Location: /f1_project/views/public/confirm.html");
 } else {
-    session_destroy();
-    error("-1", "Input fields NOT provided.", "\auth\confirm_email.php", "/f1_project/views/public/registration.php");
+    header("Location: /f1_project/views/public/index.php");
     exit;
 }

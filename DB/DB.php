@@ -9,6 +9,8 @@ $ini = parse_ini_file("config/keys.ini");
 const PRODUCTS_DEFAULT_SIZE = "one";
 const PRODUCTS_ARRAY = ["id", "title", "description", "price", "img_url", "team_id", "color", "size", "alt"];
 const PRODUCTS_MAX_LENGTHS = [-1, 150, 500, -1, 700, -1, 20, 20, 400];
+const COOKIE_LENGTH = 255;
+const COOKIE_EXP_DATE = 3600*24*30; // 30 days
 
 /**
  * DB Class

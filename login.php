@@ -9,7 +9,7 @@ require_once("DB/DB.php");
 require_once("controllers/auth/auth.php");
 
 [$login_allowed, $user] = check_cookie();
-if (!$login_allowed) {
+if (!$login_allowed && !check_user_auth($user)) {
 
     if (isset($_POST["email"]) && isset($_POST["pass"])) {
 
@@ -37,10 +37,9 @@ if (!$login_allowed) {
         if ($user && password_verify($password, $user["Users.password"])) {
             if ($remember_me) {
                 try {
-
-                    $cookie_id = generate_random_string(255);
-                    $cookie_value = generate_random_string(255); // TODO: length from file
-                    $cookie_exp_date = time() + 3600*24*30; // TODO: expiration from file
+                    $cookie_id = generate_random_string(COOKIE_LENGTH);
+                    $cookie_value = generate_random_string(COOKIE_LENGTH);
+                    $cookie_exp_date = time() + COOKIE_EXP_DATE;
                     setcookie("my_f1_cookie_id", $cookie_id, $cookie_exp_date, "/");
                     setcookie("my_f1_cookie_value", $cookie_value, $cookie_exp_date, "/");
 
@@ -60,43 +59,6 @@ if (!$login_allowed) {
                         "\auth\login.php",
                         "/f1_project/views/public/auth/login.php");
 
-
-                    /* TODO: controllo superfluo in quanto se ci fosse già un cookie, non si accederebbe a questa sezione di codice.
-                                anche se sarebbe più sicuro, nel caso sarebbe da fare un SELECT * Cookies, for(cookies as cookie) if (password_match()) => already in DB.
-                                potrebbe accadere incongruenza in caso di modifiche manuali (tipo rimozione manuale di cookie_id da User)
-
-                        $cookie = DB::get_record_by_field($conn,
-                        "SELECT id FROM Cookies WHERE id = ?;",
-                        ["s"],
-                        [$user["cookie_id"]],
-                        "login.php",
-                        "../views/public/auth/login.php");
-
-                    if ($cookie) {
-
-                        DB::p_stmt_no_select($conn,
-                            "UPDATE Cookies SET id = ?, expiration_date = ? WHERE id = ?;",
-                            ["s", "i", "s"],
-                            [$cookie_id, $cookie_exp_date, $user["cookie_id"]],
-                            "login.php",
-                            "../views/public/auth/login.php"
-                        );
-                    } else {
-
-                        DB::p_stmt_no_select($conn,
-                            "INSERT INTO Cookies VALUES (?, ?);",
-                            ["s", "i"],
-                            [$cookie_id, $cookie_exp_date],
-                            "login.php",
-                            "../views/public/auth/login.php");
-
-                        DB::p_stmt_no_select($conn,
-                        "UPDATE Users SET cookie_id = ? WHERE id = ?;",
-                        ["s", "i"],
-                        [$cookie_id, $user["id"]],
-                        "login.php",
-                        "../views/public/auth/login.php");
-                    } */
                 } catch (Exception $e) {
                     error("500", "generate_random_string()", "\auth\login.php", "/f1_project/views/public/auth/login.php");
                     exit;
@@ -116,6 +78,9 @@ if (!$login_allowed) {
         error("401", "Fields not provided.", "\auth\login.php", "/f1_project/views/public/auth/login.php");
         exit;
     }
+} else {
+    error("-1", "Already registered.", "\auth\login.php", "/f1_project/views/private/dashboard.php");
+    exit;
 }
 
 

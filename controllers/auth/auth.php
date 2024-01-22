@@ -34,7 +34,7 @@ function check_cookie(): array {
         if (!password_verify($_COOKIE["my_f1_cookie_value"], $user["Cookies.value"]))
             $user = null;
         if (!$conn->close()) {
-            error("500", "conn close error: $conn->error", "auth.php", ""); // TODO: generic error page
+            error("500", "conn close error: $conn->error", "\controllers\auth\auth.php", "/f1_project/views/public/index.php");
             exit;
         }
         if ($user !== null)

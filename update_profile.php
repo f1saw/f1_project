@@ -124,7 +124,6 @@ if ($img_url == "" && isset($_FILES["image-local"]) && $_FILES["image-local"]["n
     if (gettype($_FILES["image-local"]["name"]) !== "string") {
         // It is an array, so multiple files have been uploaded.
         // This is NOT allowed
-        // TODO: redirect to users/all.php o su show_profile.php
         error("-1", "Max number of files exceeded.", SOURCE, REDIRECT);
         exit;
     }

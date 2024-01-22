@@ -11,7 +11,7 @@ require_once ("controllers/auth/auth.php");
 const NEW_PASSWORD_LENGTH = 5;
 
 [$login_allowed, $user] = check_cookie();
-if (!$login_allowed) {
+if (!$login_allowed && !check_user_auth($user)) {
 
     if (isset($_POST["email"])) {
 
