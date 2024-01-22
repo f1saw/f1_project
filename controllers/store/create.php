@@ -23,11 +23,13 @@ if (check_admin_auth($user)) {
         $color = preg_replace("/\s+/", ";", strtolower($_POST["color"]??""));
         $size = preg_replace("/\s+/", ";", strtolower((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE ));
 
+        // Image handling
         $img_url = [];
         $img_url[0] = $_POST["img_url_1"]? preg_replace('/\s+/', ' ', $_POST["img_url_1"]):"";
         $index = !($img_url[0] === "");
         $img_url[$index] = $_POST["img_url_2"]? preg_replace('/\s+/', ' ', $_POST["img_url_2"]):"";
 
+        // Alt handling
         $alts[0] = $_POST["alt_1"]? preg_replace('/\s+/', ' ', $_POST["alt_1"]):"";
         $index = !($alts[0] === "");
         $alts[$index] = $_POST["alt_2"]? preg_replace('/\s+/', ' ', $_POST["alt_2"]):"";
@@ -103,7 +105,7 @@ if (check_admin_auth($user)) {
         }
 
         DB::p_stmt_no_select($conn,
-        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO Products VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);",
         ["s", "s", "i", "s", "i", "s", "s", "s"],
         [$title, $desc, $price, $img_url_str, $team_id, $color, $size, $alt_str],
             "\controllers\store\create.php", "/f1_project/views/private/store/new.php");
