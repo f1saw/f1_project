@@ -19,6 +19,7 @@ function f1_scrape_drivers($base_url): array {
     @$html->loadHtml($page);
     $xpath = new DOMXPath($html);
 
+    // Get TEAMS
     $node_list = $xpath->query('//div[@class="listing-item--team f1--xxs f1-color--gray5"]');
     foreach ($node_list as $n) {
         $team = $n->nodeValue;
@@ -29,6 +30,7 @@ function f1_scrape_drivers($base_url): array {
         $team_list[] = $team;
     }
 
+    // Get NAMES
     $node_list = $xpath->query('//span[@class="d-block f1--xxs f1-color--carbonBlack"]');
     foreach ($node_list as $n) {
         $name = $n->nodeValue;
@@ -36,7 +38,7 @@ function f1_scrape_drivers($base_url): array {
         $name_list[] = $name;
     }
 
-
+    // Get LAST NAMES
     $node_list = $xpath->query('//span[@class="d-block f1-bold--s f1-color--carbonBlack"]');
     foreach ($node_list as $n) {
         $lastname = $n->nodeValue;
@@ -44,29 +46,24 @@ function f1_scrape_drivers($base_url): array {
         $lastname_list[] = $lastname;
     }
 
-
+    // Get LINKS
     $node_list = $xpath->query('//picture[@class="listing-item--photo"]//img');
-
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
-
         $img_list[] = $link;
     }
-    //echo $img_list[1] . "<br><br>";
 
+    // Get NUMBERS
     $node_list = $xpath->query('//picture[@class="listing-item--number"]//img');
-
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
-
         $number_list[] = $link;
     }
 
+    // Get FLAGS
     $node_list = $xpath->query('//picture[@class="coutnry-flag--photo"]//img');
-
     for ($i=0; $i<20; ++$i) {
         $link = $node_list->item($i)->getAttribute("data-src");
-
         $flag_list[] = $link;
     }
 
