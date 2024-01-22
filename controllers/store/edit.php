@@ -23,11 +23,14 @@ if (check_admin_auth($user)) {
         $team_id = preg_replace('!\s+!', '', $_POST["team_id"]);
         $color = preg_replace("/\s+/", ";", strtolower($_POST["color"]??""));
         $size = preg_replace("/\s+/", ";", strtolower((isset($_POST["size"]) && !preg_match('/^\s*$/', $_POST["size"]))? $_POST["size"] : PRODUCTS_DEFAULT_SIZE ));
+
+        // Image handling
         $img_url = ["", ""];
         $img_url[0] = $_POST["img_url_1"]? preg_replace('/\s+/', ' ', $_POST["img_url_1"]):"";
         $index = !($img_url[0] === "");
         $img_url[$index] = $_POST["img_url_2"]? preg_replace('/\s+/', ' ', $_POST["img_url_2"]):"";
 
+        // Alt handling
         $alts = ["", ""];
         $alts[0] = $_POST["alt_1"]? preg_replace('/\s+/', ' ', $_POST["alt_1"]):"";
         $index = !($alts[0] === "");
@@ -74,14 +77,6 @@ if (check_admin_auth($user)) {
         }
         $price = preg_replace("/,/", ".", $price);
 
-
-        // TODO: REGEX img url ?? è necessario ??
-        /*if ($date_of_birth && !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date_of_birth)) {
-            error("-1", "Date of birth pattern NOT valid.", "registration.php", "/f1_project/views/public/auth/registration.php");
-            exit;
-        }*/
-
-        /* TODO: CHECK INPUT LENGTHS */
 
         /* DB */
         $conn = DB::connect("\controllers\store\\edit.php", "/f1_project/views/private/store/edit.php?id=$id");

@@ -59,7 +59,6 @@ if (check_admin_auth($user)) {
             }
         }
 
-
         /* -- ERROR | Empty input fields -- */
         if ($title == "" || $title == " "
             || $price == "" || $price == " "
@@ -75,11 +74,6 @@ if (check_admin_auth($user)) {
         }
         $price = preg_replace("/,/", ".", $price);
 
-        // TODO: REGEX img url ?? è necessario ??
-        /*if ($date_of_birth && !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date_of_birth)) {
-            error("-1", "Date of birth pattern NOT valid.", "registration.php", "/f1_project/views/public/auth/registration.php");
-            exit;
-        }*/
 
         /* DB */
         $conn = DB::connect("\controllers\store\create.php", "/f1_project/views/private/store/new.php");
