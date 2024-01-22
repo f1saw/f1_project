@@ -172,6 +172,7 @@ if (!$product) {
             </div>
         </div>
     </main>
+<?php include ("views/partials/footer.php"); ?>
 <script src="/f1_project/assets/js/navbar.js"></script>
 </body>
 </html>

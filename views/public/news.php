@@ -55,5 +55,6 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
             <?php } ?>
         </main>
     </div>
+    <?php include ("views/partials/footer.php"); ?>
 </body>
 </html>

@@ -134,5 +134,6 @@ $json_cards_data = json_decode($json, true);
         </section>
     </main>
 </div>
+<?php include ("views/partials/footer.php"); ?>
 </body>
 </html>

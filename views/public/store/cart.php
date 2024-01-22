@@ -117,6 +117,7 @@ require_once ("DB/DB.php");
         </div>
     </main>
 </div>
+<?php include ("views/partials/footer.php"); ?>
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/cart.js"></script>
 </body>

@@ -123,6 +123,7 @@ if (!$conn->close()) {
         </div>
     </div>
 
+    <?php include ("views/partials/footer.php"); ?>
 <script src="/f1_project/assets/js/loading-crud.js"></script>
 </body>
 </html>

@@ -59,6 +59,8 @@ else{
     <main class="home-cards mt-5">
         <?php include("views/partials/store/view_products.php") ?>
     </main>
+
+<?php include ("views/partials/footer.php"); ?>
 <script src="/f1_project/assets/js/navbar.js"></script>
 <script src="/f1_project/assets/js/store/store.js"></script>
 </body>

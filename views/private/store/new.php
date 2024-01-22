@@ -238,6 +238,7 @@ if (!$conn->close()) {
         </div>
     </div>
 
+    <?php include ("views/partials/footer.php"); ?>
 <script src="/f1_project/assets/js/validators/products.js"></script>
 <script src="https://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 <script src="/f1_project/assets/js/store/crud.js"></script>

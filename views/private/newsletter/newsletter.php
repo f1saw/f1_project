@@ -73,5 +73,7 @@ if (!check_admin_auth($user)) {
         </div>
     </main>
 </div>
+
+<?php include ("views/partials/footer.php"); ?>
 </body>
 </html>

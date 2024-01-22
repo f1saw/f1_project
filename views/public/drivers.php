@@ -71,8 +71,9 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
     </main>
 </div>
 
-<script src="/f1_project/assets/js/navigate.js"></script>
+<?php include ("views/partials/footer.php"); ?>
 
+<script src="/f1_project/assets/js/navigate.js"></script>
 </body>
 </html>
 

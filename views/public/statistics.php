@@ -84,6 +84,8 @@ else
     </main>
 </div>
 
+<?php include ("views/partials/footer.php"); ?>
+
 <script src="/f1_project/assets/js/navigate.js"></script>
 </body>
 </html>
