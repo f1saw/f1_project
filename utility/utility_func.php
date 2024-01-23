@@ -71,7 +71,7 @@ function send_mail(array $recipients, string $subject, string $body, array $bcc 
     $mail->SMTPSecure = $ini["smtp_secure"];
     $mail->Port = $ini["smtp_port"];
 
-    // I send email from $ini["g_email"] to addresses stored in $to.
+    // I send email from $ini["g_email"] to addresses stored in $recipients.
     $mail->setFrom($ini["g_email"], $ini["g_name"]?? null);
     foreach ($recipients as $recipient) {
         $mail->addAddress($recipient["email"]?? $recipient);
