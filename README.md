@@ -44,7 +44,7 @@ Front-end: JS / CSS / Bootstrap / HTML
 <hr>
 
 #### Circuits
-![Circuits page](./assets/images/readme/circuits.png)
+![Circuits page](./assets/images/readme/circuits_page.png)
 <hr>
 
 #### Store
