@@ -38,7 +38,7 @@ Front-end: JS / CSS / Bootstrap / HTML
 <hr>
 
 #### Home
-![Home page](./assets/images/readme/home0.png)
+![Home page](./assets/images/readme/home.png)
 
 ![Home page](./assets/images/readme/home1.png)
 <hr>
