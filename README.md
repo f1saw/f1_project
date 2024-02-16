@@ -10,10 +10,10 @@ For a proper presentation we suggest to view [F1 SAW](./F1_SAW.pdf)
 <hr>
 
 ### What you can do
-- virtually buy products in the STORE
-- keep yourself updated with the most recent NEWS 
-- navigate in different STATISTICS, such as Drivers, Teams, Calendar 2024 and GP results (from 1950 to 2023).
-- if you are an ADMIN, you can manage the store and users data, and email the users who subscribed to the newsletter
+- virtually buy products in the **STORE**
+- keep yourself updated with the most recent **NEWS** 
+- navigate in different **STATISTICS**, such as Drivers, Teams, Calendar 2024 and GP results (from 1950 to 2023).
+- if you are an **ADMIN**, you can manage the store and users data, and email the users who subscribed to the newsletter
 
 The news, teams and drivers lists are fetched through **web-scraping**
 <hr>
