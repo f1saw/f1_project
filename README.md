@@ -1,60 +1,55 @@
-# f1_project
-SAW project about F1
+# F1 SAW
+Web App with the aim of grouping everything useful about Formula 1
 
-# CLONE (w/ submodules):
+*keys.ini* file with setup keys inside is required 
+to work properly with the DB (MySQL) and the [AWS-S3](https://aws.amazon.com/it/s3/) storage
+
+For a proper presentation we suggest to view [F1 SAW](./F1_SAW.pdf)
+
+**NB**: **ACADEMIC** purposes only
+<hr>
+
+### What you can do
+- virtually buy products in the STORE
+- keep yourself updated with the most recent NEWS 
+- navigate in different STATISTICS, such as Drivers, Teams, Calendar 2024 and GP results (from 1950 to 2023).
+- if you are an ADMIN, you can manage the store and users data, and email the users who subscribed to the newsletter
+
+The news, teams and drivers lists are fetched through **web-scraping**
+<hr>
+
+### How
+Back-end: PHP (and PHPMailer) / AWS-S3 / MySQL
+<br>
+Front-end: JS / CSS / Bootstrap / HTML
+<hr>
+
+### USAGE
 - ```git clone --recursive-submodule {.git}```
-<br>or<br>
-```git submodule update --init --recursive```
-- Update submodule ```git submodule update --remote```
+- ```git submodule update --init --recursive```
+- ```git submodule update --remote```
+
+
+### SOURCES:
+- [Formula 1](https://www.formula1.com/)
+- [Open Weather Map](https://openweathermap.org/api)
+- [AWS-S3](https://aws.amazon.com/it/s3/)
 
 <hr>
 
-## MAURI:
-- [ ] line 128 edit_profile => si può eliminare il div?
+#### Home
+![Home page](./assets/images/readme/home0.png)
 
+![Home page](./assets/images/readme/home1.png)
 <hr>
 
-## MATTE:
+#### Circuits
+![Circuits page](./assets/images/readme/circuits.png)
 <hr>
 
-## NOTES:
-- Redirect update_profile.php ( => show_profile.php OPPURE su users/all.php)
-- Upload immagini 413 (file too large)
-- Sistemare parametri del log di errori (mettere err msg anche in dashboard e index)
-- Verificare pulizia input, isset e prepare statement dove necesario (controllo di aver usato query semplici solo dove permesso)
-- Search bar server => circuiti, drivers, teams
-- Cos'è assets/image/User_detail*
-- Rivedere utilizzo utility/msg_error.php (reindirizzare secondo edit.php?id=$id)
-- Error Handling: order a product which has been deleted
+#### Store
+![Store page](./assets/images/readme/store_user.png)
+<hr>
 
-## ALL:
-- [ ] Footer
-- [ ] Registration.php / error check client side => add white border to increase contrast
-- [ ] Store / Products feedback based on starts (average obtained by "average" and "numbers of votes" => weighted average)
-              Reviews are permitted only by authenticated users and who has bought that product
-- [ ] Store / Client-side search bar (with filters such as price)
-- [ ] Store / Save cart button in cart page
-- [ ] Admin / can create users
-
-- [ ] mettere err_msg e succ_msg in dashboard.php
-- [ ] Proteggere file privati da accesso web 
--
-- [ ] Check cookie ridondante
-- [ ] Scrittura politica cookie
-- [ ] Check code HTTP code errors
-- [ ] Error pages
-- 
-- [ ] rivedere tutti i tag @TODO
-- [ ] commentare script di login, registrazione, ...
-- [ ] dashboard / click mobile per visualizzare rettangolo bianco ("doppio click")
-
-## EXTRA:
-- [ ] dashboard page per statistiche utenti => plot grafico date di nascita, nazionalità, ...
-
-## SOURCES:
-- https://verifalia.com/validate-email
-- <a href="https://www.f1-fansite.com/">f1-fansite</a>
-- <a href="https://wallpapercave.com/">wallpapercave</a>
-- (teams evolution: https://i.redd.it/rp22ueq8ctea1.png)
-- https://openweathermap.org/api
-- aws s3
+#### Admin dashboard
+![Admin page](./assets/images/readme/store_admin.png)
