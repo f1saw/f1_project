@@ -1,7 +1,7 @@
 [
   {
     "title": "Circuits",
-    "text": "In this section you can see <strong>all</strong> the <?php echo date("Y"); ?> F1 circuits.",
+    "text": "In this section you can see <strong>all</strong> the 2024 F1 circuits.",
     "img_url": "https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit.png",
     "link": "/views/public/circuits.php",
     "alt": "Austin Circuit"
