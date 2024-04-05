@@ -11,8 +11,6 @@ require_once("controllers/auth/auth.php");
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
 [$name_list, $lastname_list, $flag_list, $team_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
-// $json = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\\views\\partials\\public\\driver_info_link.json");
-// $json_info_link = json_decode($json, true);
 $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World Championships",
     "Highest race finish", "Highest grid position", "Date of birth", "Place of birth"];
 ?>

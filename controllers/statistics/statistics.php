@@ -1,5 +1,5 @@
 <?php
-const BASE_URL_STATISTICS = "https://www.formula1.com/en/results.html/2024/races.html";
+$BASE_URL_STATISTICS = "https://www.formula1.com/en/results.html/" . date("Y") ."/races.html";
 
 function f1_scrape_stat($base_url): array {
 
