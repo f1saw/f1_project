@@ -9,11 +9,12 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
+$BASE_URL_STATISTICS = "https://www.formula1.com/en/results.html/" . date("Y") ."/races.html";
 if(isset($_GET["year"])){
     $url = "https://www.formula1.com/en/results.html/".$_GET["year"]."/races.html";
 }
 else
-    $url = BASE_URL_STATISTICS;
+    $url = $BASE_URL_STATISTICS;
 
 [$info, $date, $car, $laps] = f1_scrape_stat($url);
 ?>

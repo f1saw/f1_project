@@ -125,7 +125,7 @@ $json_cards_data = json_decode($json, true);
                         F1 SAW was born from two passionates about Formula 1.<br>
                         We designed our website to perform different actions with it.<br>
                         You can <a href="/f1_project/views/public/store/store.php" target="_blank" class="h5">BUY</a> official products, keep yourself updated with the most recent <a href="/f1_project/views/public/news.php" target="_blank" class="h5">NEWS</a>
-                        and, also, navigate in different <a href="/f1_project/views/public/statistics.php" target="_blank" class="h5">STATISTICS</a>, such as Drivers, Teams, Calendar <?php echo date("Y"); ?> and GP results (from 1950 to 2023).
+                        and, also, navigate in different <a href="/f1_project/views/public/statistics.php" target="_blank" class="h5">STATISTICS</a>, such as Drivers, Teams, Calendar <?php echo date("Y"); ?> and GP results (from 1950 to <?php echo date("Y"); ?>).
                     </div>
                 </div>
 
