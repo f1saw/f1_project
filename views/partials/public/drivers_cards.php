@@ -1,6 +1,6 @@
-<?php function echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link, $col_card): void { ?>
+<?php function echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $url_list, $col_card): void { ?>
     <div class="row">
-        <?php for ($i = 0; $i < 20; $i++) { ?>
+        <?php for ($i = 0; $i < count($name_list); $i++) { ?>
             <div class="<?php echo $col_card ?> d-flex align-items-stretch py-3">
                 <div id="div<?php echo $i ?>" class="w-100 card border border-danger border-3 p-2 d-flex flex-column justify-content-between">
                     <div id="num<?php echo $i ?>">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        <script>f1_scrape_info_drivers('<?php echo $i ?>', '<?php echo $json_info_link[$i]["URL"] ?>')</script>
+        <script>f1_scrape_info_drivers('<?php echo $i ?>', '<?php echo $url_list[$i] ?>')</script>
         <?php } ?>
     </div>
 <?php } ?>

@@ -42,7 +42,7 @@ else
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
                     <button type="button" id="teams" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span class="left_element">2024 Teams</span>
+                    <span class="left_element"><?php echo date("Y"); ?> Teams</span>
                 </span>
             </div>
 
@@ -50,12 +50,12 @@ else
             <div class="title text-light d-flex justify-content-center">
                 <div class="d-flex flex-column align-items-center">
                     <div class="text-light margin h2 d-flex justify-content-start align-items-center">
-                        <span class="central_element"><?php  isset($_GET["year"])? print $_GET["year"]: print "2023" ?> Statistics</span>
+                        <span class="central_element"><?php  isset($_GET["year"])? print $_GET["year"]: print date("Y") ?> Statistics</span>
                     </div>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Select Year</a>
                         <ul style="max-height: 280px; overflow-y: auto" class="dropdown-menu">
-                            <?php for($k = 2023; $k > 1949; --$k){ ?>
+                            <?php for($k = date("Y"); $k > 1949; --$k){ ?>
                             <li><a class="dropdown-item" href="/f1_project/views/public/statistics.php?year=<?php echo $k; ?>"><?php echo $k; ?></a></li>
                             <li><hr class="dropdown-divider"></li>
                             <?php } ?>
@@ -66,7 +66,7 @@ else
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-end align-items-center">
-                    <span class="right_element">2024 Circuits</span>
+                    <span class="right_element"><?php echo date("Y"); ?> Circuits</span>
                     <button type="button" id="circuits" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>

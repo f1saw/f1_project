@@ -35,18 +35,18 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
                     <button type="button" id="drivers" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span class="left_element">2024 Drivers</span>
+                    <span class="left_element"><?php echo date("Y"); ?> Drivers</span>
                 </span>
             </div>
 
 
             <div class="text-light margin h2 d-flex justify-content-start align-items-center">
-                    <span class="central_element">2024 Teams</span>
+                    <span class="central_element"><?php echo date("Y"); ?> Teams</span>
             </div>
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-end align-items-center">
-                    <span class="right_element">2023 Statistics</span>
+                    <span class="right_element"><?php echo date("Y"); ?> Statistics</span>
                     <button type="button" id="statistics" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>

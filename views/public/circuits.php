@@ -43,17 +43,17 @@ $circuits = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\controll
               <div class="title text-light">
                   <span class="text-light h2 d-flex justify-content-start align-items-center">
                       <button type="button" id="statistics" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
-                      <span id="left_element" class="left_element">2023 Statistics</span>
+                      <span id="left_element" class="left_element"><?php echo date("Y"); ?> Statistics</span>
                   </span>
               </div>
 
               <div class="text-light margin h2 d-flex justify-content-start align-items-center">
-                  <span class="central_element">2024 Circuits</span>
+                  <span class="central_element"><?php echo date("Y"); ?> Circuits</span>
               </div>
 
               <div class="title text-light">
                   <span class="text-light h2 d-flex justify-content-end align-items-center">
-                      <span class="right_element">2023 Drivers</span>
+                      <span class="right_element"><?php echo date("Y"); ?> Drivers</span>
                       <button type="button" id="drivers" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                   </span>
               </div>

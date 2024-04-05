@@ -10,9 +10,9 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
-[$name_list, $lastname_list, $flag_list, $team_list, $number_list, $img_list] = f1_scrape_drivers(BASE_URL);
-$json = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\\views\\partials\\public\\driver_info_link.json");
-$json_info_link = json_decode($json, true);
+[$name_list, $lastname_list, $flag_list, $team_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
+// $json = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "\\views\\partials\\public\\driver_info_link.json");
+// $json_info_link = json_decode($json, true);
 $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World Championships",
     "Highest race finish", "Highest grid position", "Date of birth", "Place of birth"];
 ?>
@@ -42,24 +42,24 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-start align-items-center">
                     <button type="button" id="circuits" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <span class="left_element">2024 Circuits</span>
+                    <span class="left_element"><?php echo date("Y"); ?> Circuits</span>
                 </span>
             </div>
 
             <div class="text-light margin h2 d-flex justify-content-start align-items-center">
-                <span class="central_element">2024 Drivers</span>
+                <span class="central_element"><?php echo date("Y"); ?> Drivers</span>
             </div>
 
             <div class="title text-light">
                 <span class="text-light h2 d-flex justify-content-end align-items-center">
-                    <span class="right_element">2024 Teams</span>
+                    <span class="right_element"><?php echo date("Y"); ?> Teams</span>
                     <button type="button" id="teams" class="navigate-left navigate btn col-2 col-sm-2 col-md-1 d-flex justify-content-center hover-red switch-page"><span class="material-symbols-outlined">chevron_right</span></button>
                 </span>
             </div>
 
         </div>
         <?php if (count($name_list) > 0) {
-            echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $json_info_link,COL_CARD);
+            echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $url_list,COL_CARD);
         } else { ?>
             <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                 <span class="material-symbols-outlined">description</span>
