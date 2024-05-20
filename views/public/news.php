@@ -13,7 +13,20 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
-[$title_list, $img_list, $link_list] = f1_scrape_news(BASE_URL);
+define("BACKUP_FILE", $_SERVER['DOCUMENT_ROOT'] . "\\DB\backup\\news.json");
+$lists = f1_scrape_news(BASE_URL);
+$loadFromDisk = 0;
+foreach ($lists as $el) {
+    if (count($el) == 0)
+        $loadFromDisk = 1;
+}
+// Load/Store from json
+if ($loadFromDisk)
+    $lists = json_decode(file_get_contents(BACKUP_FILE));
+else
+    file_put_contents(BACKUP_FILE, json_encode($lists));
+
+[$title_list, $img_list, $link_list] = $lists;
 ?>
 
 <!DOCTYPE html>

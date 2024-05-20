@@ -9,13 +9,24 @@ require_once ("views/partials/public/drivers_cards.php");
 require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
-
+define("BACKUP_FILE", $_SERVER['DOCUMENT_ROOT'] . "\\DB\backup\\drivers.json");
 $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World Championships",
     "Highest race finish", "Highest grid position", "Date of birth", "Place of birth"];
 
-[$name_list, $team_list, $flag_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
+$lists = f1_scrape_drivers(BASE_URL);
 
+$loadFromDisk = 0;
+foreach ($lists as $el) {
+    if (count($el) == 0)
+        $loadFromDisk = 1;
+}
+// Load/Store from json
+if ($loadFromDisk)
+    $lists = json_decode(file_get_contents(BACKUP_FILE));
+else
+    file_put_contents(BACKUP_FILE, json_encode($lists));
 
+[$name_list, $team_list, $flag_list, $number_list, $img_list, $url_list] = $lists;
 ?>
 
 <!DOCTYPE html>
