@@ -12,7 +12,7 @@ if(isset($_GET["url"])) {
     $xpath = new DOMXPath($html);
 
     // Get DRIVER STATISTICS
-    $node_list = $xpath->query('//td[@class="stat-value"]');
+    $node_list = $xpath->query('//dd[contains(@class, "f1-text")]');
     foreach ($node_list as $n) {
         $value = $n->nodeValue;
         $array_value[] = $value;

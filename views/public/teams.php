@@ -9,7 +9,7 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
-[$name_list, $lastname_list, $team_list, $img_list] = f1_scrape_teams(BASE_URL_TEAMS);
+[$name_list, $team_list, $car_img_list, $logo_img_list] = f1_scrape_teams(BASE_URL_TEAMS);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
             </div>
         </div>
         <?php if (count($name_list) > 0) {
-            echo_teams_cards($name_list, $lastname_list, $team_list, $img_list, COL_CARD);
+            echo_teams_cards($name_list, $team_list, $car_img_list, $logo_img_list,COL_CARD);
         } else { ?>
             <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                 <span class="material-symbols-outlined">description</span>

@@ -10,7 +10,7 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
-[$name_list, $lastname_list, $flag_list, $team_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
+[$name_list, $team_list, $flag_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
 $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World Championships",
     "Highest race finish", "Highest grid position", "Date of birth", "Place of birth"];
 ?>
@@ -57,7 +57,7 @@ $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World C
 
         </div>
         <?php if (count($name_list) > 0) {
-            echo_drivers_cards($name_list, $lastname_list, $flag_list, $number_list, $img_list, $url_list,COL_CARD);
+            echo_drivers_cards($name_list, $team_list, $flag_list, $number_list, $img_list, $url_list,COL_CARD);
         } else { ?>
             <div class="alert border-light text-dark fade show d-flex align-items-center justify-content-center mt-4 col-12" role="alert">
                 <span class="material-symbols-outlined">description</span>
