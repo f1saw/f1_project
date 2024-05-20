@@ -8,8 +8,21 @@ require_once ("views/partials/public/teams_card.php");
 require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
+define("BACKUP_FILE", $_SERVER['DOCUMENT_ROOT'] . "\DB\backup\\teams.json");
 
-[$name_list, $team_list, $car_img_list, $logo_img_list] = f1_scrape_teams(BASE_URL_TEAMS);
+$list = f1_scrape_teams(BASE_URL_TEAMS);
+$loadFromDisk = 0;
+foreach ($list as $el) {
+    if (count($el) == 0)
+        $loadFromDisk = 1;
+}
+// Load/Store from json
+if ($loadFromDisk)
+    $list = json_decode(file_get_contents(BACKUP_FILE));
+else
+    file_put_contents(BACKUP_FILE, json_encode($list));
+
+[$name_list, $team_list, $car_img_list, $logo_img_list] = $list;
 ?>
 
 <!DOCTYPE html>

@@ -10,9 +10,12 @@ require_once("controllers/auth/auth.php");
 
 const COL_CARD = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
-[$name_list, $team_list, $flag_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
 $info = ["Team", "Country", "Podiums", "Points", "Grands Prix entered", "World Championships",
     "Highest race finish", "Highest grid position", "Date of birth", "Place of birth"];
+
+[$name_list, $team_list, $flag_list, $number_list, $img_list, $url_list] = f1_scrape_drivers(BASE_URL);
+
+
 ?>
 
 <!DOCTYPE html>
